@@ -1,0 +1,54 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% block head %}
+    {% endblock %}
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>bar</title>
+    </head>
+
+        <!-- {% if request.user.is_active %} -->
+        <!-- <div >
+            <a href="{% url 'doctors:profile' %}" >
+                <img src =" {{request.user.patient.profile_pic.url}}" >
+                <p>{{request.user.patient.First_name}}</p> 
+            </a>
+        </div> -->
+        <!-- {% else %} -->
+
+        <!-- {% endif %} -->
+
+   <div>
+        <a href="{% url 'website:todolist' %}">สิ่งที่ต้องทำ</a>
+        <a href="">ประกาศข่าวสาร</a>
+        <a href="">แผนการดำเนินงาน</a>
+        <a href="">อัพโหลดเอกสาร</a>
+        <a href="">โครงงานนักศึกษา</a>
+        <a href="">คะแนนโครงงาน</a>
+        <a href="">เกณฑ์การตัดเกรด</a>
+        <a href="">จัดการข้อมูลพื้นฐาน</a>
+        <a href="">จัดการปีการศึกษา</a>
+        <a href="">ตั้งค่า</a>
+
+        <!-- {% if request.user.is_superuser %} -->
+        <!-- {% else %} -->
+
+        <!-- {% endif %} -->
+    </div>
+
+    <div>
+        <a href = "" >
+            <div>
+                <p>ออกจากระบบ</p>
+            </div>
+        </a>
+    </div>
+
+    </body>
+    {% block content %}
+    {% endblock %}
+</html>
