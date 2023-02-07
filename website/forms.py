@@ -30,3 +30,4 @@ class NewsModelForm(forms.ModelForm):
     class Meta:
         model = NewsModel
         fields = "__all__"
+        exclude = ['date_created']

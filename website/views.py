@@ -126,5 +126,5 @@ def news_csv(request):
 def news_detail(request, pk):
     new = NewsModel.objects.filter(id=pk).first()
     context = {"new": new}
-    return render(request, "news_page.html", context)
+    return render(request, "news_detail.html", context)
 

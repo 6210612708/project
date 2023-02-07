@@ -5,6 +5,16 @@
         <a href="{% url 'user:login' %}" class="signin">LOG IN</a>
     </div>
     <h2>ประกาศข่าวสาร</h2>
+
+    {% for news in news %}
+    <tr>
+        <td>
+            {{news.title}}
+            <a href="{% url 'website:news_detail' news.id %}" >รายละเอียด</a>
+
+        </td>
+    </tr>
+    {% endfor %}
     
 
 

@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 import requests
 import pandas as pd
 import json
+from website.models import *
 
 from .models import Student
 # Create your views here.
@@ -17,7 +18,10 @@ from .models import Student
 def index(request):
     if request.user.is_authenticated:
         return redirect('website:index')
-    return render(request, 'user/index.html')
+
+    news = NewsModel.objects.all()
+    context = {'news':news}
+    return render(request, 'user/index.html' ,context)
 
 
 def login_view(request):
@@ -75,7 +79,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged out.")
-    return render(request, "user/login.html", {
+    return render(request, 'user/index.html', {
         "messages": messages.get_messages(request)
     })
 

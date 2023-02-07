@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+
 {% load static %}
 
 {% block head %}
@@ -17,6 +17,7 @@
 
         {{new.title}}
         {{new.detail}}
+        {{new.date_created}}
     
     
         <a href="{% url 'website:news' %}" >Back</a>

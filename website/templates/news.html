@@ -14,10 +14,36 @@
 {% endblock %}
 {% block content %}
     <body>
-        <form method="POST" class="text-center">
+        <form method="POST" >
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
+            <!-- <div>
+                <h5>title</h5>
+                {{ form.title }}
+            </div>
+            <div>
+                <h5>detail</h5>
+                {{ form.detail }}
+            </div>
+            <div>
+                <h5>อาจารย์ในภาค</h5>
+                {{ form.in_prof }}
+            </div>
+            <div>
+                <h5>อาจารย์นอกภาค</h5>
+                {{ form.out_prof }}
+            </div>
+            <div>
+                <h5>นักศึกษาสาขาคอม</h5>
+                {{ form.cn_std }}
+            
+            </div>
+            <div>
+                <h5>นักศึกษาสาขาไฟฟ้า</h5>
+                {{ form.ee_std }}
+            </div> -->
+
             <input type="submit" name="Submit" id="submit">
         </form>
         <table>
