@@ -7,3 +7,11 @@ from django.db import models
 class ListModel(models.Model):
     date = models.DateField(null=True)
     list = models.CharField(max_length=64, null=True)
+
+class NewsModel(models.Model):
+    title = models.CharField(max_length=64, null=True)
+    detail = models.CharField(max_length=500, null=True)
+    in_prof = models.BooleanField('in_prof', default=False)
+    out_prof = models.BooleanField('out_prof', default=False)
+    cn_std = models.BooleanField('cn_std', default=False)
+    ee_std = models.BooleanField('ee_std', default=False)

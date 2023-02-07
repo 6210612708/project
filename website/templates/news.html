@@ -20,23 +20,22 @@
             {{ form.as_p }}
             <input type="submit" name="Submit" id="submit">
         </form>
-
-
         <table>
             {% for show in show %}
             <tr>
                 <td>
-                    {{show.date}}
-                    {{show.list}}
-                    <a href="{% url 'website:deletelist' show.id %}" 
+                    {{show.title}}
+                    <a href="{% url 'website:news_detail' show.id %}" >รายละเอียด</a>
+                    <a href="{% url 'website:deletenews' show.id %}" 
                     onclick="return confirm('Confirm Delete?')">ลบ</a>
-                    <a href="{% url 'website:updatelist' show.id %}" >แก้ไข</a>
+                    <a href="{% url 'website:updatenews' show.id %}" >แก้ไข</a>
                 </td>
             </tr>
             {% endfor %}
 
-            <a href="{% url 'website:todo_csv' %}">upload csv</a>
+            <a href="{% url 'website:news_csv' %}">upload csv</a>
         </table>
+
 
     </body>
 {% endblock %}

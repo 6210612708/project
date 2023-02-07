@@ -1,0 +1,23 @@
+{% load static %}
+<html lang="en">
+
+{% block head %}
+    <title>update</title>
+{% endblock %}
+
+{% block content %}
+    {% if not form.is_valid %} 
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit">
+            <a href="{% url 'website:news' %}" >Back</a>
+
+        </form>
+    {% endif %}
+
+{% endblock %}
+
+</html>

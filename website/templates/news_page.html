@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% url 'js-catlog' %}"></script>
+        <script src="{% static '/admin/js/core.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+        <title>todolist</title>
+    </head>
+{% endblock %}
+{% block content %}
+    <body>
+
+        {{new.title}}
+        {{new.detail}}
+    
+    
+        <a href="{% url 'website:news' %}" >Back</a>
+
+
+    </body>
+{% endblock %}

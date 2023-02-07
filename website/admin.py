@@ -4,3 +4,4 @@ from .models import *
 
 # admin.site.register(Student)
 admin.site.register(ListModel)
+admin.site.register(NewsModel)

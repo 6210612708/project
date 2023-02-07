@@ -12,19 +12,14 @@
     </head>
 
         <!-- {% if request.user.is_active %} -->
-        <!-- <div >
-            <a href="{% url 'doctors:profile' %}" >
-                <img src =" {{request.user.patient.profile_pic.url}}" >
-                <p>{{request.user.patient.First_name}}</p> 
-            </a>
-        </div> -->
+
         <!-- {% else %} -->
 
         <!-- {% endif %} -->
 
    <div>
         <a href="{% url 'website:todolist' %}">สิ่งที่ต้องทำ</a>
-        <a href="">ประกาศข่าวสาร</a>
+        <a href="{% url 'website:news' %}">ประกาศข่าวสาร</a>
         <a href="">แผนการดำเนินงาน</a>
         <a href="">อัพโหลดเอกสาร</a>
         <a href="">โครงงานนักศึกษา</a>

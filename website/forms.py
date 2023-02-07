@@ -10,7 +10,7 @@ from .models import *
 
 class todoForm(forms.Form):
     date = forms.DateField(widget=AdminDateWidget())
-    list = forms.CharField(max_length=160)
+    list = forms.CharField(max_length=64)
 
 class ListModelForm(forms.ModelForm):
     class Meta:
@@ -20,3 +20,13 @@ class ListModelForm(forms.ModelForm):
             "date": AdminDateWidget(),
         }
 
+
+class newsForm(forms.Form):
+    title = forms.CharField(max_length=160)
+    detail = forms.CharField(max_length=160)
+
+
+class NewsModelForm(forms.ModelForm):
+    class Meta:
+        model = NewsModel
+        fields = "__all__"

@@ -16,13 +16,13 @@ from .models import Student
 
 def index(request):
     if request.user.is_authenticated:
-        return render(request, 'user/home.html')
+        return redirect('website:index')
     return render(request, 'user/index.html')
 
 
 def login_view(request):
     if request.user.is_authenticated:
-        return render(request, 'user/home.html')
+        return redirect('website:index')
     elif request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")

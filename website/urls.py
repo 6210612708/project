@@ -21,8 +21,19 @@ from . import views
 app_name = "website" 
 urlpatterns = [
     path('', views.index ,name='index' ),
+
+    # todolist
     path('todolist/', views.todolist ,name='todolist'),
-    path('upload_csv/', views.upload_csv ,name='upload_csv'),
+    path('todo_csv/', views.todo_csv ,name='todo_csv'),
     path('todolist/delete/<pk>', views.deletelist ,name='deletelist'),
     path('todolist/update/<pk>', views.updatelist ,name='updatelist'),
+
+    # news
+    path('news/', views.news ,name='news'),
+    path('news_csv/', views.news_csv ,name='news_csv'),
+    path('news/delete/<pk>', views.deletenews ,name='deletenews'),
+    path('news/update/<pk>', views.updatenews ,name='updatenews'),
+    path('news/<pk>', views.news_detail, name="news_detail"),
+
+
 ]
