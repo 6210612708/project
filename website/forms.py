@@ -31,3 +31,15 @@ class NewsModelForm(forms.ModelForm):
         model = NewsModel
         fields = "__all__"
         exclude = ['date_created']
+
+
+class docForm(forms.Form):
+    title = forms.CharField(max_length=160)
+    file = forms.FileField()
+
+
+class DocModelForm(forms.ModelForm):
+    class Meta:
+        model = DocModel
+        fields = "__all__"
+        exclude = ['date_created']

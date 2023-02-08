@@ -128,3 +128,23 @@ def news_detail(request, pk):
     context = {"new": new}
     return render(request, "news_detail.html", context)
 
+# =========== Document ==========================================
+
+
+def document(request):
+    if request.method == "POST":
+        form = DocModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = DocModelForm()
+    show = DocModel.objects.all()
+    
+    context = {'form':form, 'show':show }
+    return render(request,'document.html' ,context)
+
+def doc_detail(request, pk):
+    pdf = DocModel.objects.filter(id=pk).first()
+    context = {"pdf": pdf}
+    return render(request, "doc_detail.html", context)

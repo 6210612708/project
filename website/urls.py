@@ -35,5 +35,10 @@ urlpatterns = [
     path('news/update/<pk>', views.updatenews ,name='updatenews'),
     path('news/<pk>', views.news_detail, name="news_detail"),
 
+    # Document
+    path('document/', views.document ,name='document'),
+    # path('document/delete/<pk>', views.deletedoc ,name='deletenews'),
+    path('document/<pk>', views.doc_detail, name="doc_detail"),
+
 
 ]

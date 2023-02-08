@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.utils import timezone
+from .utils import file_path
 
 # Create your models here.
 
@@ -24,3 +25,10 @@ class NewsModel(models.Model):
     def __str__(self):
         return self.title
 
+class DocModel(models.Model):
+    title = models.CharField(max_length=64, null=True)
+    file = models.FileField(upload_to=file_path,null=True)
+    date_created = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.title
