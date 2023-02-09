@@ -34,7 +34,7 @@ def login_view(request):
 
         if user is not None and user.is_superuser:
             login(request, user)
-            return redirect("/admin")
+            return redirect('website:index')
 
         else:
 
@@ -78,10 +78,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    messages.success(request, "Logged out.")
-    return render(request, 'user/index.html', {
-        "messages": messages.get_messages(request)
-    })
+    return redirect('user:index')
 
 
 # login with tu api
