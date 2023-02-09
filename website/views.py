@@ -5,7 +5,7 @@ from .forms import *
 from datetime import date, datetime
 from django.contrib import messages
 import csv ,io
-
+from django.http import FileResponse
 
 def index(request):
     return render(request, 'index.html')
@@ -148,3 +148,4 @@ def doc_detail(request, pk):
     pdf = DocModel.objects.filter(id=pk).first()
     context = {"pdf": pdf}
     return render(request, "doc_detail.html", context)
+
