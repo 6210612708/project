@@ -133,7 +133,7 @@ def news_detail(request, pk):
 
 def document(request):
     if request.method == "POST":
-        form = DocModelForm(request.POST)
+        form = DocModelForm(request.POST ,request.FILES)
         if form.is_valid():
             form.save()
         else:
@@ -148,4 +148,10 @@ def doc_detail(request, pk):
     pdf = DocModel.objects.filter(id=pk).first()
     context = {"pdf": pdf}
     return render(request, "doc_detail.html", context)
+
+def deletedoc(request, pk):
+    data = DocModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:document')
+
 

@@ -37,8 +37,11 @@ urlpatterns = [
 
     # Document
     path('document/', views.document ,name='document'),
-    # path('document/delete/<pk>', views.deletedoc ,name='deletenews'),
+    path('document/delete/<pk>', views.deletedoc ,name='deletedoc'),
     path('document/<pk>', views.doc_detail, name="doc_detail"),
+
+
+    #Database
 
 
 ]

@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(ListModel)
 admin.site.register(NewsModel)
 admin.site.register(DocModel)
+admin.site.register(ProfModel)
