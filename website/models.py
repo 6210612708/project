@@ -48,3 +48,14 @@ class ProfModel(models.Model):
     
     def __str__(self):
         return f'{self.fname} {self.lname}'
+
+
+class OtherModel(models.Model):
+    title = models.CharField(max_length=100, null=True)
+    fname = models.CharField(max_length=100, null=True)
+    lname = models.CharField(max_length=100, null=True)
+    email = models.EmailField(max_length=100, null=True)
+    phone = models.CharField(max_length=100, null=True)
+    
+    def __str__(self):
+        return f'{self.fname} {self.lname}'

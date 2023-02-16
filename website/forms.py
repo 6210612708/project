@@ -14,12 +14,14 @@ class ListModelForm(forms.ModelForm):
         widgets = {
             "date": AdminDateWidget(),
         }
+        
 
 class NewsModelForm(forms.ModelForm):
     class Meta:
         model = NewsModel
         fields = "__all__"
         exclude = ['date_created']
+
 
 class DocModelForm(forms.ModelForm):
     class Meta:
@@ -33,3 +35,8 @@ class ProfModelForm(forms.ModelForm):
         model = ProfModel
         fields = "__all__"
 
+
+class OtherModelForm(forms.ModelForm):
+    class Meta:
+        model = OtherModel
+        fields = "__all__"

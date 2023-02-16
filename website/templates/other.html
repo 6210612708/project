@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% url 'js-catlog' %}"></script>
+        <script src="{% static '/admin/js/core.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+        <title>Document</title>
+    </head>
+{% endblock %}
+{% block content %}
+    <body>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" name="Submit" id="submit">
+        </form>
+
+
+        <table>
+            {% for show in show %}
+            <tr>
+                <td>
+                    {{show.title}} {{show.fname}} {{show.lname}} {{show.email}} {{show.phone}}
+                    <a href="{% url 'website:deleteother' show.id %}" 
+                    onclick="return confirm('Confirm Delete?')">ลบ</a>
+                    <a href="{% url 'website:updateother' show.id %}" >แก้ไข</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+            <a href="{% url 'website:other_csv' %}">upload csv</a>
+        </table>
+
+    </body>
+{% endblock %}

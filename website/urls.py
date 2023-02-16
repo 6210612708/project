@@ -48,4 +48,11 @@ urlpatterns = [
     path('prof/update/<pk>', views.updateprof ,name='updateprof'),
 
 
+    # OTHER
+    path('other/', views.other ,name='other'),
+    path('other_csv/', views.other_csv ,name='other_csv'),
+    path('other/delete/<pk>', views.deleteother ,name='deleteother'),
+    path('other/update/<pk>', views.updateother ,name='updateother'),
+
+
 ]
