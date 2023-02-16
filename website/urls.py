@@ -41,7 +41,11 @@ urlpatterns = [
     path('document/<pk>', views.doc_detail, name="doc_detail"),
 
 
-    #Database
+    # Professor
+    path('prof/', views.prof ,name='prof'),
+    path('prof_csv/', views.prof_csv ,name='prof_csv'),
+    path('prof/delete/<pk>', views.deleteprof ,name='deleteprof'),
+    path('prof/update/<pk>', views.updateprof ,name='updateprof'),
 
 
 ]

@@ -155,3 +155,63 @@ def deletedoc(request, pk):
     return redirect('website:document')
 
 
+
+# =========== Database ==========================================
+
+def prof(request):
+    if request.method == "POST":
+        form = ProfModelForm(request.POST ,request.FILES)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = ProfModelForm()
+    show = ProfModel.objects.all()
+    
+    context = {'form':form, 'show':show }
+    return render(request,'professor.html' ,context)
+
+def prof_csv(request):
+    show = ProfModel.objects.all()
+    if request.method == "GET":
+        context = {'show':show}
+        return render(request, 'todo_csv.html' ,context)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'Please upload only CSV file')
+
+    data_set =csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+
+    for column in csv.reader(io_string, delimiter=',',quotechar='|'):
+        _, created = ProfModel.objects.update_or_create(
+            title = column[0],
+            fname = column[1],
+            lname = column[2],
+            major = column[3],
+            email = column[4],
+            phone = column[5],
+
+        )
+    context = {
+        'notify': 'CSV file is already upload', 'show':show
+    }
+    return render(request,'prof_csv.html' ,context)
+
+def deleteprof(request, pk):
+    data = ProfModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:prof')
+
+def updateprof(request, pk):
+    list = ProfModel.objects.get(id=pk)
+    form = ProfModelForm(instance=list )
+    if request.method == 'POST':
+        form = ProfModelForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('website:prof')
+    return render(request, 'update_prof.html', {'form':form } )

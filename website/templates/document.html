@@ -26,7 +26,7 @@
             {% for show in show %}
             <tr>
                 <td>
-                    {{show.title}}
+                    {{show.title}} 
                     <a href="{{show.file.url}}" download>download file</a>
                     <a href="{% url 'website:deletedoc' show.id %}" 
                     onclick="return confirm('Confirm Delete?')">ลบ</a>

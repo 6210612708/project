@@ -7,11 +7,6 @@ from django import forms
 from django.contrib.admin.widgets import  AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 from .models import *
 
-
-class todoForm(forms.Form):
-    date = forms.DateField(widget=AdminDateWidget())
-    list = forms.CharField(max_length=64)
-
 class ListModelForm(forms.ModelForm):
     class Meta:
         model = ListModel
@@ -20,26 +15,21 @@ class ListModelForm(forms.ModelForm):
             "date": AdminDateWidget(),
         }
 
-
-class newsForm(forms.Form):
-    title = forms.CharField(max_length=160)
-    detail = forms.CharField(max_length=160)
-
-
 class NewsModelForm(forms.ModelForm):
     class Meta:
         model = NewsModel
         fields = "__all__"
         exclude = ['date_created']
 
-
-class docForm(forms.Form):
-    title = forms.CharField(max_length=160)
-    file = forms.FileField()
-
-
 class DocModelForm(forms.ModelForm):
     class Meta:
         model = DocModel
         fields = "__all__"
         exclude = ['date_created']
+
+
+class ProfModelForm(forms.ModelForm):
+    class Meta:
+        model = ProfModel
+        fields = "__all__"
+
