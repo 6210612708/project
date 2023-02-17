@@ -1,43 +1,69 @@
+{% extends 'base_user.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>login</title>
-        <link rel="stylesheet" type="text/css" href="{% static '/css/login.css' %}">
-    </head>
-    {% block body %}
-      <form method="post" action="{% url 'user:login' %}" id="login-form" class="login-form" autocomplete="off" role="main">
-          {% csrf_token %}
-          <h1 class="a11y-hidden">Login Form</h1>
-            <div>
-              <label class="label-email">
-                <input type="text" name="username" placeholder="Username">
-                <span class="required">Username</span>
-              </label>
-              <label class="label-password">
-                <input type="password" name="password" placeholder="Password">
-                <span class="required">Password</span>
-              </label>
-            </div>
-            <input type="submit" value="Login" >
-            <figure aria-hidden="true">
-              <div class="person-body"></div>
-              <div class="neck skin"></div>
-              <div class="head skin">
-              <div class="eyes"></div>
-              <div class="mouth"></div>
+{% block body %}  
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+  <div class="card card0 border-0">
+      <div class="row d-flex">
+          <div class="col-lg-6">
+              <div class="card1 pb-5">
+                  <div class="row">
+                      <img src="{% static 'images/TSE-logo.png' %}" class="logo">
+                  </div>
+                  <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
+                      <img src="https://i.imgur.com/uNGdWHi.png" class="image">
+                  </div>
               </div>
-              <div class="hair"></div>
-              <div class="ears"></div>
-              <div class="shirt-1"></div>
-              <div class="shirt-2"></div>
-            </figure>
-          {% if messages %}
-          {% for message in messages %}
-          <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
-          {% endfor %}
-    {% endif %}
-
-      </form>
-
+          </div>
+          <div class="col-lg-6">
+              <div class="card2 card border-0 px-4 py-5">
+                  <div class="row px-3 mb-4">
+                      <div class="line"></div>
+                      <bigger class="or text-center">LOGIN</bigger>
+                      <div class="line"></div>
+                  </div>
+                  <form method="post" action="{% url 'user:login' %}" id="login-form" class="login-form" autocomplete="off" role="main">
+                    {% csrf_token %}
+                  <div class="row px-3">
+                      <label class="mb-1"><h6 class="mb-0 text-sm"><span class="required">Username</span></h6></label>
+                      <input class="mb-4" type="text" name="username" placeholder="Enter Username">
+                  </div>
+                  <div class="row px-3">
+                      <label class="mb-1"><h6 class="mb-0 text-sm">Password</h6></label>
+                      <input type="password" name="password" placeholder="Enter password">
+                  </div>
+                  <div class="row px-3 mb-4">
+                      <div class="custom-control custom-checkbox custom-control-inline">
+                          <input id="chk1" type="checkbox" name="chk" class="custom-control-input"> 
+                          <label for="chk1" class="custom-control-label text-sm">Remember me</label>
+                      </div>
+                      <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
+                  </div>
+                  <div class="row mb-3 px-3">
+                      <button type="submit" class="btn btn-blue text-center">Login</button>
+                  </div>
+                  {% if messages %}
+                      {% for message in messages %}
+                        <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+                      {% endfor %}
+                  {% endif %}
+                  </form>
+                  <div class="row mb-4 px-3">
+                      <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="bg-blue py-4">
+          <div class="row px-3">
+              <small class="ml-4 ml-sm-5 mb-2"></small>
+              <div class="social-contact ml-4 ml-sm-auto">
+                  <span class="fa fa-facebook mr-4 text-sm"></span>
+                  <span class="fa fa-google-plus mr-4 text-sm"></span>
+                  <span class="fa fa-linkedin mr-4 text-sm"></span>
+                  <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
 {% endblock %}

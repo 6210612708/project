@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  
+    
+</head>
+
+<body>
+    <main>
+        <section class="header">
+            <nav>
+              <div class="nav-links" id="navLinks">
+                <ul>
+                  <li><a href="{% url 'main:index' %}">Home</a></li>
+                  <li><a href="{% url 'main:news' %}">Internship</a></li>
+                  <li><a href="#" class="About">About</a>
+                <div class="sub-about">
+                  <ul>
+                    <a href="https://github.com/cn332proj/cn332proj"><li>GitHub</li></a>
+                    <a href="https://www.youtube.com/watch?v=O9XSYX4t2m8"><li>Youtube</li></a>
+                  </ul>
+                </div>
+              </li>
+              <li><a href="{% url 'user:logout' %}">Log out</a></li>
+              </ul>
+              </div>
+            </nav>
+          </section>
+    <nav>
+        <section class="header">
+        <div class="menu-bar ">
+            <img src="{% static 'images/Logo_ECE.png' %}" height="50px" style="margin: 6px" />
+            <a href="">เข้าสู่ระบบ</a>
+            <a href="">เอกสารวิชาโครงงาน</a>
+        </div>   
+        </section>
+    </nav>
+     <section class="body">
+        {% block content %}
+        {% endblock %}
+    </section>
+    </main>
+</body>
+</html>
