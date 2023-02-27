@@ -35,6 +35,7 @@ def todo_csv(request):
 
     if not csv_file.name.endswith('.csv'):
         messages.error(request, 'Please upload only CSV file')
+        return redirect('website:todo_csv')
 
     data_set =csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
@@ -108,6 +109,7 @@ def news_csv(request):
 
     if not csv_file.name.endswith('.csv'):
         messages.error(request, 'Please upload only CSV file')
+        return redirect('website:news_csv')
 
     data_set =csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
@@ -181,6 +183,7 @@ def prof_csv(request):
 
     if not csv_file.name.endswith('.csv'):
         messages.error(request, 'Please upload only CSV file')
+        return redirect('website:prof_csv')
 
     data_set =csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
@@ -241,6 +244,7 @@ def other_csv(request):
 
     if not csv_file.name.endswith('.csv'):
         messages.error(request, 'Please upload only CSV file')
+        return redirect('website:other_csv')
 
     data_set =csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
@@ -301,6 +305,7 @@ def std_csv(request):
 
     if not csv_file.name.endswith('.csv'):
         messages.error(request, 'Please upload only CSV file')
+        return redirect('website:std_csv')
 
     data_set =csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
