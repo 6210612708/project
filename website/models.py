@@ -59,3 +59,24 @@ class OtherModel(models.Model):
     
     def __str__(self):
         return f'{self.fname} {self.lname}'
+
+
+class StdModel(models.Model):
+    MAJOR = (
+            ('ไฟฟ้า', 'ไฟฟ้า'),
+            ('คอมพิวเตอร์', 'คอมพิวเตอร์'),
+    )
+    TITLE = (
+            ('นาย', 'นาย'),
+            ('นางสาว', 'นางสาว'),
+    )
+    stdid = models.CharField(max_length=100, null=True)
+    title = models.CharField(max_length=100, null=True, choices=TITLE)
+    fname = models.CharField(max_length=100, null=True)
+    lname = models.CharField(max_length=100, null=True)
+    major = models.CharField(max_length=100, null=True, choices=MAJOR)
+    email = models.EmailField(max_length=100, null=True)
+    phone = models.CharField(max_length=100, null=True)
+    
+    def __str__(self):
+        return f'{self.fname} {self.lname}'

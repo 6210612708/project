@@ -40,3 +40,9 @@ class OtherModelForm(forms.ModelForm):
     class Meta:
         model = OtherModel
         fields = "__all__"
+
+
+class StdModelForm(forms.ModelForm):
+    class Meta:
+        model = StdModel
+        fields = "__all__"

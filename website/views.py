@@ -274,3 +274,64 @@ def updateother(request, pk):
             form.save()
             return redirect('website:other')
     return render(request, 'update_other.html', {'form':form } )
+
+
+# =========== Student ==========================================
+
+def std(request):
+    if request.method == "POST":
+        form = StdModelForm(request.POST ,request.FILES)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = StdModelForm()
+    show = StdModel.objects.all()
+    
+    context = {'form':form, 'show':show }
+    return render(request,'student.html' ,context)
+
+def std_csv(request):
+    show = StdModel.objects.all()
+    if request.method == "GET":
+        context = {'show':show}
+        return render(request, 'std_csv.html' ,context)
+
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'Please upload only CSV file')
+
+    data_set =csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+
+    for column in csv.reader(io_string, delimiter=',',quotechar='|'):
+        _, created = StdModel.objects.update_or_create(
+            stdid = column[0],
+            title = column[1],
+            fname = column[2],
+            lname = column[3],
+            email = column[4],
+            phone = column[5],
+
+        )
+    context = {
+        'notify': 'CSV file is already upload', 'show':show
+    }
+    return render(request,'std_csv.html' ,context)
+
+def deletestd(request, pk):
+    data = StdModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:std')
+
+def updatestd(request, pk):
+    list = StdModel.objects.get(id=pk)
+    form = StdModelForm(instance=list )
+    if request.method == 'POST':
+        form = StdModelForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('website:std')
+    return render(request, 'update_std.html', {'form':form } )

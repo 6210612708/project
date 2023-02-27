@@ -55,4 +55,11 @@ urlpatterns = [
     path('other/update/<pk>', views.updateother ,name='updateother'),
 
 
+    # Student
+    path('std/', views.std ,name='std'),
+    path('std_csv/', views.std_csv ,name='std_csv'),
+    path('std/delete/<pk>', views.deletestd ,name='deletestd'),
+    path('std/update/<pk>', views.updatestd ,name='updatestd'),
+
+
 ]
