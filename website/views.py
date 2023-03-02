@@ -340,3 +340,123 @@ def updatestd(request, pk):
             form.save()
             return redirect('website:std')
     return render(request, 'update_std.html', {'form':form } )
+
+
+# =========== PLAN for Coordinator ==========================================
+
+def coorplan(request):
+    if request.method == "POST":
+        form = CoorPlanModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = CoorPlanModelForm()
+    show = CoorPlanModel.objects.all()
+    
+    context = {'form':form , 'show':show }
+    return render(request,'coorplan.html' ,context)
+
+def coorplan_csv(request):
+    show = CoorPlanModel.objects.all()
+    if request.method == "GET":
+        context = {'show':show}
+        return render(request, 'coorplan_csv.html' ,context)
+
+    if request.method == "POST":
+        csv_file = request.FILES['file']
+    
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'Please upload only CSV file')
+        return redirect('website:coorplan_csv')
+
+    data_set =csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+
+    for column in csv.reader(io_string, delimiter=',',quotechar='|'):
+        _, created = CoorPlanModel.objects.update_or_create(
+            date=column[0],
+            list=column[1],
+        )
+    context = {
+        'notify': 'CSV file is already upload', 'show':show
+    }
+    return render(request,'coorplan_csv.html' ,context)
+
+
+def deletecoorplan(request, pk):
+    data = CoorPlanModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:coorplan')
+
+def updatecoorplan(request, pk):
+    list = CoorPlanModel.objects.get(id=pk)
+    form = CoorPlanModelForm(instance=list )
+    if request.method == 'POST':
+        form = CoorPlanModelForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('website:coorplan')
+    return render(request, 'update_coorplan.html', {'form':form } )
+
+
+# =========== PLAN for Committee ==========================================
+
+def complan(request):
+    if request.method == "POST":
+        form = ComPlanModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = ComPlanModelForm()
+    show = ComPlanModel.objects.all()
+    
+    context = {'form':form , 'show':show }
+    return render(request,'complan.html' ,context)
+
+def complan_csv(request):
+    show = ComPlanModel.objects.all()
+    if request.method == "GET":
+        context = {'show':show}
+        return render(request, 'complan_csv.html' ,context)
+
+    if request.method == "POST":
+        csv_file = request.FILES['file']
+    
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'Please upload only CSV file')
+        return redirect('website:complan_csv')
+
+    data_set =csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+
+    for column in csv.reader(io_string, delimiter=',',quotechar='|'):
+        _, created = CoorPlanModel.objects.update_or_create(
+            date=column[0],
+            list=column[1],
+        )
+    context = {
+        'notify': 'CSV file is already upload', 'show':show
+    }
+    return render(request,'complan_csv.html' ,context)
+
+
+def deletecomplan(request, pk):
+    data = ComPlanModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:complan')
+
+def updatecomplan(request, pk):
+    list = ComPlanModel.objects.get(id=pk)
+    form = ComPlanModelForm(instance=list )
+    if request.method == 'POST':
+        form = ComPlanModelForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('website:complan')
+    return render(request, 'update_complan.html', {'form':form } )

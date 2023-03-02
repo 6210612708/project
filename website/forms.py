@@ -14,7 +14,39 @@ class ListModelForm(forms.ModelForm):
         widgets = {
             "date": AdminDateWidget(),
         }
-        
+
+class CoorPlanModelForm(forms.ModelForm):
+    class Meta:
+        model = CoorPlanModel
+        fields = "__all__"
+        widgets = {
+            "date": AdminDateWidget(),
+        }
+
+class ComPlanModelForm(forms.ModelForm):
+    class Meta:
+        model = ComPlanModel
+        fields = "__all__"
+        widgets = {
+            "date": AdminDateWidget(),
+        }
+
+class ProfPlanModelForm(forms.ModelForm):
+    class Meta:
+        model = ProfPlanModel
+        fields = "__all__"
+        widgets = {
+            "date": AdminDateWidget(),
+        }
+
+class StdPlanModelForm(forms.ModelForm):
+    class Meta:
+        model = StdPlanModel
+        fields = "__all__"
+        widgets = {
+            "date": AdminDateWidget(),
+        }
+   
 
 class NewsModelForm(forms.ModelForm):
     class Meta:
@@ -46,3 +78,4 @@ class StdModelForm(forms.ModelForm):
     class Meta:
         model = StdModel
         fields = "__all__"
+
