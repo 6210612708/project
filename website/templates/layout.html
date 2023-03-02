@@ -1,10 +1,174 @@
+{% extends 'base_layout.html' %}
+{% block head %}
+{% endblock %}
+     
+{% block body %}
+    <!-- <body id="body-pd">
+    <header class="header" id="header">
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div> <a href="#" class="nav_logo" style="text-decoration:none"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">MENU</span> </a>
+                <div class="nav_list">
+                     <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">สิ่งที่ต้องทำ</span> </a> 
+                     <a href="#" class="nav_link"> <i class='bx bx-news nav_icon'></i> <span class="nav_name">ประกาศข่าวสาร</span> </a> 
+                     <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">แผนการดำเนินงาน</span> </a> 
+                     <a href="#" class="nav_link"><i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">อัพโหลดเอกสาร</span> </a> 
+                     <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">โครงงานนักศึกษา</span> </a> 
+                     <a href="#" class="nav_link"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">เกณฑ์การตัดเกรด</span> </a>
+                     -->
+                        <!----------------------------------------submenu--------------------------------------------------->
+                   
+                 <!-- <li class="nav-item has-submenu">
+                    <a class="nav-link" href="#"><i class='bx bx-user nav_icon'></i><span class="nav_name">จัดการข้อมูล</span></a>
+                    <ul class="submenu collapse">
+                        <li><a class="nav-link" href="#">Submenu item 4 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 5 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 6 </a></li>
+                        <li><a class="nav-link" href="#">Submenu item 7 </a></li>
+                    </ul>
+                </li> -->
+                 
+                 <!----------------------------------------submenu--------------------------------------------------->
+                 <!-- <a href="#" class="nav_link"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">จัดการปีการศึกษา</span> </a>
+                 <a href="#" class="nav_link"><i class='bx bx-cog nav_icon'></i> <span class="nav_name">ตั้งค่า</span> </a>
+                </div>
+            </div> <a href="{% url 'user:logout' %}" class="nav_link" style="text-decoration:none"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+        </nav>
+    </div> -->
 
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    {% block head %}
-    {% endblock %}
+    <!--Container Main start-->
+    <!-- <div class="height-100 bg-light">
+        <h4>Main Components</h4>
+    </div> -->
+    <!--Container Main end-->
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>STUDENT</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <!-- <p>MENU</p> -->
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-user nav_icon'></i><span class="nav_name">จัดการข้อมูล</span></a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="{% url 'website:prof' %}">อาจารย์</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'website:other' %}">ผู้ใช้นอกภาควิชา</a>
+                        </li>
+                        <li>
+                            <a href="#">ผู้ประสานงาน</a>
+                        </li>
+                        <li>
+                            <a href="#">นักศึกษา</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">สิ่งที่ต้องทำ</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-news nav_icon'></i> <span class="nav_name">ประกาศข่าวสาร</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">แผนการดำเนินงาน</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">อัพโหลดเอกสาร</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-folder nav_icon'></i> <span class="nav_name">โครงงานนักศึกษา</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-folder nav_icon'></i> <span class="nav_name">คะแนนโครงงาน</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">เกณฑ์การตัดเกรด</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">จัดการปีการศึกษา</span></a>
+                </li>
+                <li>
+                    <a href="#"><i class='bx bx-cog nav_icon'></i> <span class="nav_name">ตั้งค่า</span></a>
+                </li>
+                <!-- <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Portfolio</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li> -->
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="#" class="article">BACK</a>
+                </li>
+                <li>
+                    <a href="{% url 'user:logout' %}" class="download" style="color: #7386D5;">LOG OUT</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>HOME</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
     
+<<<<<<< HEAD
+{% endblock %}
+            {% block content %}
+            {% endblock %}
+    </div>
+=======
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,3 +226,4 @@
     {% block content %}
     {% endblock %}
 </html>
+>>>>>>> 7cef6bca77b2e05f531a7993687e77e68dde1961
