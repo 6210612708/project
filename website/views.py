@@ -436,7 +436,7 @@ def complan_csv(request):
     next(io_string)
 
     for column in csv.reader(io_string, delimiter=',',quotechar='|'):
-        _, created = CoorPlanModel.objects.update_or_create(
+        _, created = ComPlanModel.objects.update_or_create(
             date=column[0],
             list=column[1],
         )
@@ -460,3 +460,123 @@ def updatecomplan(request, pk):
             form.save()
             return redirect('website:complan')
     return render(request, 'update_complan.html', {'form':form } )
+
+
+# =========== PLAN for Consult ==========================================
+
+def profplan(request):
+    if request.method == "POST":
+        form = ProfPlanModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = ProfPlanModelForm()
+    show = ProfPlanModel.objects.all()
+    
+    context = {'form':form , 'show':show }
+    return render(request,'profplan.html' ,context)
+
+def profplan_csv(request):
+    show = ProfPlanModel.objects.all()
+    if request.method == "GET":
+        context = {'show':show}
+        return render(request, 'profplan_csv.html' ,context)
+
+    if request.method == "POST":
+        csv_file = request.FILES['file']
+    
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'Please upload only CSV file')
+        return redirect('website:profplan_csv')
+
+    data_set =csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+
+    for column in csv.reader(io_string, delimiter=',',quotechar='|'):
+        _, created = ProfPlanModel.objects.update_or_create(
+            date=column[0],
+            list=column[1],
+        )
+    context = {
+        'notify': 'CSV file is already upload', 'show':show
+    }
+    return render(request,'profplan_csv.html' ,context)
+
+
+def deleteprofplan(request, pk):
+    data = ProfPlanModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:profplan')
+
+def updateprofplan(request, pk):
+    list = ProfPlanModel.objects.get(id=pk)
+    form = ProfPlanModelForm(instance=list )
+    if request.method == 'POST':
+        form = ProfPlanModelForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('website:profplan')
+    return render(request, 'update_profplan.html', {'form':form } )
+
+
+# =========== PLAN for Student ==========================================
+
+def stdplan(request):
+    if request.method == "POST":
+        form = StdPlanModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = StdPlanModelForm()
+    show = StdPlanModel.objects.all()
+    
+    context = {'form':form , 'show':show }
+    return render(request,'stdplan.html' ,context)
+
+def stdplan_csv(request):
+    show = StdPlanModel.objects.all()
+    if request.method == "GET":
+        context = {'show':show}
+        return render(request, 'stdplan_csv.html' ,context)
+
+    if request.method == "POST":
+        csv_file = request.FILES['file']
+    
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'Please upload only CSV file')
+        return redirect('website:stdplan_csv')
+
+    data_set =csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+
+    for column in csv.reader(io_string, delimiter=',',quotechar='|'):
+        _, created = StdPlanModel.objects.update_or_create(
+            date=column[0],
+            list=column[1],
+        )
+    context = {
+        'notify': 'CSV file is already upload', 'show':show
+    }
+    return render(request,'stdplan_csv.html' ,context)
+
+
+def deletestdplan(request, pk):
+    data = StdPlanModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:stdplan')
+
+def updatestdplan(request, pk):
+    list = StdPlanModel.objects.get(id=pk)
+    form = StdPlanModelForm(instance=list )
+    if request.method == 'POST':
+        form = StdPlanModelForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('website:stdplan')
+    return render(request, 'update_stdplan.html', {'form':form } )

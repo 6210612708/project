@@ -40,6 +40,18 @@ urlpatterns = [
     path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
     path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
 
+    # CON plan
+    path('profplan/', views.profplan ,name='profplan'),
+    path('profplan_csv/', views.profplan_csv ,name='profplan_csv'),
+    path('profplan/delete/<pk>', views.deleteprofplan ,name='deleteprofplan'),
+    path('profplan/update/<pk>', views.updateprofplan ,name='updateprofplan'),
+
+    # STD plan
+    path('stdplan/', views.stdplan ,name='stdplan'),
+    path('stdplan_csv/', views.stdplan_csv ,name='stdplan_csv'),
+    path('stdplan/delete/<pk>', views.deletestdplan ,name='deletestdplan'),
+    path('stdplan/update/<pk>', views.updatestdplan ,name='updatestdplan'),
+
     # news
     path('news/', views.news ,name='news'),
     path('news_csv/', views.news_csv ,name='news_csv'),
