@@ -5,38 +5,130 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="{% url 'js-catlog' %}"></script>
-        <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <title>TodoList</title>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/todolist.css' %}">
     </head>
 {% endblock %}
 {% block content %}
     <body>
-        <form method="POST" class="text-center">
-            {% csrf_token %}
-            {{ form.media }}
-            {{ form.as_p }}
-            <input type="submit" name="Submit" id="submit">
-        </form>
+            <div class="row mt-5">
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Upload CSV</h5>
+                    <p class="card-text">
+                      <form method="POST" class="text-center">
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.as_p }}
+                        <!-- <label class="input">
+                          <input class="input__field" type="text" placeholder=" ">
+                          <span class="input__label">List</span>
+                        </label> -->
+                        <!-- <div class="button-group">
+                          <button>Send</button>
+                          <button type="reset">Reset</button>
+                        </div> -->
+                    </p>
+                    <a href="#" class="btn btn-primary" type="submit" name="Submit" id="submit">Submit</a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">รายการสิ่งที่ต้องทำ</h5>
+                    <p class="card-text">
+                      <table class="table table-borderless">
+                        <thead>
+                          <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">List</th>
+                            <th scope="col">Edit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for show in show %}
+                          <tr>
+                            <td>{{show.date}}</td>
+                            <td>{{show.list}}</td>
+                            <td>
+                              <a href="{% url 'website:deletelist' show.id %}" 
+                                onclick="return confirm('Confirm Delete?')">ลบ</a>
+                              <a href="{% url 'website:updatelist' show.id %}" >แก้ไข</a>
+                            </td>
+                            {% endfor %}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
-        <table>
-            {% for show in show %}
-            <tr>
-                <td>
-                    {{show.date}}
-                    {{show.list}}
-                    <a href="{% url 'website:deletelist' show.id %}" 
-                    onclick="return confirm('Confirm Delete?')">ลบ</a>
-                    <a href="{% url 'website:updatelist' show.id %}" >แก้ไข</a>
-                </td>
-            </tr>
-            {% endfor %}
+    <!-- <div class="container py-5">
+  <div class="card mt-5">
+    <div class="row ">
 
-            <a href="{% url 'website:todo_csv' %}">upload csv</a>
-        </table>
+      <div class="col-md-12 px-3">
+        <div class="card-block text-center px-6">
+            <div class="widget-49">
+          <h4 class="card-title">รายการสิ่งที่ต้องทำ</h4>
+          <p class="card-text">
+            <div class="center">
+                  <form method="POST" class="text-center">
+                {% csrf_token %}
+                    <span >{{ form.media }}</span>
+                    <span>{{ form.as_p }}</span>
+                  <div class="inputbox">
+                    <input type="submit" name="Submit" id="submit" value="submit">
+                  </div>
+                </form>
+              </div>
+            </form>
+          </p>
+          <p class="card-text text-center">
+            <ol class="widget-49-meeting-points">
+                {% for show in show %}
+              <li class="widget-49-meeting-item">
+                  <span>
+                          {{show.date}}
+                          {{show.list}}
+                          <a href="{% url 'website:deletelist' show.id %}" 
+                          onclick="return confirm('Confirm Delete?')">ลบ</a>
+                          <a href="{% url 'website:updatelist' show.id %}" >แก้ไข</a>
+                          
+                  </span>           
+              </li>
+               {% endfor %}
+          </ol>
+          </p>
+          <br>
+          <div class="widget-49-meeting-action">
+            <a href="{% url 'website:todo_csv' %}" class="btn btn-sm btn-flash-border-primary">upload csv</a>
+        </div>  
+        </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div> -->
 
     </body>
+    <script>
+      let timer;
+
+document.addEventListener('input', e => {
+  const el = e.target;
+  
+  if( el.matches('[data-color]') ) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      document.documentElement.style.setProperty(`--color-${el.dataset.color}`, el.value);
+    }, 100)
+  }
+})
+    </script>
 {% endblock %}

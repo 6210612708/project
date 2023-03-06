@@ -1,7 +1,30 @@
 {% load static %}
 <html lang="en">
-
-{% block head %}
+    <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                {% block head %}
+                <title>update</title>
+                {% endblock %}
+              </h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- {% block head %}
     <title>update</title>
 {% endblock %}
 
@@ -18,6 +41,6 @@
         </form>
     {% endif %}
 
-{% endblock %}
+{% endblock %} -->
 
 </html>
