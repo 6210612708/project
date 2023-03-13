@@ -106,10 +106,17 @@
   text-align: right;
 }
 
+/* .widget-49-meeting-action {
+  text-align: right;
+} */
+
 .widget-49 .widget-49-meeting-action a {
   text-transform: uppercase;
 }
 
+.widget-49-meeting-action a {
+  text-transform: uppercase;
+}
 
 
  body {
@@ -237,5 +244,8 @@
   .center .inputbox:hover [type="Submit"] {
     background: linear-gradient(45deg, rgb(255, 47, 47), dodgerblue);
   }
-  
-  
+  .icon {
+    display: inline-block;
+    width: 1em; height: 1em;
+    margin-right: .5em;
+  }
