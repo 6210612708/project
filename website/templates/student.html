@@ -2,24 +2,34 @@
 {% load static %}
 
 {% block head %}
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="{% url 'js-catlog' %}"></script>
-        <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <title>Document</title>
-    </head>
+    
 {% endblock %}
 {% block content %}
     <body>
-        <form method="POST" enctype="multipart/form-data">
+        <div class="card mt-5">
+            <!-- <h5 class="card-header">Featured</h5> -->
+            <h5 class="card-header">Upload CSV</h5>
+            <div class="card-body">
+              <!-- <h5 class="card-title">Upload CSV</h5> -->
+              <p class="card-text"><form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label class="addcontent-blog">
+                  {{ form.media }}
+                  {{ form.as_p }}
+                </label>
+                <!-- <input type="submit" name="Submit" id="submit"> -->
+                <div class="text-center">
+                <a href="#" type="submit" name="Submit" id="submit" class="btn btn-primary">Submit</a></div>
+            </form></p>
+            </div>
+          </div>
+
+        <!-- <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
             <input type="submit" name="Submit" id="submit">
-        </form>
+        </form> -->
 
 
         <table>

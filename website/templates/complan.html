@@ -2,19 +2,10 @@
 {% load static %}
 
 {% block head %}
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="{% url 'js-catlog' %}"></script>
-        <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <title>TodoList</title>
-    </head>
 {% endblock %}
 {% block content %}
     <body>
-        <form method="POST" class="text-center">
+        <!-- <form method="POST" class="text-center">
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
@@ -36,7 +27,59 @@
             {% endfor %}
 
             <a href="{% url 'website:complan_csv' %}">upload csv</a>
-        </table>
+        </table> -->
+        <div class="row mt-5">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">กรรมการ</h5>
+                  <p class="card-text">
+                    <form method="POST" class="text-center">
+                      {% csrf_token %}
+                      <label class="addcontent-blog">
+                        {{ form.media }}
+                        {{ form.as_p }}
+                      </label>
+                  </p>
 
+                <a class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit" role="button" aria-pressed="true">Submit</a>
+                <a href="{% url 'website:todo_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">แผนการดำเนินงาน</h5>
+                  <p class="card-text">
+                    <table class="table table-borderless">
+                      <thead>
+                        <tr>
+                          <th scope="col">Date</th>
+                          <th scope="col">List</th>
+                          <th scope="col">Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for show in show %}
+                        <tr>
+                          <td>{{show.date}}</td>
+                          <td>{{show.list}}</td>
+                          <td>
+                             <a href="{% url 'website:deletecomplan' show.id %}" 
+                            onclick="return confirm('Confirm Delete?')">ลบ</a>
+                            <a href="{% url 'website:updatecomplan' show.id %}" >แก้ไข</a>
+                          </td>
+                          {% endfor %}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </p>
+                  <!-- <a href="{% url 'website:complan_csv' %}" class="btn btn-primary">upload csv</a> -->
+                </div>
+              </div>
+            </div>
+          </div>
     </body>
 {% endblock %}
