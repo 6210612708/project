@@ -8,12 +8,14 @@
             <!-- left sidebar -->
             <div class="col-md-2 fixed pl-0 py-2 bg-dark left">
                 <ul class="nav flex-md-column flex-nowrap justify-content-center">
+                    {% if user.groups.all.0 == 'admin' %}
                     <li class="nav-item mt-5">
                         <a class="nav-link text-truncate " href="#"></a>
                     </li>
                     <li class="nav-item mt-3">
                         <a class="nav-link" href="{% url 'website:todolist' %}"><i class='bx bx-grid-alt nav_icon mr-3'></i>สิ่งที่ต้องทำ</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item mt-2">
                         <a class="nav-link" href="{% url 'website:news' %}"><i class='bx bx-news nav_icon mr-3'></i>ประกาศข่าวสาร</a>
                     </li>
@@ -51,6 +53,9 @@
                     </li>
                     <li class="nav-item mt-2">
                         <a class="nav-link" href="#"><i class='bx bx-cog nav_icon mr-3'></i>ตั้งค่า</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="{% url 'user:logout' %}"><i class='bx bx-cog nav_icon mr-3'></i>ออก</a>
                     </li>
                 </ul>
             </div>
@@ -105,6 +110,7 @@
            
         </div>
     </div>
+
    
 </section>    
     {% endblock %}

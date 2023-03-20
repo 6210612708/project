@@ -6,10 +6,10 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-import requests
-import pandas as pd
 import json
+import requests
 from website.models import *
+from website.decorator import *
 
 from .models import Student
 # Create your views here.
@@ -23,11 +23,9 @@ def index(request):
     context = {'news':news}
     return render(request, 'user/index.html' ,context)
 
-
+@unauthenticated_user
 def login_view(request):
-    if request.user.is_authenticated:
-        return redirect('website:index')
-    elif request.method == "POST":
+    if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)

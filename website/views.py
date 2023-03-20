@@ -6,12 +6,16 @@ from datetime import date, datetime
 from django.contrib import messages
 import csv ,io
 from django.http import FileResponse
+from django.contrib.auth.decorators import login_required
+from .decorator import *
 
+@login_required(login_url='user:login')
 def index(request):
     return render(request, 'index.html')
 
 # =========== TODOLIST ==========================================
 
+# @allowed_users(allowed_roles=['admin'])
 def todolist(request):
     if request.method == "POST":
         form = ListModelForm(request.POST)
@@ -50,7 +54,6 @@ def todo_csv(request):
         'notify': 'CSV file is already upload', 'show':show
     }
     return render(request,'todo_csv.html' ,context)
-
 
 def deletelist(request, pk):
     data = ListModel.objects.get(id=pk)
