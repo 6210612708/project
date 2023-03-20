@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+
+/* mhealthblog and uhealthblog and healthblog and mnews and unews and news */
+
+// $BGcolor:#63bc8a;
+$BGcolor:#f4f4f4;
+$Cardcolor:white;
+$labelcolor:#F2DC99;
+$Topiccolor: #63bc8a;
+
+.addcontent-blog {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    padding-top: 0px;
+    justify-content: top;
+    align-items: center;
+    text-align: center;
+
+    h5 {
+        margin-right: 10px;
+        color: $Topiccolor;
+        font-size: 1.2rem;
+    }
+    
+    .content {
+        height: 34vh;
+        width: 100%;
+        border: transparent;
+        background-color: $BGcolor;
+        border-radius: 20px;
+        padding: 20px;
+        font-size: 16px;
+        
+    }
+
+    textarea {
+        height: 34vh;
+        width: 100%;
+        border: transparent;
+        background-color: $BGcolor;
+        border-radius: 20px;
+        padding: 20px;
+        font-size: 16px;
+    }
+}

@@ -2,15 +2,16 @@
 {% load static %}
 
 {% block head %}
-    <head>
+    <!-- <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{% static '/css/todolist.css' %}">
-    </head>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/todo-list.css' %}">
+    </head> -->
 {% endblock %}
 {% block content %}
     <body>
-            <div class="row mt-5">
+            <div class="row mt-4">
               <div class="col-sm-6">
                 <div class="card">
                   <div class="card-body">
@@ -18,18 +19,19 @@
                     <p class="card-text">
                       <form method="POST" class="text-center">
                         {% csrf_token %}
+                        <!-- <div class="txt_field">
                         {{ form.media }}
                         {{ form.as_p }}
-                        <!-- <label class="input">
-                          <input class="input__field" type="text" placeholder=" ">
-                          <span class="input__label">List</span>
-                        </label> -->
-                        <!-- <div class="button-group">
-                          <button>Send</button>
-                          <button type="reset">Reset</button>
                         </div> -->
+                        {% csrf_token %}
+                        <label class="addcontent-blog">
+                          {{ form.media }}
+                          {{ form.as_p }}
+                        </label>
                     </p>
-                    <a href="#" class="btn btn-primary" type="submit" name="Submit" id="submit">Submit</a>
+
+                  <a class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit" role="button" aria-pressed="true">Submit</a>
+                  <a href="{% url 'website:todo_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
                     </form>
                   </div>
                 </div>
@@ -119,7 +121,6 @@
     </body>
     <script>
       let timer;
-
 document.addEventListener('input', e => {
   const el = e.target;
   
