@@ -8,59 +8,59 @@
             <!-- left sidebar -->
             <div class="col-md-2 fixed pl-0 py-2 bg-dark left">
                 <ul class="nav flex-md-column flex-nowrap justify-content-center">
-                    {% if user.groups.all.0 == 'admin' %}
+
+                    <!-- ################# ADMIN ################## -->
+
+                    {% if user.groups.all.0.name == 'admin' %}
                     <li class="nav-item mt-5">
                         <a class="nav-link text-truncate " href="#"></a>
                     </li>
                     <li class="nav-item mt-3">
-                        <a class="nav-link" href="{% url 'website:todolist' %}"><i class='bx bx-grid-alt nav_icon mr-3'></i>สิ่งที่ต้องทำ</a>
+                        <a class="nav-link" href="{% url 'website:todolist' %}">
+                            <i class='bx bx-grid-alt nav_icon mr-3'></i>รายการที่ต้องทำ</a>
                     </li>
-                    {% endif %}
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="{% url 'website:news' %}"><i class='bx bx-news nav_icon mr-3'></i>ประกาศข่าวสาร</a>
+                        <a class="nav-link" href="{% url 'website:news' %}">
+                            <i class='bx bx-news nav_icon mr-3'></i>ประกาศข่าวสาร</a>
                     </li>
-                    <!-- <li class="nav-item mt-2">
-                        <a class="nav-link" href="#"><i class='bx bx-message-square-detail nav_icon mr-3'></i>แผนการดำเนินงาน</a>
-                    </li> -->
-                     <li class="nav-item mt-2 dropdown">
+                    <li class="nav-item mt-2 dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class='bx bx-message-square-detail nav_icon mr-3'></i>แผนการดำเนินงาน</a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                           <li><a class="dropdown-item" href="{% url 'website:coorplan' %}">ผู้ประสานงาน</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:complan' %}">กรรมการ</a></li>
-                          <li><a class="dropdown-item" href="#">ผู้ใช้นอกภาควิชา</a></li>
-                          <li><a class="dropdown-item" href="#">นักศึกษา</a></li>
+                          <li><a class="dropdown-item" href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
+                          <li><a class="dropdown-item" href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
                         </ul>
                       </li>
-                    <!-- <li class="nav-item mt-2">
-                        <a class="nav-link " href="{% url 'website:document' %}"><i class='bx bx-bookmark nav_icon mr-3'></i>อัพโหลดเอกสาร</a>
-                    </li> -->
-                    <li class="nav-item mt-2 dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item mt-2">
+                        <a class="nav-link " href="{% url 'website:document' %}">
                             <i class='bx bx-bookmark nav_icon mr-3'></i>อัพโหลดเอกสาร</a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink2">
-                          <li><a class="dropdown-item" href="{% url 'website:coorplan' %}">โครงงานนักศึกษา</a></li>
-                          <li><a class="dropdown-item" href="{% url 'website:complan' %}">คะแนนโครงงาน</a></li>
-                          <li><a class="dropdown-item" href="#">เกณฑ์การตัดเกรด</a></li>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>โครงงานนักศึกษา</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>เอกสารโครงงาน</a>
+                    </li>
+                    <li class="nav-item mt-2 dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class='bx bx-message-square-detail nav_icon mr-3'></i>คะแนนโครงงาน</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                          <li><a class="dropdown-item" href="#">เทอม 1</a></li>
+                          <li><a class="dropdown-item" href="#">เทอม 2</a></li>
                         </ul>
                       </li>
-                    <!-- <li class="nav-item mt-2">
-                        <a class="nav-link" href="#"><i class='bx bx-folder nav_icon mr-3'></i>โครงงานนักศึกษา</a>
-                    </li> -->
-                    <!-- <li class="nav-item mt-2">
-                        <a class="nav-link" href="#"><i class='bx bx-folder nav_icon mr-3'></i>คะแนนโครงงาน</a>
-                    </li> -->
-                    <!-- <li class="nav-item mt-2">
-                        <a class="nav-link" href="#"><i class='bx bx-bar-chart-alt-2 nav_icon mr-3'></i>เกณฑ์การตัดเกรด</a>
-                    </li> -->
-                    <!-- <li class="nav-item mt-2">
-                        <a class="nav-link" href="#"><i class='bx bx-user nav_icon mr-3'></i>จัดการข้อมูลพื้นฐาน</a>
-                    </li> -->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>เกณฑ์การตัดเกรด</a>
+                    </li>
                     <li class="nav-item mt-2 dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class='bx bx-user nav_icon mr-3'></i>จัดการข้อมูลพื้นฐาน
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class='bx bx-user nav_icon mr-3'></i>จัดการข้อมูลพื้นฐาน</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                           <li><a class="dropdown-item" href="{% url 'website:prof' %}">อาจารย์</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:other' %}">ผู้ใช้งานนอกภาควิชา</a></li>
                           <li><a class="dropdown-item" href="#">ผู้ประสานงาน</a></li>
@@ -68,14 +68,129 @@
                         </ul>
                       </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#"><i class='bx bx-bar-chart-alt-2 nav_icon mr-3'></i>จัดการปีการศึกษา</a>
-                    </li>
-                    <li class="nav-item mt-2">
                         <a class="nav-link" href="#"><i class='bx bx-cog nav_icon mr-3'></i>ตั้งค่า</a>
                     </li>
-                    <li class="nav-item mt-2">
-                        <a class="nav-link" href="{% url 'user:logout' %}"><i class='bx bx-cog nav_icon mr-3'></i>ออก</a>
+                    {% endif %}
+
+
+                    <!-- ################# COORDINATOR ################## -->
+
+
+                    {% if user.groups.all.0.name == 'coordinator' %}
+                    <li class="nav-item mt-5">
+                        <a class="nav-link text-truncate " href="#"></a>
                     </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="{% url 'website:news' %}">
+                            <i class='bx bx-news nav_icon mr-3'></i>ประกาศข่าวสาร</a>
+                    </li>
+                    <li class="nav-item mt-2 dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class='bx bx-message-square-detail nav_icon mr-3'></i>แผนการดำเนินงาน</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                          <li><a class="dropdown-item" href="{% url 'website:complan' %}">กรรมการ</a></li>
+                          <li><a class="dropdown-item" href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
+                          <li><a class="dropdown-item" href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
+                        </ul>
+                      </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link " href="{% url 'website:document' %}">
+                            <i class='bx bx-bookmark nav_icon mr-3'></i>อัพโหลดเอกสาร</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>โครงงานนักศึกษา</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>เอกสารโครงงาน</a>
+                    </li>
+                    <li class="nav-item mt-2 dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class='bx bx-message-square-detail nav_icon mr-3'></i>คะแนนโครงงาน</a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                          <li><a class="dropdown-item" href="#">เทอม 1</a></li>
+                          <li><a class="dropdown-item" href="#">เทอม 2</a></li>
+                        </ul>
+                      </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>เกณฑ์การตัดเกรด</a>
+                    </li>
+                    {% endif %}
+
+
+                    <!-- ################# CONSULTANT ################## -->
+
+
+                    {% if user.groups.all.0.name == 'consultant' %}
+                    <li class="nav-item mt-5">
+                        <a class="nav-link text-truncate " href="#"></a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>ติดตามโครงงานนักศึกษา</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>อนุมัติโครงงาน</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>แก้ไขข้อมูลโครงงาน</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>ประเมินโครงงาน</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>กรรมการประเมินโครงงาน</a>
+                    </li>
+                    {% endif %}
+
+
+
+                    <!-- ################# STUDENT ################## -->
+
+
+                    {% if user.groups.all.0.name == 'student' %}
+                    <li class="nav-item mt-5">
+                        <a class="nav-link text-truncate " href="#"></a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>รายการที่ต้องทำ</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>ข้อมูลโครงงาน</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>ข้อมูลนักศึกษา</a>
+                    </li>
+                    {% endif %}       
+                    
+                    
+
+                    <!-- ################# OTHER ################## -->
+
+
+                    {% if user.groups.all.0.name == 'other' %}
+                    <li class="nav-item mt-5">
+                        <a class="nav-link text-truncate " href="#"></a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>ติดตามโครงงานนักศึกษา</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-folder nav_icon mr-3'></i>ประเมินโครงงาน</a>
+                    </li>
+                    {% endif %}       
+
                 </ul>
             </div>
             <!-- center content -->
@@ -101,7 +216,7 @@
                         </ul>
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link page-scroll" data-toggle="modal" href="{% url 'user:logout' %}"><i class="bx bx-log-out nav_icon mr-3 mt-2" name="Log out"></i></a>
+                                <a class="nav-link page-scroll" href="{% url 'user:logout' %}"><i class="bx bx-log-out nav_icon mr-3 mt-2"></i>ออก</a>
                             </li>
                         </ul>
                     </div>
