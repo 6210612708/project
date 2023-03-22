@@ -583,3 +583,49 @@ def updatestdplan(request, pk):
             form.save()
             return redirect('website:stdplan')
     return render(request, 'update_stdplan.html', {'form':form } )
+
+
+# =========== Project ==========================================
+
+def project(request):
+    if request.method == "POST":
+        form = projectModelForm(request.POST , user=request.user )
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = projectModelForm()
+    show = ProjectModel.objects.all()
+    
+    context = {'form':form , 'show':show }
+    return render(request,'project.html' ,context)
+    # form = projectModelForm()
+    # if request.method == "POST":
+    #     thainame = request.POST.get("thainame")
+    #     engname = request.POST.get("engname")
+    #     proj = ProjectModel.objects.create(
+    #         thainame =thainame,
+    #         engname = engname,
+    #         consult = request.user.first_name
+    #     )
+    #     proj.save()
+    
+    # show = ProjectModel.objects.all()
+    
+    # context = {'form':form , 'show':show }
+    # return render(request,'project.html' ,context)
+
+def deleteproject(request, pk):
+    data = ProjectModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:project')
+
+def updateproject(request, pk):
+    list = ProjectModel.objects.get(id=pk)
+    form = projectModelForm(instance=list )
+    if request.method == 'POST':
+        form = projectModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('website:project')
+    return render(request, 'update_project.html', {'form':form } )

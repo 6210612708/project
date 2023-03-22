@@ -117,4 +117,25 @@ class StdModel(models.Model):
     def __str__(self):
         return f'{self.fname} {self.lname}'
 
-# =====================================================
+
+# ==================  PROJECT ===================================
+
+
+class ProjectModel(models.Model):
+    STATUS = (
+            ('ยังไม่มีนักศึกษาลงทะเบียน', 'ยังไม่มีนักศึกษาลงทะเบียน'),
+            ('รอการอนุมัติ', 'รอการอนุมัติ'),
+            ('อนุมัติ', 'อนุมัติ'),
+    )
+    thainame = models.CharField(max_length=100, null=True)
+    engname = models.CharField(max_length=100, null=True)
+    detail = models.CharField(max_length=500, null=True)
+    consult = models.CharField(max_length=100, null=True)
+    committee = models.CharField(max_length=100, null=True , blank=True)
+    student1 = models.CharField(max_length=100, null=True , blank=True)
+    student2 = models.CharField(max_length=100, null=True , blank=True)
+    status = models.CharField(max_length=200, null = True, choices=STATUS, default='ยังไม่มีนักศึกษาลงทะเบียน')
+    
+
+    def __str__(self):
+        return self.thainame

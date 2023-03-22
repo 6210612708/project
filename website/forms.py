@@ -79,3 +79,17 @@ class StdModelForm(forms.ModelForm):
         model = StdModel
         fields = "__all__"
 
+
+class projectModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super().__init__(*args, **kwargs)
+        consult = forms.CharField(initial=self.request.user)
+    
+    class Meta:
+        model = ProjectModel
+        fields = "__all__"
+
+
+
+

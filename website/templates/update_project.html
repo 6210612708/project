@@ -1,0 +1,51 @@
+{% load static %}
+<html lang="en">
+
+{% block head %}
+    <title>update</title>
+{% endblock %}
+
+{% block content %}
+    {% if not form.is_valid %} 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form method="POST" class="text-center">
+        <input type="hidden" name="id" id="id" value="{{ project.id }}">
+        {% csrf_token %}
+        <div >
+            <p>ชื่อไทย</p>
+            {{ form.media }}
+            <input type="text" value="{{ project.thainame }}">
+        </div>
+
+        <div>
+            <p>ชื่ออิง</p>
+            {{ form.engname }}
+        </div>
+
+        <div>
+            <p>ที่ปรึกษา</p>
+            <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+        </div>
+
+        <div>
+            <p>รายละเอียด</p>
+            {{ form.detail }}
+        </div>
+        <input type="submit" name="Submit" id="submit">
+    </form>
+
+    {% endif %}
+
+{% endblock %}
+
+</html>

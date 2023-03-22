@@ -85,5 +85,9 @@ urlpatterns = [
     path('std/delete/<pk>', views.deletestd ,name='deletestd'),
     path('std/update/<pk>', views.updatestd ,name='updatestd'),
 
+    # Project
+    path('project/', views.project ,name='project'),
+    path('project/delete/<pk>', views.deleteproject ,name='deleteproject'),
+    path('project/update/<pk>', views.updateproject ,name='updateproject'),
 
 ]
