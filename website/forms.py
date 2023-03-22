@@ -81,14 +81,15 @@ class StdModelForm(forms.ModelForm):
 
 
 class projectModelForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request")
-        super().__init__(*args, **kwargs)
-        consult = forms.CharField(initial=self.request.user)
-    
     class Meta:
         model = ProjectModel
         fields = "__all__"
+        exclude = ['consult']
+
+class projectForm(forms.Form):
+    thainame = forms.CharField(max_length=100)
+    engname = forms.CharField(max_length=100)
+    detail = forms.CharField(max_length=500)
 
 
 

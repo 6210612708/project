@@ -19,12 +19,11 @@
     <br>
     <br>
     <form method="POST" class="text-center">
-        <input type="hidden" name="id" id="id" value="{{ project.id }}">
         {% csrf_token %}
         <div >
             <p>ชื่อไทย</p>
             {{ form.media }}
-            <input type="text" value="{{ project.thainame }}">
+            {{ form.thainame }}
         </div>
 
         <div>
