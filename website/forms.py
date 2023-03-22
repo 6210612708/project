@@ -81,15 +81,17 @@ class StdModelForm(forms.ModelForm):
 
 
 class projectModelForm(forms.ModelForm):
+    consult = forms.CharField(widget=forms.HiddenInput(), initial="123") 
     class Meta:
         model = ProjectModel
         fields = "__all__"
-        exclude = ['consult']
+        exclude = ['student1' ,'student2' ,'committee' ,'status']
 
 class projectForm(forms.Form):
     thainame = forms.CharField(max_length=100)
     engname = forms.CharField(max_length=100)
     detail = forms.CharField(max_length=500)
+
 
 
 

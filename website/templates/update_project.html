@@ -7,42 +7,15 @@
 
 {% block content %}
     {% if not form.is_valid %} 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <form method="POST" class="text-center">
+    <form method="post">
         {% csrf_token %}
-        <div >
-            <p>ชื่อไทย</p>
-            {{ form.media }}
-            {{ form.thainame }}
-        </div>
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit">
+        <a href="{% url 'website:project' %}" >Back</a>
 
-        <div>
-            <p>ชื่ออิง</p>
-            {{ form.engname }}
-        </div>
-
-        <div>
-            <p>ที่ปรึกษา</p>
-            <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
-        </div>
-
-        <div>
-            <p>รายละเอียด</p>
-            {{ form.detail }}
-        </div>
-        <input type="submit" name="Submit" id="submit">
     </form>
-
     {% endif %}
 
 {% endblock %}

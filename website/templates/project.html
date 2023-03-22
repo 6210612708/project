@@ -29,7 +29,7 @@
             {% csrf_token %}
             {{ form.media }}
                 <p>ชื่อไทย</p>
-                
+            
                 {{ form.thainame }}
 
     
@@ -55,6 +55,8 @@
             <tr>
                 <td>
                     {{show.thainame}}
+                    {{show.consult}}
+                    {{show.detail}}
                     <a href="{% url 'website:deleteproject' show.id %}" 
                     onclick="return confirm('Confirm Delete?')">ลบ</a>
                     <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
