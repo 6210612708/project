@@ -93,6 +93,12 @@ class projectForm(forms.Form):
     detail = forms.CharField(max_length=500)
 
 
+class applyprojectForm(forms.ModelForm):
+    class Meta:
+        model = ProjectModel
+        fields = ['student1' ,'student2' ]
+
+
 
 
 

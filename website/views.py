@@ -599,8 +599,13 @@ def project(request):
             print("Error", form.errors)
     form = projectModelForm()
     show = ProjectModel.objects.all()
-    
-    context = {'form':form , 'show':show }
+    test = ProjectModel.objects.all()
+    x = 0
+    for test in test :
+        if test.student1 == request.user.first_name or test.student2 == request.user.first_name:
+            x = 1
+
+    context = {'form':form , 'show':show , 'x':x}
     return render(request,'project.html' ,context)
     
     # form = projectForm()
@@ -654,3 +659,17 @@ def updateproject(request, pk):
     
     # context = {list :'list'}
     # return render(request,'update_project.html' ,context)
+    
+
+# =========== apply Project ==========================================
+
+def applyproject(request, pk):
+    list = ProjectModel.objects.get(id=pk)
+    form = applyprojectForm(instance=list )
+    if request.method == 'POST':
+        form = applyprojectForm(request.POST, instance=list)
+        if form.is_valid():
+            list.status = 'รอการอนุมัติ'
+            form.save()
+            return redirect('website:project')
+    return render(request, 'applyproject.html', {'form':form } )

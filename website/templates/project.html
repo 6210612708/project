@@ -25,6 +25,7 @@
         <br>
         <br>
         <br>
+        {% if user.groups.all.0.name == 'consultant' %}
         <form method="POST" class="text-center">
             {% csrf_token %}
             {{ form.media }}
@@ -47,19 +48,37 @@
                 {{ form.detail }}
 
             <input type="submit" name="Submit" id="submit">
+            {% endif %}
         </form>
-
 
         <table>
             {% for show in show %}
+        
             <tr>
                 <td>
                     {{show.thainame}}
                     {{show.consult}}
                     {{show.detail}}
+                    {% if user.groups.all.0.name == 'student' %}
+                        
+                            {% if show.status == 'รอการอนุมัติ' %}
+                                {{show.status}}
+                                {{show.student1}}
+                                {{show.student2}}
+                            {% else %}
+                            {% if x == 0 %}
+                                <a href="{% url 'website:applyproject' show.id%}" >ลงทะเบียน</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    
+                    
+                    {% if user.groups.all.0.name == 'consultant' %}
                     <a href="{% url 'website:deleteproject' show.id %}" 
                     onclick="return confirm('Confirm Delete?')">ลบ</a>
                     <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
+                    {% endif %}
+                    
                 </td>
             </tr>
             {% endfor %}
