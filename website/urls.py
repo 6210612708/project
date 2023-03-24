@@ -91,5 +91,8 @@ urlpatterns = [
     path('project/update/<pk>', views.updateproject ,name='updateproject'),
     
     path('applyproject/<pk>', views.applyproject ,name='applyproject'),
+    path('statusproject/<pk>', views.statusproject ,name='statusproject'),
+    path('approveproject', views.approveproject ,name='approveproject'),
+
 
 ]

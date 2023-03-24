@@ -66,18 +66,21 @@ class ProfModelForm(forms.ModelForm):
     class Meta:
         model = ProfModel
         fields = "__all__"
+        exclude = ['user']
 
 
 class OtherModelForm(forms.ModelForm):
     class Meta:
         model = OtherModel
         fields = "__all__"
+        exclude = ['user']
 
 
 class StdModelForm(forms.ModelForm):
     class Meta:
         model = StdModel
         fields = "__all__"
+        exclude = ['user']
 
 
 class projectModelForm(forms.ModelForm):
@@ -87,11 +90,10 @@ class projectModelForm(forms.ModelForm):
         fields = "__all__"
         exclude = ['student1' ,'student2' ,'committee' ,'status']
 
-class projectForm(forms.Form):
-    thainame = forms.CharField(max_length=100)
-    engname = forms.CharField(max_length=100)
-    detail = forms.CharField(max_length=500)
-
+# class projectForm(forms.Form):
+#     thainame = forms.CharField(max_length=100)
+#     engname = forms.CharField(max_length=100)
+#     detail = forms.CharField(max_length=500)
 
 class applyprojectForm(forms.ModelForm):
     class Meta:

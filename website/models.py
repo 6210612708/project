@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils import timezone
 from .utils import file_path
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -76,7 +77,7 @@ class ProfModel(models.Model):
             ('ไฟฟ้า', 'ไฟฟ้า'),
             ('คอมพิวเตอร์', 'คอมพิวเตอร์'),
     )
-
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE,blank=True)
     title = models.CharField(max_length=100, null=True)
     fname = models.CharField(max_length=100, null=True)
     lname = models.CharField(max_length=100, null=True)
@@ -88,6 +89,7 @@ class ProfModel(models.Model):
         return f'{self.fname} {self.lname}'
 
 class OtherModel(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE,blank=True)
     title = models.CharField(max_length=100, null=True)
     fname = models.CharField(max_length=100, null=True)
     lname = models.CharField(max_length=100, null=True)
@@ -106,6 +108,7 @@ class StdModel(models.Model):
             ('นาย', 'นาย'),
             ('นางสาว', 'นางสาว'),
     )
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE,blank=True)
     stdid = models.CharField(max_length=100, null=True)
     title = models.CharField(max_length=100, null=True, choices=TITLE)
     fname = models.CharField(max_length=100, null=True)
@@ -132,8 +135,8 @@ class ProjectModel(models.Model):
     detail = models.CharField(max_length=500, null=True)
     consult = models.CharField(max_length=100, null=True)
     committee = models.CharField(max_length=100, null=True , blank=True)
-    student1 = models.CharField(max_length=100, null=True , blank=True)
-    student2 = models.CharField(max_length=100, null=True , blank=True)
+    student1 = models.OneToOneField(StdModel, null=True, blank=True, on_delete=models.CASCADE , related_name='student1')
+    student2 = models.OneToOneField(StdModel, null=True, blank=True, on_delete=models.CASCADE , related_name='student2')
     status = models.CharField(max_length=200, null = True, choices=STATUS, default='ยังไม่มีนักศึกษาลงทะเบียน')
     
 

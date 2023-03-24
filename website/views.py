@@ -604,7 +604,7 @@ def project(request):
     for test in test :
         if test.student1 == request.user.first_name or test.student2 == request.user.first_name:
             x = 1
-
+ 
     context = {'form':form , 'show':show , 'x':x}
     return render(request,'project.html' ,context)
     
@@ -673,3 +673,12 @@ def applyproject(request, pk):
             form.save()
             return redirect('website:project')
     return render(request, 'applyproject.html', {'form':form } )
+
+def statusproject(request, pk):
+    ProjectModel.objects.filter(id=pk).update(status='อนุมัติ')
+    return redirect('website:approveproject')
+
+def approveproject(request):
+    show = ProjectModel.objects.filter(consult=request.user.first_name+ " " + request.user.last_name)
+    context = {'show':show}
+    return render(request,'approveproject.html' ,context)

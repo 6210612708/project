@@ -30,19 +30,14 @@
             {% csrf_token %}
             {{ form.media }}
                 <p>ชื่อไทย</p>
-            
                 {{ form.thainame }}
 
-    
- 
                 <p>ชื่ออิง</p>
                 {{ form.engname }}
 
                 <p>ที่ปรึกษา</p>
                 <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
                 {{ form.consult }}
-
-
 
                 <p>รายละเอียด</p>
                 {{ form.detail }}
@@ -59,8 +54,17 @@
                     {{show.thainame}}
                     {{show.consult}}
                     {{show.detail}}
+                    {% if user.groups.all.0.name == 'consultant' %}
+                        {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                            {{show.status}}
+                        {% else %}
+                            {{show.status}}
+                            {{show.student1}}
+                            {{show.student2}}
+                        {% endif %}
+                    {% endif %}
+
                     {% if user.groups.all.0.name == 'student' %}
-                        
                             {% if show.status == 'รอการอนุมัติ' %}
                                 {{show.status}}
                                 {{show.student1}}
