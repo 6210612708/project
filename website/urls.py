@@ -34,11 +34,11 @@ urlpatterns = [
     path('coorplan/delete/<pk>', views.deletecoorplan ,name='deletecoorplan'),
     path('coorplan/update/<pk>', views.updatecoorplan ,name='updatecoorplan'),
 
-    # COM plan
-    path('complan/', views.complan ,name='complan'),
-    path('complan_csv/', views.complan_csv ,name='complan_csv'),
-    path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
-    path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
+    # # COM plan
+    # path('complan/', views.complan ,name='complan'),
+    # path('complan_csv/', views.complan_csv ,name='complan_csv'),
+    # path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
+    # path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
 
     # CON plan
     path('profplan/', views.profplan ,name='profplan'),
@@ -90,10 +90,14 @@ urlpatterns = [
     path('stdproject/', views.stdproject ,name='stdproject'),
     path('project/delete/<pk>', views.deleteproject ,name='deleteproject'),
     path('project/update/<pk>', views.updateproject ,name='updateproject'),
-    
     path('applyproject/<pk>', views.applyproject ,name='applyproject'),
     path('statusproject/<pk>', views.statusproject ,name='statusproject'),
     path('approveproject', views.approveproject ,name='approveproject'),
+    path('detailproject', views.detailproject ,name='detailproject'),
+    
+    
+    path('stddetail', views.stddetail ,name='stddetail'),
+
 
 
 ]

@@ -8,6 +8,7 @@ import csv ,io
 from django.http import FileResponse
 from django.contrib.auth.decorators import login_required
 from .decorator import *
+from django.db.models import Q
 
 @login_required(login_url='user:login')
 def index(request):
@@ -405,64 +406,64 @@ def updatecoorplan(request, pk):
     return render(request, 'update_coorplan.html', {'form':form } )
 
 
-# =========== PLAN for Committee ==========================================
+# # =========== PLAN for Committee ==========================================
 
-def complan(request):
-    if request.method == "POST":
-        form = ComPlanModelForm(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            print("Error", form.errors)
-    form = ComPlanModelForm()
-    show = ComPlanModel.objects.all()
+# def complan(request):
+#     if request.method == "POST":
+#         form = ComPlanModelForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#         else:
+#             print("Error", form.errors)
+#     form = ComPlanModelForm()
+#     show = ComPlanModel.objects.all()
     
-    context = {'form':form , 'show':show }
-    return render(request,'complan.html' ,context)
+#     context = {'form':form , 'show':show }
+#     return render(request,'complan.html' ,context)
 
-def complan_csv(request):
-    show = ComPlanModel.objects.all()
-    if request.method == "GET":
-        context = {'show':show}
-        return render(request, 'complan_csv.html' ,context)
+# def complan_csv(request):
+#     show = ComPlanModel.objects.all()
+#     if request.method == "GET":
+#         context = {'show':show}
+#         return render(request, 'complan_csv.html' ,context)
 
-    if request.method == "POST":
-        csv_file = request.FILES['file']
+#     if request.method == "POST":
+#         csv_file = request.FILES['file']
     
 
-    if not csv_file.name.endswith('.csv'):
-        messages.error(request, 'Please upload only CSV file')
-        return redirect('website:complan_csv')
+#     if not csv_file.name.endswith('.csv'):
+#         messages.error(request, 'Please upload only CSV file')
+#         return redirect('website:complan_csv')
 
-    data_set =csv_file.read().decode('UTF-8')
-    io_string = io.StringIO(data_set)
-    next(io_string)
+#     data_set =csv_file.read().decode('UTF-8')
+#     io_string = io.StringIO(data_set)
+#     next(io_string)
 
-    for column in csv.reader(io_string, delimiter=',',quotechar='|'):
-        _, created = ComPlanModel.objects.update_or_create(
-            date=column[0],
-            list=column[1],
-        )
-    context = {
-        'notify': 'CSV file is already upload', 'show':show
-    }
-    return render(request,'complan_csv.html' ,context)
+#     for column in csv.reader(io_string, delimiter=',',quotechar='|'):
+#         _, created = ComPlanModel.objects.update_or_create(
+#             date=column[0],
+#             list=column[1],
+#         )
+#     context = {
+#         'notify': 'CSV file is already upload', 'show':show
+#     }
+#     return render(request,'complan_csv.html' ,context)
 
 
-def deletecomplan(request, pk):
-    data = ComPlanModel.objects.get(id=pk)
-    data.delete()
-    return redirect('website:complan')
+# def deletecomplan(request, pk):
+#     data = ComPlanModel.objects.get(id=pk)
+#     data.delete()
+#     return redirect('website:complan')
 
-def updatecomplan(request, pk):
-    list = ComPlanModel.objects.get(id=pk)
-    form = ComPlanModelForm(instance=list )
-    if request.method == 'POST':
-        form = ComPlanModelForm(request.POST, instance=list)
-        if form.is_valid():
-            form.save()
-            return redirect('website:complan')
-    return render(request, 'update_complan.html', {'form':form } )
+# def updatecomplan(request, pk):
+#     list = ComPlanModel.objects.get(id=pk)
+#     form = ComPlanModelForm(instance=list )
+#     if request.method == 'POST':
+#         form = ComPlanModelForm(request.POST, instance=list)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('website:complan')
+#     return render(request, 'update_complan.html', {'form':form } )
 
 
 # =========== PLAN for Consult ==========================================
@@ -642,10 +643,10 @@ def deleteproject(request, pk):
 def updateproject(request, pk):
     list = ProjectModel.objects.get(id=pk)
     form = projectModelForm(instance=list )
-    con = request.user.first_name + " " + request.user.last_name
     if request.method == 'POST':
         form = projectModelForm(request.POST, instance=list)
         if form.is_valid():
+            con = request.user.profmodel
             test = form.save(commit=False)
             test.consult = con
             test = test.save()
@@ -690,3 +691,13 @@ def approveproject(request):
     show = ProjectModel.objects.filter(consult=request.user.profmodel)
     context = {'show':show}
     return render(request,'approveproject.html' ,context)
+
+def detailproject(request):
+    show = ProjectModel.objects.filter(Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
+    context = {'show':show}
+    return render(request,'detailproject.html' ,context)
+
+def stddetail(request):
+    show = StdModel.objects.filter(Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname) )
+    context = {'show':show}
+    return render(request, 'stddetail.html' ,context)

@@ -28,6 +28,7 @@
 
             <a href="{% url 'website:coorplan_csv' %}">upload csv</a>
         </table> -->
+        {% if user.groups.all.0.name == 'consultant'%}
         <div class="row mt-5">
             <div class="col-sm-6">
               <div class="card">
@@ -48,6 +49,7 @@
                 </div>
               </div>
             </div>
+            {% endif %}
             <div class="col-sm-6">
               <div class="card">
                 <div class="card-body">
@@ -67,16 +69,20 @@
                           <td>{{show.date}}</td>
                           <td>{{show.list}}</td>
                           <td>
+                            {% if user.groups.all.0.name == 'consultant'%}
                             <a href="{% url 'website:deletecoorplan' show.id %}" 
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
                             <a href="{% url 'website:updatecoorplan' show.id %}" >แก้ไข</a>
+                            {% endif %}
                           </td>
                           {% endfor %}
                         </tr>
                       </tbody>
                     </table>
                   </p>
+                  {% if user.groups.all.0.name == 'consultant'%}
                   <!-- <a href="{% url 'website:coorplan_csv' %}" class="btn btn-primary">upload csv</a> -->
+                  {% endif %}
                 </div>
               </div>
             </div>
