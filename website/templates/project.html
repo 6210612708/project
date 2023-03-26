@@ -19,12 +19,6 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         {% if user.groups.all.0.name == 'consultant' %}
         <form method="POST" class="text-center">
             {% csrf_token %}
@@ -63,19 +57,6 @@
                             {{show.student2}}
                         {% endif %}
                     {% endif %}
-
-                    {% if user.groups.all.0.name == 'student' %}
-                            {% if show.status == 'รอการอนุมัติ' %}
-                                {{show.status}}
-                                {{show.student1}}
-                                {{show.student2}}
-                            {% else %}
-                            {% if x == 0 %}
-                                <a href="{% url 'website:applyproject' show.id%}" >ลงทะเบียน</a>
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
-                    
                     
                     {% if user.groups.all.0.name == 'consultant' %}
                     <a href="{% url 'website:deleteproject' show.id %}" 

@@ -587,11 +587,22 @@ def updatestdplan(request, pk):
 
 # =========== Project ==========================================
 
+def stdproject(request):
+    test = ProjectModel.objects.all()
+    x = 0
+    for test in test :
+        if test.student1 == request.user.stdmodel or test.student2 == request.user.stdmodel:
+            x = 1
+ 
+    context = {'x':x}
+    return render(request,'project.html' ,context)
+    
+
 def project(request):
-    con = request.user.profmodel
     form = projectModelForm(request.POST)
     if request.method == "POST":
         if form.is_valid():
+            con = request.user.profmodel
             test = form.save(commit=False)
             test.consult = con
             test = test.save()
@@ -601,9 +612,6 @@ def project(request):
     show = ProjectModel.objects.all()
     test = ProjectModel.objects.all()
     x = 0
-    for test in test :
-        if test.student1 == request.user.first_name or test.student2 == request.user.first_name:
-            x = 1
  
     context = {'form':form , 'show':show , 'x':x}
     return render(request,'project.html' ,context)
@@ -679,6 +687,6 @@ def statusproject(request, pk):
     return redirect('website:approveproject')
 
 def approveproject(request):
-    show = ProjectModel.objects.filter(consult=request.user.first_name+ " " + request.user.last_name)
+    show = ProjectModel.objects.filter(consult=request.user.profmodel)
     context = {'show':show}
     return render(request,'approveproject.html' ,context)
