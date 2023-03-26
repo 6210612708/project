@@ -588,9 +588,9 @@ def updatestdplan(request, pk):
 # =========== Project ==========================================
 
 def project(request):
-    con = request.user.first_name + " " + request.user.last_name
+    con = request.user.profmodel
+    form = projectModelForm(request.POST)
     if request.method == "POST":
-        form = projectModelForm(request.POST)
         if form.is_valid():
             test = form.save(commit=False)
             test.consult = con

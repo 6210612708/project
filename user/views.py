@@ -63,6 +63,11 @@ def login_view(request):
                                                         first_name=first_name,
                                                         last_name=surname,
                                                         email=email)
+                        ProfModel.objects.update_or_create(
+                        user=user,
+                        fname=first_name,
+                        lname=surname,
+                        email=email,)
                     user.save()
 
                 if user is not None:

@@ -86,7 +86,7 @@ class ProfModel(models.Model):
     phone = models.CharField(max_length=100, null=True)
     
     def __str__(self):
-        return f'{self.fname} {self.lname}'
+        return f'{self.title} {self.fname} {self.lname}'
 
 class OtherModel(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE,blank=True)
@@ -133,7 +133,7 @@ class ProjectModel(models.Model):
     thainame = models.CharField(max_length=100, null=True)
     engname = models.CharField(max_length=100, null=True)
     detail = models.CharField(max_length=500, null=True)
-    consult = models.CharField(max_length=100, null=True)
+    consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE , null=True ,blank=True)
     committee = models.CharField(max_length=100, null=True , blank=True)
     student1 = models.OneToOneField(StdModel, null=True, blank=True, on_delete=models.CASCADE , related_name='student1')
     student2 = models.OneToOneField(StdModel, null=True, blank=True, on_delete=models.CASCADE , related_name='student2')
