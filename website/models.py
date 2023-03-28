@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from .utils import file_path
 from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
 
 # Create your models here.
 
@@ -119,6 +120,12 @@ class StdModel(models.Model):
     
     def __str__(self):
         return f'{self.fname} {self.lname}'
+    
+
+class CoordinatorModel(models.Model):
+    user = models.OneToOneField(ProfModel, null=True, on_delete=models.CASCADE,blank=True)
+    def __str__(self):
+        return f'{self.user}'
 
 
 # ==================  PROJECT ===================================

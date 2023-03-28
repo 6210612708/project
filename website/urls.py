@@ -84,6 +84,10 @@ urlpatterns = [
     path('std_csv/', views.std_csv ,name='std_csv'),
     path('std/delete/<pk>', views.deletestd ,name='deletestd'),
     path('std/update/<pk>', views.updatestd ,name='updatestd'),
+    
+    # Coordinator
+    path('coor/delete/<pk>', views.deletecoor ,name='deletecoor'),
+    path('addcoor/<pk>', views.addcoor ,name='addcoor'),
 
     # Project
     path('project/', views.project ,name='project'),

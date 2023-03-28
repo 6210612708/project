@@ -1,5 +1,7 @@
+{% extends "layout.html" %}
 {% load static %}
-<html lang="en">
+
+{% comment %} <html lang="en">
     <div class="row">
         <div class="col-sm-6">
           <div class="card">
@@ -22,13 +24,20 @@
               <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
-        </div>
-      </div>
-<!-- {% block head %}
+        </div> {% endcomment %}
+{% block head %}
     <title>update</title>
 {% endblock %}
 
 {% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
     {% if not form.is_valid %} 
         <form method="post">
             {% csrf_token %}
@@ -41,6 +50,6 @@
         </form>
     {% endif %}
 
-{% endblock %} -->
+{% endblock %}
 
 </html>

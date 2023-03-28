@@ -9,6 +9,7 @@ from django.http import FileResponse
 from django.contrib.auth.decorators import login_required
 from .decorator import *
 from django.db.models import Q
+from django.contrib.auth.models import Group
 
 @login_required(login_url='user:login')
 def index(request):
@@ -164,6 +165,30 @@ def deletedoc(request, pk):
 
 # =========== Prof ==========================================
 
+def deletecoor(request, pk):
+    data = CoordinatorModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:prof')
+
+def addcoor(request ,pk):
+    name = ProfModel.objects.get(id=pk)
+    username = User.objects.get(username=name.user)
+    group = Group.objects.get(name='coordinator')
+    username.groups.add(group)
+    list = ProfModel.objects.get(id=pk)
+    if request.method == 'POST':
+        form = coordinatorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('website:prof')
+    form = coordinatorForm(initial={'user': list})
+    show = CoordinatorModel.objects.all()
+    
+    context = {'form':form, 'show':show }
+    return render(request, 'coordinator.html' ,context )
+    
+
+
 def prof(request):
     if request.method == "POST":
         form = ProfModelForm(request.POST ,request.FILES)
@@ -173,8 +198,9 @@ def prof(request):
             print("Error", form.errors)
     form = ProfModelForm()
     show = ProfModel.objects.all()
+    coor = CoordinatorModel.objects.all()
     
-    context = {'form':form, 'show':show }
+    context = {'form':form, 'show':show, 'coor':coor }
     return render(request,'professor.html' ,context)
 
 def prof_csv(request):
@@ -696,6 +722,39 @@ def detailproject(request):
     show = ProjectModel.objects.filter(Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
     context = {'show':show}
     return render(request,'detailproject.html' ,context)
+
+
+
+
+
+
+
+# def coordinator(request ,pk):
+#     show = ProfModel.objects.all()
+    
+#     # user = User.objects.get(username = 'username')
+#     # user.groups.add(name='coordinator')
+#     # if request.method == "POST":
+#     #     form = coordinatorForm(request.POST)        
+#     #     if form.is_valid():
+#     #         # user = User.objects.get(username = )
+#     #         print('pk')
+#     #         user = form.save()
+#     #         group = Group.objects.get(name='coordinator')
+#     #         # test = User.objects.get(user=request.user.coordinatormodel)
+#     #         user.groups.add(group)
+#     #         group.save()
+#     #     else:
+#     #         print("Error", form.errors)
+#     # form = coordinatorForm()
+#     # show = CoordinatorModel.objects.all()
+#     # 'form':form , 'show':show
+#     context = {'show':show , }
+#     return render(request,'coordinator.html')
+
+
+
+
 
 def stddetail(request):
     show = StdModel.objects.filter(Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname) )

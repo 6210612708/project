@@ -98,8 +98,13 @@ class applyprojectForm(forms.ModelForm):
     class Meta:
         model = ProjectModel
         fields = ['student1' ,'student2' ]
-
-
-
+        
+class coordinatorForm(forms.ModelForm):
+    class Meta:
+        model = CoordinatorModel
+        fields = "__all__"
+        
+# class coordinatorForm(forms.Form):
+#     thainame = forms.MultipleChoiceField(queryset=User.objects.all())
 
 
