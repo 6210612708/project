@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="card mt-5">
-            <h5 class="card-header">Featured</h5>
+            <h5 class="card-header">รายชื่ออาจารย์</h5>
             <div class="card-body">
               <!-- <h5 class="card-title">จัดการข้อมูล</h5> -->
               <p class="card-text">
@@ -80,11 +80,49 @@
                             <a href="{% url 'website:deleteprof' show.id %}" 
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
                             <a href="{% url 'website:updateprof' show.id %}" >แก้ไข</a>
+                            <a href="{% url 'website:addcoor' show.id %}" >เพิ่มผู้ประสานงาน</a>
+                            {% comment %} <a href="{% url 'website:coordinator' show.id %}" >TESTING</a> {% endcomment %}
                         </td>
                         {% endfor %}
                       </tr>
                     </tbody>
-                  </table></p>
+                  </table>
+                </p>
+            </div>
+          </div>
+          <div class="card mt-5">
+            <h5 class="card-header">ผู้ประสานงาน</h5>
+            <div class="card-body">
+              <!-- <h5 class="card-title">จัดการข้อมูล</h5> -->
+              <p class="card-text">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Major</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Phone</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for show in coor %}
+                    <tr>
+                      <td>{{show.user.title}}</td>
+                      <td>{{show.user.fname}} {{show.user.lname}}</td>
+                      <td>{{show.user.major}}</td>
+                      <td>{{show.user.email}}</td>
+                      <td>{{show.user.phone}}</td>
+                      <td>
+                        <a href="{% url 'website:deletecoor' show.id %}" 
+                        onclick="return confirm('Confirm Delete?')">ลบ</a>
+
+                      </td>
+                      {% endfor %}
+                    </tr>
+                  </tbody>
+                </table>
+                </p>
             </div>
           </div>
     </body>

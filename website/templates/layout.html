@@ -28,7 +28,6 @@
                             <i class='bx bx-message-square-detail nav_icon mr-3'></i>แผนการดำเนินงาน</a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                           <li><a class="dropdown-item" href="{% url 'website:coorplan' %}">ผู้ประสานงาน</a></li>
-                          <li><a class="dropdown-item" href="{% url 'website:complan' %}">กรรมการ</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
                         </ul>
@@ -38,7 +37,7 @@
                             <i class='bx bx-bookmark nav_icon mr-3'></i>อัพโหลดเอกสาร</a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'website:project' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>โครงงานนักศึกษา</a>
                     </li>
                     <li class="nav-item mt-2">
@@ -81,14 +80,17 @@
                         <a class="nav-link text-truncate " href="#"></a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="{% url 'website:news' %}">
+                        <a class="nav-link" href="{% url 'website:coorplan' %}">
                             <i class='bx bx-news nav_icon mr-3'></i>ประกาศข่าวสาร</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="{% url 'website:news' %}">
+                            <i class='bx bx-news nav_icon mr-3'></i>สิ่งที่ต้องทำ</a>
                     </li>
                     <li class="nav-item mt-2 dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class='bx bx-message-square-detail nav_icon mr-3'></i>แผนการดำเนินงาน</a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                          <li><a class="dropdown-item" href="{% url 'website:complan' %}">กรรมการ</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
                         </ul>
@@ -98,7 +100,7 @@
                             <i class='bx bx-bookmark nav_icon mr-3'></i>อัพโหลดเอกสาร</a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'website:project' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>โครงงานนักศึกษา</a>
                     </li>
                     <li class="nav-item mt-2">
@@ -128,11 +130,15 @@
                         <a class="nav-link text-truncate " href="#"></a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'website:complan' %}">
+                            <i class='bx bx-folder nav_icon mr-3'></i>สิ่งที่ต้องทำ</a>
+                    </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link" href="{% url 'website:project' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>ติดตามโครงงานนักศึกษา</a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'website:aapproveproject' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>อนุมัติโครงงาน</a>
                     </li>
                     <li class="nav-item mt-2">
@@ -159,11 +165,11 @@
                         <a class="nav-link text-truncate " href="#"></a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'website:stdplan' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>รายการที่ต้องทำ</a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'website:detailproject' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>ข้อมูลโครงงาน</a>
                     </li>
                     <li class="nav-item mt-2">

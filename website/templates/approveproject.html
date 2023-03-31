@@ -19,27 +19,12 @@
         <br>
         <br>
         <br>
-        {% if user.groups.all.0.name == 'consultant' %}
-        <form method="POST" class="text-center">
-            {% csrf_token %}
-            {{ form.media }}
-                <p>ชื่อไทย</p>
-                {{ form.thainame }}
-
-                <p>ชื่ออิง</p>
-                {{ form.engname }}
-
-                <p>ที่ปรึกษา</p>
-                <p>{{ request.user.profmodel }}</p>
-                {{ form.consult }}
-
-                <p>รายละเอียด</p>
-                {{ form.detail }}
-
-            <input type="submit" name="Submit" id="submit">
-            {% endif %}
-        </form>
-
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <table>
             {% for show in show %}
         
@@ -48,22 +33,20 @@
                     {{show.thainame}}
                     {{show.consult}}
                     {{show.detail}}
-                    {% if user.groups.all.0.name == 'consultant' %}
                         {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
                             {{show.status}}
+                        {% elif show.status == 'รอการอนุมัติ' %}
+                            {{show.status}}
+                            <a href="{% url 'website:statusproject' show.id %}" >อนุมัติ</a>
+                            {{show.student1}}
+                            {{show.student2}}
                         {% else %}
                             {{show.status}}
                             {{show.student1}}
                             {{show.student2}}
+
                         {% endif %}
-                    {% endif %}
-                    
-                    {% if user.groups.all.0.name == 'consultant' %}
-                    <a href="{% url 'website:deleteproject' show.id %}" 
-                    onclick="return confirm('Confirm Delete?')">ลบ</a>
-                    <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
-                    {% endif %}
-                    
+
                 </td>
             </tr>
             {% endfor %}

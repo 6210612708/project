@@ -66,39 +66,45 @@ class ProfModelForm(forms.ModelForm):
     class Meta:
         model = ProfModel
         fields = "__all__"
+        exclude = ['user']
 
 
 class OtherModelForm(forms.ModelForm):
     class Meta:
         model = OtherModel
         fields = "__all__"
+        exclude = ['user']
 
 
 class StdModelForm(forms.ModelForm):
     class Meta:
         model = StdModel
         fields = "__all__"
+        exclude = ['user']
 
 
 class projectModelForm(forms.ModelForm):
-    consult = forms.CharField(widget=forms.HiddenInput(), initial="123") 
     class Meta:
         model = ProjectModel
         fields = "__all__"
-        exclude = ['student1' ,'student2' ,'committee' ,'status']
+        exclude = ['student1' ,'student2' ,'committee' ,'status' ,'consult']
 
-class projectForm(forms.Form):
-    thainame = forms.CharField(max_length=100)
-    engname = forms.CharField(max_length=100)
-    detail = forms.CharField(max_length=500)
-
+# class projectForm(forms.Form):
+#     thainame = forms.CharField(max_length=100)
+#     engname = forms.CharField(max_length=100)
+#     detail = forms.CharField(max_length=500)
 
 class applyprojectForm(forms.ModelForm):
     class Meta:
         model = ProjectModel
         fields = ['student1' ,'student2' ]
-
-
-
+        
+class coordinatorForm(forms.ModelForm):
+    class Meta:
+        model = CoordinatorModel
+        fields = "__all__"
+        
+# class coordinatorForm(forms.Form):
+#     thainame = forms.MultipleChoiceField(queryset=User.objects.all())
 
 

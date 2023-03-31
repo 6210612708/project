@@ -61,7 +61,17 @@ def login_view(request):
                                                         first_name=first_name,
                                                         last_name=surname,
                                                         email=email)
+<<<<<<< HEAD
                         user.save()
+=======
+                        ProfModel.objects.update_or_create(
+                        user=user,
+                        fname=first_name,
+                        lname=surname,
+                        email=email,)
+                    user.save()
+
+>>>>>>> bc86a203a47043616c440511c740114fdb996b09
                 if user is not None:
                     login(request, user)
                     return redirect("/")
