@@ -20,8 +20,9 @@ def index(request):
         return redirect('website:index')
 
     news = NewsModel.objects.all()
-    context = {'news':news}
-    return render(request, 'user/index.html' ,context)
+    context = {'news': news}
+    return render(request, 'user/index.html', context)
+
 
 @unauthenticated_user
 def login_view(request):
@@ -30,7 +31,7 @@ def login_view(request):
         password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
 
-        if user is not None :
+        if user is not None:
             login(request, user)
             return redirect('website:index')
 
@@ -41,7 +42,6 @@ def login_view(request):
             if login_status == 200:
                 user = authenticate(
                     request, username=username, password=password)
-
                 if not request.user.is_authenticated:
                     header = {
                         'Content-Type': 'application/json',
@@ -53,24 +53,37 @@ def login_view(request):
                     first_name, surname = (
                         data_student["displayname_th"]).split(" ")
                     email = data_student["email"]
-                    # print(User.objects.all().username)
                     all_users = User.objects.values_list('username', flat=True)
-                    print(username in list(all_users))
-                    # print(all_users[]['username'])
+
                     if username not in list(all_users):
                         user = User.objects.create_user(username=username,
                                                         password=password,
                                                         first_name=first_name,
                                                         last_name=surname,
                                                         email=email)
-                    user.save()
-
+                        user.save()
                 if user is not None:
                     login(request, user)
                     return redirect("/")
 
             else:
-                messages.info(request, "invalid Student ID or password")
+                login_status = login_engr(username, password)
+
+                if login_status == 200:
+                    all_users = User.objects.values_list('username', flat=True)
+                    if username not in list(all_users):
+                        user = User.objects.create_user(username=username,
+                                                        password=password,
+                                                        )
+                        user.save()
+
+                    if user is not None:
+                        login(request, user)
+                        return redirect("/")
+                else:
+                    messages.info(request, "invalid Student ID or password")
+
+           
     return render(request, 'user/login.html')
 
 
@@ -92,3 +105,14 @@ def login_api(username, password):
         "https://restapi.tu.ac.th/api/v1/auth/Ad/verify", headers=header, json=body)
 
     return res.status_code
+
+
+def login_engr(username, password):
+
+    body = {"username": username, "password": password}
+
+    res = requests.post(
+        "https://restapi.engr.tu.ac.th/api/v1/authentication/", json=body)
+    # print(res)
+
+    return res
