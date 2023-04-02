@@ -42,36 +42,58 @@ def login_view(request):
             if login_status == 200:
                 user = authenticate(
                     request, username=username, password=password)
+                
                 if not request.user.is_authenticated:
                     header = {
                         'Content-Type': 'application/json',
                         'Application-Key': 'TU240a80e5357e5d9279be402378381dfdfe126518202b4a6f5b30a4fb6218476b5ed6436d7a53ba7cc8009994e1ced28e'
                     }
-                    pull_api = requests.get(
-                        'https://restapi.tu.ac.th/api/v2/profile/std/info/?id='+str(username), headers=header)
-                    data_student = json.loads(pull_api.content).get("data")
-                    first_name, surname = (
-                        data_student["displayname_th"]).split(" ")
-                    email = data_student["email"]
-                    all_users = User.objects.values_list('username', flat=True)
+                    if username.isnumeric():    
+                        pull_api = requests.get(
+                            'https://restapi.tu.ac.th/api/v2/profile/std/info/?id='+str(username), headers=header)
+                        data_student = json.loads(pull_api.content).get("data")
+                        first_name, surname = (
+                            data_student["displayname_th"]).split(" ")
+                        email = data_student["email"]
+                        all_users = User.objects.values_list('username', flat=True)
 
-                    if username not in list(all_users):
-                        user = User.objects.create_user(username=username,
-                                                        password=password,
-                                                        first_name=first_name,
-                                                        last_name=surname,
-                                                        email=email)
-<<<<<<< HEAD
-                        user.save()
-=======
-                        ProfModel.objects.update_or_create(
-                        user=user,
-                        fname=first_name,
-                        lname=surname,
-                        email=email,)
-                    user.save()
+                        if username not in list(all_users):
+                            user = User.objects.create_user(username=username,
+                                                            password=password,
+                                                            first_name=first_name,
+                                                            last_name=surname,
+                                                            email=email
+                                                            )
+                            user.save()
+                        group = Group.objects.get(name='student')
+                        user.groups.add(group)
+                        StdModel.objects.filter(stdid = user.username).update(
+                            user=user
+                        )
+                    else:
+                        pull_api = requests.get(
+                            'https://restapi.tu.ac.th/api/v2/profile/emp/info/?username='+str(username), headers=header)
+                        data = json.loads(pull_api.content).get("data")
+                        first_name, surname = (
+                            data["displayname_th"]).split(" ")
+                        email = data_student["email"]
+                        all_users = User.objects.values_list('username', flat=True)
 
->>>>>>> bc86a203a47043616c440511c740114fdb996b09
+                        if username not in list(all_users):
+                            user = User.objects.create_user(username=username,
+                                                            password=password,
+                                                            first_name=first_name,
+                                                            last_name=surname,
+                                                            email=email
+                                                            )
+                            user.save()
+                        group = Group.objects.get(name='other')
+                        user.groups.add(group)
+                        OtherModel.objects.filter(stdid = user.username).update(
+                            user=user
+                        )
+                
+                
                 if user is not None:
                     login(request, user)
                     return redirect("/")
@@ -79,17 +101,30 @@ def login_view(request):
             else:
                 login_status = login_engr(username, password)
 
-                if login_status == 200:
+                if login_status.status_code == 200:
+                    
                     all_users = User.objects.values_list('username', flat=True)
                     if username not in list(all_users):
                         user = User.objects.create_user(username=username,
                                                         password=password,
                                                         )
                         user.save()
+                        
+                    if user.username.isnumeric():
+                        group = Group.objects.get(name='student')
+                        user.groups.add(group)
+                        StdModel.objects.filter(stdid = user.username).update(
+                            user=user
+                        )
+                            
+                    else:
+                        group = Group.objects.get(name='consultant')
+                        user.groups.add(group)                        
 
                     if user is not None:
                         login(request, user)
                         return redirect("/")
+                    
                 else:
                     messages.info(request, "invalid Student ID or password")
 
