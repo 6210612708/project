@@ -4,6 +4,7 @@ from django.utils import timezone
 from .utils import file_path
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+from annoying.fields import AutoOneToOneField
 
 # Create your models here.
 
@@ -87,7 +88,7 @@ class ProfModel(models.Model):
     phone = models.CharField(max_length=100, null=True)
     
     def __str__(self):
-        return f'{self.title} {self.fname} {self.lname}'
+        return f'{self.fname} {self.lname}'
 
 class OtherModel(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE,blank=True)
@@ -149,3 +150,23 @@ class ProjectModel(models.Model):
 
     def __str__(self):
         return self.thainame
+    
+class Docproject(models.Model):
+    project = AutoOneToOneField(ProjectModel,on_delete=models.CASCADE ,primary_key=True)
+    proposal = models.FileField(upload_to=file_path,null=True,blank=True)
+    preliminary = models.FileField(upload_to=file_path,null=True,blank=True)
+    progress1 = models.FileField(upload_to=file_path,null=True,blank=True)
+    progress2 = models.FileField(upload_to=file_path,null=True,blank=True)
+    draftthesis = models.FileField(upload_to=file_path,null=True,blank=True)
+    finalthesis = models.FileField(upload_to=file_path,null=True,blank=True)
+    
+    
+class GradeModel(models.Model):
+    A = models.IntegerField(null=True)
+    Bplus = models.IntegerField(null=True)
+    B = models.IntegerField(null=True)
+    Cplus = models.IntegerField(null=True)
+    C = models.IntegerField(null=True)
+    Dplus = models.IntegerField(null=True)
+    D = models.IntegerField(null=True)
+    F = models.IntegerField(null=True)

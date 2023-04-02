@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'accounts',
     'user',
+    'annoying',
 
 ]
 

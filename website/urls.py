@@ -35,10 +35,10 @@ urlpatterns = [
     path('coorplan/update/<pk>', views.updatecoorplan ,name='updatecoorplan'),
 
     # # COM plan
-    # path('complan/', views.complan ,name='complan'),
-    # path('complan_csv/', views.complan_csv ,name='complan_csv'),
-    # path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
-    # path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
+    path('complan/', views.complan ,name='complan'),
+    path('complan_csv/', views.complan_csv ,name='complan_csv'),
+    path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
+    path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
 
     # CON plan
     path('profplan/', views.profplan ,name='profplan'),
@@ -101,6 +101,8 @@ urlpatterns = [
     
     
     path('stddetail', views.stddetail ,name='stddetail'),
+    
+    path('grade', views.grade ,name='grade'),
 
 
 

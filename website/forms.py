@@ -104,7 +104,10 @@ class coordinatorForm(forms.ModelForm):
         model = CoordinatorModel
         fields = "__all__"
         
-# class coordinatorForm(forms.Form):
-#     thainame = forms.MultipleChoiceField(queryset=User.objects.all())
+class docprojectForm(forms.Form):
+    file = forms.FileField()
 
-
+class GradeForm(forms.ModelForm):
+    class Meta:
+        model = GradeModel
+        fields = "__all__"
