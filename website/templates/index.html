@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+<!-- {% extends "layout.html" %} -->
 <!DOCTYPE html>
     <html>
 
@@ -8,38 +8,7 @@
         
     </head>
     {% block content %}
-    <!-- <div class="invisible col-md-2 fixed mt-5"></div>
-    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-      <div class="card-header">Student</div>
-      <div class="card-body">
-        {% if user.is_authenticated %}
-        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
-        <p class="card-text">
-          ID : {{ user.username }}
-          Email : {{ user.email }}
-        </p>
-        {% if user.groups.all.0.name == 'consultant' %}
 
-      
-        {% endif %}
-  
-      {% endif %}
-      </div>
-    </div> -->
-    <!-- {% if user.is_authenticated %}
-      Hi {{ user.username }}! <br>
-      {{ user.first_name }} 
-      {{ user.last_name }}<br>
-      {{ user.email }}<br>
-
-      hiiiiii
-
-      {% if user.groups.all.0.name == 'consultant' %}
-
-      
-      {% endif %}
-
-    {% endif %} -->
     {% endblock %}
 
 </html>
