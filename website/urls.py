@@ -34,18 +34,12 @@ urlpatterns = [
     path('coorplan/delete/<pk>', views.deletecoorplan ,name='deletecoorplan'),
     path('coorplan/update/<pk>', views.updatecoorplan ,name='updatecoorplan'),
 
-<<<<<<< HEAD
-    # COM plan
-=======
     # # COM plan
->>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9
     path('complan/', views.complan ,name='complan'),
     path('complan_csv/', views.complan_csv ,name='complan_csv'),
     path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
     path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
 
-<<<<<<< HEAD
-=======
     # CON plan
     path('profplan/', views.profplan ,name='profplan'),
     path('profplan_csv/', views.profplan_csv ,name='profplan_csv'),
@@ -58,7 +52,6 @@ urlpatterns = [
     path('stdplan/delete/<pk>', views.deletestdplan ,name='deletestdplan'),
     path('stdplan/update/<pk>', views.updatestdplan ,name='updatestdplan'),
 
->>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9
     # news
     path('news/', views.news ,name='news'),
     path('news_csv/', views.news_csv ,name='news_csv'),

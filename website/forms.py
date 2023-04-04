@@ -80,9 +80,6 @@ class StdModelForm(forms.ModelForm):
     class Meta:
         model = StdModel
         fields = "__all__"
-<<<<<<< HEAD
-
-=======
         exclude = ['user']
 
 
@@ -114,4 +111,3 @@ class GradeForm(forms.ModelForm):
     class Meta:
         model = GradeModel
         fields = "__all__"
->>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9

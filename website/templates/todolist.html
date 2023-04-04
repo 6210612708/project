@@ -2,16 +2,22 @@
 {% load static %}
 
 {% block head %}
-    <!-- <head>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{% static '/css/todolist.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static '/css/todo-list.css' %}">
-    </head> -->
+        <script src="{% url 'js-catlog' %}"></script>
+        <script src="{% static '/admin/js/core.js' %}"></script>
+        <!-- <script type="text/javascript" src="/admin/jsi18n/"></script>
+        <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+        <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+        <script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script> -->
+        {{ form.media }}
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+        </head>
 {% endblock %}
 {% block content %}
     <body>
-            <div class="row mt-4">
+            <div class="row mt-4 center">
               <div class="col-sm-6">
                 <div class="card">
                   <div class="card-body">
@@ -19,18 +25,14 @@
                     <p class="card-text">
                       <form method="POST" class="text-center">
                         {% csrf_token %}
-                        <!-- <div class="txt_field">
-                        {{ form.media }}
-                        {{ form.as_p }}
-                        </div> -->
-                        {% csrf_token %}
                         <label class="addcontent-blog">
-                          {{ form.media }}
-                          {{ form.as_p }}
+                          วันที่ : {{ form.date }}
+                          รายการ : {{ form.list }}
                         </label>
                     </p>
 
-                  <a class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit" role="button" aria-pressed="true">Submit</a>
+                  <!-- <input class="btn btn-primary btn-sm active" type="input" name="Submit" id="submit" role="button" aria-pressed="true">Submit</input> -->
+                  <input class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit">
                   <a href="{% url 'website:todo_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
                     </form>
                   </div>
@@ -119,7 +121,7 @@
 </div> -->
 
     </body>
-    <script>
+    <!-- <script>
       let timer;
 document.addEventListener('input', e => {
   const el = e.target;
@@ -131,5 +133,5 @@ document.addEventListener('input', e => {
     }, 100)
   }
 })
-    </script>
+    </script> -->
 {% endblock %}

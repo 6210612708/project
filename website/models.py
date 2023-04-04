@@ -121,10 +121,6 @@ class StdModel(models.Model):
     
     def __str__(self):
         return f'{self.fname} {self.lname}'
-<<<<<<< HEAD
-
-# =====================================================
-=======
     
 
 class CoordinatorModel(models.Model):
@@ -174,4 +170,3 @@ class GradeModel(models.Model):
     Dplus = models.IntegerField(null=True)
     D = models.IntegerField(null=True)
     F = models.IntegerField(null=True)
->>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9
