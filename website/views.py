@@ -513,7 +513,8 @@ def updatecomplan(request, pk):
         if form.is_valid():
             form.save()
             return redirect('website:complan')
-    return render(request, 'update_complan.html', {'form': form})
+    return render(request, 'update_complan.html', {'form':form } )
+
 
 
 # =========== PLAN for Consult ==========================================
@@ -791,6 +792,7 @@ def grade(request):
     return render(request, 'grade.html', context)
 
 
+
 def docproject(request):
     form = fileprojectForm()
     if request.method == "POST":
@@ -810,3 +812,7 @@ def docproject(request):
     else:
         context = {'form':form ,'show':show }
         return render(request, 'docproject.html', context)
+
+#     context = {list :'list'}
+#     return render(request,'update_project.html' ,context)
+
