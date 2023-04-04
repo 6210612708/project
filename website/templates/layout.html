@@ -28,7 +28,7 @@
                             <i class='bx bx-message-square-detail nav_icon mr-3'></i>แผนการดำเนินงาน</a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                           <li><a class="dropdown-item" href="{% url 'website:coorplan' %}">ผู้ประสานงาน</a></li>
-                          <li><a class="dropdown-item" href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
+                          <li><a class="dropdown-item" href="{% url 'website:profplan' %}">อาจารย์ที่ปรึกษา</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
                         </ul>
                       </li>
@@ -60,9 +60,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class='bx bx-user nav_icon mr-3'></i>จัดการข้อมูลพื้นฐาน</a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                          <li><a class="dropdown-item" href="{% url 'website:prof' %}">อาจารย์</a></li>
-                          <li><a class="dropdown-item" href="{% url 'website:other' %}">ผู้ใช้งานนอกภาควิชา</a></li>
-                          <li><a class="dropdown-item" href="#">ผู้ประสานงาน</a></li>
+                          <li><a class="dropdown-item" href="{% url 'website:prof' %}">อาจารย์และผู้ประสานงาน</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:std' %}">นักศึกษา</a></li>
                         </ul>
                       </li>
@@ -75,7 +73,7 @@
                     <!-- ################# COORDINATOR ################## -->
 
 
-                    {% if user.groups.all.0.name == 'coordinator' %}
+                    {% if user.groups.all.1.name == 'coordinator' %}
                     <li class="nav-item mt-5">
                         <a class="nav-link text-truncate " href="#"></a>
                     </li>
@@ -91,7 +89,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class='bx bx-message-square-detail nav_icon mr-3'></i>แผนการดำเนินงาน</a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                          <li><a class="dropdown-item" href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
+                          <li><a class="dropdown-item" href="{% url 'website:profplan' %}">อาจารย์ที่ปรึกษา</a></li>
                           <li><a class="dropdown-item" href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
                         </ul>
                       </li>
@@ -125,12 +123,12 @@
                     <!-- ################# CONSULTANT ################## -->
 
 
-                    {% if user.groups.all.0.name == 'consultant' %}
+                    {% if user.groups.all.0.name == 'consultant' and user.groups.all.1.name != 'coordinator' %}
                     <li class="nav-item mt-5">
                         <a class="nav-link text-truncate " href="#"></a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="{% url 'website:complan' %}">
+                        <a class="nav-link" href="{% url 'website:profplan' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>สิ่งที่ต้องทำ</a>
                     </li>
                     <li class="nav-item mt-2">
@@ -169,11 +167,15 @@
                             <i class='bx bx-folder nav_icon mr-3'></i>รายการที่ต้องทำ</a>
                     </li>
                     <li class="nav-item mt-2">
+                        <a class="nav-link" href="{% url 'website:docproject' %}">
+                            <i class='bx bx-folder nav_icon mr-3'></i>เอกสารโครงงาน</a>
+                    </li>
+                    <li class="nav-item mt-2">
                         <a class="nav-link" href="{% url 'website:detailproject' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>ข้อมูลโครงงาน</a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'website:stddetail' %}">
                             <i class='bx bx-folder nav_icon mr-3'></i>ข้อมูลนักศึกษา</a>
                     </li>
                     {% endif %}       
@@ -188,7 +190,7 @@
                         <a class="nav-link text-truncate " href="#"></a>
                     </li>
                     <li class="nav-item mt-2">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="website:project">
                             <i class='bx bx-folder nav_icon mr-3'></i>ติดตามโครงงานนักศึกษา</a>
                     </li>
                     <li class="nav-item mt-2">

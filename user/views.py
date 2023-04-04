@@ -11,7 +11,6 @@ import requests
 from website.models import *
 from website.decorator import *
 
-from .models import Student
 # Create your views here.
 
 
@@ -87,7 +86,7 @@ def login_view(request):
                                                             email=email
                                                             )
                             user.save()
-                        group = Group.objects.get(name='other')
+                        group = Group.objects.get(name='consultant')
                         user.groups.add(group)
                         OtherModel.objects.filter(stdid = user.username).update(
                             user=user

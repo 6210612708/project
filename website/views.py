@@ -267,66 +267,66 @@ def updateprof(request, pk):
 # =========== Other ==========================================
 
 
-def other(request):
-    if request.method == "POST":
-        form = OtherModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-        else:
-            print("Error", form.errors)
-    form = OtherModelForm()
-    show = OtherModel.objects.all()
+# def other(request):
+#     if request.method == "POST":
+#         form = OtherModelForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#         else:
+#             print("Error", form.errors)
+#     form = OtherModelForm()
+#     show = OtherModel.objects.all()
 
-    context = {'form': form, 'show': show}
-    return render(request, 'other.html', context)
-
-
-def other_csv(request):
-    show = OtherModel.objects.all()
-    if request.method == "GET":
-        context = {'show': show}
-        return render(request, 'other_csv.html', context)
-
-    csv_file = request.FILES['file']
-
-    if not csv_file.name.endswith('.csv'):
-        messages.error(request, 'Please upload only CSV file')
-        return redirect('website:other_csv')
-
-    data_set = csv_file.read().decode('UTF-8')
-    io_string = io.StringIO(data_set)
-    next(io_string)
-
-    for column in csv.reader(io_string, delimiter=',', quotechar='|'):
-        _, created = OtherModel.objects.update_or_create(
-            title=column[0],
-            fname=column[1],
-            lname=column[2],
-            email=column[3],
-            phone=column[4],
-
-        )
-    context = {
-        'notify': 'CSV file is already upload', 'show': show
-    }
-    return render(request, 'other_csv.html', context)
+#     context = {'form': form, 'show': show}
+#     return render(request, 'other.html', context)
 
 
-def deleteother(request, pk):
-    data = OtherModel.objects.get(id=pk)
-    data.delete()
-    return redirect('website:other')
+# def other_csv(request):
+#     show = OtherModel.objects.all()
+#     if request.method == "GET":
+#         context = {'show': show}
+#         return render(request, 'other_csv.html', context)
+
+#     csv_file = request.FILES['file']
+
+#     if not csv_file.name.endswith('.csv'):
+#         messages.error(request, 'Please upload only CSV file')
+#         return redirect('website:other_csv')
+
+#     data_set = csv_file.read().decode('UTF-8')
+#     io_string = io.StringIO(data_set)
+#     next(io_string)
+
+#     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
+#         _, created = OtherModel.objects.update_or_create(
+#             title=column[0],
+#             fname=column[1],
+#             lname=column[2],
+#             email=column[3],
+#             phone=column[4],
+
+#         )
+#     context = {
+#         'notify': 'CSV file is already upload', 'show': show
+#     }
+#     return render(request, 'other_csv.html', context)
 
 
-def updateother(request, pk):
-    list = OtherModel.objects.get(id=pk)
-    form = OtherModelForm(instance=list)
-    if request.method == 'POST':
-        form = OtherModelForm(request.POST, instance=list)
-        if form.is_valid():
-            form.save()
-            return redirect('website:other')
-    return render(request, 'update_other.html', {'form': form})
+# def deleteother(request, pk):
+#     data = OtherModel.objects.get(id=pk)
+#     data.delete()
+#     return redirect('website:other')
+
+
+# def updateother(request, pk):
+#     list = OtherModel.objects.get(id=pk)
+#     form = OtherModelForm(instance=list)
+#     if request.method == 'POST':
+#         form = OtherModelForm(request.POST, instance=list)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('website:other')
+#     return render(request, 'update_other.html', {'form': form})
 
 
 # =========== Student ==========================================
@@ -645,11 +645,15 @@ def stdproject(request):
     x = 0
     for test in test:
         if test.student1 == request.user.stdmodel or test.student2 == request.user.stdmodel:
-            x = 1
-            
-    show = ProjectModel.objects.all()
+            x = 1        
+    if x == 1 :
+        show = ProjectModel.objects.filter(
+            Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
+    else:
+        show = ProjectModel.objects.all()
 
-    context = {'x': x ,'show' :show}
+
+    context = {'x': x, 'show': show}
     return render(request, 'stdproject.html', context)
 
 
@@ -660,11 +664,8 @@ def project(request):
             con = request.user.profmodel
             test = form.save(commit=False)
             test.consult = con
-            test = test.save()
-            
-        #     Docproject.objects.create(
-        #     project = test
-        # )
+            fin = test.save()
+
         else:
             print("Error", form.errors)
     form = projectModelForm()
@@ -680,6 +681,7 @@ def deleteproject(request, pk):
     data = ProjectModel.objects.get(id=pk)
     data.delete()
     return redirect('website:project')
+
 
 def updateproject(request, pk):
     list = ProjectModel.objects.get(id=pk)
@@ -740,7 +742,10 @@ def detailproject(request):
     show = ProjectModel.objects.filter(
         Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
     context = {'show': show}
-    return render(request, 'detailproject.html', context)
+    if not show:
+        return redirect('website:stdproject')
+    else:
+       return render(request, 'detailproject.html', context)
 
 
 # def coordinator(request ,pk):
@@ -773,13 +778,6 @@ def stddetail(request):
     context = {'show': show}
     return render(request, 'stddetail.html', context)
 
-def stddetail(request):
-    show = StdModel.objects.filter(
-        Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
-    context = {'show': show}
-    return render(request, 'stddetail.html', context)
-
-
 
 def grade(request):
     if request.method == "POST":
@@ -792,18 +790,23 @@ def grade(request):
     context = {'form': form}
     return render(request, 'grade.html', context)
 
-# def docproject(request ,pk):
-#     form = docprojectForm()
-#     proj = Docproject.objects.get(id=pk)
-#     if request.method == "POST":
-#         thainame = request.POST.get("file")
-#         proj = ProjectModel.objects.update(
-#             thainame =thainame,
-#             engname = engname,
-#             consult = request.user.first_name,
-#             detail = detail,
-#         )
-#         return redirect('website:project')
 
-#     context = {list :'list'}
-#     return render(request,'update_project.html' ,context)
+def docproject(request):
+    form = fileprojectForm()
+    if request.method == "POST":
+        form = fileprojectForm(request.POST , request.FILES)
+        if form.is_valid():
+            test = form.save(commit=False)
+            test.date = datetime.now()
+            test = test.save()
+        else:
+            print("Error", form.errors)
+    # temp = ProjectModel.objects.filter(
+    #     Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
+    # show = Fileproject.objects.filter(project=temp)
+    if temp.status == 'รออนุมัติ':
+        messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
+        return redirect('website:todo_csv')
+    else:
+        context = {'form':form ,'show':show }
+        return render(request, 'docproject.html', context)

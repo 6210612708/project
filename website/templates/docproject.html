@@ -13,7 +13,12 @@
     </head>
 {% endblock %}
 {% block content %}
-<br><br>
+<br><br><br><br><br><br>
+{% if messages %}
+{% for messages in messages %}
+    <div>{{messages|safe}}</div>
+{% endfor %}
+{% else %}
     <body>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -22,4 +27,19 @@
             <input type="submit" name="Submit" id="submit">
         </form>
     </body>
+
+    ประวัติการส่ง
+    <table>
+        {% for show in show %}
+        <tr>
+            <td>
+                {{show.topic}}
+                <a href="{{show.file.url}}" download>download file</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% endif %}
 {% endblock %}
