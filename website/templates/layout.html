@@ -1,216 +1,251 @@
 {% extends 'base_layout.html' %}
-{% block head %}
-{% endblock %}
-     
+{% load static %}
 {% block body %}
-    <!-- <body id="body-pd">
-    <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-    </header>
-    <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div> <a href="#" class="nav_logo" style="text-decoration:none"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">MENU</span> </a>
-                <div class="nav_list">
-                     <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">สิ่งที่ต้องทำ</span> </a> 
-                     <a href="#" class="nav_link"> <i class='bx bx-news nav_icon'></i> <span class="nav_name">ประกาศข่าวสาร</span> </a> 
-                     <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">แผนการดำเนินงาน</span> </a> 
-                     <a href="#" class="nav_link"><i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">อัพโหลดเอกสาร</span> </a> 
-                     <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">โครงงานนักศึกษา</span> </a> 
-                     <a href="#" class="nav_link"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">เกณฑ์การตัดเกรด</span> </a>
-                     -->
-                        <!----------------------------------------submenu--------------------------------------------------->
-                   
-                 <!-- <li class="nav-item has-submenu">
-                    <a class="nav-link" href="#"><i class='bx bx-user nav_icon'></i><span class="nav_name">จัดการข้อมูล</span></a>
-                    <ul class="submenu collapse">
-                        <li><a class="nav-link" href="#">Submenu item 4 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 5 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 7 </a></li>
-                    </ul>
-                </li> -->
-                 
-                 <!----------------------------------------submenu--------------------------------------------------->
-                 <!-- <a href="#" class="nav_link"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">จัดการปีการศึกษา</span> </a>
-                 <a href="#" class="nav_link"><i class='bx bx-cog nav_icon'></i> <span class="nav_name">ตั้งค่า</span> </a>
+
+<header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a href="index.html">ENGR</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+           <!-- ################# ADMIN ################## -->
+           {% if user.groups.all.0.name == 'admin' %}
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:todolist' %}">รายการที่ต้องทำ</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:news' %}">ประกาศข่าวสาร</a></li>
+          <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{% url 'website:coorplan' %}">ผู้ประสานงาน</a></li>
+              <li><a href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
+              <li><a href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">อัพโหลดเอกสาร</a></li>
+              <li class="dropdown"><a href="#"><span>คะแนนโครงงาน</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">ปีการศึกษาที่ 1</a></li>
+                  <li><a href="#">ปีการศึกษาที่ 2</a></li>
+                </ul>
+              </li>
+              <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
+              <li><a href="{% url 'website:stdplan' %}">เกณฑ์การตัดเกรด</a></li>
+              <li class="dropdown"><a href="#"><span>จัดการข้อมูลพื้นฐาน</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">อาจารย์</a></li>
+                  <li><a href="#">ผู้ใช้งานนอกภาควิชา</a></li>
+                  <li><a href="#">ผู้ประสานงาน</a></li>
+                  <li><a href="#">นักศึกษา</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">ตั้งค่า</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
+          {% endif %}
+
+          <!-- ################# COORDINATOR ################## -->
+          {% if user.groups.all.0.name == 'coordinator' %}
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:news' %}">รายการที่ต้องทำ</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:coorplan' %}">ประกาศข่าวสาร</a></li>
+          <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <!-- <li><a href="{% url 'website:coorplan' %}">ผู้ประสานงาน</a></li>               -->
+              <li><a href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
+              <li><a href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{% url 'website:document' %}">อัพโหลดเอกสาร</a></li>
+              <li class="dropdown"><a href="#"><span>คะแนนโครงงาน</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">ปีการศึกษาที่ 1</a></li>
+                  <li><a href="#">ปีการศึกษาที่ 2</a></li>
+                </ul>
+              </li>
+              <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
+              <li><a href="{% url 'website:stdplan' %}">เกณฑ์การตัดเกรด</a></li>
+              <li><a href="#">เอกสารโครงงาน</a></li>
+            </ul>
+          </li>
+        <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
+        {% endif %}
+
+          <!-- ################# CONSULTANT ################## -->
+          {% if user.groups.all.0.name == 'consultant' %}
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:complan' %}">รายการที่ต้องทำ</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:project' %}">ติดตามโครงงานนักศึกษา</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:approveproject' %}">อนุมัติโครงงาน</a></li>
+          <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">แก้ไขข้อมูลโครงงาน</a></li>
+              <li><a href="#">ประเมินโครงงาน</a></li>
+              <li><a href="#">กรรมการประเมินโครงงาน</a></li>
+            </ul>
+          </li>
+        <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
+          {% endif %}
+
+          <!-- ################# STUDENT ################## -->
+          {% if user.groups.all.0.name == 'student' %}
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:stdplan' %}">รายการที่ต้องทำ</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:detailproject' %}">ข้อมูลโครงงาน</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:approveproject' %}">อนุมัติโครงงาน</a></li>
+          <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">ข้อมูลนักศึกษา</a></li>
+            </ul>
+          </li>
+        <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
+          {% endif %}   
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex" style="background-color: #eee;">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="https://www.seekpng.com/png/detail/202-2024606_png-file-logo-personal-avatar.png" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 155px;">
+                  <h5 class="my-3">{{ user.first_name }} {{ user.last_name }}</h5>
+                  <p class="text-muted mb-1"></p>
+                  <p class="text-muted mb-4"></p>
                 </div>
-            </div> <a href="{% url 'user:logout' %}" class="nav_link" style="text-decoration:none"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-        </nav>
-    </div> -->
-
-    <!--Container Main start-->
-    <!-- <div class="height-100 bg-light">
-        <h4>Main Components</h4>
-    </div> -->
-    <!--Container Main end-->
-
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>STUDENT</h3>
+              </div>
+             
             </div>
-
-            <ul class="list-unstyled components">
-                <!-- <p>MENU</p> -->
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class='bx bx-user nav_icon'></i><span class="nav_name">จัดการข้อมูล</span></a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="{% url 'website:prof' %}">อาจารย์</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'website:other' %}">ผู้ใช้นอกภาควิชา</a>
-                        </li>
-                        <li>
-                            <a href="#">ผู้ประสานงาน</a>
-                        </li>
-                        <li>
-                            <a href="#">นักศึกษา</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">สิ่งที่ต้องทำ</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-news nav_icon'></i> <span class="nav_name">ประกาศข่าวสาร</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">แผนการดำเนินงาน</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">อัพโหลดเอกสาร</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-folder nav_icon'></i> <span class="nav_name">โครงงานนักศึกษา</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-folder nav_icon'></i> <span class="nav_name">คะแนนโครงงาน</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">เกณฑ์การตัดเกรด</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">จัดการปีการศึกษา</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class='bx bx-cog nav_icon'></i> <span class="nav_name">ตั้งค่า</span></a>
-                </li>
-                <!-- <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li> -->
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#" class="article">BACK</a>
-                </li>
-                <li>
-                    <a href="{% url 'user:logout' %}" class="download" style="color: #7386D5;">LOG OUT</a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Page Content  -->
-        <div id="content">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>HOME</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                        </ul>
+            {% if user.is_authenticated %}
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">ชื่อ</p>
                     </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ user.first_name }}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">นามสกุล</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ user.last_name }}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">รหัสนักศึกษา</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ user.username }}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ user.email }}</p>
+                    </div>
+                  </div>
+                  <hr>
                 </div>
-            </nav>
-
-    
-<<<<<<< HEAD
-{% endblock %}
-            {% block content %}
-            {% endblock %}
-    </div>
-=======
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>bar</title>
-    </head>
-
-        <!-- {% if request.user.is_active %} -->
-
-        <!-- {% else %} -->
-
-        <!-- {% endif %} -->
-
-   <div>
-        <a href="{% url 'website:todolist' %}">สิ่งที่ต้องทำ</a>
-        <a href="{% url 'website:news' %}">ประกาศข่าวสาร</a>
-        <a href="">แผนการดำเนินงาน</a>
-        <a href="{% url 'website:document' %}">อัพโหลดเอกสาร</a>
-        <a href="">โครงงานนักศึกษา</a>
-        <a href="">คะแนนโครงงาน</a>
-        <a href="">เกณฑ์การตัดเกรด</a>
-        <div>
-            <a href="">จัดการข้อมูลพื้นฐาน</a>
-            <a href="{% url 'website:prof' %}">อาจารย์</a>
-            <a href="{% url 'website:other' %}">ผู้ใช้นอกภาควิชา</a>
-            <a href="">ผู้ประสานงาน</a>
-            <a href="{% url 'website:std' %}">นักศึกษา</a>
+              </div>
+              {% if user.groups.all.0.name == 'consultant' %}
+              {% endif %}
+            {% endif %}
+            </div>
+          </div>
         </div>
-        <a href="">จัดการปีการศึกษา</a>
-        <a href="">ตั้งค่า</a>
+      </section>
+      
 
-        <!-- {% if request.user.is_superuser %} -->
-        <!-- {% else %} -->
+<footer id="footer">
 
-        <!-- {% endif %} -->
+<div class="footer-top">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-3 col-md-6 footer-contact">
+        <h3>ENGR</h3>
+        <p>
+          99 หมู่ 18 ถ.พหลโยธิน <br>
+          คลองหลวง รังสิต <br>
+          ปทุมธานี 12120 <br><br>
+          <strong>Phone:</strong> 02 564 3001-9 ต่อ 3037<br>
+          <strong>Email:</strong> kboonruan@engr.tu.ac.th<br>
+        </p>
+      </div>
+
+      <div class="col-lg-3 col-md-6 footer-links">
+        <h4>ลิงก์สำหรับนักศึกษา</h4>
+        <ul>
+          <li><i class="bx bx-chevron-right"></i> <a href="https://reg.tu.ac.th/">สำนักทะเบียน</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="http://acrd.engr.tu.ac.th/">งานบริการการศึกษาและประกันคุณภาพ</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="https://engr.tu.ac.th/">คณะวิศวกรรมศาสตร์ มธ</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="https://tu.ac.th/">มหาวิทยาลัยธณรมศาสตร์</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6 footer-links">
+        <h4>บุคคลทั่วไป</h4>
+        <ul>
+          <li><i class="bx bx-chevron-right"></i> <a href="https://engr.tu.ac.th/maps">การเดินทางมาคณะวิศวะ</a></li>
+          
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6 footer-links">
+        <h4>Our Social Networks</h4>
+        <p>คณะวิศวกรรมศาสตร์</p>
+        <div class="social-links mt-3">
+            <a href="https://www.facebook.com/ENGR.THAMMASAT" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.youtube.com/channel/UCUUdPglY16NxQnttIGM2xpw" class="instagram"><i class="bx bxl-youtube"></i></a>
+        </div>
+      </div>
+
     </div>
+  </div>
+</div>
 
-    <div>
-        <a href="{% url 'user:logout' %}">Log out</a>
-    </div>
+<div class="container footer-bottom clearfix">
+  <div class="copyright">
+    &copy; Copyright <strong><span>2020 Department of Electrical and Computer Engineering </span></strong>. All Rights Reserved
+  </div>
+</div>
+</footer><!-- End Footer -->
 
-    </body>
-    {% block content %}
-    {% endblock %}
-</html>
->>>>>>> 7cef6bca77b2e05f531a7993687e77e68dde1961
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="{% static 'assets/vendor/aos/aos.js'%}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js'%}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js'%}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js'%}"></script>
+<script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js'%}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js'%}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js'%}"></script>
+{% endblock %}
+
+

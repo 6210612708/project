@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+    <!-- <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% url 'js-catlog' %}"></script>
+        <script src="{% static '/admin/js/core.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+        <title>TodoList</title>
+    </head> -->
+{% endblock %}
+{% block content %}
+    <body>
+        <!-- <form method="POST" class="text-center">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" name="Submit" id="submit">
+        </form>
+
+
+        <table>
+            {% for show in show %}
+            <tr>
+                <td>
+                    {{show.date}}
+                    {{show.list}}
+                    <a href="{% url 'website:deleteprofplan' show.id %}" 
+                    onclick="return confirm('Confirm Delete?')">ลบ</a>
+                    <a href="{% url 'website:updateprofplan' show.id %}" >แก้ไข</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+            <a href="{% url 'website:profplan_csv' %}">upload csv</a>
+        </table> -->
+        {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+        <div class="row mt-5">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">จัดการข้อมูลพื้นฐาน</h5>
+                  <p class="card-text">
+                    <form method="POST" class="text-center">
+                      {% csrf_token %}
+                      {{ form.media }}
+                      {{ form.as_p }}
+                  </p>
+                  <a href="#" class="btn btn-primary" type="submit" name="Submit" id="submit">Submit</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {%endif%}
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">แผนการดำเนินงาน</h5>
+                  <p class="card-text">
+                    <table class="table table-borderless">
+                      <thead>
+                        <tr>
+                          <th scope="col">Date</th>
+                          <th scope="col">List</th>
+                          <th scope="col">Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for show in show %}
+                        <tr>
+                          <td>{{show.date}}</td>
+                          <td>{{show.list}}</td>
+                          <td>
+                            {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+                            <a href="{% url 'website:deleteprofplan' show.id %}" 
+                            onclick="return confirm('Confirm Delete?')">ลบ</a>
+                            <a href="{% url 'website:updateprofplan' show.id %}" >แก้ไข</a>
+                            {% endif %}
+                          </td>
+                          {% endfor %}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </p>
+                  {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+                  <a href="{% url 'website:profplan_csv' %}">upload csv</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+    </body>
+{% endblock %}

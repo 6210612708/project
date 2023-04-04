@@ -34,12 +34,31 @@ urlpatterns = [
     path('coorplan/delete/<pk>', views.deletecoorplan ,name='deletecoorplan'),
     path('coorplan/update/<pk>', views.updatecoorplan ,name='updatecoorplan'),
 
+<<<<<<< HEAD
     # COM plan
+=======
+    # # COM plan
+>>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9
     path('complan/', views.complan ,name='complan'),
     path('complan_csv/', views.complan_csv ,name='complan_csv'),
     path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
     path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
 
+<<<<<<< HEAD
+=======
+    # CON plan
+    path('profplan/', views.profplan ,name='profplan'),
+    path('profplan_csv/', views.profplan_csv ,name='profplan_csv'),
+    path('profplan/delete/<pk>', views.deleteprofplan ,name='deleteprofplan'),
+    path('profplan/update/<pk>', views.updateprofplan ,name='updateprofplan'),
+
+    # STD plan
+    path('stdplan/', views.stdplan ,name='stdplan'),
+    path('stdplan_csv/', views.stdplan_csv ,name='stdplan_csv'),
+    path('stdplan/delete/<pk>', views.deletestdplan ,name='deletestdplan'),
+    path('stdplan/update/<pk>', views.updatestdplan ,name='updatestdplan'),
+
+>>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9
     # news
     path('news/', views.news ,name='news'),
     path('news_csv/', views.news_csv ,name='news_csv'),
@@ -72,6 +91,26 @@ urlpatterns = [
     path('std_csv/', views.std_csv ,name='std_csv'),
     path('std/delete/<pk>', views.deletestd ,name='deletestd'),
     path('std/update/<pk>', views.updatestd ,name='updatestd'),
+    
+    # Coordinator
+    path('coor/delete/<pk>', views.deletecoor ,name='deletecoor'),
+    path('addcoor/<pk>', views.addcoor ,name='addcoor'),
+
+    # Project
+    path('project/', views.project ,name='project'),
+    path('stdproject/', views.stdproject ,name='stdproject'),
+    path('project/delete/<pk>', views.deleteproject ,name='deleteproject'),
+    path('project/update/<pk>', views.updateproject ,name='updateproject'),
+    path('applyproject/<pk>', views.applyproject ,name='applyproject'),
+    path('statusproject/<pk>', views.statusproject ,name='statusproject'),
+    path('approveproject', views.approveproject ,name='approveproject'),
+    path('detailproject', views.detailproject ,name='detailproject'),
+    
+    
+    path('stddetail', views.stddetail ,name='stddetail'),
+    
+    path('grade', views.grade ,name='grade'),
+
 
 
 ]

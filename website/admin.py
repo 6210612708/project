@@ -12,4 +12,12 @@ admin.site.register(StdModel)
 admin.site.register(CoorPlanModel)
 admin.site.register(ComPlanModel)
 admin.site.register(StdPlanModel)
+<<<<<<< HEAD
 admin.site.register(ProfPlanModel)
+=======
+admin.site.register(ProfPlanModel)
+admin.site.register(ProjectModel)
+admin.site.register(CoordinatorModel)
+admin.site.register(GradeModel)
+admin.site.register(Docproject)
+>>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9

@@ -1,19 +1,14 @@
-body {
-  /* color: #000; */
+/* body {
   overflow-x: hidden;
   height: 100%;
-  background-color: #B0BEC5;
-  /* background-repeat: no-repeat; */
-  background-image: linear-gradient(rgba(205, 207, 216, 0.7),rgba(255, 255, 255, 0.7)), url(/static/images/TSE_pr.jpg) ;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  /*font-family: 'PT mono', sans-serif;
-            font-size: 14px;
-            margin: 0;
-            padding: 0;
-            background-color: rgb(253, 255, 252); */
 
+}
+
+.context {
+  width: 100%;
+  position: absolute;
+  top:50vh;
+  
 }
 
 .card0 {
@@ -40,39 +35,6 @@ body {
 .border-line {
   border-right: 1px solid #EEEEEE;
 }
-
-/* .facebook {
-  background-color: #3b5998;
-  color: #fff;
-  font-size: 18px;
-  padding-top: 5px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-}
-
-.twitter {
-  background-color: #1DA1F2;
-  color: #fff;
-  font-size: 18px;
-  padding-top: 5px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-}
-
-.linkedin {
-  background-color: #2867B2;
-  color: #fff;
-  font-size: 18px;
-  padding-top: 5px;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-}*/
 
  .line {
   height: 1px;
@@ -141,7 +103,6 @@ a {
 }
 
 .btn-blue {
-  /* background-color: #1A237E; */
   width: 150px;
   color: #a80000;
   border-radius: 2px;
@@ -175,4 +136,5 @@ a {
       border-top: 1px solid #EEEEEE !important;
       margin: 0px 15px;
   }
-}
+} */
+

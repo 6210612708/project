@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% url 'js-catlog' %}"></script>
+        <script src="{% static '/admin/js/core.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+        <title>Document</title>
+    </head>
+{% endblock %}
+{% block content %}
+<br><br>
+    <body>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" name="Submit" id="submit">
+        </form>
+    </body>
+{% endblock %}

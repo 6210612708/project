@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% url 'js-catlog' %}"></script>
+        <script src="{% static '/admin/js/core.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+        <title>TodoList</title>
+    </head>
+{% endblock %}
+{% block content %}
+    <body>
+        {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+        <form method="POST" class="text-center">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" name="Submit" id="submit">
+        </form>
+        {% endif %}
+
+
+        <table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br><br>
+            
+            {% for show in show %}
+            <tr>
+                <td>
+                    {{show.date}}
+                    {{show.list}}
+                    {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+                    <a href="{% url 'website:deletestdplan' show.id %}" 
+                    onclick="return confirm('Confirm Delete?')">ลบ</a>
+                    <a href="{% url 'website:updatestdplan' show.id %}" >แก้ไข</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+                <a href="{% url 'website:stdplan_csv' %}">upload csv</a>
+            {% endif %}
+            
+        </table>
+
+    </body>
+{% endblock %}

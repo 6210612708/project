@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap");
+@import url('https://rsms.me/inter/inter.css');
+/* .box-todo {
+    background-color: aliceblue;
+    border: none;
+} */
+/* @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+* {
+    font-family: 'Poppins', sans-serif;
+} */
+
+/* body{
+    background: #F4F7FD;
+    margin-top:50px;
+} */
+
+/* .card-margin {
+    margin-bottom: 1.875rem;
+} */
+
+.card {
+    border: 0;
+    box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+    -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #ffffff;
+    background-clip: border-box;
+    border: 1px solid #e6e4e9;
+    border-radius: 8px;
+}
+
+.card .card-header.no-border {
+    border: 0;
+}
+.card .card-header {
+    background: none;
+    padding: 0 0.9375rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+}
+
+
+.card-header:first-child {
+    border-radius: calc(8px - 1px) calc(8px - 1px) 0 0;
+}
+
+.widget-49 .widget-49-title-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.widget-49 .widget-49-title-wrapper .widget-49-meeting-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.widget-49 .widget-49-title-wrapper .widget-49-meeting-info .widget-49-pro-title {
+  color: #3c4142;
+  font-size: 14px;
+}
+
+.widget-49 .widget-49-title-wrapper .widget-49-meeting-info .widget-49-meeting-time {
+  color: #B1BAC5;
+  font-size: 13px;
+}
+
+.widget-49 .widget-49-meeting-points {
+  font-weight: 400;
+  font-size: 13px;
+  margin-top: .5rem;
+}
+
+.widget-49 ol {
+    text-align: center;
+    list-style-position: inside;
+}
+
+.widget-49 .card-text {
+    text-align: center;
+}
+
+.widget-49 .widget-49-meeting-points .widget-49-meeting-item {
+  display: list-item;
+  color: #727686;
+  /* text-align: center; */
+}
+
+.widget-49 .widget-49-meeting-points .widget-49-meeting-item span {
+  margin-left: .5rem;
+  /* text-align: center; */
+}
+
+.widget-49 .widget-49-meeting-action {
+  text-align: right;
+}
+
+/* .widget-49-meeting-action {
+  text-align: right;
+} */
+
+.widget-49 .widget-49-meeting-action a {
+  text-transform: uppercase;
+}
+
+.widget-49-meeting-action a {
+  text-transform: uppercase;
+}
+
+
+ body {
+    background-color:  #eee;
+  }
+  .title {
+   
+      margin-bottom: 50px;
+      text-transform: uppercase;
+  }
+  
+  .card-block {
+      font-size: 1em;
+      position: relative;
+      margin: 0;
+      padding: 1em;
+      border: none;
+      border-top: 1px solid rgba(34, 36, 38, .1);
+      box-shadow: none;
+       
+  }
+  .card {
+      font-size: 1em;
+      overflow: hidden;
+      padding: 5;
+      border: none;
+      border-radius: .28571429rem;
+      box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+      margin-top:20px;
+  }
+  
+  .carousel-indicators li {
+      border-radius: 12px;
+      width: 12px;
+      height: 12px;
+      background-color: #404040;
+  }
+  .carousel-indicators li {
+      border-radius: 12px;
+      width: 12px;
+      height: 12px;
+      background-color: #404040;
+  }
+  .carousel-indicators .active {
+      background-color: white;
+      max-width: 12px;
+      margin: 0 3px;
+      height: 12px;
+  }
+  .btn {
+    margin-top: auto;
+  }
+  /* @import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap");
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(45deg, greenyellow, dodgerblue);
+    font-family: "Sansita Swashed", cursive;
+  } */
+  .center {
+    position: relative;
+    padding: 50px 50px;
+    background: #fff;
+    border-radius: 10px;
+  }
+  .center h1 {
+    font-size: 2em;
+    border-left: 5px solid dodgerblue;
+    padding: 10px;
+    color: #000;
+    letter-spacing: 5px;
+    margin-bottom: 60px;
+    font-weight: bold;
+    padding-left: 10px;
+  }
+  .center .inputbox {
+    position: relative;
+    width: 300px;
+    height: 50px;
+    margin-bottom: 50px;
+    margin: 0 auto;
+    float: none;
+    margin-left: 44%;
+  }
+  .center .inputbox input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 2px solid #000;
+    outline: none;
+    background: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2em;
+  }
+  .center .inputbox:last-child {
+    margin-bottom: 0;
+  }
+  .center .inputbox span {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    font-size: 1em;
+    transition: 0.6s;
+    font-family: sans-serif;
+  }
+  .center .inputbox input:focus ~ span,
+  .center .inputbox input:valid ~ span {
+    transform: translateX(-13px) translateY(-35px);
+    font-size: 1em;
+  }
+  .center .inputbox [type="Submit"] {
+    width: 50%;
+    background: dodgerblue;
+    color: #fff;
+    border: #fff;
+    
+  }
+  .center .inputbox:hover [type="Submit"] {
+    background: linear-gradient(45deg, rgb(255, 47, 47), dodgerblue);
+  }
+  .icon {
+    display: inline-block;
+    width: 1em; height: 1em;
+    margin-right: .5em;
+  }

@@ -1,6 +1,9 @@
 {% extends 'base_user.html' %}
 {% load static %}
 {% block body %}  
+
+<div class="area" >
+<div class="context">
 <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
   <div class="card card0 border-0">
       <div class="row d-flex">
@@ -39,7 +42,7 @@
                       <a href="#" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                   </div>
                   <div class="row mb-3 px-3">
-                      <button type="submit" class="btn btn-blue text-center">Login</button>
+                      <button type="submit" class="btn btn-primary text-center">Login</button>
                   </div>
                   {% if messages %}
                       {% for message in messages %}
@@ -47,9 +50,9 @@
                       {% endfor %}
                   {% endif %}
                   </form>
-                  <div class="row mb-4 px-3">
-                      <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small>
-                  </div>
+                  <!-- <div class="row mb-4 px-3">
+                      <small class="font-weight-bold">Don't have an account? <a class="text-danger " href="{% url 'user:register' %}">Register</a></small>
+                  </div> -->
               </div>
           </div>
       </div>
@@ -66,4 +69,21 @@
       </div>
   </div>
 </div>
+</div>
+
+
+    <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+    </ul>
+</div >
+
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+<!-- {% extends "layout.html" %} -->
 <!DOCTYPE html>
     <html>
 
@@ -8,13 +8,7 @@
         
     </head>
     {% block content %}
-    {% if user.is_authenticated %}
-      Hi {{ user.username }}! <br>
-      {{ user.first_name }} 
-      {{ user.last_name }}<br>
-      {{ user.email }}<br>
 
-    {% endif %}
     {% endblock %}
 
 </html>
