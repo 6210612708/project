@@ -90,16 +90,16 @@ class ProfModel(models.Model):
     def __str__(self):
         return f'{self.fname} {self.lname}'
 
-class OtherModel(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE,blank=True)
-    title = models.CharField(max_length=100, null=True)
-    fname = models.CharField(max_length=100, null=True)
-    lname = models.CharField(max_length=100, null=True)
-    email = models.EmailField(max_length=100, null=True)
-    phone = models.CharField(max_length=100, null=True)
+# class OtherModel(models.Model):
+#     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE,blank=True)
+#     title = models.CharField(max_length=100, null=True)
+#     fname = models.CharField(max_length=100, null=True)
+#     lname = models.CharField(max_length=100, null=True)
+#     email = models.EmailField(max_length=100, null=True)
+#     phone = models.CharField(max_length=100, null=True)
     
-    def __str__(self):
-        return f'{self.fname} {self.lname}'
+#     def __str__(self):
+#         return f'{self.fname} {self.lname}'
 
 class StdModel(models.Model):
     MAJOR = (
@@ -147,18 +147,26 @@ class ProjectModel(models.Model):
     student2 = models.OneToOneField(StdModel, null=True, blank=True, on_delete=models.CASCADE , related_name='student2')
     status = models.CharField(max_length=200, null = True, choices=STATUS, default='ยังไม่มีนักศึกษาลงทะเบียน')
     
-
     def __str__(self):
         return self.thainame
     
-class Docproject(models.Model):
-    project = AutoOneToOneField(ProjectModel,on_delete=models.CASCADE ,primary_key=True)
-    proposal = models.FileField(upload_to=file_path,null=True,blank=True)
-    preliminary = models.FileField(upload_to=file_path,null=True,blank=True)
-    progress1 = models.FileField(upload_to=file_path,null=True,blank=True)
-    progress2 = models.FileField(upload_to=file_path,null=True,blank=True)
-    draftthesis = models.FileField(upload_to=file_path,null=True,blank=True)
-    finalthesis = models.FileField(upload_to=file_path,null=True,blank=True)
+    
+class Fileproject(models.Model):
+    TOPIC = (
+        ("proposal", "proposal"),
+        ("preliminary", "preliminary"),
+        ("progress1", "progress1"),
+        ("progress2", "progress2"),
+        ("draftthesis", "draftthesis"),
+        ("finalthesis", "finalthesis"),
+    )
+    project = models.ForeignKey(ProjectModel,on_delete=models.CASCADE,null=True)
+    topic = models.CharField(max_length=200, null = True, choices=TOPIC)
+    file = models.FileField(upload_to=file_path,null=True,blank=True)
+    date = models.DateTimeField(null=True)
+    
+    def __str__(self):
+        return f'{self.project} {self.topic}'
     
     
 class GradeModel(models.Model):

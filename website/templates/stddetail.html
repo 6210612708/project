@@ -18,8 +18,13 @@
             {% for show in show %}
             <tr>
                 <td>
+                    {{show.title}}
                     {{show.fname}}
                     {{show.lname}}
+                    {{show.stdid}}
+                    {{show.major}}
+                    {{show.email}}
+                    {{show.phone}}
                 </td>
             </tr>
             {% endfor %}

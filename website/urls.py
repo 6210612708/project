@@ -28,19 +28,30 @@ urlpatterns = [
     path('todolist/delete/<pk>', views.deletelist ,name='deletelist'),
     path('todolist/update/<pk>', views.updatelist ,name='updatelist'),
 
-    # COOR plan
+    # COORDINATOR plan
     path('coorplan/', views.coorplan ,name='coorplan'),
     path('coorplan_csv/', views.coorplan_csv ,name='coorplan_csv'),
     path('coorplan/delete/<pk>', views.deletecoorplan ,name='deletecoorplan'),
     path('coorplan/update/<pk>', views.updatecoorplan ,name='updatecoorplan'),
 
-    # # COM plan
+
+    # COMMITTEE plan
+    # path('complan/', views.complan ,name='complan'),
+    # path('complan_csv/', views.complan_csv ,name='complan_csv'),
+    # path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
+    # path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
+
+    # CONSULT plan
+
+    # COM plan
+
     path('complan/', views.complan ,name='complan'),
     path('complan_csv/', views.complan_csv ,name='complan_csv'),
     path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
     path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
 
     # CON plan
+
     path('profplan/', views.profplan ,name='profplan'),
     path('profplan_csv/', views.profplan_csv ,name='profplan_csv'),
     path('profplan/delete/<pk>', views.deleteprofplan ,name='deleteprofplan'),
@@ -72,11 +83,11 @@ urlpatterns = [
     path('prof/update/<pk>', views.updateprof ,name='updateprof'),
 
 
-    # OTHER
-    path('other/', views.other ,name='other'),
-    path('other_csv/', views.other_csv ,name='other_csv'),
-    path('other/delete/<pk>', views.deleteother ,name='deleteother'),
-    path('other/update/<pk>', views.updateother ,name='updateother'),
+    # # OTHER
+    # path('other/', views.other ,name='other'),
+    # path('other_csv/', views.other_csv ,name='other_csv'),
+    # path('other/delete/<pk>', views.deleteother ,name='deleteother'),
+    # path('other/update/<pk>', views.updateother ,name='updateother'),
 
 
     # Student
@@ -91,13 +102,17 @@ urlpatterns = [
 
     # Project
     path('project/', views.project ,name='project'),
-    path('stdproject/', views.stdproject ,name='stdproject'),
     path('project/delete/<pk>', views.deleteproject ,name='deleteproject'),
     path('project/update/<pk>', views.updateproject ,name='updateproject'),
-    path('applyproject/<pk>', views.applyproject ,name='applyproject'),
     path('statusproject/<pk>', views.statusproject ,name='statusproject'),
     path('approveproject', views.approveproject ,name='approveproject'),
+    
+    
+    # Project student
+    path('stdproject/', views.stdproject ,name='stdproject'),
+    path('applyproject/<pk>', views.applyproject ,name='applyproject'),
     path('detailproject', views.detailproject ,name='detailproject'),
+    path('docproject', views.docproject ,name='docproject'),
     
     
     path('stddetail', views.stddetail ,name='stddetail'),

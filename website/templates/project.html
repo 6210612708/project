@@ -59,9 +59,11 @@
                     {% endif %}
                     
                     {% if user.groups.all.0.name == 'consultant' %}
+                    {% if request.user == show.consult %}
                     <a href="{% url 'website:deleteproject' show.id %}" 
                     onclick="return confirm('Confirm Delete?')">ลบ</a>
                     <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
+                    {% endif %}
                     {% endif %}
                     
                 </td>

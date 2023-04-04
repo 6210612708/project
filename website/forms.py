@@ -4,8 +4,9 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from django.contrib.admin.widgets import  AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
+from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 from .models import *
+
 
 class ListModelForm(forms.ModelForm):
     class Meta:
@@ -15,6 +16,7 @@ class ListModelForm(forms.ModelForm):
             "date": AdminDateWidget(),
         }
 
+
 class CoorPlanModelForm(forms.ModelForm):
     class Meta:
         model = CoorPlanModel
@@ -22,6 +24,7 @@ class CoorPlanModelForm(forms.ModelForm):
         widgets = {
             "date": AdminDateWidget(),
         }
+
 
 class ComPlanModelForm(forms.ModelForm):
     class Meta:
@@ -31,6 +34,7 @@ class ComPlanModelForm(forms.ModelForm):
             "date": AdminDateWidget(),
         }
 
+
 class ProfPlanModelForm(forms.ModelForm):
     class Meta:
         model = ProfPlanModel
@@ -39,6 +43,7 @@ class ProfPlanModelForm(forms.ModelForm):
             "date": AdminDateWidget(),
         }
 
+
 class StdPlanModelForm(forms.ModelForm):
     class Meta:
         model = StdPlanModel
@@ -46,7 +51,7 @@ class StdPlanModelForm(forms.ModelForm):
         widgets = {
             "date": AdminDateWidget(),
         }
-   
+
 
 class NewsModelForm(forms.ModelForm):
     class Meta:
@@ -69,11 +74,11 @@ class ProfModelForm(forms.ModelForm):
         exclude = ['user']
 
 
-class OtherModelForm(forms.ModelForm):
-    class Meta:
-        model = OtherModel
-        fields = "__all__"
-        exclude = ['user']
+# class OtherModelForm(forms.ModelForm):
+#     class Meta:
+#         model = OtherModel
+#         fields = "__all__"
+#         exclude = ['user']
 
 
 class StdModelForm(forms.ModelForm):
@@ -87,25 +92,49 @@ class projectModelForm(forms.ModelForm):
     class Meta:
         model = ProjectModel
         fields = "__all__"
-        exclude = ['student1' ,'student2' ,'committee' ,'status' ,'consult']
+        exclude = ['student1', 'student2', 'committee', 'status', 'consult']
 
 # class projectForm(forms.Form):
 #     thainame = forms.CharField(max_length=100)
 #     engname = forms.CharField(max_length=100)
 #     detail = forms.CharField(max_length=500)
 
+
 class applyprojectForm(forms.ModelForm):
     class Meta:
         model = ProjectModel
-        fields = ['student1' ,'student2' ]
-        
+        fields = ['student1', 'student2']
+
+
 class coordinatorForm(forms.ModelForm):
     class Meta:
         model = CoordinatorModel
         fields = "__all__"
         
+class fileprojectForm(forms.ModelForm):
+    class Meta:
+        model = Fileproject
+        fields = "__all__"
+        exclude = ['date']
+
+
 class docprojectForm(forms.Form):
+    SELECT_FOR_TERM_ONE = (
+        ("proposal", "proposal"),
+        ("preliminary", "preliminary"),
+        ("progress1", "progress1"),
+    )
+    SELECT_FOR_TERM_TWO = (
+        ("progress2", "progress2"),
+        ("draftthesis", "draftthesis"),
+        ("finalthesis", "finalthesis"),
+
+    )
+    trem1 = forms.TypedChoiceField(choices=SELECT_FOR_TERM_ONE, coerce=str)
+    trem2 = forms.ChoiceField(choices=SELECT_FOR_TERM_TWO)
     file = forms.FileField()
+    date = forms.DateTimeField(widget=forms.HiddenInput())
+
 
 class GradeForm(forms.ModelForm):
     class Meta:
