@@ -12,6 +12,39 @@ class ListModel(models.Model):
     
     def __str__(self):
         return self.list
+    
+# =====================================================
+
+class CoorPlanModel(models.Model):
+    date = models.DateField(null=True)
+    list = models.CharField(max_length=64, null=True)
+    
+    def __str__(self):
+        return self.list
+
+class ComPlanModel(models.Model):
+    date = models.DateField(null=True)
+    list = models.CharField(max_length=64, null=True)
+    
+    def __str__(self):
+        return self.list
+
+class ProfPlanModel(models.Model):
+    date = models.DateField(null=True)
+    list = models.CharField(max_length=64, null=True)
+    
+    def __str__(self):
+        return self.list
+
+class StdPlanModel(models.Model):
+    date = models.DateField(null=True)
+    list = models.CharField(max_length=64, null=True)
+    file = models.FileField(upload_to=file_path,null=True,blank=True)
+    
+    def __str__(self):
+        return self.list
+
+# =====================================================
 
 class NewsModel(models.Model):
     title = models.CharField(max_length=64, null=True)
@@ -24,6 +57,8 @@ class NewsModel(models.Model):
     
     def __str__(self):
         return self.title
+    
+
 
 class DocModel(models.Model):
     title = models.CharField(max_length=64, null=True)
@@ -32,6 +67,9 @@ class DocModel(models.Model):
     
     def __str__(self):
         return self.title
+    
+
+# =====================================================
 
 class ProfModel(models.Model):
     MAJOR = (
@@ -49,7 +87,6 @@ class ProfModel(models.Model):
     def __str__(self):
         return f'{self.fname} {self.lname}'
 
-
 class OtherModel(models.Model):
     title = models.CharField(max_length=100, null=True)
     fname = models.CharField(max_length=100, null=True)
@@ -59,7 +96,6 @@ class OtherModel(models.Model):
     
     def __str__(self):
         return f'{self.fname} {self.lname}'
-
 
 class StdModel(models.Model):
     MAJOR = (
@@ -80,3 +116,5 @@ class StdModel(models.Model):
     
     def __str__(self):
         return f'{self.fname} {self.lname}'
+
+# =====================================================

@@ -28,6 +28,18 @@ urlpatterns = [
     path('todolist/delete/<pk>', views.deletelist ,name='deletelist'),
     path('todolist/update/<pk>', views.updatelist ,name='updatelist'),
 
+    # COOR plan
+    path('coorplan/', views.coorplan ,name='coorplan'),
+    path('coorplan_csv/', views.coorplan_csv ,name='coorplan_csv'),
+    path('coorplan/delete/<pk>', views.deletecoorplan ,name='deletecoorplan'),
+    path('coorplan/update/<pk>', views.updatecoorplan ,name='updatecoorplan'),
+
+    # COM plan
+    path('complan/', views.complan ,name='complan'),
+    path('complan_csv/', views.complan_csv ,name='complan_csv'),
+    path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
+    path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
+
     # news
     path('news/', views.news ,name='news'),
     path('news_csv/', views.news_csv ,name='news_csv'),
