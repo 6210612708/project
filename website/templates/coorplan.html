@@ -2,26 +2,10 @@
 {% load static %}
 
 {% block head %}
-<<<<<<< HEAD
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="{% url 'js-catlog' %}"></script>
-        <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <title>TodoList</title>
-    </head>
-{% endblock %}
-{% block content %}
-    <body>
-        <form method="POST" class="text-center">
-=======
 {% endblock %}
 {% block content %}
     <body>
         <!-- <form method="POST" class="text-center">
->>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
@@ -43,10 +27,6 @@
             {% endfor %}
 
             <a href="{% url 'website:coorplan_csv' %}">upload csv</a>
-<<<<<<< HEAD
-        </table>
-
-=======
         </table> -->
         {% if user.groups.all.0.name == 'consultant'%}
         <div class="row mt-5">
@@ -107,6 +87,5 @@
               </div>
             </div>
           </div>
->>>>>>> a1fb504be64f889b67acc570852c566e999ac4c9
     </body>
 {% endblock %}
