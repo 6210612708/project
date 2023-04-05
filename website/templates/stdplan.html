@@ -15,7 +15,7 @@
 {% block content %}
     <body>
         <br><br><br><br>
-        {% if user.groups.all.0.name == 'consultant' and user.groups.all.1.name == 'coordinator' %}
+        {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' %}
         <form method="POST" class="text-center">
             {% csrf_token %}
             {{ form.media }}
@@ -40,7 +40,7 @@
                 </td>
             </tr>
             {% endfor %}
-            {% if user.groups.all.0.name == 'consultant' or user.groups.all.1.name == 'coordinator' %}
+            {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' %}
                 <a href="{% url 'website:stdplan_csv' %}">upload csv</a>
             {% endif %}
             

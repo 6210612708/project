@@ -30,7 +30,7 @@
                 </ul>
               </li>
               <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
-              <li><a href="{% url 'website:stdplan' %}">เกณฑ์การตัดเกรด</a></li>
+              <li><a href="#">เกณฑ์การตัดเกรด</a></li>
               <li class="dropdown"><a href="#"><span>จัดการข้อมูลพื้นฐาน</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{% url 'website:prof' %}">อาจารย์และผู้ประสานงาน</a></li>
@@ -74,7 +74,7 @@
           <!-- ################# CONSULTANT ################## -->
           {% if user.groups.all.0.name == 'consultant' %}
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'website:conplan' %}">รายการที่ต้องทำ</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:profplan' %}">รายการที่ต้องทำ</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:project' %}">ติดตามโครงงานนักศึกษา</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:approveproject' %}">อนุมัติโครงงาน</a></li>
           <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>

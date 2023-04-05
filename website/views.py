@@ -803,9 +803,9 @@ def docproject(request):
             test = test.save()
         else:
             print("Error", form.errors)
-    # temp = ProjectModel.objects.filter(
-    #     Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
-    # show = Fileproject.objects.filter(project=temp)
+    temp = ProjectModel.objects.filter(
+        Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
+    show = Fileproject.objects.filter(project=temp)
     if temp.status == 'รออนุมัติ':
         messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
         return redirect('website:todo_csv')

@@ -37,7 +37,7 @@
 
             <a href="{% url 'website:profplan_csv' %}">upload csv</a>
         </table> -->
-        {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+        {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' %}
         <div class="row mt-5">
             <div class="col-sm-6">
               <div class="card">
@@ -74,7 +74,7 @@
                           <td>{{show.date}}</td>
                           <td>{{show.list}}</td>
                           <td>
-                            {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+                            {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' %}
                             <a href="{% url 'website:deleteprofplan' show.id %}" 
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
                             <a href="{% url 'website:updateprofplan' show.id %}" >แก้ไข</a>
@@ -85,7 +85,7 @@
                       </tbody>
                     </table>
                   </p>
-                  {% if user.groups.all.0.name == 'consultant' or user.groups.all.0.name == 'coordinator' %}
+                  {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' %}
                   <a href="{% url 'website:profplan_csv' %}">upload csv</a>
                   {% endif %}
                 </div>
