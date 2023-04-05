@@ -37,6 +37,7 @@
         
             <tr>
                 <td>
+                    {% if request.user.profmodel == show.consult %}
                     {{show.thainame}}
                     {{show.consult}}
                     {{show.detail}}
@@ -48,11 +49,9 @@
                             {{show.student1}}
                             {{show.student2}}
                         {% endif %}
-                        {% if request.user.profmodel == show.consult %}
                             <a href="{% url 'website:deleteproject' show.id %}" 
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
                             <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
-                            <a href="{% url 'website:score' show.id %}" >ประเมิน</a>
                         {% endif %}
                     
                     {% endif %}

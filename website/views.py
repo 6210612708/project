@@ -672,6 +672,7 @@ def project(request):
             test.consult = con
             fin = test.save()
             ScoreModel.objects.create(
+                subject= SubjectModel.objects.latest('id'),
                 project = test,
                 consult = con
             )
@@ -812,9 +813,15 @@ def subject(request):
         else:
             print("Error", form.errors)
     form = SubjectForm()
-    show = SubjectModel.objects.all()
-    context = {'form': form , 'show':show}
+    show = SubjectModel.objects.latest('id')
+    all = SubjectModel.objects.all().order_by('-id')
+    context = {'form': form , 'show':show ,'all':all}
     return render(request, 'subject.html', context)
+
+def deletesubject(request, pk):
+    data = SubjectModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:subject')
 
 def score(request ,pk):
     list = ScoreModel.objects.get(id=pk)

@@ -34,15 +34,26 @@
             </div>
           </div>
 
-
+        ปัจจุบัน
         <table>
-            {% for show in show %}
+           
             <tr>
                 <td>
                     {{show.subject}} {{show.year}} {{show.startterm}} {{show.endterm}}
-                    <a href="{% url 'website:deletestd' show.id %}" 
+                </td>
+            </tr>
+            
+        </table>
+
+
+        ประวัติปีการศึกษา
+        <table>
+            {% for all in all %}
+            <tr>
+                <td>
+                    {{all.subject}} {{all.year}} {{all.startterm}} {{all.endterm}}
+                    <a href="{% url 'website:deletesubject' all.id %}" 
                     onclick="return confirm('Confirm Delete?')">ลบ</a>
-                    <a href="{% url 'website:updatestd' show.id %}" >แก้ไข</a>
                 </td>
             </tr>
             {% endfor %}
