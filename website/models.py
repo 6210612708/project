@@ -152,8 +152,11 @@ class ProjectModel(models.Model):
     engname = models.CharField(max_length=100, null=True)
     detail = models.CharField(max_length=500, null=True)
     consult = models.ForeignKey(
-        ProfModel, on_delete=models.CASCADE, null=True, blank=True)
-    committee = models.CharField(max_length=100, null=True, blank=True)
+        ProfModel, on_delete=models.CASCADE, null=True, blank=True, related_name='consult')
+    committee1 = models.ForeignKey(
+        ProfModel, on_delete=models.CASCADE, null=True, blank=True, related_name='committee1')
+    committee2 = models.ForeignKey(
+        ProfModel, on_delete=models.CASCADE, null=True, blank=True, related_name='committee2')
     student1 = models.OneToOneField(
         StdModel, null=True, blank=True, on_delete=models.CASCADE, related_name='student1')
     student2 = models.OneToOneField(
@@ -192,6 +195,9 @@ class SubjectModel(models.Model):
     year = models.IntegerField(null=True ,default=current_year)
     startterm = models.DateField(null=True)
     endterm = models.DateField(null=True)
+    
+    def __str__(self):
+        return f'{self.subject} {self.year}'
 
 
 class ScoreModel(models.Model):

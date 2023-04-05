@@ -117,8 +117,12 @@ urlpatterns = [
     
     path('stddetail', views.stddetail ,name='stddetail'),
     
+    
+    # grade score subject
     path('grade', views.grade ,name='grade'),
-
+    path('subject/', views.subject ,name='subject'),
+    path('score/<pk>', views.score ,name='score'),
+    path('evaluate', views.evaluate ,name='evaluate'),
 
 
 ]

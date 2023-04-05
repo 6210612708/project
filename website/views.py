@@ -804,4 +804,35 @@ def grade(request):
     context = {'form': form}
     return render(request, 'grade.html', context)
 
+def subject(request):
+    if request.method == "POST":
+        form = SubjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = SubjectForm()
+    show = SubjectModel.objects.all()
+    context = {'form': form , 'show':show}
+    return render(request, 'subject.html', context)
+
+def score(request ,pk):
+    list = ScoreModel.objects.get(id=pk)
+    show = ScoreModel.objects.filter(id=pk)
+    form = ScoreForm(instance=list)
+    if request.method == 'POST':
+        form = ScoreForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('website:project')
+        else:
+            print("Error", form.errors)
+    context = {'form': form , 'show':show}
+    return render(request, 'score.html', context)
+
+def evaluate(request):
+    show = ProjectModel.objects.filter(consult =request.user.profmodel)
+    com = ProjectModel.objects.filter(committee =request.user.profmodel)
+    context = {'show':show ,'com':com}
+    return render(request, 'evaluate.html', context)
 

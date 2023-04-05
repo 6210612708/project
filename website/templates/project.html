@@ -2,15 +2,7 @@
 {% load static %}
 
 {% block head %}
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="{% url 'js-catlog' %}"></script>
-        <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <title>project</title>
-    </head>
+
 {% endblock %}
 {% block content %}
     <body>
@@ -56,16 +48,14 @@
                             {{show.student1}}
                             {{show.student2}}
                         {% endif %}
-                    {% endif %}
+                        {% if request.user.profmodel == show.consult %}
+                            <a href="{% url 'website:deleteproject' show.id %}" 
+                            onclick="return confirm('Confirm Delete?')">ลบ</a>
+                            <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
+                            <a href="{% url 'website:score' show.id %}" >ประเมิน</a>
+                        {% endif %}
                     
-                    {% if user.groups.all.0.name == 'consultant' %}
-                    {% if request.user == show.consult %}
-                    <a href="{% url 'website:deleteproject' show.id %}" 
-                    onclick="return confirm('Confirm Delete?')">ลบ</a>
-                    <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
                     {% endif %}
-                    {% endif %}
-                    
                 </td>
             </tr>
             {% endfor %}

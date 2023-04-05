@@ -140,3 +140,21 @@ class GradeForm(forms.ModelForm):
     class Meta:
         model = GradeModel
         fields = "__all__"
+
+
+class SubjectForm(forms.ModelForm):
+    class Meta:
+        model = SubjectModel
+        fields = "__all__"
+        widgets = {
+            "startterm": AdminDateWidget(),
+            "endterm": AdminDateWidget(),
+        }
+        
+class ScoreForm(forms.ModelForm):
+    class Meta:
+        model = ScoreModel
+        fields = "__all__"
+        exclude = ['subject', 'std1', 'std2', 'consult', 'project']
+
+
