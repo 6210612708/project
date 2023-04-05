@@ -330,6 +330,11 @@ def updateprof(request, pk):
 
 
 # =========== Student ==========================================
+def stddetail(request):
+    show = StdModel.objects.filter(
+        Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
+    context = {'show': show}
+    return render(request, 'stddetail.html', context)
 
 def std(request):
     if request.method == "POST":
@@ -727,7 +732,7 @@ def applyproject(request, pk):
         if form.is_valid():
             list.status = 'รอการอนุมัติ'
             form.save()
-            ScoreModel.objects.update(
+            ScoreModel.objects.filter(project=list).update(
                 std1 = list.student1,
                 std2 = list.student2
             )
@@ -754,50 +759,6 @@ def detailproject(request):
         return redirect('website:stdproject')
     else:
        return render(request, 'detailproject.html', context)
-
-
-# def coordinator(request ,pk):
-#     show = ProfModel.objects.all()
-
-#     user = User.objects.get(username = 'username')
-#     user.groups.add(name='coordinator')
-#     if request.method == "POST":
-#         form = coordinatorForm(request.POST)
-#         if form.is_valid():
-#             # user = User.objects.get(username = )
-#             print('pk')
-#             user = form.save()
-#             group = Group.objects.get(name='coordinator')
-#             # test = User.objects.get(user=request.user.coordinatormodel)
-#             user.groups.add(group)
-#             group.save()
-#         else:
-#             print("Error", form.errors)
-#     form = coordinatorForm()
-#     show = CoordinatorModel.objects.all()
-#     # 'form':form , 'show':show
-#     context = {'show':show , }
-#     return render(request,'coordinator.html')
-
-
-def stddetail(request):
-    show = StdModel.objects.filter(
-        Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
-    context = {'show': show}
-    return render(request, 'stddetail.html', context)
-
-
-def grade(request):
-    if request.method == "POST":
-        form = GradeForm(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            print("Error", form.errors)
-    form = GradeForm()
-    context = {'form': form}
-    return render(request, 'grade.html', context)
-
 
 
 def docproject(request):
@@ -827,5 +788,20 @@ def docproject(request):
     else:
         messages.error(request, 'กรุณาลงทะเบียนโครงงาน')
         return render(request, 'docproject.html')
-#     context = {list :'list'}
-#     return render(request,'update_project.html' ,context)
+
+
+
+# =========== grade score subject==========================================
+
+def grade(request):
+    if request.method == "POST":
+        form = GradeForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = GradeForm()
+    context = {'form': form}
+    return render(request, 'grade.html', context)
+
+
