@@ -831,8 +831,9 @@ def score(request ,pk):
     return render(request, 'score.html', context)
 
 def evaluate(request):
-    show = ProjectModel.objects.filter(consult =request.user.profmodel)
-    com = ProjectModel.objects.filter(committee =request.user.profmodel)
+    show = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ')
+    com = ProjectModel.objects.filter(
+        Q(committee1=request.user.profmodel) | Q(committee2=request.user.profmodel) ,status ='อนุมัติ')
     context = {'show':show ,'com':com}
     return render(request, 'evaluate.html', context)
 
