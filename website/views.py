@@ -794,24 +794,31 @@ def grade(request):
 
 
 def docproject(request):
-    form = fileprojectForm()
-    if request.method == "POST":
-        form = fileprojectForm(request.POST , request.FILES)
-        if form.is_valid():
-            test = form.save(commit=False)
-            test.date = datetime.now()
-            test = test.save()
-        else:
-            print("Error", form.errors)
     temp = ProjectModel.objects.filter(
+        Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
+    if temp :
+        proj = ProjectModel.objects.filter(
         Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
-    show = Fileproject.objects.filter(project=temp)
-    if temp.status == 'รออนุมัติ':
-        messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
-        return redirect('website:todo_csv')
-    else:
-        context = {'form':form ,'show':show }
+        if proj.status == 'รอการอนุมัติ':
+            messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
+            return render(request, 'docproject.html')
+        else:
+            form = fileprojectForm(instance=proj)
+            if request.method == "POST":
+                form = fileprojectForm(request.POST , request.FILES)
+                if form.is_valid():
+                    test = form.save(commit=False)
+                    test.date = datetime.now()
+                    test = test.save()
+                else:
+                    print("Error", form.errors)
+        form = fileprojectForm(initial={'project': proj})
+        show = Fileproject.objects.filter(project=proj)
+        context = {'form':form 
+                   ,'show':show }
         return render(request, 'docproject.html', context)
-
+    else:
+        messages.error(request, 'กรุณาลงทะเบียนโครงงาน')
+        return render(request, 'docproject.html')
 #     context = {list :'list'}
 #     return render(request,'update_project.html' ,context)
