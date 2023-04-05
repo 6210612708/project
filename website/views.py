@@ -666,15 +666,18 @@ def project(request):
             test = form.save(commit=False)
             test.consult = con
             fin = test.save()
-
+            ScoreModel.objects.create(
+                project = test,
+                consult = con
+            )
         else:
             print("Error", form.errors)
+            
     form = projectModelForm()
     show = ProjectModel.objects.all()
-    test = ProjectModel.objects.all()
-    x = 0
 
-    context = {'form': form, 'show': show, 'x': x}
+
+    context = {'form': form, 'show': show}
     return render(request, 'project.html', context)
 
 
@@ -724,6 +727,10 @@ def applyproject(request, pk):
         if form.is_valid():
             list.status = 'รอการอนุมัติ'
             form.save()
+            ScoreModel.objects.update(
+                std1 = list.student1,
+                std2 = list.student2
+            )
             return redirect('website:detailproject')
     return render(request, 'applyproject.html', {'form': form})
 
