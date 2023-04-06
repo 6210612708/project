@@ -7,26 +7,57 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="{% url 'js-catlog' %}"></script>
         <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
         <title>project</title>
     </head>
 {% endblock %}
 {% block content %}
     <body>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+       
+        <div class="row mt-4 center">
+         <div class="col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">ข้อมูลโครงงาน</h5>
+                  <p class="card-text">
+                    <table class="table table-borderless">
+                      <thead>
+                        <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">consultant</th>
+                          <th scope="col">Detail</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for show in show %}
+                        <tr>
+                          <td>{{show.thainame}}</td>
+                          <td>{{show.consult}}</td>
+                          <td>{{show.detail}}</td>
+                        {% if user.groups.all.0.name == 'student' %}
+                            {% if show.status == 'รอการอนุมัติ' %}
+                                <td>{{show.status}}</td>
+                                <td>{{show.student1}}</td>
+                                <td>{{show.student2}}</td>
+                            {% else %}
+                                {% if x == 0 %}
+                                    <td>
+                                        <a href="{% url 'website:applyproject' show.id%}" >ลงทะเบียน</a>
+                                {% endif %}
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </p>
+                </div>
+              </div>
+            </div>
 
-        <table>
+        <!-- <table>
             {% for show in show %}
         
             <tr>
@@ -50,7 +81,7 @@
             </tr>
             {% endfor %}
 
-        </table>
-
+        </table> -->
+</div>
     </body>
 {% endblock %}
