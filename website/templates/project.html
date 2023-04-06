@@ -67,6 +67,10 @@
                         {{show.student1}}
                         {{show.student2}}
                     {% endif %}
+                    {% if show.committee1 != none %}
+                        {{show.committee1}}
+                        {{show.committee2}}
+                    {% endif %}
                         <a href="{% url 'website:committee' show.id %}" >เลือกกรรมการ</a>
                     
 
