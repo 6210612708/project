@@ -66,7 +66,7 @@
         </table>
         {% endif %}
         
-        {% comment %} {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+{% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
 เลือกกรรมการสำหรับผู้ประสานงาน
         <table>
             {% for show in show %}
@@ -94,6 +94,6 @@
             {% endfor %}
 
         </table>
-{% endif %} {% endcomment %}
+{% endif %}
     </body>
 {% endblock %}

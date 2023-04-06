@@ -675,7 +675,8 @@ def project(request):
     return render(request, 'project.html', context)
 
 def reportproject(request ,pk):
-    show = Fileproject.objects.filter(id=pk)
+    temp = ProjectModel.objects.filter(id=pk).get()
+    show = Fileproject.objects.filter(project=temp).order_by("-id")
     context = {'show': show}
     return render(request, 'reportproject.html', context)
 
@@ -783,7 +784,7 @@ def docproject(request):
                 else:
                     print("Error", form.errors)
         form = fileprojectForm(initial={'project': proj})
-        show = Fileproject.objects.filter(project=proj)
+        show = Fileproject.objects.filter(project=proj).order_by("-id")
         context = {'form':form 
                    ,'show':show }
         return render(request, 'docproject.html', context)
