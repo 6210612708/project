@@ -17,7 +17,7 @@ from django.contrib.auth.models import Group
 def index(request):
     return render(request, 'index.html')
 
-# =========== TODOLIST ==========================================
+# =========== todolist ==========================================
 
 # @allowed_users(allowed_roles=['admin'])
 
@@ -80,7 +80,7 @@ def updatelist(request, pk):
     return render(request, 'update_todo.html', {'form': form})
 
 
-# =========== NEWS ==========================================
+# =========== news ==========================================
 
 
 def news(request):
@@ -146,7 +146,7 @@ def news_detail(request, pk):
     context = {"new": new}
     return render(request, "news_detail.html", context)
 
-# =========== Document ==========================================
+# =========== document ==========================================
 
 
 def document(request):
@@ -175,7 +175,7 @@ def deletedoc(request, pk):
     return redirect('website:document')
 
 
-# =========== Prof ==========================================
+# =========== consultant coordinator ==========================================
 
 def deletecoor(request, pk):
     data = CoordinatorModel.objects.get(id=pk)
@@ -329,7 +329,12 @@ def updateprof(request, pk):
 #     return render(request, 'update_other.html', {'form': form})
 
 
-# =========== Student ==========================================
+# =========== student ==========================================
+def stddetail(request):
+    show = StdModel.objects.filter(
+        Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
+    context = {'show': show}
+    return render(request, 'stddetail.html', context)
 
 def std(request):
     if request.method == "POST":
@@ -394,7 +399,7 @@ def updatestd(request, pk):
     return render(request, 'update_std.html', {'form': form})
 
 
-# =========== PLAN for Coordinator ==========================================
+# =========== PLAN for coordinator ==========================================
 
 def coorplan(request):
     if request.method == "POST":
@@ -455,65 +460,65 @@ def updatecoorplan(request, pk):
     return render(request, 'update_coorplan.html', {'form': form})
 
 
-# # =========== PLAN for Committee ==========================================
+# # =========== PLAN for committee ==========================================
 
-def complan(request):
-    if request.method == "POST":
-        form = ComPlanModelForm(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            print("Error", form.errors)
-    form = ComPlanModelForm()
-    show = ComPlanModel.objects.all()
+# def complan(request):
+#     if request.method == "POST":
+#         form = ComPlanModelForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#         else:
+#             print("Error", form.errors)
+#     form = ComPlanModelForm()
+#     show = ComPlanModel.objects.all()
 
-    context = {'form': form, 'show': show}
-    return render(request, 'complan.html', context)
-
-
-def complan_csv(request):
-    show = ComPlanModel.objects.all()
-    if request.method == "GET":
-        context = {'show': show}
-        return render(request, 'complan_csv.html', context)
-
-    if request.method == "POST":
-        csv_file = request.FILES['file']
-
-    if not csv_file.name.endswith('.csv'):
-        messages.error(request, 'Please upload only CSV file')
-        return redirect('website:complan_csv')
-
-    data_set = csv_file.read().decode('UTF-8')
-    io_string = io.StringIO(data_set)
-    next(io_string)
-
-    for column in csv.reader(io_string, delimiter=',', quotechar='|'):
-        _, created = ComPlanModel.objects.update_or_create(
-            date=column[0],
-            list=column[1],
-        )
-    context = {
-        'notify': 'CSV file is already upload', 'show': show
-    }
-    return render(request, 'complan_csv.html', context)
+#     context = {'form': form, 'show': show}
+#     return render(request, 'complan.html', context)
 
 
-def deletecomplan(request, pk):
-    data = ComPlanModel.objects.get(id=pk)
-    data.delete()
-    return redirect('website:complan')
+# def complan_csv(request):
+#     show = ComPlanModel.objects.all()
+#     if request.method == "GET":
+#         context = {'show': show}
+#         return render(request, 'complan_csv.html', context)
+
+#     if request.method == "POST":
+#         csv_file = request.FILES['file']
+
+#     if not csv_file.name.endswith('.csv'):
+#         messages.error(request, 'Please upload only CSV file')
+#         return redirect('website:complan_csv')
+
+#     data_set = csv_file.read().decode('UTF-8')
+#     io_string = io.StringIO(data_set)
+#     next(io_string)
+
+#     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
+#         _, created = ComPlanModel.objects.update_or_create(
+#             date=column[0],
+#             list=column[1],
+#         )
+#     context = {
+#         'notify': 'CSV file is already upload', 'show': show
+#     }
+#     return render(request, 'complan_csv.html', context)
 
 
-def updatecomplan(request, pk):
-    list = ComPlanModel.objects.get(id=pk)
-    form = ComPlanModelForm(instance=list)
-    if request.method == 'POST':
-        form = ComPlanModelForm(request.POST, instance=list)
-        if form.is_valid():
-            form.save()
-            return redirect('website:complan')
-    return render(request, 'update_complan.html', {'form':form } )
+# def deletecomplan(request, pk):
+#     data = ComPlanModel.objects.get(id=pk)
+#     data.delete()
+#     return redirect('website:complan')
+
+
+# def updatecomplan(request, pk):
+#     list = ComPlanModel.objects.get(id=pk)
+#     form = ComPlanModelForm(instance=list)
+#     if request.method == 'POST':
+#         form = ComPlanModelForm(request.POST, instance=list)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('website:complan')
+#     return render(request, 'update_complan.html', {'form':form } )
 
 
 
@@ -639,7 +644,7 @@ def updatestdplan(request, pk):
     return render(request, 'update_stdplan.html', {'form': form})
 
 
-# =========== Project ==========================================
+# =========== project ==========================================
 
 def stdproject(request):
     test = ProjectModel.objects.all()
@@ -666,15 +671,19 @@ def project(request):
             test = form.save(commit=False)
             test.consult = con
             fin = test.save()
-
+            ScoreModel.objects.create(
+                subject= SubjectModel.objects.latest('id'),
+                project = test,
+                consult = con
+            )
         else:
             print("Error", form.errors)
+            
     form = projectModelForm()
     show = ProjectModel.objects.all()
-    test = ProjectModel.objects.all()
-    x = 0
 
-    context = {'form': form, 'show': show, 'x': x}
+
+    context = {'form': form, 'show': show}
     return render(request, 'project.html', context)
 
 
@@ -714,7 +723,7 @@ def updateproject(request, pk):
     # return render(request,'update_project.html' ,context)
 
 
-# =========== apply Project ==========================================
+# =========== apply project ==========================================
 
 def applyproject(request, pk):
     list = ProjectModel.objects.get(id=pk)
@@ -724,6 +733,10 @@ def applyproject(request, pk):
         if form.is_valid():
             list.status = 'รอการอนุมัติ'
             form.save()
+            ScoreModel.objects.filter(project=list).update(
+                std1 = list.student1,
+                std2 = list.student2
+            )
             return redirect('website:detailproject')
     return render(request, 'applyproject.html', {'form': form})
 
@@ -749,35 +762,81 @@ def detailproject(request):
        return render(request, 'detailproject.html', context)
 
 
-# def coordinator(request ,pk):
-#     show = ProfModel.objects.all()
+def docproject(request):
+    temp = ProjectModel.objects.filter(
+        Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
+    if temp :
+        proj = ProjectModel.objects.filter(
+        Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
+        if proj.status == 'รอการอนุมัติ':
+            messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
+            return render(request, 'docproject.html')
+        else:
+            form = fileprojectForm(instance=proj)
+            if request.method == "POST":
+                form = fileprojectForm(request.POST , request.FILES)
+                if form.is_valid():
+                    test = form.save(commit=False)
+                    test.date = datetime.now()
+                    test = test.save()
+                else:
+                    print("Error", form.errors)
+        form = fileprojectForm(initial={'project': proj})
+        show = Fileproject.objects.filter(project=proj)
+        context = {'form':form 
+                   ,'show':show }
+        return render(request, 'docproject.html', context)
+    else:
+        messages.error(request, 'กรุณาลงทะเบียนโครงงาน')
+        return render(request, 'docproject.html')
 
-#     user = User.objects.get(username = 'username')
-#     user.groups.add(name='coordinator')
-#     if request.method == "POST":
-#         form = coordinatorForm(request.POST)
-#         if form.is_valid():
-#             # user = User.objects.get(username = )
-#             print('pk')
-#             user = form.save()
-#             group = Group.objects.get(name='coordinator')
-#             # test = User.objects.get(user=request.user.coordinatormodel)
-#             user.groups.add(group)
-#             group.save()
-#         else:
-#             print("Error", form.errors)
-#     form = coordinatorForm()
-#     show = CoordinatorModel.objects.all()
-#     # 'form':form , 'show':show
-#     context = {'show':show , }
-#     return render(request,'coordinator.html')
+
+# ===========subject==========================================
+
+def subject(request):
+    if request.method == "POST":
+        form = SubjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = SubjectForm()
+    all = SubjectModel.objects.all()
+    if all :
+        show = SubjectModel.objects.latest('id')
+        context = {'form': form , 'show':show ,'all':all}
+    else:
+        context = {'form': form ,'all':all}
+    return render(request, 'subject.html', context)
+
+def deletesubject(request, pk):
+    data = SubjectModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:subject')
 
 
-def stddetail(request):
-    show = StdModel.objects.filter(
-        Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
-    context = {'show': show}
-    return render(request, 'stddetail.html', context)
+# =========== grade score==========================================
+
+def score(request ,pk):
+    list = ScoreModel.objects.get(id=pk)
+    show = ScoreModel.objects.filter(id=pk)
+    form = ScoreForm(instance=list)
+    if request.method == 'POST':
+        form = ScoreForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+            return redirect('website:project')
+        else:
+            print("Error", form.errors)
+    context = {'form': form , 'show':show}
+    return render(request, 'score.html', context)
+
+def evaluate(request):
+    show = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ')
+    com = ProjectModel.objects.filter(
+        Q(committee1=request.user.profmodel) | Q(committee2=request.user.profmodel) ,status ='อนุมัติ')
+    context = {'show':show ,'com':com}
+    return render(request, 'evaluate.html', context)
 
 
 def grade(request):
@@ -792,26 +851,16 @@ def grade(request):
     return render(request, 'grade.html', context)
 
 
+# ################# commiteee ###########################
 
-def docproject(request):
-    form = fileprojectForm()
-    if request.method == "POST":
-        form = fileprojectForm(request.POST , request.FILES)
+def committee(request, pk):
+    list = ProjectModel.objects.get(id=pk)
+    form = CommitteeForm(instance=list)
+    if request.method == 'POST':
+        form = CommitteeForm(request.POST, instance=list)
         if form.is_valid():
             test = form.save(commit=False)
-            test.date = datetime.now()
             test = test.save()
-        else:
-            print("Error", form.errors)
-    # temp = ProjectModel.objects.filter(
-    #     Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
-    # show = Fileproject.objects.filter(project=temp)
-    if temp.status == 'รออนุมัติ':
-        messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
-        return redirect('website:todo_csv')
-    else:
-        context = {'form':form ,'show':show }
-        return render(request, 'docproject.html', context)
-
-#     context = {list :'list'}
-#     return render(request,'update_project.html' ,context)
+            return redirect('website:project')
+    context = {'form': form , 'list' :list}
+    return render(request, 'committee.html', context)

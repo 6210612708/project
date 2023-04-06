@@ -10,7 +10,7 @@
         <ul>
            <!-- ################# ADMIN ################## -->
            {% if user.groups.all.0.name == 'admin' %}
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:todolist' %}">รายการที่ต้องทำ</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:news' %}">ประกาศข่าวสาร</a></li>
           <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-down"></i></a>
@@ -30,13 +30,12 @@
                 </ul>
               </li>
               <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
-              <li><a href="{% url 'website:stdplan' %}">เกณฑ์การตัดเกรด</a></li>
+              <li><a href="{% url 'website:subject' %}">ปีการศึกษา</a></li>
+              <li><a href="#">เกณฑ์การตัดเกรด</a></li>
               <li class="dropdown"><a href="#"><span>จัดการข้อมูลพื้นฐาน</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">อาจารย์</a></li>
-                  <li><a href="#">ผู้ใช้งานนอกภาควิชา</a></li>
-                  <li><a href="#">ผู้ประสานงาน</a></li>
-                  <li><a href="#">นักศึกษา</a></li>
+                  <li><a href="{% url 'website:prof' %}">อาจารย์และผู้ประสานงาน</a></li>
+                  <li><a href="{% url 'website:std' %}">นักศึกษา</a></li>
                 </ul>
               </li>
             </ul>
@@ -46,13 +45,12 @@
           {% endif %}
 
           <!-- ################# COORDINATOR ################## -->
-          {% if user.groups.all.0.name == 'coordinator' %}
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'website:news' %}">รายการที่ต้องทำ</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'website:coorplan' %}">ประกาศข่าวสาร</a></li>
+          {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+          <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:coorplan' %}">รายการที่ต้องทำ</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:news' %}">ประกาศข่าวสาร</a></li>
           <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <!-- <li><a href="{% url 'website:coorplan' %}">ผู้ประสานงาน</a></li>               -->
               <li><a href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
               <li><a href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
             </ul>
@@ -60,31 +58,25 @@
           <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'website:document' %}">อัพโหลดเอกสาร</a></li>
-              <li class="dropdown"><a href="#"><span>คะแนนโครงงาน</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">ปีการศึกษาที่ 1</a></li>
-                  <li><a href="#">ปีการศึกษาที่ 2</a></li>
-                </ul>
-              </li>
               <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
               <li><a href="{% url 'website:stdplan' %}">เกณฑ์การตัดเกรด</a></li>
+              <li><a href="{% url 'website:approveproject' %}">อนุมัติโครงงาน</a></li>
               <li><a href="#">เอกสารโครงงาน</a></li>
+              <li><a href="{% url 'website:evaluate' %}">ประเมินโครงงาน</a></li>
             </ul>
           </li>
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
         {% endif %}
 
           <!-- ################# CONSULTANT ################## -->
-          {% if user.groups.all.0.name == 'consultant' %}
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'website:complan' %}">รายการที่ต้องทำ</a></li>
+          {% if user.groups.all.0.name == 'consultant' and user.groups.all.1.name != 'coordinator'%}
+          <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'website:profplan' %}">รายการที่ต้องทำ</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:project' %}">ติดตามโครงงานนักศึกษา</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:approveproject' %}">อนุมัติโครงงาน</a></li>
           <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">แก้ไขข้อมูลโครงงาน</a></li>
-              <li><a href="#">ประเมินโครงงาน</a></li>
-              <li><a href="#">กรรมการประเมินโครงงาน</a></li>
+              <li><a href="{% url 'website:evaluate' %}">ประเมินโครงงาน</a></li>
             </ul>
           </li>
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
@@ -98,7 +90,8 @@
           <li><a class="nav-link scrollto " href="{% url 'website:approveproject' %}">อนุมัติโครงงาน</a></li>
           <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">ข้อมูลนักศึกษา</a></li>
+              <li><a href="{% url 'website:docproject' %}">เอกสารโครงงาน</a></li>
+              <li><a href="{% url 'website:stddetail' %}">ข้อมูลนักศึกษา</a></li>
             </ul>
           </li>
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>

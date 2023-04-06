@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+{% block content %}
+    <body>
+        {% for show in show %}
+            <tr>
+                <td>
+                    {{show.subject}} {{show.std1}} {{show.std2}} {{show.consult}} {{show.project}}
+                </td>
+            </tr>
+            {% endfor %}
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                   
+                        {{ form.media }}
+                        {{ form.as_p }}
+   
+                        <input type="submit" name="Submit" id="submit" value="save">
+                    <div class="text-center">
+                    
+                </form>
+
+    </body>
+{% endblock %}

@@ -16,4 +16,8 @@ admin.site.register(ProjectModel)
 admin.site.register(CoordinatorModel)
 admin.site.register(GradeModel)
 admin.site.register(Fileproject)
+admin.site.register(SubjectModel)
+admin.site.register(ScoreModel)
+
+
 

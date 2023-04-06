@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% url 'js-catlog' %}"></script>
+    <script src="{% static '/admin/js/core.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+{% endblock %}
+{% block content %}
+    <body>
+        <div class="card mt-5">
+            <h5 class="card-header">Upload CSV</h5>
+            <div class="card-body">
+            <p class="card-text">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label class="addcontent-blog">
+                        {{ form.media }}
+                        {{ form.as_p }}
+                        </label>
+                        <input type="submit" name="Submit" id="submit">
+                    <div class="text-center">
+                    
+                </form>
+            </p>
+            </div>
+          </div>
+
+        ปัจจุบัน
+        <table>
+           
+            <tr>
+                <td>
+                    {{show.subject}} {{show.year}} {{show.startterm}} {{show.endterm}}
+                </td>
+            </tr>
+            
+        </table>
+
+
+        ประวัติปีการศึกษา
+        <table>
+            {% for all in all %}
+            <tr>
+                <td>
+                    {{all.subject}} {{all.year}} {{all.startterm}} {{all.endterm}}
+                    <a href="{% url 'website:deletesubject' all.id %}" 
+                    onclick="return confirm('Confirm Delete?')">ลบ</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </body>
+{% endblock %}

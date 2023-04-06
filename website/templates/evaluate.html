@@ -1,0 +1,42 @@
+{% for show in show %}
+    ที่ปรึกษา
+    <br>
+    <tr>
+        <td>
+            {{show.thainame}}
+            {{show.consult}}
+            {% if user.groups.all.0.name == 'consultant' %}
+                {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                    {{show.status}}
+                {% else %}
+                    {{show.status}}
+                    {{show.student1}}
+                    {{show.student2}}
+                {% endif %}
+                <a href="{% url 'website:score' show.id %}" >ประเมิน</a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
+<br>
+{% for show in com %}
+    กรรมการ
+    <br>
+    <tr>
+        <td>
+            {{show.thainame}}
+            {{show.consult}}
+            {% if user.groups.all.0.name == 'consultant' %}
+                {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                    {{show.status}}
+                {% else %}
+                    {{show.status}}
+                    {{show.student1}}
+                    {{show.student2}}
+                {% endif %}
+                <a href="{% url 'website:score' show.id %}" >ประเมิน</a>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
+
