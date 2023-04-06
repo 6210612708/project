@@ -41,15 +41,6 @@ urlpatterns = [
     # path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
     # path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
 
-    # CONSULT plan
-
-    # COM plan
-
-    path('complan/', views.complan ,name='complan'),
-    path('complan_csv/', views.complan_csv ,name='complan_csv'),
-    path('complan/delete/<pk>', views.deletecomplan ,name='deletecomplan'),
-    path('complan/update/<pk>', views.updatecomplan ,name='updatecomplan'),
-
     # CON plan
 
     path('profplan/', views.profplan ,name='profplan'),
@@ -124,6 +115,8 @@ urlpatterns = [
     path('subject/delete/<pk>', views.deletesubject ,name='deletesubject'),
     path('score/<pk>', views.score ,name='score'),
     path('evaluate', views.evaluate ,name='evaluate'),
+    
+    path('committee/<pk>', views.committee ,name='committee'),
 
 
 ]

@@ -11,7 +11,7 @@
 {% block content %}
     <body>
         <div class="card mt-5">
-            <h5 class="card-header">Upload CSV</h5>
+            <h5 class="card-header">{{list.thainame}}</h5>
             <div class="card-body">
             <p class="card-text">
                 <form method="POST" enctype="multipart/form-data">
@@ -27,31 +27,5 @@
             </p>
             </div>
           </div>
-
-        ปัจจุบัน
-        <table>
-           
-            <tr>
-                <td>
-                    {{show.subject}} {{show.year}} {{show.startterm}} {{show.endterm}}
-                </td>
-            </tr>
-            
-        </table>
-
-
-        ประวัติปีการศึกษา
-        <table>
-            {% for all in all %}
-            <tr>
-                <td>
-                    {{all.subject}} {{all.year}} {{all.startterm}} {{all.endterm}}
-                    <a href="{% url 'website:deletesubject' all.id %}" 
-                    onclick="return confirm('Confirm Delete?')">ลบ</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-
     </body>
 {% endblock %}

@@ -26,13 +26,13 @@ class CoorPlanModelForm(forms.ModelForm):
         }
 
 
-class ComPlanModelForm(forms.ModelForm):
-    class Meta:
-        model = ComPlanModel
-        fields = "__all__"
-        widgets = {
-            "date": AdminDateWidget(),
-        }
+# class ComPlanModelForm(forms.ModelForm):
+#     class Meta:
+#         model = ComPlanModel
+#         fields = "__all__"
+#         widgets = {
+#             "date": AdminDateWidget(),
+#         }
 
 
 class ProfPlanModelForm(forms.ModelForm):
@@ -158,3 +158,8 @@ class ScoreForm(forms.ModelForm):
         exclude = ['subject', 'std1', 'std2', 'consult', 'project']
 
 
+class CommitteeForm(forms.ModelForm):
+    class Meta:
+        model = ProjectModel
+        fields = ['committee1', 'committee2']
+        

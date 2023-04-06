@@ -37,11 +37,11 @@
         
             <tr>
                 <td>
+                    {% if user.groups.all.0.name == 'consultant' and user.groups.all.1.name != 'coordinator'%}
                     {% if request.user.profmodel == show.consult %}
                     {{show.thainame}}
                     {{show.consult}}
                     {{show.detail}}
-                    {% if user.groups.all.0.name == 'consultant' %}
                         {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
                             {{show.status}}
                         {% else %}
@@ -53,10 +53,24 @@
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
                             <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
                         {% endif %}
-                    
                     {% endif %}
                 </td>
             </tr>
+            {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+                {{show.thainame}}
+                {{show.consult}}
+                {{show.detail}}
+                    {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                        {{show.status}}
+                    {% else %}
+                        {{show.status}}
+                        {{show.student1}}
+                        {{show.student2}}
+                    {% endif %}
+                        <a href="{% url 'website:committee' show.id %}" >เลือกกรรมการ</a>
+                    
+
+            {% endif %}
             {% endfor %}
 
         </table>

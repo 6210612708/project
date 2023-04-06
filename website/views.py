@@ -17,7 +17,7 @@ from django.contrib.auth.models import Group
 def index(request):
     return render(request, 'index.html')
 
-# =========== TODOLIST ==========================================
+# =========== todolist ==========================================
 
 # @allowed_users(allowed_roles=['admin'])
 
@@ -80,7 +80,7 @@ def updatelist(request, pk):
     return render(request, 'update_todo.html', {'form': form})
 
 
-# =========== NEWS ==========================================
+# =========== news ==========================================
 
 
 def news(request):
@@ -146,7 +146,7 @@ def news_detail(request, pk):
     context = {"new": new}
     return render(request, "news_detail.html", context)
 
-# =========== Document ==========================================
+# =========== document ==========================================
 
 
 def document(request):
@@ -175,7 +175,7 @@ def deletedoc(request, pk):
     return redirect('website:document')
 
 
-# =========== Prof ==========================================
+# =========== consultant coordinator ==========================================
 
 def deletecoor(request, pk):
     data = CoordinatorModel.objects.get(id=pk)
@@ -329,7 +329,7 @@ def updateprof(request, pk):
 #     return render(request, 'update_other.html', {'form': form})
 
 
-# =========== Student ==========================================
+# =========== student ==========================================
 def stddetail(request):
     show = StdModel.objects.filter(
         Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
@@ -399,7 +399,7 @@ def updatestd(request, pk):
     return render(request, 'update_std.html', {'form': form})
 
 
-# =========== PLAN for Coordinator ==========================================
+# =========== PLAN for coordinator ==========================================
 
 def coorplan(request):
     if request.method == "POST":
@@ -460,65 +460,65 @@ def updatecoorplan(request, pk):
     return render(request, 'update_coorplan.html', {'form': form})
 
 
-# # =========== PLAN for Committee ==========================================
+# # =========== PLAN for committee ==========================================
 
-def complan(request):
-    if request.method == "POST":
-        form = ComPlanModelForm(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            print("Error", form.errors)
-    form = ComPlanModelForm()
-    show = ComPlanModel.objects.all()
+# def complan(request):
+#     if request.method == "POST":
+#         form = ComPlanModelForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#         else:
+#             print("Error", form.errors)
+#     form = ComPlanModelForm()
+#     show = ComPlanModel.objects.all()
 
-    context = {'form': form, 'show': show}
-    return render(request, 'complan.html', context)
-
-
-def complan_csv(request):
-    show = ComPlanModel.objects.all()
-    if request.method == "GET":
-        context = {'show': show}
-        return render(request, 'complan_csv.html', context)
-
-    if request.method == "POST":
-        csv_file = request.FILES['file']
-
-    if not csv_file.name.endswith('.csv'):
-        messages.error(request, 'Please upload only CSV file')
-        return redirect('website:complan_csv')
-
-    data_set = csv_file.read().decode('UTF-8')
-    io_string = io.StringIO(data_set)
-    next(io_string)
-
-    for column in csv.reader(io_string, delimiter=',', quotechar='|'):
-        _, created = ComPlanModel.objects.update_or_create(
-            date=column[0],
-            list=column[1],
-        )
-    context = {
-        'notify': 'CSV file is already upload', 'show': show
-    }
-    return render(request, 'complan_csv.html', context)
+#     context = {'form': form, 'show': show}
+#     return render(request, 'complan.html', context)
 
 
-def deletecomplan(request, pk):
-    data = ComPlanModel.objects.get(id=pk)
-    data.delete()
-    return redirect('website:complan')
+# def complan_csv(request):
+#     show = ComPlanModel.objects.all()
+#     if request.method == "GET":
+#         context = {'show': show}
+#         return render(request, 'complan_csv.html', context)
+
+#     if request.method == "POST":
+#         csv_file = request.FILES['file']
+
+#     if not csv_file.name.endswith('.csv'):
+#         messages.error(request, 'Please upload only CSV file')
+#         return redirect('website:complan_csv')
+
+#     data_set = csv_file.read().decode('UTF-8')
+#     io_string = io.StringIO(data_set)
+#     next(io_string)
+
+#     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
+#         _, created = ComPlanModel.objects.update_or_create(
+#             date=column[0],
+#             list=column[1],
+#         )
+#     context = {
+#         'notify': 'CSV file is already upload', 'show': show
+#     }
+#     return render(request, 'complan_csv.html', context)
 
 
-def updatecomplan(request, pk):
-    list = ComPlanModel.objects.get(id=pk)
-    form = ComPlanModelForm(instance=list)
-    if request.method == 'POST':
-        form = ComPlanModelForm(request.POST, instance=list)
-        if form.is_valid():
-            form.save()
-            return redirect('website:complan')
-    return render(request, 'update_complan.html', {'form':form } )
+# def deletecomplan(request, pk):
+#     data = ComPlanModel.objects.get(id=pk)
+#     data.delete()
+#     return redirect('website:complan')
+
+
+# def updatecomplan(request, pk):
+#     list = ComPlanModel.objects.get(id=pk)
+#     form = ComPlanModelForm(instance=list)
+#     if request.method == 'POST':
+#         form = ComPlanModelForm(request.POST, instance=list)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('website:complan')
+#     return render(request, 'update_complan.html', {'form':form } )
 
 
 
@@ -644,7 +644,7 @@ def updatestdplan(request, pk):
     return render(request, 'update_stdplan.html', {'form': form})
 
 
-# =========== Project ==========================================
+# =========== project ==========================================
 
 def stdproject(request):
     test = ProjectModel.objects.all()
@@ -723,7 +723,7 @@ def updateproject(request, pk):
     # return render(request,'update_project.html' ,context)
 
 
-# =========== apply Project ==========================================
+# =========== apply project ==========================================
 
 def applyproject(request, pk):
     list = ProjectModel.objects.get(id=pk)
@@ -791,19 +791,7 @@ def docproject(request):
         return render(request, 'docproject.html')
 
 
-
-# =========== grade score subject==========================================
-
-def grade(request):
-    if request.method == "POST":
-        form = GradeForm(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            print("Error", form.errors)
-    form = GradeForm()
-    context = {'form': form}
-    return render(request, 'grade.html', context)
+# ===========subject==========================================
 
 def subject(request):
     if request.method == "POST":
@@ -813,15 +801,21 @@ def subject(request):
         else:
             print("Error", form.errors)
     form = SubjectForm()
-    show = SubjectModel.objects.latest('id')
-    all = SubjectModel.objects.all().order_by('-id')
-    context = {'form': form , 'show':show ,'all':all}
+    all = SubjectModel.objects.all()
+    if all :
+        show = SubjectModel.objects.latest('id')
+        context = {'form': form , 'show':show ,'all':all}
+    else:
+        context = {'form': form ,'all':all}
     return render(request, 'subject.html', context)
 
 def deletesubject(request, pk):
     data = SubjectModel.objects.get(id=pk)
     data.delete()
     return redirect('website:subject')
+
+
+# =========== grade score==========================================
 
 def score(request ,pk):
     list = ScoreModel.objects.get(id=pk)
@@ -844,3 +838,29 @@ def evaluate(request):
     context = {'show':show ,'com':com}
     return render(request, 'evaluate.html', context)
 
+
+def grade(request):
+    if request.method == "POST":
+        form = GradeForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    form = GradeForm()
+    context = {'form': form}
+    return render(request, 'grade.html', context)
+
+
+# ################# commiteee ###########################
+
+def committee(request, pk):
+    list = ProjectModel.objects.get(id=pk)
+    form = CommitteeForm(instance=list)
+    if request.method == 'POST':
+        form = CommitteeForm(request.POST, instance=list)
+        if form.is_valid():
+            test = form.save(commit=False)
+            test = test.save()
+            return redirect('website:project')
+    context = {'form': form , 'list' :list}
+    return render(request, 'committee.html', context)
