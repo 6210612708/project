@@ -1,0 +1,30 @@
+<table>
+    โครงงานที่ปรึกษา
+    {% for show in show %}
+    
+    <tr>
+        <td>
+            
+            {% if request.user.profmodel == show.consult %}
+            {{show.thainame}}
+            {{show.consult}}
+            {{show.detail}}
+                {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                    {{show.status}}
+                {% elif show.status == 'รอการอนุมัติ' %}
+                    {{show.status}}
+                    {{show.student1}}
+                    {{show.student2}}
+                    <a href="{% url 'website:statusproject' show.id %}" >อนุมัติโครงงาน</a>
+                {% else %}
+                    {{show.status}}
+                    {{show.student1}}
+                    {{show.student2}}
+                {% endif %}
+                    <a href="{% url 'website:reportproject' show.id %}" >รายงานนักศึกษา</a>
+                {% endif %}
+            
+        </td>
+    </tr>
+    {% endfor %}
+</table>

@@ -646,22 +646,10 @@ def updatestdplan(request, pk):
 
 # =========== project ==========================================
 
-def stdproject(request):
-    test = ProjectModel.objects.all()
-    x = 0
-    for test in test:
-        if test.student1 == request.user.stdmodel or test.student2 == request.user.stdmodel:
-            x = 1        
-    if x == 1 :
-        show = ProjectModel.objects.filter(
-            Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
-    else:
-        show = ProjectModel.objects.all()
-
-
-    context = {'x': x, 'show': show}
-    return render(request, 'stdproject.html', context)
-
+def allproject(request):
+    show = ProjectModel.objects.all()
+    context = {'show': show}
+    return render(request, 'allproject.html', context)
 
 def project(request):
     form = projectModelForm(request.POST)
@@ -681,11 +669,15 @@ def project(request):
             
     form = projectModelForm()
     show = ProjectModel.objects.all()
-
+    some = ProjectModel.objects.filter(consult=request.user.profmodel)
 
     context = {'form': form, 'show': show}
     return render(request, 'project.html', context)
 
+def reportproject(request ,pk):
+    show = Fileproject.objects.filter(id=pk)
+    context = {'show': show}
+    return render(request, 'reportproject.html', context)
 
 def deleteproject(request, pk):
     data = ProjectModel.objects.get(id=pk)
@@ -722,8 +714,28 @@ def updateproject(request, pk):
     # context = {list :'list'}
     # return render(request,'update_project.html' ,context)
 
+def statusproject(request, pk):
+    ProjectModel.objects.filter(id=pk).update(status='อนุมัติ')
+    return redirect('website:project')
 
-# =========== apply project ==========================================
+# =========== student project ==========================================
+
+def stdproject(request):
+    test = ProjectModel.objects.all()
+    x = 0
+    for test in test:
+        if test.student1 == request.user.stdmodel or test.student2 == request.user.stdmodel:
+            x = 1        
+    if x == 1 :
+        show = ProjectModel.objects.filter(
+            Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
+    else:
+        show = ProjectModel.objects.all()
+
+
+    context = {'x': x, 'show': show}
+    return render(request, 'stdproject.html', context)
+
 
 def applyproject(request, pk):
     list = ProjectModel.objects.get(id=pk)
@@ -739,17 +751,6 @@ def applyproject(request, pk):
             )
             return redirect('website:detailproject')
     return render(request, 'applyproject.html', {'form': form})
-
-
-def statusproject(request, pk):
-    ProjectModel.objects.filter(id=pk).update(status='อนุมัติ')
-    return redirect('website:approveproject')
-
-
-def approveproject(request):
-    show = ProjectModel.objects.filter(consult=request.user.profmodel)
-    context = {'show': show}
-    return render(request, 'approveproject.html', context)
 
 
 def detailproject(request):

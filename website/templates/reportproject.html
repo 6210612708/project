@@ -1,0 +1,11 @@
+<table>
+    {% for show in show %}
+    <tr>
+        <td>
+            {{show.topic}}
+            <a href="{{show.file.url}}" download>download file</a>
+
+        </td>
+    </tr>
+    {% endfor %}
+</table>

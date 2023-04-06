@@ -96,7 +96,6 @@ urlpatterns = [
     path('project/delete/<pk>', views.deleteproject ,name='deleteproject'),
     path('project/update/<pk>', views.updateproject ,name='updateproject'),
     path('statusproject/<pk>', views.statusproject ,name='statusproject'),
-    path('approveproject', views.approveproject ,name='approveproject'),
     
     
     # Project student
@@ -104,8 +103,9 @@ urlpatterns = [
     path('applyproject/<pk>', views.applyproject ,name='applyproject'),
     path('detailproject', views.detailproject ,name='detailproject'),
     path('docproject', views.docproject ,name='docproject'),
+    path('allproject', views.allproject ,name='allproject'),
     
-    
+    path('reportproject/<pk>', views.reportproject ,name='reportproject'),
     path('stddetail', views.stddetail ,name='stddetail'),
     
     
