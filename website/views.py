@@ -859,8 +859,22 @@ def grade(request):
         else:
             print("Error", form.errors)
     form = GradeForm()
-    context = {'form': form}
+    show = GradeModel.objects.all()
+    context = {'form': form , 'show':show}
     return render(request, 'grade.html', context)
+
+
+def updategrade(request,pk):
+    list = GradeModel.objects.get(id=pk)
+    form = GradeForm(instance=list)
+    if request.method == "POST":
+        form = GradeForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    context = {'form': form }
+    return render(request, 'updategrade.html', context)
 
 
 # ################# commiteee ###########################

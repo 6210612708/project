@@ -219,6 +219,7 @@ class ScoreModel(models.Model):
         return f'{self.project}'
 
 class GradeModel(models.Model):
+    subject = models.OneToOneField(SubjectModel, null=True, on_delete=models.CASCADE, blank=True ) 
     A = models.IntegerField(null=True)
     Bplus = models.IntegerField(null=True)
     B = models.IntegerField(null=True)

@@ -1,16 +1,6 @@
-{% extends "layout.html" %}
-{% load static %}
 
 {% block head %}
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="{% url 'js-catlog' %}"></script>
-        <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
-        <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <title>Document</title>
-    </head>
+
 {% endblock %}
 {% block content %}
 <br><br>
@@ -22,4 +12,22 @@
             <input type="submit" name="Submit" id="submit">
         </form>
     </body>
+
+{% for show in show %}
+    
+    <br>
+    <tr>
+        <td>
+            {{show.subject}} <a href="{% url 'website:updategrade' show.id %}" >แก้ไข</a><br>
+            A  {{show.A}}<br>
+            B+ {{show.Bplus}}<br>
+            B  {{show.B}}<br>
+            C+ {{show.Cplus}}<br>
+            C  {{show.C}}<br>
+            D+ {{show.Dplus}}<br>
+            D  {{show.D}}<br>
+            F  {{show.F}}<br>
+        </td>
+    </tr>
+{% endfor %}
 {% endblock %}

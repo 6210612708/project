@@ -112,9 +112,13 @@ urlpatterns = [
     
     # grade score subject
     path('grade', views.grade ,name='grade'),
+    path('updategrade/<pk>', views.updategrade ,name='updategrade'),
+    path('score/<pk>', views.score ,name='score'),
+    
+    
     path('subject/', views.subject ,name='subject'),
     path('subject/delete/<pk>', views.deletesubject ,name='deletesubject'),
-    path('score/<pk>', views.score ,name='score'),
+    
     path('evaluate', views.evaluate ,name='evaluate'),
     
     path('committee/<pk>', views.committee ,name='committee'),
