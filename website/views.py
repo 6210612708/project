@@ -20,7 +20,17 @@ def index(request):
 # =========== todolist ==========================================
 
 # @allowed_users(allowed_roles=['admin'])
+def setting(request):
+    admin = User.objects.get(username=request.user)
+    form = settingForm(instance=admin)
+    if request.method == "POST":
+        form = settingForm(request.POST ,instance=admin)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
 
+    return render(request, 'setting.html' ,{'form':form})
 
 def todolist(request):
     if request.method == "POST":

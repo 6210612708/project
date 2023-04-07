@@ -1,0 +1,15 @@
+
+{% block head %}
+
+{% endblock %}
+{% block content %}
+<br><br>
+    <body>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" name="Submit" id="submit">
+        </form>
+    </body>
+{% endblock %}

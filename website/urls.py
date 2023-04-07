@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.index ,name='index' ),
 
     # todolist
+    path('setting/', views.setting ,name='setting'),
     path('todolist/', views.todolist ,name='todolist'),
     path('todo_csv/', views.todo_csv ,name='todo_csv'),
     path('todolist/delete/<pk>', views.deletelist ,name='deletelist'),

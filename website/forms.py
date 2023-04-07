@@ -8,6 +8,13 @@ from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, Admin
 from .models import *
 
 
+class settingForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','first_name' , 'last_name', 'email']
+        
+
+
 class ListModelForm(forms.ModelForm):
     class Meta:
         model = ListModel
