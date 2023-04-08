@@ -1,3 +1,27 @@
+{% load static %}
+
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="{% url 'js-catlog' %}"></script>
+        <script src="{% static '/admin/js/core.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+        </head>
+</head>
+
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <input type="submit" name="Submit" id="submit">
+    </form>
+</body>
+{% for show in file %}
+{{show.topic}} {{show.datedue}}
+{% endfor %}
+
 {% if user.groups.all.0.name == 'consultant' and user.groups.all.1.name != 'coordinator'%}
         <table>
             {% for show in show %}
