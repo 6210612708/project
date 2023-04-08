@@ -7,13 +7,66 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="{% url 'js-catlog' %}"></script>
         <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/stddetail.css' %}">
         <title>project</title>
     </head>
 {% endblock %}
 {% block content %}
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="page-content page-container center" id="page-content">
+<div class="padding">
+<div class="row container d-flex">
+<div class="col-xl-6 col-md-12 ">
+    {% for show in show %}
+    <div class="card user-card-full">
+        <div class="row m-l-0 m-r-0">
+            <!-- <div class="col-sm-4 bg-c-lite-green user-profile">
+                <div class="card-block text-center text-white">
+                    <div class="m-b-25">
+                    </div>
+                    <h6 class="f-w-600">{{show.title}}</h6>
+                    <p>Web Designer</p>
+                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                </div>
+            </div> -->
+            <div class="col-sm-8">
+                <div class="card-block">
+                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">PROFILE</h6>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">ชื่อ</p>
+                            <h6 class="text-muted f-w-400">{{show.title}}{{show.fname}} {{show.lname}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">รหัสนักศึกษา</p>
+                            <h6 class="text-muted f-w-400">{{show.stdid}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">ภาควิชา</p>
+                            <h6 class="text-muted f-w-400">{{show.major}}</h6>
+                        </div>
+                    </div>
+                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">ช่องทางการติดต่อ</h6>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Email</p>
+                            <h6 class="text-muted f-w-400">{{show.email}}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">โทรศัพท์</p>
+                            <h6 class="text-muted f-w-400">{{show.phone}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}   
+    </div>
+       </div>
+        </div>
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br>
         <table>
             {% for show in show %}
             <tr>
@@ -29,7 +82,7 @@
             </tr>
             {% endfor %}
 
-        </table>
+        </table> -->
 
     </body>
 {% endblock %}
