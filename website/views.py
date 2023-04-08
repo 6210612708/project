@@ -657,8 +657,15 @@ def updatestdplan(request, pk):
 # =========== project ==========================================
 
 def allproject(request):
+    form = topicprojectForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
     show = ProjectModel.objects.all()
-    context = {'show': show}
+    file = Topicproject.objects.all()
+    context = {'form':form ,'show': show ,'file':file}
     return render(request, 'allproject.html', context)
 
 def project(request):

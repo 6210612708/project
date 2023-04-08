@@ -167,8 +167,7 @@ class ProjectModel(models.Model):
     def __str__(self):
         return self.thainame
 
-
-class Fileproject(models.Model):
+class Topicproject(models.Model):
     TOPIC = (
         ("proposal", "proposal"),
         ("preliminary", "preliminary"),
@@ -177,11 +176,19 @@ class Fileproject(models.Model):
         ("draftthesis", "draftthesis"),
         ("finalthesis", "finalthesis"),
     )
+    topic = models.CharField(max_length=200, null=True,choices=TOPIC)
+    datedue = models.DateField(null=True)
+
+    def __str__(self):
+        return f'{self.topic} {self.datedue}'
+
+class Fileproject(models.Model):
     project = models.ForeignKey(
-        ProjectModel, on_delete=models.CASCADE, null=True)
-    topic = models.CharField(max_length=200, null=True, choices=TOPIC)
-    file = models.FileField(upload_to=file_path, null=True, blank=True)
-    date = models.DateTimeField(null=True)
+        ProjectModel, on_delete=models.CASCADE, null=True,blank=True)
+    topic = models.ForeignKey(
+        Topicproject, on_delete=models.CASCADE, null=True,blank=True)
+    file = models.FileField(upload_to=file_path, null=True ,blank=True,)
+    date = models.DateTimeField(null=True,blank=True)
 
     def __str__(self):
         return f'{self.project} {self.topic}'
