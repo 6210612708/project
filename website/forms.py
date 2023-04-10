@@ -8,6 +8,12 @@ from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, Admin
 from .models import *
 
 
+class settingForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','first_name' , 'last_name', 'email']
+        
+        
 class ListModelForm(forms.ModelForm):
     class Meta:
         model = ListModel
@@ -111,11 +117,20 @@ class coordinatorForm(forms.ModelForm):
         model = CoordinatorModel
         fields = "__all__"
         
+class topicprojectForm(forms.ModelForm):
+    class Meta:
+        model = Topicproject
+        fields = "__all__"
+        widgets = {
+            "datedue": AdminDateWidget(),
+        }
+        
 class fileprojectForm(forms.ModelForm):
     class Meta:
         model = Fileproject
         fields = "__all__"
         exclude = ['date']
+        
 
 
 class docprojectForm(forms.Form):

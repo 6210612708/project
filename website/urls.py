@@ -23,6 +23,7 @@ urlpatterns = [
     path('', views.index ,name='index' ),
 
     # todolist
+    path('setting/', views.setting ,name='setting'),
     path('todolist/', views.todolist ,name='todolist'),
     path('todo_csv/', views.todo_csv ,name='todo_csv'),
     path('todolist/delete/<pk>', views.deletelist ,name='deletelist'),
@@ -111,9 +112,13 @@ urlpatterns = [
     
     # grade score subject
     path('grade', views.grade ,name='grade'),
+    path('updategrade/<pk>', views.updategrade ,name='updategrade'),
+    path('score/<pk>', views.score ,name='score'),
+    
+    
     path('subject/', views.subject ,name='subject'),
     path('subject/delete/<pk>', views.deletesubject ,name='deletesubject'),
-    path('score/<pk>', views.score ,name='score'),
+    
     path('evaluate', views.evaluate ,name='evaluate'),
     
     path('committee/<pk>', views.committee ,name='committee'),

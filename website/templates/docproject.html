@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% comment %} {% extends "layout.html" %}
 {% load static %}
 
 {% block head %}
@@ -7,19 +7,40 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="{% url 'js-catlog' %}"></script>
         <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
+        {{ form.media }}
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
         <title>Document project</title>
     </head>
-{% endblock %}
+{% endblock %} {% endcomment %}
 {% block content %}
-<br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 {% if messages %}
 {% for messages in messages %}
-    <div>{{messages|safe}}</div>
+    <h3 class="text-center text-warning">{{messages|safe}}</h3>
 {% endfor %}
 {% else %}
     <body>
+        {% comment %} <div class="card">
+            <h5 class="card-header">Featured</h5>
+            <div class="card-body">
+                <h5 class="card-title">Upload CSV</h5>
+                <p class="card-text">
+                  <form method="POST" class="text-center">
+                    {% csrf_token %}
+                    <label class="addcontent-blog">
+                      วันที่ : {{ form.date }}
+                      รายการ : {{ form.list }}
+                    </label>
+                </p>
+        
+
+              <!-- <input class="btn btn-primary btn-sm active" type="input" name="Submit" id="submit" role="button" aria-pressed="true">Submit</input> -->
+              <input class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit">
+              <a href="{% url 'website:todo_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
+                </form>
+              </div>
+          </div> {% endcomment %}
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
@@ -29,17 +50,43 @@
     </body>
 
     ประวัติการส่ง
-    <table>
+    <div class="card">
+        <h5 class="card-header">Featured</h5>
+        <div class="card-body">
+            <h5 class="card-title">รายการสิ่งที่ต้องทำ</h5>
+            <p class="card-text">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col">หัวเรื่อง</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for show in show %}
+                  <tr>
+                    <td>{{show.topic}}</td>
+                    <td>
+                        <a href="{{show.file.url}}" download>download file</a>
+                    </td>
+                    {% endfor %}
+                  </tr>
+                </tbody>
+              </table>
+            </p>
+          </div>
+      </div>
+    <!-- <table>
         {% for show in show %}
         <tr>
             <td>
                 {{show.topic}}
                 <a href="{{show.file.url}}" download>download file</a>
+                {{show.date}}
 
             </td>
         </tr>
         {% endfor %}
 
-    </table>
+    </table> -->
     {% endif %}
 {% endblock %}

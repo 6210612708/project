@@ -20,7 +20,17 @@ def index(request):
 # =========== todolist ==========================================
 
 # @allowed_users(allowed_roles=['admin'])
+def setting(request):
+    admin = User.objects.get(username=request.user)
+    form = settingForm(instance=admin)
+    if request.method == "POST":
+        form = settingForm(request.POST ,instance=admin)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
 
+    return render(request, 'setting.html' ,{'form':form})
 
 def todolist(request):
     if request.method == "POST":
@@ -647,8 +657,15 @@ def updatestdplan(request, pk):
 # =========== project ==========================================
 
 def allproject(request):
+    form = topicprojectForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
     show = ProjectModel.objects.all()
-    context = {'show': show}
+    file = Topicproject.objects.all()
+    context = {'form':form ,'show': show ,'file':file}
     return render(request, 'allproject.html', context)
 
 def project(request):
@@ -849,8 +866,22 @@ def grade(request):
         else:
             print("Error", form.errors)
     form = GradeForm()
-    context = {'form': form}
+    show = GradeModel.objects.all()
+    context = {'form': form , 'show':show}
     return render(request, 'grade.html', context)
+
+
+def updategrade(request,pk):
+    list = GradeModel.objects.get(id=pk)
+    form = GradeForm(instance=list)
+    if request.method == "POST":
+        form = GradeForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+        else:
+            print("Error", form.errors)
+    context = {'form': form }
+    return render(request, 'updategrade.html', context)
 
 
 # ################# commiteee ###########################
