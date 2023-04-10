@@ -200,10 +200,10 @@ class SubjectModel(models.Model):
         return f'{self.subject} {self.year}'
 
 
-class ScoreModel(models.Model):
+class ScoreConsult(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1') 
-    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2')
+    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1con') 
+    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2con')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
     sc1 = models.IntegerField(null=True, blank=True)
@@ -214,7 +214,59 @@ class ScoreModel(models.Model):
     sc6 = models.IntegerField(null=True, blank=True)
     sc7 = models.IntegerField(null=True, blank=True)
     sc8 = models.IntegerField(null=True, blank=True)
+    score = models.IntegerField(null=True, blank=True)
+       
+    def __str__(self):
+        return f'{self.project}'
+
+class ScoreCom1(models.Model):
+    subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1sc1') 
+    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc1')
+    consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
+    project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    sc1 = models.IntegerField(null=True, blank=True)
+    sc2 = models.IntegerField(null=True, blank=True)
+    sc3 = models.IntegerField(null=True, blank=True)
+    sc4 = models.IntegerField(null=True, blank=True)
+    sc5 = models.IntegerField(null=True, blank=True)
+    sc6 = models.IntegerField(null=True, blank=True)
+    sc7 = models.IntegerField(null=True, blank=True)
+    sc8 = models.IntegerField(null=True, blank=True)
+    score = models.IntegerField(null=True, blank=True)
     
+    def __str__(self):
+        return f'{self.project}'
+
+class ScoreCom2(models.Model):
+    subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1sc2') 
+    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc2')
+    consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
+    project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    sc1 = models.IntegerField(null=True, blank=True)
+    sc2 = models.IntegerField(null=True, blank=True)
+    sc3 = models.IntegerField(null=True, blank=True)
+    sc4 = models.IntegerField(null=True, blank=True)
+    sc5 = models.IntegerField(null=True, blank=True)
+    sc6 = models.IntegerField(null=True, blank=True)
+    sc7 = models.IntegerField(null=True, blank=True)
+    sc8 = models.IntegerField(null=True, blank=True)
+    score = models.IntegerField(null=True, blank=True)
+    
+    def __str__(self):
+        return f'{self.project}'
+
+class ScoreModel(models.Model):
+    subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1') 
+    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2')
+    consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
+    project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    consc = models.OneToOneField(ScoreConsult, null=True, on_delete=models.CASCADE, blank=True)
+    com1sc = models.OneToOneField(ScoreCom1, null=True, on_delete=models.CASCADE, blank=True)
+    com2sc = models.OneToOneField(ScoreCom2, null=True, on_delete=models.CASCADE, blank=True)
+
     def __str__(self):
         return f'{self.project}'
 
