@@ -25,7 +25,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Upload CSV</h5>
                   <p class="card-text">
-                    {% if user.groups.all.0.name == 'consultant' and user.groups.all.1.name == 'coordinator' %}
+                    {% if user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
                     <form method="POST" class="text-center">
                       {% csrf_token %}
                       <label class="addcontent-blog">
@@ -34,7 +34,7 @@
                       </label>
                   </p>
                 <input class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit">
-                {% if user.groups.all.0.name == 'consultant' or user.groups.all.1.name == 'coordinator' %}
+                {% if user.groups.all.0.name == 'consultant' or user.groups.all.1.name == 'coordinator'or user.groups.all.0.name == 'admin' %}
                 <a href="{% url 'website:stdplan_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
                 {% endif %}
                   </form>
@@ -61,7 +61,7 @@
                           <td>{{show.date}}</td>
                           <td>{{show.list}}</td>
                           <td>
-                            {% if user.groups.all.0.name == 'consultant' or user.groups.all.1.name == 'coordinator' %}
+                            {% if user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'admin' %}
                             <a href="{% url 'website:deletestdplan' show.id %}" 
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
                             <a href="{% url 'website:updatestdplan' show.id %}" >แก้ไข</a>
@@ -77,7 +77,7 @@
             </div>
           </div>
         <!-- <br><br><br><br>
-        {% if user.groups.all.0.name == 'consultant' and user.groups.all.1.name == 'coordinator' %}
+        {% if user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
         <form method="POST" class="text-center">
             {% csrf_token %}
             {{ form.media }}
@@ -94,7 +94,7 @@
                 <td>
                     {{show.date}}
                     {{show.list}}
-                    {% if user.groups.all.0.name == 'consultant' or user.groups.all.1.name == 'coordinator' %}
+                    {% if user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'or user.groups.all.0.name == 'admin' %}
                     <a href="{% url 'website:deletestdplan' show.id %}" 
                     onclick="return confirm('Confirm Delete?')">ลบ</a>
                     <a href="{% url 'website:updatestdplan' show.id %}" >แก้ไข</a>
@@ -102,7 +102,7 @@
                 </td>
             </tr>
             {% endfor %}
-            {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' %}
+           {% if user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
                 <a href="{% url 'website:stdplan_csv' %}">upload csv</a>
             {% endif %}
             

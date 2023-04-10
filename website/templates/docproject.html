@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% comment %} {% extends "layout.html" %}
 {% load static %}
 
 {% block head %}
@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
         <title>Document project</title>
     </head>
-{% endblock %}
+{% endblock %} {% endcomment %}
 {% block content %}
 <br><br><br><br><br><br><br><br><br>
 {% if messages %}
@@ -21,7 +21,7 @@
 {% endfor %}
 {% else %}
     <body>
-        <div class="card">
+        {% comment %} <div class="card">
             <h5 class="card-header">Featured</h5>
             <div class="card-body">
                 <h5 class="card-title">Upload CSV</h5>
@@ -40,13 +40,13 @@
               <a href="{% url 'website:todo_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
                 </form>
               </div>
-          </div>
-        <!-- <form method="POST" enctype="multipart/form-data">
+          </div> {% endcomment %}
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
             <input type="submit" name="Submit" id="submit">
-        </form> -->
+        </form>
     </body>
 
     ประวัติการส่ง
