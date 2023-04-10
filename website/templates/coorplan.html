@@ -2,6 +2,16 @@
 {% load static %}
 
 {% block head %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="{% url 'js-catlog' %}"></script>
+  <script src="{% static '/admin/js/core.js' %}"></script>
+  {{ form.media }}
+  <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+  <title>TodoList</title>
+</head>
 {% endblock %}
 {% block content %}
     <body>
@@ -38,8 +48,8 @@
                     <form method="POST" class="text-center">
                       {% csrf_token %}
                       <label class="addcontent-blog">
-                        {{ form.media }}
-                        {{ form.as_p }}
+                        วันที่ : {{ form.date }}
+                        รายการ : {{ form.list }}
                       </label>
                   </p>
 
@@ -50,7 +60,7 @@
               </div>
             </div>
             {% endif %}
-            <div class="col-sm-6">
+            <div class="col-sm-12 center">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">แผนการดำเนินงาน</h5>
@@ -58,9 +68,9 @@
                     <table class="table table-borderless">
                       <thead>
                         <tr>
-                          <th scope="col">Date</th>
-                          <th scope="col">List</th>
-                          <th scope="col">Edit</th>
+                          <th class="col">วันที่</th>
+                          <th class="col-6">รายการ</th>
+                          <th class="col">ลบ/แก้ไข</th>
                         </tr>
                       </thead>
                       <tbody>

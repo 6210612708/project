@@ -1,0 +1,45 @@
+.addcontentbox {
+    display: flex;
+  /* width: 100%; */
+  padding: 10px;
+  padding-top: 0px;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  /* padding: 0;
+  margin: 0; */
+}
+
+.addcontentbox input {
+    border: transparent;
+    background-color: #f4f4f4;
+    font-size: 24px;
+    border-radius:10px;
+    /* column-width: 100; */
+    padding: 0;
+    margin: 0;
+    width: 90%;
+}
+
+.checkbox {
+    display: flex;
+    padding: 10px;
+    padding-top: 0px;
+    justify-content: space-between;
+    padding-left: 50px;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.checkbox .topic {
+    /* border: transparent; */
+    /* background-color: #f4f4f4; */
+    font-size: 24px;
+    /* border-radius:10px; */
+    /* column-width: 100; */
+    /* padding: 0;
+    margin: 0;
+    width: 90%; */
+}

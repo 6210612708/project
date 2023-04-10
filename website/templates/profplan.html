@@ -2,15 +2,16 @@
 {% load static %}
 
 {% block head %}
-    <!-- <head>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="{% url 'js-catlog' %}"></script>
         <script src="{% static '/admin/js/core.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        {{ form.media }}
+        <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
         <title>TodoList</title>
-    </head> -->
+    </head>
 {% endblock %}
 {% block content %}
     <body>
@@ -38,16 +39,18 @@
             <a href="{% url 'website:profplan_csv' %}">upload csv</a>
         </table> -->
         {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' %}
-        <div class="row mt-5">
-            <div class="col-sm-6">
+        <div class="row mt-5 ">
+            <div class="col-sm-12 center">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">จัดการข้อมูลพื้นฐาน</h5>
                   <p class="card-text">
                     <form method="POST" class="text-center">
                       {% csrf_token %}
-                      {{ form.media }}
-                      {{ form.as_p }}
+                      <label class="addcontent-blog">
+                        วันที่ : {{ form.date }}
+                        รายการ : {{ form.list }}
+                      </label>
                   </p>
                   <a href="#" class="btn btn-primary" type="submit" name="Submit" id="submit">Submit</a>
                   </form>
@@ -55,7 +58,7 @@
               </div>
             </div>
             {%endif%}
-            <div class="col-sm-6">
+            <div class="col-sm-12 center">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">แผนการดำเนินงาน</h5>
@@ -63,9 +66,9 @@
                     <table class="table table-borderless">
                       <thead>
                         <tr>
-                          <th scope="col">Date</th>
-                          <th scope="col">List</th>
-                          <th scope="col">Edit</th>
+                          <th class="col">วันที่</th>
+                          <th class="col-6">รายการ</th>
+                          <th class="col">ลบ/แก้ไข</th>
                         </tr>
                       </thead>
                       <tbody>
