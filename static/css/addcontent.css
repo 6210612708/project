@@ -25,7 +25,7 @@
     display: flex;
     padding: 10px;
     padding-top: 0px;
-    justify-content: space-between;
+    justify-content: start;
     padding-left: 50px;
     align-items: center;
     text-align: center;
@@ -33,13 +33,7 @@
     margin: 0;
 }
 
-.checkbox .topic {
-    /* border: transparent; */
-    /* background-color: #f4f4f4; */
-    font-size: 24px;
-    /* border-radius:10px; */
-    /* column-width: 100; */
-    /* padding: 0;
+.checkbox .box {
+    padding: 0;
     margin: 0;
-    width: 90%; */
 }
