@@ -52,7 +52,7 @@
         <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Coordinator</h4>
+                <h4 class="card-title">อัพโหลดข่าวประชาสัมพันธ์</h4>
                 <p class="card-text">
                     <form method="POST" >
                         {% csrf_token %}
@@ -121,35 +121,33 @@
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">แผนการดำเนินงาน</h5>
+                <h5 class="card-title">ข่าวประชาสัมพันธ์</h5>
                 <p class="card-text">
                   <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th class="col">หัวข้อ</th>
-                        <!-- <th class="col-6">รายการ</th>
-                        <th class="col">ลบ/แก้ไข</th> -->
-                      </tr>
                     </thead>
                     <tbody>
-                      {% for show in show %}
+                      
                       <tr>
                           <th class="col">หัวข้อ</th>
                           <th class="col">รายละเอียด</th>
                           <th class="col">ลบ/แก้ไข</th>
+                      </tr>
+                      {% for show in show %}
+                      <tr>
                           <td>
-                            {{show.title}}
+                              {{show.title}}
                           </td>
                           <td>
                             <a href="{% url 'website:news_detail' show.id %}" >รายละเอียด</a>
                           </td>
                         <td>
-                          <a href="{% url 'website:deletecoorplan' show.id %}" 
+                          <a href="{% url 'website:deletenews' show.id %}" 
                           onclick="return confirm('Confirm Delete?')">ลบ</a>
-                          <a href="{% url 'website:updatecoorplan' show.id %}" >แก้ไข</a>
+                          <a href="{% url 'website:updatenews' show.id %}" >แก้ไข</a>
                         </td>
-                        {% endfor %}
+                        
                       </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                 </p>

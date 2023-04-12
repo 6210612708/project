@@ -7,7 +7,66 @@
 {% block content %}
 
 <body>
-    {% if messages %}
+    <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">อัพโหลดเอกสาร</h4>
+            <p class="card-text">
+                {% if messages %}
+                    {% for messages in messages %}
+                        <div>{{messages|safe}}</div>
+                    {% endfor %}
+                {% else %}
+                {{notify}}
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label class="form-label" for="customFile"> Uploads only CSV file</label>
+                    <input type="file" name="file" class="form-control mt-2" id="customFile" />
+                    <button type="submit" class="btn btn-primary mt-3">upload</button>
+                </form>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    <div class="col-sm-12 center">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">แผนการดำเนินงาน</h4>
+            <p class="card-text">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th class="col-10">วันที่</th>
+                    <th class="col-10">รายการ</th>
+                    <th class="col">ลบ/แก้ไข</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for show in show %}
+                  <tr>  
+                      <td>
+                        {{show.date}}
+                      </td>
+                      <td>
+                        {{show.list}}
+                      </td>
+                    <td>
+                        <a href="{% url 'website:deletecoorplan' show.id %}" 
+                        onclick="return confirm('Confirm Delete?')">ลบ</a>
+                        <a href="{% url 'website:updatecoorplan' show.id %}" >แก้ไข</a>
+                    </td>
+                    {% endfor %}
+                  </tr>
+                </tbody>
+              </table>
+            </p>
+          </div>
+          <a href="{% url 'website:coorplan' %}" >Back</a>
+        </div>
+      </div>
+      {% endif %}
+    <!-- {% if messages %}
         {% for messages in messages %}
             <div>{{messages|safe}}</div>
         {% endfor %}
@@ -33,7 +92,7 @@
             {% endfor %}
         </table>
     {% endif %}
-    <a href="{% url 'website:coorplan' %}" >Back</a>
+    <a href="{% url 'website:coorplan' %}" >Back</a> -->
 
 </body>
 {% endblock %}

@@ -9,20 +9,42 @@
         <script src="{% static '/admin/js/core.js' %}"></script>
         <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+        <link rel="stylesheet" href="{% static '/css/addcontent.css' %}">
         <title>Document</title>
+        {{ form.media }}
     </head>
 {% endblock %}
 {% block content %}
-<br><br><br><br><br><br>
     <body>
-        <form method="POST" enctype="multipart/form-data">
+        <!-- <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
             <input type="submit" name="Submit" id="submit">
-        </form>
+        </form> -->
+        <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">อัพโหลดเอกสาร</h5>
+                <p class="card-text">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label class="form-label mx-4" for="customFile"> Uploads file</label>
+                            <label class="addcontentbox" placeholder="Email" >
+                                ชื่อ (Title) :  {{ form.title }}
+                                
+                            </label>
+                            <label class="mx-4">{{ form.file }}</label>
+                        <!-- <input type="file" name="file" class="form-control mt-2" id="customFile" /> -->
+                        
+                    </form>
+                    <input class="btn btn-primary btn-sm active mt-3 mx-4" type="submit" name="Submit" id="submit">
+                </p>
+              </div>
+            </div>
+          </div>
 
-
+<!-- 
         <table>
             {% for show in show %}
             <tr>
@@ -36,8 +58,43 @@
             </tr>
             {% endfor %}
 
-            <!-- <a href="{% url 'website:todo_csv' %}">upload csv</a> -->
-        </table>
+            <a href="{% url 'website:todo_csv' %}">upload csv</a>
+        </table> -->
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">เอกสาร</h5>
+                <p class="card-text">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th class="col-8">หัวข้อ</th>
+                        <th class="col">ดาวน์โหลดเอกสาร</th>
+                        <th class="col">ลบ/แก้ไข</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for show in show %}
+                      <tr>  
+                          <td>
+                            {{show.title}}
+                          </td>
+                          <td>
+                            <a href="{{show.file.url}}" download>download file</a>
+                          </td>
+                        <td>
+                            <a href="{% url 'website:deletedoc' show.id %}" 
+                            onclick="return confirm('Confirm Delete?')">ลบ</a>
+                            <a href="{% url 'website:doc_detail' show.id %}" >รายละเอียด</a>
+                        </td>
+                        {% endfor %}
+                      </tr>
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+          </div>
 
     </body>
 {% endblock %}
