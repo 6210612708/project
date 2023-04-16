@@ -1,16 +1,64 @@
 {% extends "layout.html" %}
 {% load static %}
-{% block head %}
 
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% url 'js-catlog' %}"></script>
+    <script src="{% static '/admin/js/core.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/css/addcontent.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+    {{ form.media }}
+    <title>โครงงานักศึกษา</title>
+</head>
 {% endblock %}
 {% block content %}
     <body>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
         {% if user.groups.all.0.name == 'consultant' %}
+        <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">โครงงานนักศึกษา</h4>
+                <p class="card-text">
+                    <form method="POST" >
+                        {% csrf_token %}
+                        <div class="form-group row mt-2 mx-1">
+                                <label class="addcontentbox" placeholder="Email" >
+                                    ชื่อ (ภาษาไทย) :  {{ form.thainame }}
+                                </label>
+                          </div>
+                          <div class="form-group row mt-2 mx-1">
+                            <label class="addcontentbox" placeholder="Email" >
+                                ชื่อ (ภาษาอังกฤษ) : {{ form.engname }}
+                            </label>
+                          </div>
+                          <div class="mx-3">
+                            <div><h6>ที่ปรึกษา : {{ request.user.profmodel }}</h6></div>
+                            <div></div>
+                            <span></span>
+                        </div>
+                        <div class="mt-3 checkbox">
+                            <div class="mx-3"><h6>อาจารย์นอกภาค : {{ form.out_prof }} {{ form.consult }}</h6></div>
+                        </div>
+                        <div class="form-group row mt-2">
+                            <label class="addcontentbox" placeholder="Email" >
+                                รายละเอียด : {{ form.detail }}
+                            </label>
+                          </div>
+                          <div class="form-group row mt-3">
+                            <div class="col-sm-10 mx-3">
+                            <input class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit">
+                            </div>
+                          </div>
+                 </form>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+        <!-- {% if user.groups.all.0.name == 'consultant' %}
         <form method="POST" class="text-center">
             {% csrf_token %}
             {{ form.media }}
@@ -29,8 +77,83 @@
 
             <input type="submit" name="Submit" id="submit">
             {% endif %}
-        </form>
-{% if user.groups.all.0.name == 'consultant' %}
+        </form> -->
+
+        {% if user.groups.all.0.name == 'consultant' %}
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">โครงงานที่ปรึกษา</h5>
+                <p class="card-text">
+                  <table class="table table-borderless">
+                    </thead>
+                    <tbody>
+                      
+                      <tr>
+                          <th class="col">หัวข้อ</th>
+                          <th class="col">อาจารย์ที่ปรึกษา</th>
+                          <th class="col">รายละเอียด</th>
+                          <th class="col">สถานะ</th>
+                          <th class="col">นักศึกษา</th>
+                          <th class="col">อื่นๆ</th>
+                      </tr>
+                      {% for show in show %}
+                      
+                      <tr>
+                        {% if request.user.profmodel == show.consult %}
+                          <td>
+                            {{show.thainame}}
+                          </td>
+                          <td>
+                            {{show.consult}}
+                          </td>
+                          <td>
+                            {{show.detail}}
+                          </td>
+                        {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                        <td>
+                            {{show.status}}
+                        </td>
+                        <td>
+                            <p>-</p>
+                        </td>
+                        {% elif show.status == 'รอการอนุมัติ' %}
+                            <td>
+                                {{show.status}}
+                            </td>
+                            <td>
+                                <p>{{show.student1}}</p>
+                                <p>{{show.student2}}</p>
+                            </td>
+                            <td>
+                                <a href="{% url 'website:statusproject' show.id %}" >อนุมัติโครงงาน</a>
+                            </td>
+                        {% else %}
+                        <td>   
+                            {{show.status}}
+                        </td> 
+                        <td>
+                            <p>{{show.student1}}</p>
+                            <p>{{show.student2}}</p>
+                        </td>
+                        {% endif %}
+                        <td>   
+                            <a href="{% url 'website:deleteproject' show.id %}" 
+                            onclick="return confirm('Confirm Delete?')">ลบ</a>
+                            <a href="{% url 'website:updateproject' show.id %}" >แก้ไข</a>
+                        </td> 
+                        {% endif %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+<!-- {% if user.groups.all.0.name == 'consultant' %}
         <table>
             โครงงานที่ปรึกษา
             {% for show in show %}
@@ -63,9 +186,73 @@
             </tr>
             {% endfor %}
         </table>
-        {% endif %}
+        {% endif %} -->
+        {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">เลือกกรรมการสำหรับผู้ประสานงาน</h5>
+                <p class="card-text">
+                  <table class="table table-borderless">
+                    </thead>
+                    <tbody>
+                      
+                      <tr>
+                        <th class="col">หัวข้อ</th>
+                        <th class="col">อาจารย์ที่ปรึกษา</th>
+                        <th class="col">รายละเอียด</th>
+                        <th class="col">สถานะ</th>
+                        <th class="col">นักศึกษา</th>
+                        <th class="col">กรรมการ</th>
+                      </tr>
+                      {% for show in show %}
+                      <tr>
+                          <td>
+                            {{show.thainame}}
+                          </td>
+                          <td>
+                            {{show.consult}}
+                          </td>
+                          <td>
+                            {{show.detail}}
+                          </td>
+                          {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                          <td>
+                            {{show.status}}
+                          </td>
+                          <td>
+                            <p>-</p>
+                        </td>
+                          {% else %}
+                          <td>
+                            {{show.status}}
+                          </td>
+                          <td>
+                            <p>{{show.student1}}</p>
+                            <p>{{show.student2}}</p>
+                        </td>
+                        {% endif %}
+                        {% if show.committee1 != none %}
+                        <td>
+                            <p>{{show.committee1}}</p>
+                            <p>{{show.committee2}}</p> 
+                        </td>
+                        {% endif %}
+                        <td>
+                            <a href="{% url 'website:committee' show.id %}" >เลือกกรรมการ</a>
+                        </td>
+                        
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
         
-{% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+<!-- {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
 เลือกกรรมการสำหรับผู้ประสานงาน
         <table>
             {% for show in show %}
@@ -93,6 +280,6 @@
             {% endfor %}
 
         </table>
-{% endif %}
+{% endif %} -->
     </body>
 {% endblock %}
