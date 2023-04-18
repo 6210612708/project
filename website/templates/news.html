@@ -56,11 +56,15 @@
                 <p class="card-text">
                     <form method="POST" >
                         {% csrf_token %}
+                        <!-- <div class="container-form">
+                          <label for="uname"><strong>หัวข้อ</strong></label>
+                          <div name="uname" class="addform" required>{{ form.title }}</div>
+                          <label for="psw"><strong>รายละเอียด</strong></label>
+                          <div name="psw" class="addform" required>{{ form.detail }}</div>
+                        </div> -->
                         <div class="form-group row">
-                                <label class="addcontentbox" placeholder="Email" >
-                                    ชื่อ (Title) :  {{ form.title }}
-                                    <!-- รายการ : {{ form.detail }} -->
-                                </label>
+                                <label for="uname"><strong>หัวข้อ</strong></label>
+                                <div class="addcontentbox" name="uname">{{ form.title }}</div>
                           </div>
                           <div class="form-group row mt-3">
                             <label class="addcontentbox" placeholder="Email" >

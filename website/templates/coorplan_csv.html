@@ -37,8 +37,8 @@
               <table class="table table-borderless">
                 <thead>
                   <tr>
-                    <th class="col-10">วันที่</th>
-                    <th class="col-10">รายการ</th>
+                    <th class="col-2">วันที่</th>
+                    <th class="col-7">รายการ</th>
                     <th class="col">ลบ/แก้ไข</th>
                   </tr>
                 </thead>
@@ -62,8 +62,9 @@
               </table>
             </p>
           </div>
-          <a href="{% url 'website:coorplan' %}" >Back</a>
+          <!-- <a href="{% url 'website:coorplan' %}" >Back</a> -->
         </div>
+        <a href="{% url 'website:coorplan' %}" class="btn btn-secondary btn-lg active mt-5" role="button" aria-pressed="true">Back</a>
       </div>
       {% endif %}
     <!-- {% if messages %}

@@ -15,10 +15,15 @@
     background-color: #f4f4f4;
     font-size: 16px;
     border-radius:10px;
-    /* column-width: 100; */
     padding: 0;
     margin: 0;
     width: 90%;
+    /* width: 90%;
+      padding: 16px 8px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box; */
 }
 
 .checkbox {
@@ -36,4 +41,18 @@
 .checkbox .box {
     padding: 0;
     margin: 0;
+}
+
+.container-form {
+    padding: 16px 0;
+    text-align:left;
+}
+
+.addform input {
+    width: 100%;
+      padding: 16px 8px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
 }
