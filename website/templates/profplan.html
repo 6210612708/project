@@ -39,14 +39,14 @@
 
             <a href="{% url 'website:profplan_csv' %}">upload csv</a>
         </table> -->
-        {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator'or user.groups.all.0.name == 'coordinator' %}
-        <div class="row mt-5">
+        
+        <div class="col-sm-12 center">
             <div class="col-sm-12 center">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">จัดการข้อมูลพื้นฐาน</h5>
                   <p class="card-text">
-                    <form method="POST" class="text-center">
+                    <form method="POST">
                       {% csrf_token %}
                       <div class="form__group row mt-3 mx-1">
                         <label class="form__field">
@@ -63,12 +63,13 @@
                         รายการ : {{ form.list }}
                       </label> -->
                   </p>
-                  <a href="#" class="btn btn-primary" type="submit" name="Submit" id="submit">Submit</a>
+                  <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+                  <a href="{% url 'website:profplan_csv' %}" class="btn btn-secondary btn-sm active mt-4 mx-3" role="button" aria-pressed="true">Upload CSV</a>
                   </form>
                 </div>
               </div>
             </div>
-            {%endif%}
+            
             <div class="col-sm-12 center">
               <div class="card">
                 <div class="card-body">
@@ -88,20 +89,16 @@
                           <td>{{show.date}}</td>
                           <td>{{show.list}}</td>
                           <td>
-                            {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator'or user.groups.all.0.name == 'coordinator' %}
                             <a href="{% url 'website:deleteprofplan' show.id %}" 
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
                             <a href="{% url 'website:updateprofplan' show.id %}" >แก้ไข</a>
-                            {% endif %}
                           </td>
                           {% endfor %}
                         </tr>
                       </tbody>
                     </table>
                   </p>
-                  {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
-                  <a href="{% url 'website:profplan_csv' %}">upload csv</a>
-                  {% endif %}
+                  <!-- <a href="{% url 'website:profplan_csv' %}">upload csv</a> -->
                 </div>
               </div>
             </div>

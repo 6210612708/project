@@ -39,29 +39,38 @@
 
             <a href="{% url 'website:coorplan_csv' %}">upload csv</a>
         </table> -->
-        {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
-        <div class="row mt-5">
-            <div class="col-sm-6">
+        
+        <div class="col-sm-12 center">
+            <div class="col-sm-12">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">โครงการนักศึกษา</h5>
                   <p class="card-text">
-                    <form method="POST" class="text-center">
+                    <form method="POST">
                       {% csrf_token %}
-                      <label class="form__field">
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          วันที่ : {{ form.date }}
+                        </label>
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          รายการ : {{ form.list }}
+                        </label>
+                      </div>
+                      <!-- <label class="form__field">
                         วันที่ : {{ form.date }}
                         รายการ : {{ form.list }}
-                      </label>
+                      </label> -->
                   </p>
-
-                <a class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit" role="button" aria-pressed="true">Submit</a>
-                <a href="{% url 'website:todo_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
+                  <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+                  <a href="{% url 'website:coorplan_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
                   </form>
                 </div>
               </div>
             </div>
-            {% endif %}
-            <div class="col-sm-12 center">
+            
+            <div class="col-sm-12 mt-5">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">แผนการดำเนินงาน</h5>
@@ -80,20 +89,17 @@
                           <td>{{show.date}}</td>
                           <td>{{show.list}}</td>
                           <td>
-                            {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+                            
                             <a href="{% url 'website:deletecoorplan' show.id %}" 
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
                             <a href="{% url 'website:updatecoorplan' show.id %}" >แก้ไข</a>
-                            {% endif %}
+                            
                           </td>
                           {% endfor %}
                         </tr>
                       </tbody>
                     </table>
                   </p>
-                  {% if user.groups.all.0.name == 'admin' or user.groups.all.1.name == 'coordinator'or user.groups.all.0.name == 'coordinator'%}
-                  <a href="{% url 'website:coorplan_csv' %}" class="btn btn-primary">upload csv</a>
-                  {% endif %}
                 </div>
               </div>
             </div>
