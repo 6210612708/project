@@ -7,11 +7,13 @@
     <script src="{% url 'js-catlog' %}"></script>
     <script src="{% static '/admin/js/core.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
+    {{ form.media }}
 {% endblock %}
 {% block content %}
     <body>
-        <div class="card mt-5">
-            <h5 class="card-header">Upload CSV</h5>
+        <!-- <div class="card mt-5">
+            <h5 class="card-header">โครงงาน</h5>
             <div class="card-body">
             <p class="card-text">
                 <form method="POST" enctype="multipart/form-data">
@@ -26,9 +28,44 @@
                 </form>
             </p>
             </div>
+          </div> -->
+          <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">โครงงาน</h4>
+                <p class="card-text">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                                <label for="uname"><h6>หัวข้อโครงงาน (Subject)</h6></label>
+                                <div class="form__field" name="uname">{{ form.subject }}</div>
+                          </div>
+                          <!-- <div class="form-group row mt-3"> -->
+                            <label class="addcontent-blog mt-5">
+                                <p>ปีการศึกษา : {{ form.year }}</p>
+                                <p>วันเริ่มปีการศึกษา : {{ form.startterm }}</p>
+                                <p>วันสุดท้ายของปีการศึกษา : {{ form.endterm }}</p>
+                            </label>
+                        <!-- </div> -->
+                        <!-- <div class="form-group row mt-3">
+                            <label class="addcontent-blog">
+                                
+                            </label>
+                        </div> -->
+                        <center>
+                          <div class="form-group row mt-3">
+                            <div class="col-sm-11 mx-5">
+                            <input class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit">
+                            </div>
+                          </div></center>
+                 </form>
+                </p>
+              </div>
+            </div>
           </div>
 
-        ปัจจุบัน
+
+        <!-- ปัจจุบัน
         <table>
            
             <tr>
@@ -37,10 +74,43 @@
                 </td>
             </tr>
             
-        </table>
+        </table> -->
+        
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-header">ปัจจุบัน</h3>
+                <p class="card-text">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th class="col">หัวข้อโครงงาน</th>
+                        <th class="col">ปีการศึกษา</th>
+                        <th class="col">วันเริ่มปีการศึกษา</th>
+                        <th class="col">วันสุดท้ายของปีการศึกษา</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      <tr>  
+                          <td>
+                            {{show.subject}}
+                          </td>
+                          <td>{{show.year}}</td>
+                          <td>{{show.startterm}}</td>
+                          <td>{{show.endterm}}</td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+          </div>
+  
 
 
-        ประวัติปีการศึกษา
+        <!-- ประวัติปีการศึกษา
         <table>
             {% for all in all %}
             <tr>
@@ -51,7 +121,37 @@
                 </td>
             </tr>
             {% endfor %}
-        </table>
-
+        </table> -->
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-header">ประวัติปีการศึกษา</h3>
+                <p class="card-text">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th class="col">หัวข้อโครงงาน</th>
+                        <th class="col">ปีการศึกษา</th>
+                        <th class="col">วันเริ่มปีการศึกษา</th>
+                        <th class="col">วันสุดท้ายของปีการศึกษา</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for show in all %}
+                      <tr>  
+                          <td>
+                            {{show.subject}}
+                          </td>
+                          <td>{{show.year}}</td>
+                          <td>{{show.startterm}}</td>
+                          <td>{{show.endterm}}</td>
+                          {% endfor %}
+                      </tr>
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+          </div>
     </body>
 {% endblock %}

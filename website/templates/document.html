@@ -9,7 +9,7 @@
         <script src="{% static '/admin/js/core.js' %}"></script>
         <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <link rel="stylesheet" href="{% static '/css/addcontent.css' %}">
+        <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
         <title>Document</title>
         {{ form.media }}
     </head>
@@ -29,16 +29,20 @@
                 <p class="card-text">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <label class="form-label mx-4" for="customFile"> Uploads file</label>
-                            <label class="addcontentbox" placeholder="Email" >
-                                ชื่อ (Title) :  {{ form.title }}
-                                
-                            </label>
-                            <label class="mx-4">{{ form.file }}</label>
+                        <!-- <label class="form-label mx-3" for="customFile"> Uploads file</label> -->
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                            ชื่อ (Title) :  {{ form.title }}
+                          </label>
+                        </div>
+                        <div class="form__group row mt-4">
+                          <label class="mx-4">{{ form.file }}</label>
+                        </div>
+                            
                         <!-- <input type="file" name="file" class="form-control mt-2" id="customFile" /> -->
                         
                     </form>
-                    <input class="btn btn-primary btn-sm active mt-3 mx-4" type="submit" name="Submit" id="submit">
+                    <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
                 </p>
               </div>
             </div>

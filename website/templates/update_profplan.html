@@ -6,6 +6,16 @@
 {% endblock %}
 
 {% block content %}
+<!-- <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-header">แก้ไขรายชื่ออาจารย์</h3>
+        <p class="card-text">
+            
+        </p>
+      </div>
+    </div>
+  </div> -->
     {% if not form.is_valid %} 
         <form method="post">
             {% csrf_token %}

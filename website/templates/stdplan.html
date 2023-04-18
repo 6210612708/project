@@ -7,12 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{% url 'js-catlog' %}"></script>
     <script src="{% static '/admin/js/core.js' %}"></script>
-    <!-- <script type="text/javascript" src="/admin/jsi18n/"></script>
-    <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
-    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script> -->
     {{ form.media }}
     <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}" /> -->
     </head>
 {% endblock %}
@@ -28,10 +25,20 @@
                     {% if user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
                     <form method="POST" class="text-center">
                       {% csrf_token %}
-                      <label class="addcontent-blog">
+                      <!-- <label class="addcontent-blog">
                         วันที่ : {{ form.date }}
                         รายการ : {{ form.list }}
-                      </label>
+                      </label> -->
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          วันที่ : {{ form.date }}
+                        </label>
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          รายการ : {{ form.list }}
+                        </label>
+                      </div>
                   </p>
                 <input class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit">
                 {% if user.groups.all.0.name == 'consultant' or user.groups.all.1.name == 'coordinator'or user.groups.all.0.name == 'admin' %}

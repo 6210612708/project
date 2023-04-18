@@ -10,6 +10,7 @@
         {{ form.media }}
         <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+        <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
         <title>TodoList</title>
     </head>
 {% endblock %}
@@ -47,10 +48,20 @@
                   <p class="card-text">
                     <form method="POST" class="text-center">
                       {% csrf_token %}
-                      <label class="addcontent-blog">
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          วันที่ : {{ form.date }}
+                        </label>
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          รายการ : {{ form.list }}
+                        </label>
+                      </div>
+                      <!-- <label class="addcontent-blog">
                         วันที่ : {{ form.date }}
                         รายการ : {{ form.list }}
-                      </label>
+                      </label> -->
                   </p>
                   <a href="#" class="btn btn-primary" type="submit" name="Submit" id="submit">Submit</a>
                   </form>

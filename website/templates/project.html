@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{% url 'js-catlog' %}"></script>
     <script src="{% static '/admin/js/core.js' %}"></script>
-    <link rel="stylesheet" href="{% static '/css/addcontent.css' %}">
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
     {{ form.media }}
     <title>โครงงานักศึกษา</title>
@@ -23,17 +23,17 @@
                 <p class="card-text">
                     <form method="POST" >
                         {% csrf_token %}
-                        <div class="form-group row mt-2 mx-1">
-                                <label class="addcontentbox" placeholder="Email" >
+                        <div class="form__group row mt-3 mx-1">
+                                <label class="form__field">
                                     ชื่อ (ภาษาไทย) :  {{ form.thainame }}
                                 </label>
                           </div>
-                          <div class="form-group row mt-2 mx-1">
-                            <label class="addcontentbox" placeholder="Email" >
+                          <div class="form-group row mt-3 mx-1">
+                            <label class="form__field">
                                 ชื่อ (ภาษาอังกฤษ) : {{ form.engname }}
                             </label>
                           </div>
-                          <div class="mx-3">
+                          <div class="mx-3 mt-3">
                             <div><h6>ที่ปรึกษา : {{ request.user.profmodel }}</h6></div>
                             <div></div>
                             <span></span>
@@ -42,7 +42,7 @@
                             <div class="mx-3"><h6>อาจารย์นอกภาค : {{ form.out_prof }} {{ form.consult }}</h6></div>
                         </div>
                         <div class="form-group row mt-2">
-                            <label class="addcontentbox" placeholder="Email" >
+                            <label class="form__field mx-3">
                                 รายละเอียด : {{ form.detail }}
                             </label>
                           </div>

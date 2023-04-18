@@ -1,0 +1,25 @@
+/* $primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b; */
+
+.form__field input {
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    /* font-size: 1.3rem;
+    color: #fff;
+    padding: 7px 0;
+    background: transparent;
+    z-index: -1; */
+}
+
+.form__field input:focus {
+    padding-bottom: 6px;  
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #000000,#080a09);
+    border-image-slice: 1;
+    z-index: -1;
+  }

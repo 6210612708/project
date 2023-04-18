@@ -9,7 +9,8 @@
         <script src="{% static '/admin/js/core.js' %}"></script>
         <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <link rel="stylesheet" href="{% static '/css/addcontent.css' %}">
+        <!-- <link rel="stylesheet" href="{% static '/css/addcontent.css' %}"> -->
+        <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
         <title>Professor</title>
         {{ form.media }}
     </head>
@@ -46,28 +47,38 @@
               <p class="card-text">
                   <form method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
-                          <label class="addcontentbox">
-                              หัวข้อ (Title) :  {{ form.title }}
-                          </label>
-                          <label class="addcontentbox">
-                            ชื่อจริง (First name) :  {{ form.fname }}
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          หัวข้อ (Title) :  {{ form.title }}
                         </label>
-                        <label class="addcontentbox">
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          ชื่อจริง (First name) :  {{ form.fname }}
+                        </label>
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
                           นามสกุล (Last name) :  {{ form.lname }}
-                      </label>
-                      <label class="addcontentbox">
-                        คณะ (Major) :  {{ form.major }}
-                    </label>
-                    <label class="addcontentbox">
-                      อีเมลล์ (Email) :  {{ form.email }}
-                  </label>
-                  <label class="addcontentbox">
-                    โทรศัพท์ (Phone) :  {{ form.phone }}
-                </label>
-                      <!-- <input type="file" name="file" class="form-control mt-2" id="customFile" /> -->
-                      
+                        </label>
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field mt-2">
+                          <p>คณะ (Major) :  </p>{{ form.major }}
+                        </label>
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          อีเมลล์ (Email) :  {{ form.email }}
+                        </label>
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field">
+                          โทรศัพท์ (Phone) :  {{ form.phone }}
+                        </label>
+                      </div>
                   </form>
-                  <a href="{% url 'website:prof_csv' %}" type="submit" name="Submit" id="submit" class="btn btn-primary mx-3">Submit</a>
+                  <a href="{% url 'website:prof_csv' %}" type="submit" name="Submit" id="submit" class="btn btn-primary mt-4 mx-3">Submit</a>
               </p>
             </div>
           </div>

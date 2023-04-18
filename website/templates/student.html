@@ -2,25 +2,78 @@
 {% load static %}
 
 {% block head %}
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% url 'js-catlog' %}"></script>
+    <script src="{% static '/admin/js/core.js' %}"></script>
+    {{ form.media }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}" /> -->
+    </head>
 {% endblock %}
 {% block content %}
     <body>
-        <div class="card mt-5">
-            <!-- <h5 class="card-header">Featured</h5> -->
+        <!-- <div class="card mt-5">
+            <h5 class="card-header">Featured</h5>
             <h5 class="card-header">Upload CSV</h5>
             <div class="card-body">
-              <!-- <h5 class="card-title">Upload CSV</h5> -->
+              <h5 class="card-title">Upload CSV</h5>
               <p class="card-text"><form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <label class="addcontent-blog">
                   {{ form.media }}
                   {{ form.as_p }}
                 </label>
-                <!-- <input type="submit" name="Submit" id="submit"> -->
+                <input type="submit" name="Submit" id="submit">
                 <div class="text-center">
                 <a href="#" type="submit" name="Submit" id="submit" class="btn btn-primary">Submit</a></div>
             </form></p>
+            </div>
+          </div> -->
+          <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-header">นักศึกษา</h3>
+                <p class="card-text">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                            รหัสนักศึกษา (Student ID) :  {{ form.stdid }}
+                          </label>
+                        </div>
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                            ชื่อจริง (First name) :  {{ form.fname }}
+                          </label>
+                        </div>
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                            นามสกุล (Last name) :  {{ form.lname }}
+                          </label>
+                        </div>
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field mt-2">
+                            <p>คณะ (Major) :  </p>{{ form.major }}
+                          </label>
+                        </div>
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                            อีเมลล์ (Email) :  {{ form.email }}
+                          </label>
+                        </div>
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                            โทรศัพท์ (Phone) :  {{ form.phone }}
+                          </label>
+                        </div>
+                    </form>
+                    <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+                    <a href="{% url 'website:std_csv' %}" class="btn btn-secondary btn-sm active mt-4 mx-3" role="button" aria-pressed="true">Upload CSV</a>
+                </p>
+              </div>
             </div>
           </div>
 
@@ -32,7 +85,7 @@
         </form> -->
 
 
-        <table>
+        <!-- <table>
             {% for show in show %}
             <tr>
                 <td>
@@ -45,7 +98,48 @@
             {% endfor %}
 
             <a href="{% url 'website:std_csv' %}">upload csv</a>
-        </table>
+        </table> -->
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-header">ผู้ประสานงาน</h3>
+                <p class="card-text">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th class="col"></th>
+                        <th class="col">ชื่อจริง</th>
+                        <th class="col">นามสกุล</th>
+                        <th class="col">คณะ</th>
+                        <th class="col">อีเมลล์</th>
+                        <th class="col">เบอร์โทรศัพท์</th>
+                        <th class="col">ลบ/แก้ไข</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for show in show %}
+                      <tr>  
+                          <td>
+                            {{show.title}}
+                          </td>
+                          <td>{{show.fname}}</td>
+                          <td>{{show.lname}}</td>
+                          <td>{{show.major}}</td>
+                          <td>{{show.email}}</td>
+                          <td>{{show.phone}}</td>
+                        <td>
+                            <a href="{% url 'website:deletestd' show.id %}" 
+                            onclick="return confirm('Confirm Delete?')">ลบ</a>
+                            <a href="{% url 'website:updatestd' show.id %}" >แก้ไข</a>
+                        </td>
+                        {% endfor %}
+                      </tr>
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+          </div>
 
     </body>
 {% endblock %}
