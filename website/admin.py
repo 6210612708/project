@@ -17,6 +17,9 @@ admin.site.register(GradeModel)
 admin.site.register(Fileproject)
 admin.site.register(SubjectModel)
 admin.site.register(ScoreModel)
+admin.site.register(ScoreCom1)
+admin.site.register(ScoreCom2)
+admin.site.register(ScoreConsult)
 admin.site.register(Topicproject)
 
 
