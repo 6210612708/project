@@ -14,8 +14,22 @@
             <p class="card-text">
                 {% if messages %}
                     {% for messages in messages %}
-                        <div>{{messages|safe}}</div>
+                    <br>
+                    <br>
+                    <div class="text-center col-12 row mt-3 mx-1">
+                      <div>{{messages|safe}}</div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                        <!-- <div>{{messages|safe}}</div> -->
                     {% endfor %}
+                        <!-- <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br> -->
                 {% else %}
                 {{notify}}
                 <form method="POST" enctype="multipart/form-data">

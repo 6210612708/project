@@ -18,6 +18,7 @@
 
         </form>
     {% endif %} -->
+    {% if not form.is_valid %} 
     <div class="row center">
     <div class="col-sm-6">
         <div class="card">
@@ -29,12 +30,8 @@
                 <label class="addcontent-blog">
                   วันที่ : {{ form.date }}
                   รายการ : {{ form.list }}
-                  <!-- {{ form.as_table }} -->
                 </label>
             </p>
-    
-
-          <!-- <input class="btn btn-primary btn-sm active" type="input" name="Submit" id="submit" role="button" aria-pressed="true">Submit</input> -->
           <input class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit">
           <a href="{% url 'website:todolist' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Back</a>
             </form>
@@ -42,7 +39,7 @@
         </div>
       </div>
     </div>
-
+    {% endif %}
 {% endblock %}
 
 </html>

@@ -10,22 +10,32 @@
 {% endblock %}
 {% block content %}
     <body>
-        <div class="card mt-5">
+        <div class="col-sm-12 center">
+        <div class="card">
             <h5 class="card-header">{{list.thainame}}</h5>
             <div class="card-body">
             <p class="card-text">
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <label class="addcontent-blog">
+                    <div class="form__group row mt-3 mx-1">
+                        <label class="form__field mt-2">
+                          <p>คณะกรรมการคนที่ 1 :  </p>{{ form.committee1 }}
+                        </label>
+                      </div>
+                      <div class="form__group row mt-3 mx-1">
+                        <label class="form__field mt-2">
+                          <p>คณะกรรมการคนที่ 2 :  </p>{{ form.committee2 }}
+                        </label>
+                      </div>
+                    <!-- <label class="addcontent-blog">
                         {{ form.media }}
                         {{ form.as_p }}
-                        </label>
-                        <input type="submit" name="Submit" id="submit">
-                    <div class="text-center">
-                    
+                        </label> -->
+                        <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">  
                 </form>
             </p>
             </div>
           </div>
+        </div>
     </body>
 {% endblock %}

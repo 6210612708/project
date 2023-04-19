@@ -1,44 +1,14 @@
 {% extends "layout.html" %}
 {% load static %}
 
-{% comment %} <html lang="en">
-    <div class="row">
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">
-                {% block head %}
-                <title>update</title>
-                {% endblock %}
-              </h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div> {% endcomment %}
 {% block head %}
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
     <title>update</title>
 {% endblock %}
 
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-    {% if not form.is_valid %} 
+
+    <!-- {% if not form.is_valid %} 
         <form method="post">
             {% csrf_token %}
             <table>
@@ -48,6 +18,52 @@
             <a href="{% url 'website:prof' %}" >Back</a>
 
         </form>
+    {% endif %} -->
+    {% if not form.is_valid %} 
+    <div class="col-sm-12 center">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">แก้ไขผู้ประสานงาน</h5>
+            <p class="card-text">
+              <form method="POST">
+                {% csrf_token %}
+                <div class="form__group row mt-3 mx-1">
+                  <label class="form__field">
+                    หัวข้อ (Title) :  {{ form.title }}
+                  </label>
+                </div>
+                <div class="form__group row mt-3 mx-1">
+                  <label class="form__field">
+                    ชื่อจริง (First name) :  {{ form.fname }}
+                  </label>
+                </div>
+                <div class="form__group row mt-3 mx-1">
+                  <label class="form__field">
+                    นามสกุล (Last name) :  {{ form.lname }}
+                  </label>
+                </div>
+                <div class="form__group row mt-3 mx-1">
+                  <label class="form__field mt-2">
+                    <p>คณะ (Major) :  </p>{{ form.major }}
+                  </label>
+                </div>
+                <div class="form__group row mt-3 mx-1">
+                  <label class="form__field">
+                    อีเมลล์ (Email) :  {{ form.email }}
+                  </label>
+                </div>
+                <div class="form__group row mt-3 mx-1">
+                  <label class="form__field">
+                    โทรศัพท์ (Phone) :  {{ form.phone }}
+                  </label>
+                </div>
+            </p>
+          <input class="btn btn-primary btn-sm active mx-3 mt-3" type="submit" name="Submit" id="submit">
+          <a href="{% url 'website:prof' %}" class="btn btn-secondary btn-sm active  mt-3" role="button" aria-pressed="true">Back</a>
+            </form>
+          </div>
+        </div>
+      </div>
     {% endif %}
 
 {% endblock %}

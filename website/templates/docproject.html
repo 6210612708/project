@@ -1,4 +1,4 @@
-{% comment %} {% extends "layout.html" %}
+{% extends "layout.html" %}
 {% load static %}
 
 {% block head %}
@@ -12,13 +12,22 @@
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
         <title>Document project</title>
     </head>
-{% endblock %} {% endcomment %}
+{% endblock %}
 {% block content %}
-<br><br><br><br><br><br><br><br><br>
-{% if messages %}
-{% for messages in messages %}
-    <h3 class="text-center text-warning">{{messages|safe}}</h3>
-{% endfor %}
+
+<div class="col-sm-12 center">
+  <div class="card">
+    <div class="card-body">
+       {% if messages %}
+      {% for messages in messages %}
+        <br><br>
+          <h3 class="text-center text-danger">{{messages|safe}}</h3>
+        <br><br>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+     
 {% else %}
     <body>
         {% comment %} <div class="card">

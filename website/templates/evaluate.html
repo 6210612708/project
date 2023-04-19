@@ -1,4 +1,20 @@
-{% for show in show %}
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
+        {{ form.media }}
+        <title>ประเมินโครงงาน</title>
+        </head>
+{% endblock %}
+
+{% block content %}
+
+<!-- {% for show in show %}
     ที่ปรึกษา
     <br>
     <tr>
@@ -18,8 +34,66 @@
         </td>
     </tr>
 {% endfor %}
-<br>
-{% for show in com %}
+<br> -->
+<div class="col-sm-12 center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">ที่ปรึกษาโครงงาน</h5>
+        <p class="card-text">
+          <table class="table table-borderless">
+            </thead>
+            <tbody>
+              
+              <tr>
+                  <th class="col">หัวข้อ</th>
+                  <th class="col">อาจารย์ที่ปรึกษา</th>
+                  <th class="col">สถานะ</th>
+                  <th class="col">นักศึกษา</th>
+                  <th class="col">ประเมิน</th>
+              </tr>
+              {% for show in show %}
+              
+              <tr>
+                {% if request.user.profmodel == show.consult %}
+                  <td>
+                    {{show.thainame}}
+                  </td>
+                  <td>
+                    {{show.consult}}
+                  </td>
+                {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                <td>
+                    {{show.status}}
+                </td>
+                <td>
+                    <p>-</p>
+                </td>
+                <td>
+                    <p>-</p>
+                </td>
+                {% else %}
+                <td>   
+                    {{show.status}}
+                </td> 
+                <td>
+                    <p>{{show.student1}}</p>
+                    <p>{{show.student2}}</p>
+                </td>
+                {% endif %}
+                <td>   
+                    <a href="{% url 'website:score' show.id %}" >กดที่นี่</a>
+                </td> 
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </p>
+      </div>
+    </div>
+  </div>
+
+<!-- {% for show in com %}
     กรรมการ
     <br>
     <tr>
@@ -38,5 +112,64 @@
             {% endif %}
         </td>
     </tr>
-{% endfor %}
+{% endfor %} -->
+<div class="col-sm-12 center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">กรรมการ</h5>
+        <p class="card-text">
+          <table class="table table-borderless">
+            </thead>
+            <tbody>
+              
+              <tr>
+                  <th class="col">หัวข้อ</th>
+                  <th class="col">อาจารย์ที่ปรึกษา</th>
+                  <th class="col">สถานะ</th>
+                  <th class="col">นักศึกษา</th>
+                  <th class="col">ประเมิน</th>
+              </tr>
+              {% for show in show %}
+              
+              <tr>
+                {% if request.user.profmodel == show.consult %}
+                  <td>
+                    {{show.thainame}}
+                  </td>
+                  <td>
+                    {{show.consult}}
+                  </td>
+                {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                <td>
+                    {{show.status}}
+                </td>
+                <td>
+                    <p>-</p>
+                </td>
+                <td>
+                    <p>-</p>
+                </td>
+                {% else %}
+                <td>   
+                    {{show.status}}
+                </td> 
+                <td>
+                    <p>{{show.student1}}</p>
+                    <p>{{show.student2}}</p>
+                </td>
+                {% endif %}
+                <td>   
+                    <a href="{% url 'website:score' show.id %}" >กดที่นี่</a>
+                </td> 
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </p>
+      </div>
+    </div>
+  </div>
 
+
+{% endblock %}

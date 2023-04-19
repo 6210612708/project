@@ -25,7 +25,14 @@
                 <p class="card-text">
                     {% if messages %}
                         {% for messages in messages %}
-                            <div>{{messages|safe}}</div>
+                        <br>
+                        <br>
+                        <div class="text-center col-12 row mt-3 mx-1">
+                          <div>{{messages|safe}}</div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
                         {% endfor %}
                     {% else %}
                     {{notify}}

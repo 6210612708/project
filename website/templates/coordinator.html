@@ -6,17 +6,32 @@
 {% endblock %}
 {% block content %}
     <body>
-        <br>
-        <br>
-        <br>
-        <br><br><br><br><br><br>
-        <form method="POST" enctype="multipart/form-data">
+       
+        <!-- <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           {{ form.media }}
           {{ form.as_p }}
           <input type="submit" name="Submit" id="submit">
-        </form>
-        <table>
+        </form> -->
+        <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-header">นักศึกษา</h3>
+                <p class="card-text">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                            <p>ผู้ประสานงาน : </p> {{ form.user }}
+                          </label>
+                        </div>
+                    </form>
+                    <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+              </div>
+            </div>
+          </div>
+
+        <!-- <table>
           {% for show in show %}
           <tr>
               <td>
@@ -24,6 +39,31 @@
               </td>
           </tr>
           {% endfor %}
+      </table> -->
+      <div class="col-sm-12 center">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-header">ผู้ประสานงาน</h3>
+            <p class="card-text">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th class="col">รายชื่อ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for show in show %}
+                  <tr>  
+                      <td>
+                        {{show.user}} 
+                      </td>
+                    {% endfor %}
+                  </tr>
+                </tbody>
+              </table>
+            </p>
+          </div>
+        </div>
+      </div>
 
-      </table>
 {% endblock %}
