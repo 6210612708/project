@@ -234,11 +234,11 @@
                             <p>{{show.committee1}}</p>
                             <p>{{show.committee2}}</p> 
                         </td>
-                        {% endif %}
+                        {% else %}
                         <td>
                             <a href="{% url 'website:committee' show.id %}" >เลือกกรรมการ</a>
                         </td>
-                        
+                        {% endif %}
                       </tr>
                       {% endfor %}
                     </tbody>

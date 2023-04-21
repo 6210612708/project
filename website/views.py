@@ -782,6 +782,18 @@ def applyproject(request, pk):
                 std1 = list.student1,
                 std2 = list.student2
             )
+            ScoreConsult.objects.filter(project=list).update(
+                std1 = list.student1,
+                std2 = list.student2
+            )
+            ScoreCom1.objects.filter(project=list).update(
+                std1 = list.student1,
+                std2 = list.student2
+            )
+            ScoreCom2.objects.filter(project=list).update(
+                std1 = list.student1,
+                std2 = list.student2
+            )
             return redirect('website:detailproject')
     return render(request, 'applyproject.html', {'form': form})
 
