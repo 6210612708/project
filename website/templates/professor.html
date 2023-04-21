@@ -88,7 +88,7 @@
         <div class="col-sm-12 center">
           <div class="card">
             <div class="card-body">
-              <h3 class="card-header">ผู้ประสานงาน</h3>
+              <h3 class="card-header">รายชื่ออาจารย์</h3>
               <p class="card-text">
                 <table class="table table-borderless">
                   <thead>
@@ -135,7 +135,7 @@
         <div class="col-sm-12 center">
           <div class="card">
             <div class="card-body">
-              <h3 class="card-header">รายชื่ออาจารย์</h3>
+              <h3 class="card-header">ผู้ประสานงาน</h3>
               <p class="card-text">
                 <table class="table table-borderless">
                   <thead>
@@ -150,7 +150,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for show in show %}
+                    {% for show in coor %}
                     <tr>  
                         <td>
                           {{show.user.title}}
