@@ -22,6 +22,7 @@
         {{ form.as_p }}
         <input type="submit" name="Submit" id="submit">
     </form> -->
+    {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
     <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
         <div class="card">
           <div class="card-body">
@@ -49,14 +50,14 @@
           </div>
         </div>
       </div>
-
-{% for show in file %}
+      {% endif %}
+{% comment %} {% for show in file %}
 {{show.topic}} {{show.datedue}}
-{% endfor %}
+{% endfor %} {% endcomment %}
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">รายงานโครงงาน</h5>
+        <h5 class="card-title">กำหนดวันส่ง</h5>
         <p class="card-text">
           <table class="table table-borderless">
             </thead>
@@ -119,7 +120,7 @@
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">ที่ปรึกษาโครงงาน</h5>
+                <h5 class="card-title">โครงงานนักศึกษา</h5>
                 <p class="card-text">
                   <table class="table table-borderless">
                     </thead>
@@ -226,7 +227,7 @@
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">ที่ปรึกษาโครงงาน</h5>
+        <h5 class="card-title">โครงงานนักศึกษา</h5>
         <p class="card-text">
           <table class="table table-borderless">
             </thead>

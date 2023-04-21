@@ -120,6 +120,7 @@ urlpatterns = [
     path('subject/delete/<pk>', views.deletesubject ,name='deletesubject'),
     
     path('evaluate', views.evaluate ,name='evaluate'),
+    path('reportgrade/<pk>', views.report_grade ,name='report_grade'),
     
     path('committee/<pk>', views.committee ,name='committee'),
 

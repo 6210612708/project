@@ -88,7 +88,7 @@ def login_view(request):
                             user.save()
                         group = Group.objects.get(name='consultant')
                         user.groups.add(group)
-                        OtherModel.objects.filter(stdid = user.username).update(
+                        ProfModel.objects.filter(fname = user.first_name ,lname = user.last_name).update(
                             user=user
                         )
                 
@@ -118,7 +118,10 @@ def login_view(request):
                             
                     else:
                         group = Group.objects.get(name='consultant')
-                        user.groups.add(group)                        
+                        user.groups.add(group)
+                        ProfModel.objects.filter(fname = user.first_name ,lname = user.last_name).update(
+                            user=user
+                        )                        
 
                     if user is not None:
                         login(request, user)

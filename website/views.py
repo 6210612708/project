@@ -673,41 +673,50 @@ def project(request):
     forms = projectModelForm()
     show = ProjectModel.objects.all()
     context = {'form': forms, 'show': show}
-    if request.method == "POST":
-        if form.is_valid():
-            check = SubjectModel.objects.all()
-            if check :
-                con = request.user.profmodel
-                test = form.save(commit=False)
-                test.consult = con
-                fin = test.save()
-                ScoreModel.objects.create(
-                    subject= SubjectModel.objects.latest('id'),
-                    project = test,
-                    consult = con
-                )
-                ScoreConsult.objects.create(
-                    subject= SubjectModel.objects.latest('id'),
-                    project = test,
-                    consult = con
-                )
-                ScoreCom1.objects.create(
-                    subject= SubjectModel.objects.latest('id'),
-                    project = test,
-                    consult = con
-                )
-                ScoreCom2.objects.create(
-                    subject= SubjectModel.objects.latest('id'),
-                    project = test,
-                    consult = con
-                )
-            else :
-                messages.error(request, 'กรุณารอแอดมินตั้งค่าวิชาและปีการศึกษา')
-                return render(request, 'project.html', context)
-                
+    prof = ProfModel.objects.all()
+    can_show = 0
+    for ck in prof :
+        if ck.user == request.user :
+            can_show = 1
+    if can_show == 1 :
+        if request.method == "POST":
+            if form.is_valid():
+                check = SubjectModel.objects.all()
+                if check :
+                    con = request.user.profmodel
+                    test = form.save(commit=False)
+                    test.consult = con
+                    fin = test.save()
+                    ScoreModel.objects.create(
+                        subject= SubjectModel.objects.latest('id'),
+                        project = test,
+                        consult = con
+                    )
+                    ScoreConsult.objects.create(
+                        subject= SubjectModel.objects.latest('id'),
+                        project = test,
+                        consult = con
+                    )
+                    ScoreCom1.objects.create(
+                        subject= SubjectModel.objects.latest('id'),
+                        project = test,
+                        consult = con
+                    )
+                    ScoreCom2.objects.create(
+                        subject= SubjectModel.objects.latest('id'),
+                        project = test,
+                        consult = con
+                    )
+                else :
+                    messages.error(request, 'กรุณารอแอดมินตั้งค่าวิชาและปีการศึกษา')
+                    return render(request, 'project.html', context)            
         else:
             print("Error", form.errors)
-            
+
+    else:
+        messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลอาจารย์')
+        return redirect('website:index')
+    
     return render(request, 'project.html', context)
 
 def reportproject(request ,pk):
@@ -803,13 +812,25 @@ def applyproject(request, pk):
 
 
 def detailproject(request):
-    show = ProjectModel.objects.filter(
-        Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
-    context = {'show': show}
-    if not show:
-        return redirect('website:stdproject')
+    check = StdModel.objects.all()
+    can_show = 0
+    for ck in check :
+        if ck.user == request.user :
+            can_show = 1
+    if can_show == 1 :
+        show = ProjectModel.objects.filter(
+            Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
+        
+        context = {'show': show}
+        if not show:
+            return redirect('website:stdproject')
+        else:
+            return render(request, 'detailproject.html', context)
     else:
-       return render(request, 'detailproject.html', context)
+        messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลนักศึกษา')
+        return redirect('website:index')
+    
+
 
 
 def docproject(request):
@@ -919,11 +940,20 @@ def score(request ,pk):
     return render(request, 'score.html', context)
 
 def evaluate(request):
-    show = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ')
-    com = ProjectModel.objects.filter(
-        Q(committee1=request.user.profmodel) | Q(committee2=request.user.profmodel) ,status ='อนุมัติ')
-    context = {'show':show ,'com':com}
-    return render(request, 'evaluate.html', context)
+    prof = ProfModel.objects.all()
+    can_show = 0
+    for ck in prof :
+        if ck.user == request.user :
+            can_show = 1
+    if can_show == 1 :
+        show = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ')
+        com = ProjectModel.objects.filter(
+            Q(committee1=request.user.profmodel) | Q(committee2=request.user.profmodel) ,status ='อนุมัติ')
+        context = {'show':show ,'com':com}
+        return render(request, 'evaluate.html', context)
+    else:
+        messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลอาจารย์')
+        return redirect('website:index')
 
 
 def grade(request):
@@ -951,6 +981,10 @@ def updategrade(request,pk):
     context = {'form': form }
     return render(request, 'updategrade.html', context)
 
+def report_grade(request,pk):
+    show = ScoreModel.objects.get(id=pk)
+    context = {'show': show }
+    return render(request, 'grade.html', context)
 
 # ################# commiteee ###########################
 
