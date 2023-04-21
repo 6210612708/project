@@ -30,8 +30,8 @@
                 </ul>
               </li>
               <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
-              <li><a href="{% url 'website:subject' %}">ปีการศึกษา</a></li>
-              <li><a href="#">เกณฑ์การตัดเกรด</a></li>
+              <li><a href="{% url 'website:subject' %}">วิชาและภาคเรียน</a></li>
+              <li><a href="{% url 'website:grade' %}">เกณฑ์การตัดเกรด</a></li>
               <li class="dropdown"><a href="#"><span>จัดการข้อมูลพื้นฐาน</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{% url 'website:prof' %}">อาจารย์และผู้ประสานงาน</a></li>
@@ -59,7 +59,7 @@
             <ul>
               <li><a href="{% url 'website:document' %}">อัพโหลดเอกสาร</a></li>
               <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
-              <li><a href="#">เกณฑ์การตัดเกรด</a></li>
+              <li><a href="{% url 'website:grade' %}">เกณฑ์การตัดเกรด</a></li>
               <li><a href="{% url 'website:allproject' %}">รายงานโครงงาน</a></li>
               <li><a href="{% url 'website:evaluate' %}">ประเมินโครงงาน</a></li>
             </ul>

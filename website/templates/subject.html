@@ -145,6 +145,10 @@
                           <td>{{show.year}}</td>
                           <td>{{show.startterm}}</td>
                           <td>{{show.endterm}}</td>
+                          <td>
+                          <a href="{% url 'website:deletesubject' show.id %}" 
+                          onclick="return confirm('Confirm Delete?')">ลบ</a>
+                        </td>
                           {% endfor %}
                       </tr>
                     </tbody>

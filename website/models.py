@@ -285,3 +285,6 @@ class GradeModel(models.Model):
     Dplus = models.IntegerField(null=True)
     D = models.IntegerField(null=True)
     F = models.IntegerField(null=True)
+    
+    def __str__(self):
+        return f'{self.subject}'
