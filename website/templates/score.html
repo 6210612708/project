@@ -6,7 +6,9 @@
         {% for show in show %}
             <tr>
                 <td>
-                    {{show.subject}} {{show.std1}} {{show.std2}} {{show.consult}} {{show.project}}
+                    {{show.subject}} {{show.project}} {{show.std1}} {{show.std2}} {{show.consult}}
+                    <br>
+                    {{show.score}} 
                 </td>
             </tr>
             {% endfor %}
@@ -21,6 +23,6 @@
                     <div class="text-center">
                     
                 </form>
-
+            <a href="{% url 'website:evaluate'%}" >กลับ</a>
     </body>
 {% endblock %}

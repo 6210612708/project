@@ -129,10 +129,10 @@
                   <th class="col">นักศึกษา</th>
                   <th class="col">ประเมิน</th>
               </tr>
-              {% for show in show %}
+              {% for show in com %}
               
               <tr>
-                {% if request.user.profmodel == show.consult %}
+                {% if request.user.profmodel == show.committee1 or request.user.profmodel == show.committee1 %}
                   <td>
                     {{show.thainame}}
                   </td>

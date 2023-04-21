@@ -681,6 +681,21 @@ def project(request):
                 project = test,
                 consult = con
             )
+            ScoreConsult.objects.create(
+                subject= SubjectModel.objects.latest('id'),
+                project = test,
+                consult = con
+            )
+            ScoreCom1.objects.create(
+                subject= SubjectModel.objects.latest('id'),
+                project = test,
+                consult = con
+            )
+            ScoreCom2.objects.create(
+                subject= SubjectModel.objects.latest('id'),
+                project = test,
+                consult = con
+            )
         else:
             print("Error", form.errors)
             
@@ -837,17 +852,54 @@ def deletesubject(request, pk):
 # =========== grade score==========================================
 
 def score(request ,pk):
-    list = ScoreModel.objects.get(id=pk)
-    show = ScoreModel.objects.filter(id=pk)
-    form = ScoreForm(instance=list)
-    if request.method == 'POST':
-        form = ScoreForm(request.POST, instance=list)
-        if form.is_valid():
-            form.save()
-            return redirect('website:project')
-        else:
-            print("Error", form.errors)
-    context = {'form': form , 'show':show}
+    con = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ')
+    com1 = ProjectModel.objects.filter(committee1=request.user.profmodel,status ='อนุมัติ')
+    
+    if con :
+        list = ScoreConsult.objects.get(id=pk)
+        show = ScoreConsult.objects.filter(id=pk)
+        form = ScoreconsultForm(instance=list)
+        if request.method == 'POST':
+            form = ScoreconsultForm(request.POST, instance=list)
+            if form.is_valid():
+                test = form.save(commit=False)
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 
+                + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                test.score = point
+                fin = test.save()
+            else:
+                print("Error", form.errors)
+        context = {'form': form , 'show':show}
+    elif com1 :
+        list = ScoreCom1.objects.get(id=pk)
+        show = ScoreCom1.objects.filter(id=pk)
+        form = Scorecom1Form(instance=list)
+        if request.method == 'POST':
+            form = Scorecom1Form(request.POST, instance=list)
+            if form.is_valid():
+                test = form.save(commit=False)
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 
+                + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                test.score = point
+            else:
+                print("Error", form.errors)
+        context = {'form': form , 'show':show}
+    else :
+        list = ScoreCom2.objects.get(id=pk)
+        show = ScoreCom2.objects.filter(id=pk)
+        form = Scorecom2Form(instance=list)
+        if request.method == 'POST':
+            form = Scorecom2Form(request.POST, instance=list)
+            if form.is_valid():
+                test = form.save(commit=False)
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 
+                + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                test.score = point
+            else:
+                print("Error", form.errors)
+        context = {'form': form , 'show':show}
+        
+    
     return render(request, 'score.html', context)
 
 def evaluate(request):
