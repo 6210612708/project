@@ -140,7 +140,17 @@ class CoordinatorModel(models.Model):
 
 
 # ==================  PROJECT ===================================
-
+class SubjectModel(models.Model):
+    def current_year():
+        return datetime.date.today().year + 543
+    
+    subject = models.CharField(max_length=200, null=True)
+    year = models.IntegerField(null=True ,default=current_year)
+    startterm = models.DateField(null=True)
+    endterm = models.DateField(null=True)
+    
+    def __str__(self):
+        return f'{self.subject} {self.year}'
 
 class ProjectModel(models.Model):
     STATUS = (
@@ -163,6 +173,7 @@ class ProjectModel(models.Model):
         StdModel, null=True, blank=True, on_delete=models.CASCADE, related_name='student2')
     status = models.CharField(
         max_length=200, null=True, choices=STATUS, default='ยังไม่มีนักศึกษาลงทะเบียน')
+    
 
     def __str__(self):
         return self.thainame
@@ -192,19 +203,6 @@ class Fileproject(models.Model):
 
     def __str__(self):
         return f'{self.project} {self.topic}'
-
-
-class SubjectModel(models.Model):
-    def current_year():
-        return datetime.date.today().year + 543
-    
-    subject = models.CharField(max_length=200, null=True)
-    year = models.IntegerField(null=True ,default=current_year)
-    startterm = models.DateField(null=True)
-    endterm = models.DateField(null=True)
-    
-    def __str__(self):
-        return f'{self.subject} {self.year}'
 
 
 class ScoreConsult(models.Model):

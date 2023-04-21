@@ -278,5 +278,69 @@
 
         </table>
 {% endif %} -->
+{% if user.groups.all.0.name == 'admin'%}
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">เลือกกรรมการสำหรับผู้ประสานงาน</h5>
+                <p class="card-text">
+                  <table class="table table-borderless">
+                    </thead>
+                    <tbody>
+                      
+                      <tr>
+                        <th class="col">หัวข้อ</th>
+                        <th class="col">อาจารย์ที่ปรึกษา</th>
+                        <th class="col">รายละเอียด</th>
+                        <th class="col">สถานะ</th>
+                        <th class="col">นักศึกษา</th>
+                        <th class="col">กรรมการ</th>
+                      </tr>
+                      {% for show in show %}
+                      <tr>
+                          <td>
+                            {{show.thainame}}
+                          </td>
+                          <td>
+                            {{show.consult}}
+                          </td>
+                          <td>
+                            {{show.detail}}
+                          </td>
+                          {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                          <td>
+                            {{show.status}}
+                          </td>
+                          <td>
+                            <p>-</p>
+                        </td>
+                          {% else %}
+                          <td>
+                            {{show.status}}
+                          </td>
+                          <td>
+                            <p>{{show.student1}}</p>
+                            <p>{{show.student2}}</p>
+                        </td>
+                        {% endif %}
+                        {% if show.committee1 != none %}
+                        <td>
+                            <p>{{show.committee1}}</p>
+                            <p>{{show.committee2}}</p> 
+                        </td>
+                        {% else %}
+                        <td>
+                            <a href="{% url 'website:committee' show.id %}" >เลือกกรรมการ</a>
+                        </td>
+                        {% endif %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endif %}
     </body>
 {% endblock %}

@@ -670,40 +670,44 @@ def allproject(request):
 
 def project(request):
     form = projectModelForm(request.POST)
+    forms = projectModelForm()
+    show = ProjectModel.objects.all()
+    context = {'form': forms, 'show': show}
     if request.method == "POST":
         if form.is_valid():
-            con = request.user.profmodel
-            test = form.save(commit=False)
-            test.consult = con
-            fin = test.save()
-            ScoreModel.objects.create(
-                subject= SubjectModel.objects.latest('id'),
-                project = test,
-                consult = con
-            )
-            ScoreConsult.objects.create(
-                subject= SubjectModel.objects.latest('id'),
-                project = test,
-                consult = con
-            )
-            ScoreCom1.objects.create(
-                subject= SubjectModel.objects.latest('id'),
-                project = test,
-                consult = con
-            )
-            ScoreCom2.objects.create(
-                subject= SubjectModel.objects.latest('id'),
-                project = test,
-                consult = con
-            )
+            check = SubjectModel.objects.all()
+            if check :
+                con = request.user.profmodel
+                test = form.save(commit=False)
+                test.consult = con
+                fin = test.save()
+                ScoreModel.objects.create(
+                    subject= SubjectModel.objects.latest('id'),
+                    project = test,
+                    consult = con
+                )
+                ScoreConsult.objects.create(
+                    subject= SubjectModel.objects.latest('id'),
+                    project = test,
+                    consult = con
+                )
+                ScoreCom1.objects.create(
+                    subject= SubjectModel.objects.latest('id'),
+                    project = test,
+                    consult = con
+                )
+                ScoreCom2.objects.create(
+                    subject= SubjectModel.objects.latest('id'),
+                    project = test,
+                    consult = con
+                )
+            else :
+                messages.error(request, 'กรุณารอแอดมินตั้งค่าวิชาและปีการศึกษา')
+                return render(request, 'project.html', context)
+                
         else:
             print("Error", form.errors)
             
-    form = projectModelForm()
-    show = ProjectModel.objects.all()
-    some = ProjectModel.objects.filter(consult=request.user.profmodel)
-
-    context = {'form': form, 'show': show}
     return render(request, 'project.html', context)
 
 def reportproject(request ,pk):

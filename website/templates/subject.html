@@ -37,14 +37,14 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group row">
-                                <label for="uname"><h6>หัวข้อโครงงาน (Subject)</h6></label>
+                                <label for="uname"><h6>ชื่อวิชา</h6></label>
                                 <div class="form__field" name="uname">{{ form.subject }}</div>
                           </div>
                           <!-- <div class="form-group row mt-3"> -->
                             <label class="addcontent-blog mt-5">
                                 <p>ปีการศึกษา : {{ form.year }}</p>
-                                <p>วันเริ่มปีการศึกษา : {{ form.startterm }}</p>
-                                <p>วันสุดท้ายของปีการศึกษา : {{ form.endterm }}</p>
+                                <p>วันเริ่มของภาคเรียน : {{ form.startterm }}</p>
+                                <p>วันสุดท้ายของภาคเรียน : {{ form.endterm }}</p>
                             </label>
                         <!-- </div> -->
                         <!-- <div class="form-group row mt-3">
@@ -84,10 +84,10 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th class="col">หัวข้อโครงงาน</th>
+                        <th class="col">ชื่อวิชา</th>
                         <th class="col">ปีการศึกษา</th>
-                        <th class="col">วันเริ่มปีการศึกษา</th>
-                        <th class="col">วันสุดท้ายของปีการศึกษา</th>
+                        <th class="col">วันเริ่มของภาคเรียน</th>
+                        <th class="col">วันสุดท้ายของภาคเรียน</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -125,15 +125,15 @@
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
-                <h3 class="card-header">ประวัติปีการศึกษา</h3>
+                <h3 class="card-header">ประวัติภาคการศึกษา</h3>
                 <p class="card-text">
                   <table class="table table-borderless">
                     <thead>
                       <tr>
-                        <th class="col">หัวข้อโครงงาน</th>
+                        <th class="col">ชื่อวิชา</th>
                         <th class="col">ปีการศึกษา</th>
-                        <th class="col">วันเริ่มปีการศึกษา</th>
-                        <th class="col">วันสุดท้ายของปีการศึกษา</th>
+                        <th class="col">วันเริ่มของภาคเรียน</th>
+                        <th class="col">วันสุดท้ายของภาคเรียน</th>
                       </tr>
                     </thead>
                     <tbody>
