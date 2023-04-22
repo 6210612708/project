@@ -9,7 +9,7 @@
         <script src="{% static '/admin/js/core.js' %}"></script>
         <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <title>project</title>
+        <title>รายละเอียดโครงงาน</title>
     </head>
 {% endblock %}
 {% block content %}
@@ -19,7 +19,10 @@
          <div class="col-sm-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">ข้อมูลโครงงาน</h5>
+                  <!-- <h5 class="card-title">ข้อมูลโครงงาน</h5> -->
+                  <div class="card-header">
+                    <h5 class="card-title">ข้อมูลโครงงาน</h5>
+                  </div>
                   <p class="card-text">
                     <table class="table table-borderless">
                       <thead>
@@ -27,6 +30,8 @@
                           <th scope="col">ชื่อโครงงาน</th>
                           <th scope="col">ที่ปรึกษา</th>
                           <th scope="col">รายละเอียด</th>
+                          <th scope="col">สถานะ</th>
+                          <th scope="col">สมาชิก</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -38,8 +43,10 @@
                         {% if user.groups.all.0.name == 'student' %}
                             {% if show.status == 'รอการอนุมัติ' %}
                                 <td>{{show.status}}</td>
-                                <td>{{show.student1}}</td>
-                                <td>{{show.student2}}</td>
+                                <td>
+                                  <p>{{show.student1}}</p>
+                                  <p>{{show.student2}}</p>
+                                </td>
                             {% else %}
                                 {% if x == 0 %}
                                     <td>

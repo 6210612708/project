@@ -10,16 +10,16 @@
         <!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}"> -->
         {{ form.media }}
         <link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
-        <title>Document project</title>
+        <title>อัพโหลดเอกสารโครงงาน</title>
     </head>
 {% endblock %}
 {% block content %}
 
+{% if messages %}
+      {% for messages in messages %}
 <div class="col-sm-12 center">
   <div class="card">
     <div class="card-body">
-       {% if messages %}
-      {% for messages in messages %}
         <br><br>
           <h3 class="text-center text-danger">{{messages|safe}}</h3>
         <br><br>
@@ -29,9 +29,10 @@
 </div>
      
 {% else %}
-    <body>
-        {% comment %} <div class="card">
-            <h5 class="card-header">Featured</h5>
+        <!-- {% comment %} <div class="card">
+            <div class="card-header">
+              อัพโหลดเอกสารโครงงาน
+            </div>
             <div class="card-body">
                 <h5 class="card-title">Upload CSV</h5>
                 <p class="card-text">
@@ -42,27 +43,55 @@
                       รายการ : {{ form.list }}
                     </label>
                 </p>
-        
-
-              <!-- <input class="btn btn-primary btn-sm active" type="input" name="Submit" id="submit" role="button" aria-pressed="true">Submit</input> -->
-              <input class="btn btn-primary btn-sm active" type="submit" name="Submit" id="submit">
               <a href="{% url 'website:todo_csv' %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Upload CSV</a>
                 </form>
               </div>
-          </div> {% endcomment %}
-        <form method="POST" enctype="multipart/form-data">
+          </div> {% endcomment %} -->
+        <!-- <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
             <input type="submit" name="Submit" id="submit">
         </form>
-    </body>
-
-    ประวัติการส่ง
-    <div class="card">
-        <h5 class="card-header">Featured</h5>
+    </body> -->
+    <div class="col-sm-12 center">
+      <div class="card">
         <div class="card-body">
-            <h5 class="card-title">รายการสิ่งที่ต้องทำ</h5>
+          <div class="card-header">
+            <h4 class="card-title">เอกสารโครงงาน</h4>
+          </div>
+          <p class="card-text">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form__group row mt-3 mx-1">
+                <label class="form__field">
+                  <p>โครงงาน : </p>{{ form.project }}
+                </label>
+              </div>
+              <div class="form__group row mt-3 mx-1">
+                <label class="form__field">
+                  <P>หัวข้อ : </P>{{ form.topic}}
+                </label>
+              </div>
+              <div class="form__group row mt-4 mx-1">
+                  {{ form.file}}
+              </div>
+              <!-- <label class="addcontent-blog">
+                วันที่ : {{ form.date }}
+                รายการ : {{ form.list }}
+              </label> -->
+          </p>
+          <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 center">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">ประวัติการส่ง</h4>
+      </div>
+        <div class="card-body">
             <p class="card-text">
               <table class="table table-borderless">
                 <thead>
@@ -85,6 +114,7 @@
             </p>
           </div>
       </div>
+    </div>
     <!-- <table>
         {% for show in show %}
         <tr>

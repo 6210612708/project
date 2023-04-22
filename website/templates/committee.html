@@ -7,12 +7,16 @@
     <script src="{% url 'js-catlog' %}"></script>
     <script src="{% static '/admin/js/core.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+    <title>กรรมการ</title>
 {% endblock %}
 {% block content %}
     <body>
         <div class="col-sm-12 center">
         <div class="card">
-            <h5 class="card-header">{{list.thainame}}</h5>
+          <div class="card-header">
+            <h5 class="card-title">{{list.thainame}}</h5>
+          </div>
+            <!-- <h5 class="card-header">{{list.thainame}}</h5> -->
             <div class="card-body">
             <p class="card-text">
                 <form method="POST" enctype="multipart/form-data">

@@ -10,19 +10,87 @@
 </head>
 {% endblock %}
 {% block content %}
-<br><br>
-    <body>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.media }}
-            {{ form.as_p }}
-            <input type="submit" name="Submit" id="submit">
-        </form>
-    </body>
+
+    <div class="col-sm-12">
+        <div class="col-sm-12 center">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">เกณฑ์การตัดคะแนน (โปรดเลือกหัวข้อ)</h5>
+              <p class="card-text">
+                <form method="POST" enctype="multipart/form-data" class="text-center">
+                  {% csrf_token %}
+                  <div class="form__group row mt-3 mx-1 ">
+                    <label class="form__field">
+                      <!-- <p>หัวข้อ :</p>  -->
+                      {{ form.subject }}
+                    </label>
+                  </div>
+                  <label class="addcontent-blog mt-5">
+                    A  : {{ form.A }}
+                    B+ : {{ form.Bplus }}
+                    B : {{ form.B }}
+                    C+ : {{ form.Cplus }}
+                    </label>
+                    <label class="addcontent-blog mt-3">
+                        C : {{ form.C }}
+                    D+ : {{ form.Dplus }}
+                    D : {{ form.D }}
+                    F : {{ form.F }}
+                        </label>
+                  
+                  
+                  <!-- <label class="addcontent-blog">
+                    วันที่ : {{ form.date }}
+                    รายการ : {{ form.list }}
+                  </label> -->
+              </p>
+              
+              <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+              </form>
+            </div>
+          </div>
+        </div>
 
 {% for show in show %}
+<div class="col-sm-12 center">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{show.subject}} <br></h5>
+        <p class="card-text">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th class="col">A</th>
+                <th class="col">B+</th>
+                <th class="col">B</th>
+                <th class="col">C+</th>
+                <th class="col">C</th>
+                <th class="col">D+</th>
+                <th class="col">D</th>
+                <th class="col">F</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{show.A}}</td>
+                <td>{{show.Bplus}}</td>
+                <td>{{show.B}}</td>
+                <td>{{show.Cplus}}</td>
+                <td>{{show.C}}</td>
+                <td>{{show.Dplus}}</td>
+                <td>{{show.D}}</td>
+                <td>{{show.F}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
+        <a class="btn btn-primary" href="{% url 'website:updategrade' show.id %}" role="button">แก้ไข</a>
+      </div>
+    </div>
+  </div>
+</div>
     
-    <br>
+    <!-- <br>
     <tr>
         <td>
             {{show.subject}} <a href="{% url 'website:updategrade' show.id %}" >แก้ไข</a><br>
@@ -35,6 +103,6 @@
             D  {{show.D}}<br>
             F  {{show.F}}<br>
         </td>
-    </tr>
+    </tr> -->
 {% endfor %}
 {% endblock %}

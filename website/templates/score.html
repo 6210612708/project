@@ -1,9 +1,60 @@
-{% block head %}
+{% extends "layout.html" %}
+{% load static %}
 
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% url 'js-catlog' %}"></script>
+    <script src="{% static '/admin/js/core.js' %}"></script>
+    {{ form.media }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
+    <title>ประเมินคะแนน</title>
+    </head>
 {% endblock %}
 {% block content %}
     <body>
-        {% for show in show %}
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-header">
+                <!-- <h4 class="card-title">โครงงาน</h4> -->
+                <div class="card-header">
+                  <h5 class="card-title">โครงงาน</h5>
+                </div>
+              </div>
+                <div class="card-body">
+                    <p class="card-text">
+                      <table class="table table-borderless">
+                        <thead>
+                          <tr>
+                            <th scope="col">ปีการศึกษา</th>
+                            <th scope="col">หัวเรื่อง</th>
+                            <th scope="col">นักศึกษา</th>
+                            <th scope="col">ที่ปรึกษา</th>
+                            <th scope="col">คะแนนการประเมิน</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for show in show %}
+                          <tr>
+                            <td>{{show.subject}}</td>
+                            <td>{{show.project}}</td>
+                            <td>
+                                <p>{{show.std1}}</p>
+                                <p>{{show.std2}}</p>
+                            </td>
+                            <td>{{show.consult}}</td>
+                            <td> {{show.score}} </td>
+                            {% endfor %}
+                          </tr>
+                        </tbody>
+                      </table>
+                    </p>
+                  </div>
+              </div>
+            </div>
+        <!-- {% for show in show %}
             <tr>
                 <td>
                     {{show.subject}} {{show.project}} {{show.std1}} {{show.std2}} {{show.consult}}
@@ -11,9 +62,52 @@
                     {{show.score}} 
                 </td>
             </tr>
-            {% endfor %}
-
-                <form method="POST" enctype="multipart/form-data">
+            {% endfor %} -->
+            <div class="col-sm-12 center">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="card-header">
+                        <!-- <h4 class="card-title">ประเมินคะแนน</h4> -->
+                        <div class="card-header">
+                          <h5 class="card-title">ประเมินคะแนน</h5>
+                        </div>
+                      </div>
+                    <p class="card-text">
+                      <form method="POST">
+                        {% csrf_token %}
+                        <!-- <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                           คะแนนส่วนที่ 1 : {{ form.sc1 }}
+                          </label>
+                        </div>
+                        <div class="form__group row mt-3 mx-1">
+                          <label class="form__field">
+                            คะแนนส่วนที่ 2 : {{ form.sc2 }}
+                          </label>
+                        </div> -->
+                        <label class="addcontent-blog mt-5">
+                            คะแนนส่วนที่ 1 : {{ form.sc1 }}
+                            คะแนนส่วนที่ 2 : {{ form.sc2 }}
+                            คะแนนส่วนที่ 3 : {{ form.sc3 }}
+                            คะแนนส่วนที่ 4 : {{ form.sc4 }}
+                            </label>
+                            <label class="addcontent-blog mt-3">
+                            คะแนนส่วนที่ 5 : {{ form.sc5 }}
+                            คะแนนส่วนที่ 6 : {{ form.sc6 }}
+                            คะแนนส่วนที่ 7 : {{ form.sc7 }}
+                            คะแนนส่วนที่ 8 : {{ form.sc8 }}
+                                </label>
+                    </p>
+                    <div class="text-center">
+                    <input class="btn btn-primary btn-sm active mt-4 mx-3 center" type="submit" name="Submit" id="submit">
+                     <a href="{% url 'website:evaluate'%}" class="btn btn-secondary btn-sm active mt-4 mx-2" role="button" aria-pressed="true">กลับ</a>
+                    </div>
+                   
+                    </form>
+                  </div>
+                </div>
+              </div>
+                <!-- <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                    
                         {{ form.media }}
@@ -23,6 +117,6 @@
                     <div class="text-center">
                     
                 </form>
-            <a href="{% url 'website:evaluate'%}" >กลับ</a>
+            <a href="{% url 'website:evaluate'%}" >กลับ</a> -->
     </body>
 {% endblock %}
