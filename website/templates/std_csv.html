@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head %}
-
+<title>อัพโหลดเอกสาร</title>
 {% endblock %}
 {% block content %}
 
@@ -21,7 +21,10 @@
         <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">อัพโหลดเอกสาร</h4>
+                <!-- <h4 class="card-title">อัพโหลดเอกสาร</h4> -->
+                <div class="card-header">
+                  <h5 class="card-title">อัพโหลดเอกสาร</h5>
+                </div>
                 <p class="card-text">
                     {% if messages %}
                         {% for messages in messages %}
@@ -64,7 +67,10 @@
     <div class="col-sm-12 center">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">แผนการดำเนินงาน</h4>
+            <!-- <h4 class="card-title">แผนการดำเนินงาน</h4> -->
+            <div class="card-header">
+              <h5 class="card-title">แผนการดำเนินงาน</h5>
+            </div>
             <p class="card-text">
               <table class="table table-borderless">
                 <thead>

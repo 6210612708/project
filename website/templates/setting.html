@@ -1,15 +1,52 @@
+{% extends "layout.html" %}
+{% load static %}
 
 {% block head %}
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% url 'js-catlog' %}"></script>
+    <script src="{% static '/admin/js/core.js' %}"></script>
+    {{ form.media }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
+    <title>การตั้งค่า</title>
+    </head>
 {% endblock %}
 {% block content %}
-<br><br>
     <body>
-        <form method="POST" enctype="multipart/form-data">
+        <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-header">
+                    <!-- <h4 class="card-title">แก้ไขข้อมูลส่วนตัว</h4> -->
+                    <div class="card-header">
+                      <h5 class="card-title">แก้ไขข้อมูลส่วนตัว</h5>
+                    </div>
+                  </div>
+                <p class="card-text">
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="form__group row mt-3 mx-1">
+                      <label class="form__field">
+                        {{ form.as_p }}
+                      </label>
+                    </div>
+                    <!-- <label class="addcontent-blog">
+                      วันที่ : {{ form.date }}
+                      รายการ : {{ form.list }}
+                    </label> -->
+                </p>
+                <input class="btn btn-primary btn-sm active mt-1 mx-3" type="submit" name="Submit" id="submit">
+                </form>
+              </div>
+            </div>
+          </div>
+        <!-- <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
             <input type="submit" name="Submit" id="submit">
-        </form>
+        </form> -->
     </body>
 {% endblock %}

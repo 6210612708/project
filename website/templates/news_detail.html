@@ -70,15 +70,16 @@
           </header><!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex">
+    <section id="hero">
     <div class="container">
         <h1>{{new.title}}</h1>
-        <h3>{{new.detail}}</h3>
+        <h3 class="mt-3">{{new.detail}}</h3>
         <br><br><br><br><br><br><br><br><br><br>
-        <h5>{{new.date_created}}</h5>
-        <a href="{% url 'website:news' %}" >Back</a>
+        <h6>{{new.date_created}}</h6>
+        <a class="btn btn-primary mt-3" href="{% url 'website:news' %}" role="button">Back</a>
     </div>
-  </section><!-- End Hero -->
+  </section>
+  <!-- End Hero -->
 
           <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients section-bg">

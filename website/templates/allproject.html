@@ -25,7 +25,10 @@
     <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">โครงงานนักศึกษา</h4>
+            <div class="card-header">
+              <h4 class="card-title">โครงงานนักศึกษา</h4>
+            </div>
+            <!-- <h4 class="card-title">โครงงานนักศึกษา</h4> -->
             <p class="card-text">
                 <form method="POST" >
                     {% csrf_token %}
@@ -50,13 +53,15 @@
         </div>
       </div>
 
-{% for show in file %}
+<!-- {% for show in file %}
 {{show.topic}} {{show.datedue}}
-{% endfor %}
+{% endfor %} -->
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">รายงานโครงงาน</h5>
+        <div class="card-header">
+          <h4 class="card-title">กำหนดการ</h4>
+        </div>
         <p class="card-text">
           <table class="table table-borderless">
             </thead>
@@ -119,7 +124,10 @@
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">ที่ปรึกษาโครงงาน</h5>
+                <div class="card-header">
+                  <h4 class="card-title">รายละเอียดโครงงาน</h4>
+                </div>
+                <!-- <h5 class="card-title">ที่ปรึกษาโครงงาน</h5> -->
                 <p class="card-text">
                   <table class="table table-borderless">
                     </thead>
@@ -174,11 +182,20 @@
                             <p>{{show.student2}}</p>
                         </td>
                         {% endif %}
+                        <!-- {% if show.committee1 == none %}
+                        <td>
+                            <p>-</p>
+                        </td>
+                        {% endif %} -->
                         {% if show.committee1 != none %}
                         <td>
                             <p>{{show.committee1}}</p>
                             <p>{{show.committee2}}</p>
                         </td>
+                        <!-- {% else %}
+                        <td>
+                            <p>-</p>
+                        </td> -->
                         {% endif %}
                         <td>   
                             <a href="{% url 'website:reportproject' show.id %}" >ดูรายงาน</a>
@@ -226,7 +243,9 @@
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">ที่ปรึกษาโครงงาน</h5>
+        <div class="card-header">
+          <h4 class="card-title">รายละเอียดโครงงาน</h4>
+        </div>
         <p class="card-text">
           <table class="table table-borderless">
             </thead>

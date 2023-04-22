@@ -6,19 +6,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
-    <title>เกณฑ์การตัดคะแนน</title>
+    <title>แก้ไขเกณฑ์การตัดคะแนน</title>
     {{ form.media }}
 </head>
 {% endblock %}
 {% block content %}
 <br><br>
-    <body>
+    <!-- <body>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
             <input type="submit" name="Submit" id="submit">
         </form>
-    </body>
+    </body> -->
+    <div class="col-sm-12 center">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">แก้ไขเกณฑ์การตัดคะแนน</h5>
+            <p class="card-text">
+              <form method="POST" enctype="multipart/form-data" class="text-center">
+                {% csrf_token %}
+                <div class="form__group row mt-3 mx-1 ">
+                  <label class="form__field">
+                    <!-- <p>หัวข้อ :</p>  -->
+                    {{ form.subject }}
+                  </label>
+                </div>
+                <label class="addcontent-blog mt-5">
+                  A  : {{ form.A }}
+                  B+ : {{ form.Bplus }}
+                  B : {{ form.B }}
+                  C+ : {{ form.Cplus }}
+                  </label>
+                  <label class="addcontent-blog mt-3">
+                      C : {{ form.C }}
+                  D+ : {{ form.Dplus }}
+                  D : {{ form.D }}
+                  F : {{ form.F }}
+                      </label>
+            </p>
+            <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+            </form>
+          </div>
+        </div>
+      </div>
 
 {% endblock %}

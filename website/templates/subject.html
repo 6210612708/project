@@ -8,6 +8,7 @@
     <script src="{% static '/admin/js/core.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
     <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
+    <title>หัวข้อโครงงาาน</title>
     {{ form.media }}
 {% endblock %}
 {% block content %}
@@ -32,7 +33,10 @@
           <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">โครงงาน</h4>
+                <!-- <h4 class="card-title">โครงงาน</h4> -->
+                <div class="card-header">
+                  <h5 class="card-title">ตั้งค่าโครงงานนักศึกษา</h5>
+                </div>
                 <p class="card-text">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -79,7 +83,10 @@
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
-                <h3 class="card-header">ปัจจุบัน</h3>
+                <!-- <h3 class="card-header">ปัจจุบัน</h3> -->
+                <div class="card-header">
+                  <h5 class="card-title">การตั้งค่าล่าสุด</h5>
+                </div>
                 <p class="card-text">
                   <table class="table table-borderless">
                     <thead>
@@ -125,7 +132,10 @@
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
-                <h3 class="card-header">ประวัติภาคการศึกษา</h3>
+                <!-- <h3 class="card-header">ประวัติภาคการศึกษา</h3> -->
+                <div class="card-header">
+                  <h5 class="card-title">ประวัติภาคการศึกษา</h5>
+                </div>
                 <p class="card-text">
                   <table class="table table-borderless">
                     <thead>
