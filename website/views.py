@@ -722,7 +722,8 @@ def project(request):
 def reportproject(request ,pk):
     temp = ProjectModel.objects.filter(id=pk).get()
     show = Fileproject.objects.filter(project=temp).order_by("-id")
-    context = {'show': show}
+    topic = Topicproject.objects.all()
+    context = {'show': show ,'topic': topic}
     return render(request, 'reportproject.html', context)
 
 def deleteproject(request, pk):
@@ -985,6 +986,13 @@ def report_grade(request,pk):
     show = ScoreModel.objects.get(id=pk)
     context = {'show': show }
     return render(request, 'grade.html', context)
+
+
+def report_score(request):
+    show = ScoreModel.objects.filter(std1 = not None)
+    context = {'show': show }
+    return render(request, 'report_score.html', context)
+
 
 # ################# commiteee ###########################
 

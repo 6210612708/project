@@ -1,4 +1,27 @@
 <table>
+    {% for t in topic %}
+    <tr>
+        <td>
+            {{t.topic}}
+            <table>
+            {% for show in show %}
+                {% if show.topic.topic == t.topic %}
+                <tr>
+                    <td>
+                        {{show.topic.topic}} {{show.date}}
+                        <a href="{{show.file.url}}" download>download file</a>
+
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% comment %} <table>
     {% for show in show %}
     <tr>
         <td>
@@ -8,4 +31,4 @@
         </td>
     </tr>
     {% endfor %}
-</table>
+</table> {% endcomment %}

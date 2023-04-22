@@ -121,6 +121,7 @@ urlpatterns = [
     
     path('evaluate', views.evaluate ,name='evaluate'),
     path('reportgrade/<pk>', views.report_grade ,name='report_grade'),
+    path('reportscore/', views.report_score ,name='report_score'),
     
     path('committee/<pk>', views.committee ,name='committee'),
 
