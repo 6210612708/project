@@ -272,7 +272,7 @@ class ScoreModel(models.Model):
     com1sc = models.IntegerField(null=True, blank=True ,default=0)
     com2sc = models.IntegerField(null=True, blank=True ,default=0)
     score = models.IntegerField(null=True, blank=True ,default=0)
-    grade = models.CharField(max_length=10, null=True)
+    grade = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return f'{self.project}'

@@ -905,6 +905,9 @@ def score(request ,pk):
                 + test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
+                ScoreModel.objects.filter(project = test.project).update(
+                    consc = point
+                )
             else:
                 print("Error", form.errors)
         context = {'form': form , 'show':show}
@@ -919,6 +922,10 @@ def score(request ,pk):
                 point = test.sc1 + test.sc2 + test.sc3 + test.sc4 
                 + test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
+                fin = test.save()
+                ScoreModel.objects.filter(project = test.project).update(
+                    com1sc = point
+                )
             else:
                 print("Error", form.errors)
         context = {'form': form , 'show':show}
@@ -933,6 +940,10 @@ def score(request ,pk):
                 point = test.sc1 + test.sc2 + test.sc3 + test.sc4 
                 + test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
+                fin = test.save()
+                ScoreModel.objects.filter(project = test.project).update(
+                    com2sc = point
+                )
             else:
                 print("Error", form.errors)
         context = {'form': form , 'show':show}
@@ -990,6 +1001,46 @@ def report_grade(request,pk):
 
 def report_score(request):
     show = ScoreModel.objects.filter(std1 = not None)
+    temp = ScoreModel.objects.all()
+    for i in temp :
+        sc = (i.consc + i.com1sc + i.com2sc)/3
+        ScoreModel.objects.filter(project = i.project).update(
+            score = sc
+        )
+        g = GradeModel.objects.get(subject=i.subject)
+        if i.score > g.A :
+            ScoreModel.objects.filter(project = i.project).update(
+            grade = 'A'
+            )
+        elif  g.A > i.score > g.Bplus :
+            ScoreModel.objects.filter(project = i.project).update(
+            grade = 'B+'
+            )
+        elif  g.Bplus > i.score > g.B :
+            ScoreModel.objects.filter(project = i.project).update(
+            grade = 'B'
+            )            
+        elif  g.B > i.score > g.Cplus :
+            ScoreModel.objects.filter(project = i.project).update(
+            grade = 'C+'
+            )
+        elif  g.Cplus > i.score > g.C :
+            ScoreModel.objects.filter(project = i.project).update(
+            grade = 'C'
+            )
+        elif  g.C > i.score > g.Dplus :
+            ScoreModel.objects.filter(project = i.project).update(
+            grade = 'D+'
+            )
+        elif  g.Dplus > i.score > g.D :
+            ScoreModel.objects.filter(project = i.project).update(
+            grade = 'D'
+            )
+        else :
+            ScoreModel.objects.filter(project = i.project).update(
+            grade = 'F'
+            )
+
     context = {'show': show }
     return render(request, 'report_score.html', context)
 
