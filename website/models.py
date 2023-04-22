@@ -268,9 +268,11 @@ class ScoreModel(models.Model):
     std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    consc = models.IntegerField(null=True, blank=True)
-    com1sc = models.IntegerField(null=True, blank=True)
-    com2sc = models.IntegerField(null=True, blank=True)
+    consc = models.IntegerField(null=True, blank=True ,default=0)
+    com1sc = models.IntegerField(null=True, blank=True ,default=0)
+    com2sc = models.IntegerField(null=True, blank=True ,default=0)
+    score = models.IntegerField(null=True, blank=True ,default=0)
+    grade = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return f'{self.project}'

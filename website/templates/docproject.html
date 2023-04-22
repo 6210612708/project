@@ -104,8 +104,9 @@
                   <tr>
                     <td>{{show.topic}}</td>
                     <td>
-                        <a href="{{show.file.url}}" download>download file</a>
+                        <a href="{{show.file.url}}" download>{{show.file}}</a>
                     </td>
+                    {{show.date}}
                     {% endfor %}
                   </tr>
                 </tbody>

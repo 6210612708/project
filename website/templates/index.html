@@ -9,6 +9,18 @@
         
     </head>
     {% block content %}
+    {% if messages %}
+    {% for messages in messages %}
+    <br>
+    <br>
+    <div class="text-center col-12 row mt-3 mx-1">
+      <div>{{messages|safe}}</div>
+    </div>
+    <br>
+    <br>
+    <br>
+    {% endfor %}
+    {% endif %}
     <div class="container py-5">
       <div class="row">
         <div class="col-lg-4">
