@@ -773,12 +773,8 @@ def stdproject(request):
     for test in test:
         if test.student1 == request.user.stdmodel or test.student2 == request.user.stdmodel:
             x = 1        
-    if x == 1 :
-        show = ProjectModel.objects.filter(
-            Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
-    else:
+    if x == 0 :
         show = ProjectModel.objects.all()
-
 
     context = {'x': x, 'show': show}
     return render(request, 'stdproject.html', context)
@@ -821,11 +817,13 @@ def detailproject(request):
     if can_show == 1 :
         show = ProjectModel.objects.filter(
             Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
-        
-        context = {'show': show}
         if not show:
             return redirect('website:stdproject')
         else:
+            test = ProjectModel.objects.get(
+                Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
+            score = ScoreModel.objects.filter(project = test)
+            context = {'show': show , 'score':score}
             return render(request, 'detailproject.html', context)
     else:
         messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลนักศึกษา')
@@ -835,32 +833,41 @@ def detailproject(request):
 
 
 def docproject(request):
-    temp = ProjectModel.objects.filter(
-        Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
-    if temp :
-        proj = ProjectModel.objects.filter(
-        Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
-        if proj.status == 'รอการอนุมัติ':
-            messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
-            return render(request, 'docproject.html')
+    check = StdModel.objects.all()
+    can_show = 0
+    for ck in check :
+        if ck.user == request.user :
+            can_show = 1
+    if can_show == 1 :
+        temp = ProjectModel.objects.filter(
+            Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
+        if temp :
+            proj = ProjectModel.objects.filter(
+            Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
+            if proj.status == 'รอการอนุมัติ':
+                messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
+                return render(request, 'docproject.html')
+            else:
+                form = fileprojectForm(instance=proj)
+                if request.method == "POST":
+                    form = fileprojectForm(request.POST , request.FILES)
+                    if form.is_valid():
+                        test = form.save(commit=False)
+                        test.date = datetime.now()
+                        test = test.save()
+                    else:
+                        print("Error", form.errors)
+            form = fileprojectForm(initial={'project': proj})
+            show = Fileproject.objects.filter(project=proj).order_by("-id")
+            context = {'form':form 
+                    ,'show':show }
+            return render(request, 'docproject.html', context)
         else:
-            form = fileprojectForm(instance=proj)
-            if request.method == "POST":
-                form = fileprojectForm(request.POST , request.FILES)
-                if form.is_valid():
-                    test = form.save(commit=False)
-                    test.date = datetime.now()
-                    test = test.save()
-                else:
-                    print("Error", form.errors)
-        form = fileprojectForm(initial={'project': proj})
-        show = Fileproject.objects.filter(project=proj).order_by("-id")
-        context = {'form':form 
-                   ,'show':show }
-        return render(request, 'docproject.html', context)
+            messages.error(request, 'กรุณาลงทะเบียนโครงงาน')
+            return render(request, 'docproject.html')
     else:
-        messages.error(request, 'กรุณาลงทะเบียนโครงงาน')
-        return render(request, 'docproject.html')
+        messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลนักศึกษา')
+        return redirect('website:index')
 
 
 # ===========subject==========================================
