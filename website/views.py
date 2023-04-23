@@ -914,10 +914,11 @@ def deletesubject(request, pk):
 def score(request ,pk):
     con = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ')
     com1 = ProjectModel.objects.filter(committee1=request.user.profmodel,status ='อนุมัติ')
-    
+    print(con)
     if con :
-        list = ScoreConsult.objects.get(id=pk)
-        show = ScoreConsult.objects.filter(id=pk)
+        con = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ').get()
+        list = ScoreConsult.objects.filter(project = con).get()
+        show = ScoreConsult.objects.filter(project = con)
         form = ScoreconsultForm(instance=list)
         if request.method == 'POST':
             form = ScoreconsultForm(request.POST, instance=list)
@@ -933,8 +934,9 @@ def score(request ,pk):
                 print("Error", form.errors)
         context = {'form': form , 'show':show}
     elif com1 :
-        list = ScoreCom1.objects.get(id=pk)
-        show = ScoreCom1.objects.filter(id=pk)
+        com1 = ProjectModel.objects.filter(committee1=request.user.profmodel,status ='อนุมัติ')
+        list = ScoreCom1.objects.filter(project = com1).get()
+        show = ScoreCom1.objects.filter(project = com1)
         form = Scorecom1Form(instance=list)
         if request.method == 'POST':
             form = Scorecom1Form(request.POST, instance=list)
@@ -950,8 +952,9 @@ def score(request ,pk):
                 print("Error", form.errors)
         context = {'form': form , 'show':show}
     else :
-        list = ScoreCom2.objects.get(id=pk)
-        show = ScoreCom2.objects.filter(id=pk)
+        com2 = ProjectModel.objects.filter(committee2=request.user.profmodel,status ='อนุมัติ')
+        list = ScoreCom2.objects.filter(project =com2).get()
+        show = ScoreCom2.objects.filter(project =com2)
         form = Scorecom2Form(instance=list)
         if request.method == 'POST':
             form = Scorecom2Form(request.POST, instance=list)
