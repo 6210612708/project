@@ -859,8 +859,9 @@ def docproject(request):
                         print("Error", form.errors)
             form = fileprojectForm(initial={'project': proj})
             show = Fileproject.objects.filter(project=proj).order_by("-id")
+            topic = Topicproject.objects.all()
             context = {'form':form 
-                    ,'show':show }
+                    ,'show':show ,'topic':topic }
             return render(request, 'docproject.html', context)
         else:
             messages.error(request, 'กรุณาลงทะเบียนโครงงาน')

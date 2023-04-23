@@ -29,6 +29,36 @@
 </div>
      
 {% else %}
+<div class="col-sm-12 center">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">กำหนดส่งงาน</h4>
+    </div>
+      <div class="card-body">
+          <p class="card-text">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">รายงาน</th>
+                  <th scope="col">กำหนดส่ง</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for show in topic %}
+                <tr>
+                  <td>{{show.topic}}</td>
+                  <td>
+                    {{show.datedue}}
+                  </td>
+                  
+                  {% endfor %}
+                </tr>
+              </tbody>
+            </table>
+          </p>
+        </div>
+    </div>
+  </div>
         <!-- {% comment %} <div class="card">
             <div class="card-header">
               อัพโหลดเอกสารโครงงาน
