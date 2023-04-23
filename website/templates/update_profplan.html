@@ -3,7 +3,7 @@
 <html lang="en">
 
 {% block head %}
-    <title>แก้ไขเอกสาร</title>
+    <title>แก้ไขแผนการดำเนินการ</title>
 {% endblock %}
 
 {% block content %}
@@ -23,7 +23,9 @@
     <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">แก้ไขแผนการดำเนินการ</h5>
+            <div class="card-header">
+              <h5 class="card-title">แก้ไขแผนการดำเนินการ</h5>
+            </div>
             <p class="card-text">
               <form method="POST" class="text-center">
                 {% csrf_token %}
