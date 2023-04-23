@@ -10,7 +10,7 @@
         <ul>
            <!-- ################# ADMIN ################## -->
            {% if user.groups.all.0.name == 'admin' %}
-          <!-- <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:todolist' %}">รายการที่ต้องทำ</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:news' %}">ประกาศข่าวสาร</a></li>
           <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-down"></i></a>
@@ -36,7 +36,7 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="{% url 'website:setting' %}">ตั้งค่า</a></li>
-          <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li> -->
+          <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
           {% endif %}
 
           <!-- ################# COORDINATOR ################## -->

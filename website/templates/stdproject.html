@@ -41,7 +41,7 @@
                           <td>{{show.consult}}</td>
                           <td>{{show.detail}}</td>
                         {% if user.groups.all.0.name == 'student' %}
-                            {% if show.status == 'รอการอนุมัติ' %}
+                            {% if show.status == 'รอการอนุมัติ' or show.status == 'อนุมัติ' %}
                                 <td>{{show.status}}</td>
                                 <td>
                                   <p>{{show.student1}}</p>

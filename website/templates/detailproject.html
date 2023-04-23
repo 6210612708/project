@@ -29,6 +29,7 @@
             {% endfor %}
 
         </table> -->
+        
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
@@ -66,6 +67,43 @@
               </div>
             </div>
           </div>
-
+          <div class="col-sm-12 center">
+            <div class="card">
+              <div class="card-body">
+                <!-- <h5 class="card-title">ข้อมูลโครงงาน</h5> -->
+                <div class="card-header">
+                  <h5 class="card-title">คะแนนโครงงาน</h5>
+                </div>
+                <p class="card-text">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">คะแนนจากที่ปรึกษา</th>
+                        <th scope="col">คะแนนจากกรรมการ</th>
+                        <th scope="col">คะแนนจากกรรมการ</th>
+                        <th scope="col">คะแนนรวม</th>
+                        <th scope="col">เกรด</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for show in score %}
+                      <tr>
+                        <td>{{show.consc}}</td>
+                        <td>{{show.com1sc}}</td>
+                        <td>{{show.com2sc}}</td>
+                        <td>{{show.score}}</td>
+                        {% if show.grade is not None %}
+                          <td>{{show.grade}} </td>
+                        {% else %}
+                          <td>ยังไม่ประกาศ</td>
+                        {% endif %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </p>
+              </div>
+            </div>
+          </div>
     </body>
 {% endblock %}
