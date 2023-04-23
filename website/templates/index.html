@@ -21,7 +21,34 @@
     <br>
     {% endfor %}
     {% endif %}
-    {% for show in news %}
+
+    <div>
+      <b-calendar v-model="value" :min="min" :max="max" locale="en"></b-calendar>
+    </div>
+
+    <script>
+      export default {
+        data() {
+          const now = new Date()
+          const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+          // 15th two months prior
+          const minDate = new Date(today)
+          minDate.setMonth(minDate.getMonth() - 2)
+          minDate.setDate(15)
+          // 15th in two months
+          const maxDate = new Date(today)
+          maxDate.setMonth(maxDate.getMonth() + 2)
+          maxDate.setDate(15)
+    
+          return {
+            value: '',
+            min: minDate,
+            max: maxDate
+          }
+        }
+      }
+    </script>
+    <!-- {% for show in news %}
       <tr>
           <td>
               {{show.title}}
@@ -32,7 +59,7 @@
 
         
       </tr>
-      {% endfor %}
+      {% endfor %} -->
     {% comment %} <div class="container py-5">
       <div class="row">
         <div class="col-lg-4">

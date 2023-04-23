@@ -127,16 +127,18 @@
                 <thead>
                   <tr>
                     <th scope="col">หัวเรื่อง</th>
+                    <th scope="col">วันที่</th>
+                    <th scope="col">อื่นๆ</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for show in show %}
                   <tr>
                     <td>{{show.topic}}</td>
+                    <td>{{show.date}}</td>
                     <td>
                         <a href="{{show.file.url}}" download>{{show.file}}</a>
                     </td>
-                    {{show.date}}
                     {% endfor %}
                   </tr>
                 </tbody>
