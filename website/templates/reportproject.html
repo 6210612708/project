@@ -1,4 +1,56 @@
-<table>
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% url 'js-catlog' %}"></script>
+    <script src="{% static '/admin/js/core.js' %}"></script>
+    {{ form.media }}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
+    <title>เอกสารขั้นตอนดำเนินงาน</title>
+    </head>
+{% endblock %}
+
+{% block content %}
+
+<div class="col-sm-12 center">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-header">
+          <h5 class="card-title">การส่งเอกสารโครงงาน</h5>
+        </div>
+        <p class="card-text">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th class="col">หัวข้อ</th>
+                <th class="col">วันที่ส่ง</th>
+                <th class="col">อื่นๆ</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for t in topic %}
+              <tr>
+                <th>{{t.topic}}</th>
+                {% for show in show %}
+                    {% if show.topic.topic == t.topic %}
+                <td>{{show.name}} {{show.date}}</td>
+                <td><a href="{{show.file.url}}" download>download file</a></td>
+                {% endif %}
+            {% endfor %}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </p>
+      </div>
+    </div>
+  </div>
+<!-- <table>
     {% for t in topic %}
     <tr>
         <td>
@@ -8,7 +60,9 @@
                 {% if show.topic.topic == t.topic %}
                 <tr>
                     <td>
-                        {{show.topic.topic}} {{show.name}} {{show.date}}
+                        {{show.topic.topic}} 
+                        {{show.name}} 
+                        {{show.date}}
                         <a href="{{show.file.url}}" download>download file</a>
 
                     </td>
@@ -19,16 +73,5 @@
         </td>
     </tr>
     {% endfor %}
-</table>
-
-<!-- {% comment %} <table>
-    {% for show in show %}
-    <tr>
-        <td>
-            {{show.topic}} {{show.date}}
-            <a href="{{show.file.url}}" download>download file</a>
-
-        </td>
-    </tr>
-    {% endfor %}
-</table> {% endcomment %} -->
+</table> -->
+{% endblock %}

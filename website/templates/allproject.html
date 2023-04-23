@@ -281,9 +281,9 @@
                 <td>
                     <p>-</p>
                 </td>
-                <td>
+                <!-- <td>
                     <p>-</p>
-                </td>
+                </td> -->
                 {% else %}
                 <td>   
                     {{show.status}}
@@ -299,11 +299,16 @@
                     <p>{{show.committee2}}</p>
                 </td>
                 {% endif %}
+                {% if show.committee1 == none %}
+                <td>
+                    <p>-</p>
+                </td>
+                {% endif %}
                 <td>   
                     <a href="{% url 'website:reportproject' show.id %}" >ดูรายงาน</a>
                 </td> 
-                <!-- {% endif %} -->
               </tr>
+              {% endif %}
               {% endfor %}
             </tbody>
           </table>

@@ -52,10 +52,17 @@
     <div style="height:150px;width:1325px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
       <div data-bs-offset="0" tabindex="0" >
         <div class="bg-light flex-column align-items-stretch p-3">
+          
         {% for show in news %}
-        <h5 id="list-item-1">{{show.title}}</h5>
-        <p>{{show.detail}}</p>
+        <div class="d-flex align-items-center mt-2">
+        <p>
+          <h6 id="list-item-1" class="me-auto">{{show.title}}</h6>
+          <a class="btn btn-primary btn-sm " href="{% url 'website:news_detail' show.id %}" role="button" >รายละเอียด</a>
+        </p>
+        <!-- <p>{{show.detail}}</p> -->
+        </div>
         {% endfor %}
+        
         </div>
       </div>
       </div>
