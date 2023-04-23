@@ -15,7 +15,8 @@ from django.contrib.auth.models import Group
 
 @login_required(login_url='user:login')
 def index(request):
-    return render(request, 'index.html')
+    news = NewsModel.objects.all()
+    return render(request, 'index.html',{'news':news})
 
 # =========== todolist ==========================================
 
@@ -344,10 +345,20 @@ def updateprof(request, pk):
 
 # =========== student ==========================================
 def stddetail(request):
-    show = StdModel.objects.filter(
-        Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
-    context = {'show': show}
-    return render(request, 'stddetail.html', context)
+    check = StdModel.objects.all()
+    can_show = 0
+    for ck in check :
+        if ck.user == request.user :
+            can_show = 1
+    if can_show == 1 :
+        show = StdModel.objects.filter(
+            Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
+        context = {'show': show}
+        return render(request, 'stddetail.html', context)
+    else:
+        messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลนักศึกษา')
+        return redirect('website:index')
+    
 
 def std(request):
     if request.method == "POST":
@@ -912,8 +923,7 @@ def score(request ,pk):
             form = ScoreconsultForm(request.POST, instance=list)
             if form.is_valid():
                 test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 
-                + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
                 ScoreModel.objects.filter(project = test.project).update(
@@ -930,8 +940,7 @@ def score(request ,pk):
             form = Scorecom1Form(request.POST, instance=list)
             if form.is_valid():
                 test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 
-                + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
                 ScoreModel.objects.filter(project = test.project).update(
@@ -948,8 +957,7 @@ def score(request ,pk):
             form = Scorecom2Form(request.POST, instance=list)
             if form.is_valid():
                 test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 
-                + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
                 ScoreModel.objects.filter(project = test.project).update(
