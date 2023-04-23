@@ -264,7 +264,7 @@
               {% for show in show %}
               
               <tr>
-                {% if request.user.profmodel == show.consult %}
+                <!-- {% if request.user.profmodel == show.consult %} -->
                   <td>
                     {{show.thainame}}
                   </td>
@@ -302,7 +302,7 @@
                 <td>   
                     <a href="{% url 'website:reportproject' show.id %}" >ดูรายงาน</a>
                 </td> 
-                {% endif %}
+                <!-- {% endif %} -->
               </tr>
               {% endfor %}
             </tbody>
@@ -311,6 +311,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
   {% endif %}
 
 {% endblock %}

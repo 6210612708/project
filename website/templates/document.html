@@ -43,9 +43,8 @@
                         </div>
                             
                         <!-- <input type="file" name="file" class="form-control mt-2" id="customFile" /> -->
-                        
+                        <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
                     </form>
-                    <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
                 </p>
               </div>
             </div>
@@ -80,7 +79,7 @@
                       <tr>
                         <th class="col-8">หัวข้อ</th>
                         <th class="col">ดาวน์โหลดเอกสาร</th>
-                        <th class="col">ลบ/แก้ไข</th>
+                        <th class="col">ลบ</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -95,7 +94,7 @@
                         <td>
                             <a href="{% url 'website:deletedoc' show.id %}" 
                             onclick="return confirm('Confirm Delete?')">ลบ</a>
-                            <a href="{% url 'website:doc_detail' show.id %}" >รายละเอียด</a>
+                            <!-- <a href="{% url 'website:doc_detail' show.id %}" >รายละเอียด</a> -->
                         </td>
                         {% endfor %}
                       </tr>

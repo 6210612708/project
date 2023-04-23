@@ -12,7 +12,7 @@
           <div class="card-body">
             <!-- <h4 class="card-title">อัพโหลดเอกสาร</h4> -->
             <div class="card-header">
-              <h5 class="card-title">อัพโหลดเอกสาร</h5>
+              <h4 class="card-title">อัพโหลดเอกสาร</h4>
             </div>
             <p class="card-text">
                 {% if messages %}
@@ -51,9 +51,9 @@
                         {{show.title}}
                       </td>
                     <td>
-                        <a href="{% url 'website:deletelist' show.id %}" 
+                        <a href="{% url 'website:deletenews' show.id %}" 
                         onclick="return confirm('Confirm Delete?')">ลบ</a>
-                        <a href="{% url 'website:updatelist' show.id %}" >แก้ไข</a>
+                        <a href="{% url 'website:updatenews' show.id %}" >แก้ไข</a>
                     </td>
                     {% endfor %}
                   </tr>

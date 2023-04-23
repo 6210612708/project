@@ -9,7 +9,7 @@
       <nav id="navbar" class="navbar">
         <ul>
            <!-- ################# ADMIN ################## -->
-           {% if user.groups.all.0.name == 'admin' %}
+        {% if user.groups.all.0.name == 'admin' %}
           <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:todolist' %}">รายการที่ต้องทำ</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:news' %}">ประกาศข่าวสาร</a></li>
@@ -37,7 +37,7 @@
           </li>
           <li><a class="nav-link scrollto" href="{% url 'website:setting' %}">ตั้งค่า</a></li>
           <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
-          {% endif %}
+        {% endif %}
 
           <!-- ################# COORDINATOR ################## -->
           {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
@@ -90,6 +90,7 @@
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
           {% endif %}   
         </ul>
+
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
