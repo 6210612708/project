@@ -21,52 +21,30 @@
     <div class="card">
       <div class="card-body">
         <div class="card-header">
-          <h5 class="card-title">{{show.subject}}</h5>
+          <h5 class="card-title">{{show.project}}</h5>
         </div>
         <p class="card-text">
           <table class="table table-borderless">
             <thead>
               <tr>
-                <th class="col-6">หัวข้อ</th>
+                <th class="col">ภาคเรียน</th>
                 <th class="col">สมาชิก</th>
                 <th class="col">ที่ปรึกษา</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{show.project}}</td>
-                <td>
-                    <p>{{show.std1}}</p>
-                    <p>{{show.std2}}</p>
-                </td>
-                <td>{{show.consult}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-12 center">
-    <div class="card">
-      <div class="card-body">
-        <div class="card-header">
-          <h5 class="card-title">คะแนนการประเมิน</h5>
-        </div>
-        <p class="card-text">
-          <table class="table table-borderless">
-            <thead>
-              <tr>
-                <th class="col">คะแนน 1</th>
-                <th class="col">คะแนน 2</th>
-                <th class="col">คะแนน 3</th>
+                <th class="col">คะแนนตจากที่ปรึกษา</th>
+                <th class="col">คะแนนจากกรรมการ 1</th>
+                <th class="col">คะแนนจากกรรมการ 2</th>
                 <th class="col">คะแนนรวม</th>
                 <th class="col">เกรด</th>
               </tr>
             </thead>
             <tbody>
               <tr>
+                <td>{{show.subject}}</td>
+                <td>
+                    <p>{{show.std1}}</p>
+                    <p>{{show.std2}}</p>
+                </td>
+                <td>{{show.consult}}</td>
                 <td>{{show.consc}}</td>
                 <td>{{show.com1sc}}</td>
                 <td>{{show.com2sc}}</td>
@@ -78,31 +56,15 @@
             </tbody>
           </table>
         </p>
-        <!-- <a href="{% url 'website:report_grade' show.id %}">สรุปเกรด</a> -->
-        <!-- <a href="{% url 'website:report_grade' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปเกรด</a> -->
         <center>
-            <div class="form-group row mt-3">
-              <div class="col-sm-11 mx-5">
-                <a href="{% url 'website:report_grade' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปเกรด</a>
-              </div>
-            </div></center>
+          <div class="form-group row mt-3">
+            <div class="col-sm-11 mx-5">
+              <a href="{% url 'website:report_grade' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปเกรด</a>
+            </div>
+          </div></center>
       </div>
     </div>
   </div>
-<!-- <tr>
-    <td>
-        {{show.subject}} {{show.project}} {{show.std1}} {{show.std2}} {{show.consult}}
-        <br>
-        {{show.consc}} {{show.com1sc}} {{show.com2sc}} {{show.score}} 
-        <br>
-        <br>
-        <a href="{% url 'website:report_grade' show.id %}">สรุปเกรด</a>
-        <br>
-        {% if show.grade is not None %}
-        {{show.grade}} 
-        {% endif %}
-        <br>
-    </td>
-</tr> -->
-<!-- {% endfor %} -->
+
+ {% endfor %}
 {% endblock %}
