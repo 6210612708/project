@@ -934,7 +934,7 @@ def deletesubject(request, pk):
 
 # =========== grade score==========================================
 
-def score1(request, pk):
+def score2(request, pk):
     con = ProjectModel.objects.filter(
         consult=request.user.profmodel, status='อนุมัติ')
     com1 = ProjectModel.objects.filter(
@@ -1003,7 +1003,7 @@ def score1(request, pk):
 
     return render(request, 'score.html', context)
 
-def score2(request, pk):
+def score1(request, pk):
     con = ProjectModel.objects.filter(
         consult=request.user.profmodel, status='อนุมัติ')
     com1 = ProjectModel.objects.filter(
