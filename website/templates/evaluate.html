@@ -29,12 +29,13 @@
                     {{show.student1}}
                     {{show.student2}}
                 {% endif %}
-                <a href="{% url 'website:score' show.id %}" >ประเมิน</a>
+                <a href="{% url 'website:score1' show.id %}" >ประเมิน</a>
             {% endif %}
         </td>
     </tr>
 {% endfor %}
 <br> -->
+
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
@@ -83,9 +84,17 @@
                     <p>{{show.student2}}</p>
                 </td>
                 {% endif %}
+                {% if term == 1%}
+                  term1
                 <td>   
-                    <a href="{% url 'website:score' show.id %}" >กดที่นี่</a>
+                  <a href="{% url 'website:score1' show.id %}" >กดที่นี่</a>
                 </td> 
+                {%else%}
+                term2
+                <td>   
+                  <a href="{% url 'website:score2' show.id %}" >กดที่นี่</a>
+                </td> 
+                {%endif%}
                 {% endif %}
               </tr>
               {% endfor %}
@@ -111,7 +120,7 @@
                     {{show.student1}}
                     {{show.student2}}
                 {% endif %}
-                <a href="{% url 'website:score' show.id %}" >ประเมิน</a>
+                <a href="{% url 'website:score1' show.id %}" >ประเมิน</a>
             {% endif %}
         </td>
     </tr>
@@ -164,9 +173,17 @@
                     <p>{{show.student2}}</p>
                 </td>
                 {% endif %}
+                {% if term == 1%}
+                  term1
                 <td>   
-                    <a href="{% url 'website:score' show.id %}" >กดที่นี่</a>
+                  <a href="{% url 'website:score1' show.id %}" >กดที่นี่</a>
                 </td> 
+                {%else%}
+                term2
+                <td>   
+                  <a href="{% url 'website:score2' show.id %}" >กดที่นี่</a>
+                </td> 
+                {%endif%}
                 {% endif %}
               </tr>
               {% endfor %}
