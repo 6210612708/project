@@ -702,22 +702,18 @@ def project(request):
                     test.consult = con
                     fin = test.save()
                     ScoreModel.objects.create(
-                        subject=SubjectModel.objects.latest('id'),
                         project=test,
                         consult=con
                     )
                     ScoreConsult.objects.create(
-                        subject=SubjectModel.objects.latest('id'),
                         project=test,
                         consult=con
                     )
                     ScoreCom1.objects.create(
-                        subject=SubjectModel.objects.latest('id'),
                         project=test,
                         consult=con
                     )
                     ScoreCom2.objects.create(
-                        subject=SubjectModel.objects.latest('id'),
                         project=test,
                         consult=con
                     )
@@ -901,12 +897,8 @@ def subject(request):
         else:
             print("Error", form.errors)
     form = SubjectForm()
-    all = SubjectModel.objects.all()
-    if all:
-        show = SubjectModel.objects.latest('id')
-        context = {'form': form, 'show': show, 'all': all}
-    else:
-        context = {'form': form, 'all': all}
+    all = SubjectModel.objects.all().order_by("-id")
+    context = {'form': form, 'all': all}
     return render(request, 'subject.html', context)
 
 
@@ -938,7 +930,7 @@ def score(request, pk):
                     test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
-                ScoreModel.objects.filter(project=test.project).update(
+                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
                     consc=point
                 )
             else:
@@ -958,7 +950,7 @@ def score(request, pk):
                     test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
-                ScoreModel.objects.filter(project=test.project).update(
+                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
                     com1sc=point
                 )
             else:
@@ -978,7 +970,7 @@ def score(request, pk):
                     test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
-                ScoreModel.objects.filter(project=test.project).update(
+                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
                     com2sc=point
                 )
             else:
@@ -1076,7 +1068,7 @@ def report_grade(request, pk):
 
 
 def report_score(request):
-    show = ScoreModel.objects.filter(std1=not None)
+    show = ScoreModel.objects.filter()
     temp = ScoreModel.objects.all()
     for i in temp:
         sc = (i.consc + i.com1sc + i.com2sc)/3
