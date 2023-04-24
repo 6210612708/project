@@ -12,7 +12,7 @@ import datetime
 
 class ListModel(models.Model):
     date = models.DateField(null=True)
-    list = models.CharField(max_length=64, null=True)
+    list = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.list
@@ -22,7 +22,7 @@ class ListModel(models.Model):
 
 class CoorPlanModel(models.Model):
     date = models.DateField(null=True)
-    list = models.CharField(max_length=64, null=True)
+    list = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.list
@@ -30,7 +30,7 @@ class CoorPlanModel(models.Model):
 
 class ComPlanModel(models.Model):
     date = models.DateField(null=True)
-    list = models.CharField(max_length=64, null=True)
+    list = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.list
@@ -38,7 +38,7 @@ class ComPlanModel(models.Model):
 
 class ProfPlanModel(models.Model):
     date = models.DateField(null=True)
-    list = models.CharField(max_length=64, null=True)
+    list = models.CharField(max_length=500, null=True)
 
     def __str__(self):
         return self.list
@@ -46,7 +46,7 @@ class ProfPlanModel(models.Model):
 
 class StdPlanModel(models.Model):
     date = models.DateField(null=True)
-    list = models.CharField(max_length=64, null=True)
+    list = models.CharField(max_length=500, null=True)
     file = models.FileField(upload_to=file_path, null=True, blank=True)
 
     def __str__(self):
@@ -56,7 +56,7 @@ class StdPlanModel(models.Model):
 
 
 class NewsModel(models.Model):
-    title = models.CharField(max_length=64, null=True)
+    title = models.CharField(max_length=500, null=True)
     detail = models.CharField(max_length=500, null=True)
     in_prof = models.BooleanField('in_prof', default=False)
     out_prof = models.BooleanField('out_prof', default=False)
@@ -69,7 +69,7 @@ class NewsModel(models.Model):
 
 
 class DocModel(models.Model):
-    title = models.CharField(max_length=64, null=True)
+    title = models.CharField(max_length=500, null=True)
     file = models.FileField(upload_to=file_path, null=True)
     date_created = models.DateTimeField(default=timezone.now)
 

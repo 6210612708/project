@@ -113,6 +113,7 @@ urlpatterns = [
     # grade score subject
     path('grade', views.grade ,name='grade'),
     path('updategrade/<pk>', views.updategrade ,name='updategrade'),
+    path('deletegrade/<pk>', views.deletegrade ,name='deletegrade'),
     path('score/<pk>', views.score ,name='score'),
     
     

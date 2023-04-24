@@ -16,22 +16,25 @@ from django.contrib.auth.models import Group
 @login_required(login_url='user:login')
 def index(request):
     news = NewsModel.objects.all()
-    return render(request, 'index.html',{'news':news})
+    return render(request, 'index.html', {'news': news})
 
 # =========== todolist ==========================================
 
 # @allowed_users(allowed_roles=['admin'])
+
+
 def setting(request):
     admin = User.objects.get(username=request.user)
     form = settingForm(instance=admin)
     if request.method == "POST":
-        form = settingForm(request.POST ,instance=admin)
+        form = settingForm(request.POST, instance=admin)
         if form.is_valid():
             form.save()
         else:
             print("Error", form.errors)
 
-    return render(request, 'setting.html' ,{'form':form})
+    return render(request, 'setting.html', {'form': form})
+
 
 def todolist(request):
     if request.method == "POST":
@@ -61,10 +64,9 @@ def todo_csv(request):
 
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
-    next(io_string)
 
     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
-        _, created = ListModel.objects.update_or_create(
+        ListModel.objects.update_or_create(
             date=column[0],
             list=column[1],
         )
@@ -139,7 +141,6 @@ def news_csv(request):
 
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
-    next(io_string)
 
     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
         _, created = NewsModel.objects.update_or_create(
@@ -244,7 +245,6 @@ def prof_csv(request):
 
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
-    next(io_string)
 
     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
         _, created = ProfModel.objects.update_or_create(
@@ -309,7 +309,7 @@ def updateprof(request, pk):
 
 #     data_set = csv_file.read().decode('UTF-8')
 #     io_string = io.StringIO(data_set)
-#     next(io_string)
+
 
 #     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
 #         _, created = OtherModel.objects.update_or_create(
@@ -347,10 +347,10 @@ def updateprof(request, pk):
 def stddetail(request):
     check = StdModel.objects.all()
     can_show = 0
-    for ck in check :
-        if ck.user == request.user :
+    for ck in check:
+        if ck.user == request.user:
             can_show = 1
-    if can_show == 1 :
+    if can_show == 1:
         show = StdModel.objects.filter(
             Q(fname=request.user.stdmodel.fname) & Q(lname=request.user.stdmodel.lname))
         context = {'show': show}
@@ -358,7 +358,7 @@ def stddetail(request):
     else:
         messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลนักศึกษา')
         return redirect('website:index')
-    
+
 
 def std(request):
     if request.method == "POST":
@@ -388,7 +388,6 @@ def std_csv(request):
 
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
-    next(io_string)
 
     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
         _, created = StdModel.objects.update_or_create(
@@ -454,7 +453,6 @@ def coorplan_csv(request):
 
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
-    next(io_string)
 
     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
         _, created = CoorPlanModel.objects.update_or_create(
@@ -515,7 +513,7 @@ def updatecoorplan(request, pk):
 
 #     data_set = csv_file.read().decode('UTF-8')
 #     io_string = io.StringIO(data_set)
-#     next(io_string)
+
 
 #     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
 #         _, created = ComPlanModel.objects.update_or_create(
@@ -543,7 +541,6 @@ def updatecoorplan(request, pk):
 #             form.save()
 #             return redirect('website:complan')
 #     return render(request, 'update_complan.html', {'form':form } )
-
 
 
 # =========== PLAN for Consult ==========================================
@@ -577,7 +574,6 @@ def profplan_csv(request):
 
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
-    next(io_string)
 
     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
         _, created = ProfPlanModel.objects.update_or_create(
@@ -638,7 +634,6 @@ def stdplan_csv(request):
 
     data_set = csv_file.read().decode('UTF-8')
     io_string = io.StringIO(data_set)
-    next(io_string)
 
     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
         _, created = StdPlanModel.objects.update_or_create(
@@ -679,8 +674,9 @@ def allproject(request):
             print("Error", form.errors)
     show = ProjectModel.objects.all()
     file = Topicproject.objects.all()
-    context = {'form':form ,'show': show ,'file':file}
+    context = {'form': form, 'show': show, 'file': file}
     return render(request, 'allproject.html', context)
+
 
 def project(request):
     form = projectModelForm(request.POST)
@@ -689,56 +685,61 @@ def project(request):
     context = {'form': forms, 'show': show}
     prof = ProfModel.objects.all()
     can_show = 0
-    for ck in prof :
-        if ck.user == request.user :
+    for ck in prof:
+        if ck.user == request.user:
             can_show = 1
-    if can_show == 1 :
+    if request.user.groups.filter(name='admin').exists():
+        can_show = 1
+    if can_show == 1:
         if request.method == "POST":
             if form.is_valid():
                 check = SubjectModel.objects.all()
-                if check :
+                if check:
                     con = request.user.profmodel
                     test = form.save(commit=False)
                     test.consult = con
                     fin = test.save()
                     ScoreModel.objects.create(
-                        subject= SubjectModel.objects.latest('id'),
-                        project = test,
-                        consult = con
+                        subject=SubjectModel.objects.latest('id'),
+                        project=test,
+                        consult=con
                     )
                     ScoreConsult.objects.create(
-                        subject= SubjectModel.objects.latest('id'),
-                        project = test,
-                        consult = con
+                        subject=SubjectModel.objects.latest('id'),
+                        project=test,
+                        consult=con
                     )
                     ScoreCom1.objects.create(
-                        subject= SubjectModel.objects.latest('id'),
-                        project = test,
-                        consult = con
+                        subject=SubjectModel.objects.latest('id'),
+                        project=test,
+                        consult=con
                     )
                     ScoreCom2.objects.create(
-                        subject= SubjectModel.objects.latest('id'),
-                        project = test,
-                        consult = con
+                        subject=SubjectModel.objects.latest('id'),
+                        project=test,
+                        consult=con
                     )
-                else :
-                    messages.error(request, 'กรุณารอแอดมินตั้งค่าวิชาและปีการศึกษา')
-                    return render(request, 'project.html', context)            
+                else:
+                    messages.error(
+                        request, 'กรุณารอแอดมินตั้งค่าวิชาและปีการศึกษา')
+                    return render(request, 'project.html', context)
         else:
             print("Error", form.errors)
 
     else:
         messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลอาจารย์')
         return redirect('website:index')
-    
+
     return render(request, 'project.html', context)
 
-def reportproject(request ,pk):
+
+def reportproject(request, pk):
     temp = ProjectModel.objects.filter(id=pk).get()
     show = Fileproject.objects.filter(project=temp).order_by("-id")
     topic = Topicproject.objects.all()
-    context = {'show': show ,'topic': topic}
+    context = {'show': show, 'topic': topic}
     return render(request, 'reportproject.html', context)
+
 
 def deleteproject(request, pk):
     data = ProjectModel.objects.get(id=pk)
@@ -775,19 +776,21 @@ def updateproject(request, pk):
     # context = {list :'list'}
     # return render(request,'update_project.html' ,context)
 
+
 def statusproject(request, pk):
     ProjectModel.objects.filter(id=pk).update(status='อนุมัติ')
     return redirect('website:project')
 
 # =========== student project ==========================================
 
+
 def stdproject(request):
     test = ProjectModel.objects.all()
     x = 0
     for test in test:
         if test.student1 == request.user.stdmodel or test.student2 == request.user.stdmodel:
-            x = 1        
-    if x == 0 :
+            x = 1
+    if x == 0:
         show = ProjectModel.objects.all()
 
     context = {'x': x, 'show': show}
@@ -803,20 +806,20 @@ def applyproject(request, pk):
             list.status = 'รอการอนุมัติ'
             form.save()
             ScoreModel.objects.filter(project=list).update(
-                std1 = list.student1,
-                std2 = list.student2
+                std1=list.student1,
+                std2=list.student2
             )
             ScoreConsult.objects.filter(project=list).update(
-                std1 = list.student1,
-                std2 = list.student2
+                std1=list.student1,
+                std2=list.student2
             )
             ScoreCom1.objects.filter(project=list).update(
-                std1 = list.student1,
-                std2 = list.student2
+                std1=list.student1,
+                std2=list.student2
             )
             ScoreCom2.objects.filter(project=list).update(
-                std1 = list.student1,
-                std2 = list.student2
+                std1=list.student1,
+                std2=list.student2
             )
             return redirect('website:detailproject')
     return render(request, 'applyproject.html', {'form': form})
@@ -825,10 +828,12 @@ def applyproject(request, pk):
 def detailproject(request):
     check = StdModel.objects.all()
     can_show = 0
-    for ck in check :
-        if ck.user == request.user :
+    for ck in check:
+        if ck.user == request.user:
             can_show = 1
-    if can_show == 1 :
+    if request.user.groups.filter(name='admin').exists():
+        can_show = 1
+    if can_show == 1:
         show = ProjectModel.objects.filter(
             Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
         if not show:
@@ -836,35 +841,35 @@ def detailproject(request):
         else:
             test = ProjectModel.objects.get(
                 Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
-            score = ScoreModel.objects.filter(project = test)
-            context = {'show': show , 'score':score}
+            score = ScoreModel.objects.filter(project=test)
+            context = {'show': show, 'score': score}
             return render(request, 'detailproject.html', context)
     else:
         messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลนักศึกษา')
         return redirect('website:index')
-    
-
 
 
 def docproject(request):
     check = StdModel.objects.all()
     can_show = 0
-    for ck in check :
-        if ck.user == request.user :
+    for ck in check:
+        if ck.user == request.user:
             can_show = 1
-    if can_show == 1 :
+    if request.user.groups.filter(name='admin').exists():
+        can_show = 1
+    if can_show == 1:
         temp = ProjectModel.objects.filter(
             Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel))
-        if temp :
+        if temp:
             proj = ProjectModel.objects.filter(
-            Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
+                Q(student1=request.user.stdmodel) | Q(student2=request.user.stdmodel)).get()
             if proj.status == 'รอการอนุมัติ':
                 messages.error(request, 'กรุณารอที่ปรึกษาอนุมัติโครงงาน')
                 return render(request, 'docproject.html')
             else:
                 form = fileprojectForm(instance=proj)
                 if request.method == "POST":
-                    form = fileprojectForm(request.POST , request.FILES)
+                    form = fileprojectForm(request.POST, request.FILES)
                     if form.is_valid():
                         test = form.save(commit=False)
                         test.date = datetime.now()
@@ -874,8 +879,7 @@ def docproject(request):
             form = fileprojectForm(initial={'project': proj})
             show = Fileproject.objects.filter(project=proj).order_by("-id")
             topic = Topicproject.objects.all()
-            context = {'form':form 
-                    ,'show':show ,'topic':topic }
+            context = {'form': form, 'show': show, 'topic': topic}
             return render(request, 'docproject.html', context)
         else:
             messages.error(request, 'กรุณาลงทะเบียนโครงงาน')
@@ -896,12 +900,13 @@ def subject(request):
             print("Error", form.errors)
     form = SubjectForm()
     all = SubjectModel.objects.all()
-    if all :
+    if all:
         show = SubjectModel.objects.latest('id')
-        context = {'form': form , 'show':show ,'all':all}
+        context = {'form': form, 'show': show, 'all': all}
     else:
-        context = {'form': form ,'all':all}
+        context = {'form': form, 'all': all}
     return render(request, 'subject.html', context)
+
 
 def deletesubject(request, pk):
     data = SubjectModel.objects.get(id=pk)
@@ -911,79 +916,87 @@ def deletesubject(request, pk):
 
 # =========== grade score==========================================
 
-def score(request ,pk):
-    con = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ')
-    com1 = ProjectModel.objects.filter(committee1=request.user.profmodel,status ='อนุมัติ')
+def score(request, pk):
+    con = ProjectModel.objects.filter(
+        consult=request.user.profmodel, status='อนุมัติ')
+    com1 = ProjectModel.objects.filter(
+        committee1=request.user.profmodel, status='อนุมัติ')
     print(con)
-    if con :
-        con = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ').get()
-        list = ScoreConsult.objects.filter(project = con).get()
-        show = ScoreConsult.objects.filter(project = con)
+    if con:
+        con = ProjectModel.objects.filter(
+            consult=request.user.profmodel, status='อนุมัติ').get()
+        list = ScoreConsult.objects.filter(project=con).get()
+        show = ScoreConsult.objects.filter(project=con)
         form = ScoreconsultForm(instance=list)
         if request.method == 'POST':
             form = ScoreconsultForm(request.POST, instance=list)
             if form.is_valid():
                 test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                    test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
-                ScoreModel.objects.filter(project = test.project).update(
-                    consc = point
+                ScoreModel.objects.filter(project=test.project).update(
+                    consc=point
                 )
             else:
                 print("Error", form.errors)
-        context = {'form': form , 'show':show}
-    elif com1 :
-        com1 = ProjectModel.objects.filter(committee1=request.user.profmodel,status ='อนุมัติ')
-        list = ScoreCom1.objects.filter(project = com1).get()
-        show = ScoreCom1.objects.filter(project = com1)
+        context = {'form': form, 'show': show}
+    elif com1:
+        com1 = ProjectModel.objects.filter(
+            committee1=request.user.profmodel, status='อนุมัติ')
+        list = ScoreCom1.objects.filter(project=com1).get()
+        show = ScoreCom1.objects.filter(project=com1)
         form = Scorecom1Form(instance=list)
         if request.method == 'POST':
             form = Scorecom1Form(request.POST, instance=list)
             if form.is_valid():
                 test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                    test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
-                ScoreModel.objects.filter(project = test.project).update(
-                    com1sc = point
+                ScoreModel.objects.filter(project=test.project).update(
+                    com1sc=point
                 )
             else:
                 print("Error", form.errors)
-        context = {'form': form , 'show':show}
-    else :
-        com2 = ProjectModel.objects.filter(committee2=request.user.profmodel,status ='อนุมัติ')
-        list = ScoreCom2.objects.filter(project =com2).get()
-        show = ScoreCom2.objects.filter(project =com2)
+        context = {'form': form, 'show': show}
+    else:
+        com2 = ProjectModel.objects.filter(
+            committee2=request.user.profmodel, status='อนุมัติ')
+        list = ScoreCom2.objects.filter(project=com2).get()
+        show = ScoreCom2.objects.filter(project=com2)
         form = Scorecom2Form(instance=list)
         if request.method == 'POST':
             form = Scorecom2Form(request.POST, instance=list)
             if form.is_valid():
                 test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + test.sc5 + test.sc6 + test.sc7 + test.sc8
+                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                    test.sc5 + test.sc6 + test.sc7 + test.sc8
                 test.score = point
                 fin = test.save()
-                ScoreModel.objects.filter(project = test.project).update(
-                    com2sc = point
+                ScoreModel.objects.filter(project=test.project).update(
+                    com2sc=point
                 )
             else:
                 print("Error", form.errors)
-        context = {'form': form , 'show':show}
-        
-    
+        context = {'form': form, 'show': show}
+
     return render(request, 'score.html', context)
 
 def evaluate(request):
     prof = ProfModel.objects.all()
     can_show = 0
-    for ck in prof :
-        if ck.user == request.user :
+    for ck in prof:
+        if ck.user == request.user:
             can_show = 1
-    if can_show == 1 :
-        show = ProjectModel.objects.filter(consult =request.user.profmodel ,status ='อนุมัติ')
+    if can_show == 1:
+        show = ProjectModel.objects.filter(
+            consult=request.user.profmodel, status='อนุมัติ')
         com = ProjectModel.objects.filter(
-            Q(committee1=request.user.profmodel) | Q(committee2=request.user.profmodel) ,status ='อนุมัติ')
-        context = {'show':show ,'com':com}
+            Q(committee1=request.user.profmodel) | Q(committee2=request.user.profmodel), status='อนุมัติ')
+        context = {'show': show, 'com': com}
         return render(request, 'evaluate.html', context)
     else:
         messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลอาจารย์')
@@ -998,12 +1011,16 @@ def grade(request):
         else:
             print("Error", form.errors)
     form = GradeForm()
-    show = GradeModel.objects.all()
-    context = {'form': form , 'show':show}
+    show = GradeModel.objects.all().order_by("-id")
+    context = {'form': form, 'show': show}
     return render(request, 'grade.html', context)
 
+def deletegrade(request, pk):
+    data = GradeModel.objects.get(id=pk)
+    data.delete()
+    return redirect('website:grade')
 
-def updategrade(request,pk):
+def updategrade(request, pk):
     list = GradeModel.objects.get(id=pk)
     form = GradeForm(instance=list)
     if request.method == "POST":
@@ -1012,58 +1029,59 @@ def updategrade(request,pk):
             form.save()
         else:
             print("Error", form.errors)
-    context = {'form': form }
+    context = {'form': form}
     return render(request, 'updategrade.html', context)
 
-def report_grade(request,pk):
-    show = ScoreModel.objects.filter(std1 = not None)
+
+def report_grade(request, pk):
+    show = ScoreModel.objects.filter(std1=not None)
     i = ScoreModel.objects.get(id=pk)
     g = GradeModel.objects.get(subject=i.subject)
-    if i.score > g.A :
-        ScoreModel.objects.filter(project = i.project).update(
-        grade = 'A'
+    if i.score > g.A:
+        ScoreModel.objects.filter(project=i.project).update(
+            grade='A'
         )
-    elif  g.A > i.score > g.Bplus :
-        ScoreModel.objects.filter(project = i.project).update(
-        grade = 'B+'
+    elif g.A > i.score > g.Bplus:
+        ScoreModel.objects.filter(project=i.project).update(
+            grade='B+'
         )
-    elif  g.Bplus > i.score > g.B :
-        ScoreModel.objects.filter(project = i.project).update(
-        grade = 'B'
-        )            
-    elif  g.B > i.score > g.Cplus :
-        ScoreModel.objects.filter(project = i.project).update(
-        grade = 'C+'
+    elif g.Bplus > i.score > g.B:
+        ScoreModel.objects.filter(project=i.project).update(
+            grade='B'
         )
-    elif  g.Cplus > i.score > g.C :
-        ScoreModel.objects.filter(project = i.project).update(
-        grade = 'C'
+    elif g.B > i.score > g.Cplus:
+        ScoreModel.objects.filter(project=i.project).update(
+            grade='C+'
         )
-    elif  g.C > i.score > g.Dplus :
-        ScoreModel.objects.filter(project = i.project).update(
-        grade = 'D+'
+    elif g.Cplus > i.score > g.C:
+        ScoreModel.objects.filter(project=i.project).update(
+            grade='C'
         )
-    elif  g.Dplus > i.score > g.D :
-        ScoreModel.objects.filter(project = i.project).update(
-        grade = 'D'
+    elif g.C > i.score > g.Dplus:
+        ScoreModel.objects.filter(project=i.project).update(
+            grade='D+'
         )
-    else :
-        ScoreModel.objects.filter(project = i.project).update(
-        grade = 'F'
+    elif g.Dplus > i.score > g.D:
+        ScoreModel.objects.filter(project=i.project).update(
+            grade='D'
+        )
+    else:
+        ScoreModel.objects.filter(project=i.project).update(
+            grade='F'
         )
 
     return redirect('website:report_score')
 
 
 def report_score(request):
-    show = ScoreModel.objects.filter(std1 = not None)
+    show = ScoreModel.objects.filter(std1=not None)
     temp = ScoreModel.objects.all()
-    for i in temp :
+    for i in temp:
         sc = (i.consc + i.com1sc + i.com2sc)/3
-        ScoreModel.objects.filter(project = i.project).update(
-            score = sc
+        ScoreModel.objects.filter(project=i.project).update(
+            score=sc
         )
-    context = {'show': show }
+    context = {'show': show}
     return render(request, 'report_score.html', context)
 
 
@@ -1078,5 +1096,5 @@ def committee(request, pk):
             test = form.save(commit=False)
             test = test.save()
             return redirect('website:project')
-    context = {'form': form , 'list' :list}
+    context = {'form': form, 'list': list}
     return render(request, 'committee.html', context)
