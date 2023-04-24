@@ -80,6 +80,46 @@
       {% endfor %} -->
       </div>
       </div>
+      <div class="col-sm-12 center">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-header">
+              <h5 class="card-title">เอกสารโครงงาน</h5>
+            </div>
+            <p class="card-text">
+      <div style="height:150px;width:1325px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+        <div data-bs-offset="0" tabindex="0" >
+          <div class="bg-light flex-column align-items-stretch p-3">
+            
+          {% for show in doc %}
+          <div class="d-flex align-items-center mt-2">
+          <p>
+            <h6 id="list-item-1" class="me-auto">{{show.title}}</h6>
+            <a class="btn btn-primary btn-sm "  role="button" href="{{show.file.url}}" download>download file</a>
+          </p>
+          <!-- <p>{{show.detail}}</p> -->
+          </div>
+          {% endfor %}
+          
+          </div>
+        </div>
+        </div>
+            </p>
+        </div>
+        <!-- {% for show in news %}
+        <tr>
+            <td>
+                {{show.title}}
+            </td>
+            <td>
+              {{show.detail}}
+            </td>
+  
+          
+        </tr>
+        {% endfor %} -->
+        </div>
+        </div>
 
     <!-- {% for show in news %}
       <tr>

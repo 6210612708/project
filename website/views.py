@@ -16,7 +16,9 @@ from django.contrib.auth.models import Group
 @login_required(login_url='user:login')
 def index(request):
     news = NewsModel.objects.all()
-    return render(request, 'index.html', {'news': news})
+    doc = DocModel.objects.all()
+    context = {'news': news ,'doc': doc}
+    return render(request, 'index.html', context)
 
 # =========== todolist ==========================================
 
