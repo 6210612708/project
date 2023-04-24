@@ -1171,8 +1171,16 @@ def report_grade(request, pk):
 
 
 def report_score(request):
-    show = ScoreModel.objects.filter()
+    sc = SubjectModel.objects.all().order_by('-id')
     temp = ScoreModel.objects.all()
+    term = 1
+    date_now = date.today()
+    if sc[0].startterm < date_now < sc[0].endterm :
+        term = 2
+    if term == 1 :
+        show = ScoreModel.objects.filter(subject = sc[1])
+    else:
+        show = ScoreModel.objects.filter(subject = sc[0])
     for i in temp:
         sc = (i.consc + i.com1sc + i.com2sc)/3
         ScoreModel.objects.filter(project=i.project).update(
