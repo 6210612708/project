@@ -36,6 +36,7 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="{% url 'website:setting' %}">ตั้งค่า</a></li>
+            <li><a class="getstarted scrollto bg-white text-black">ผู้ดูแลระบบ</a></li>
           <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
         {% endif %}
 
@@ -60,6 +61,7 @@
               <li><a href="{% url 'website:report_score' %}">คะแนนโครงงาน</a></li>
             </ul>
           </li>
+            <li><a class="getstarted scrollto bg-white text-black">ผู้ประสานงาน</a></li>
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
         {% endif %}
 
@@ -74,6 +76,7 @@
               <li><a href="{% url 'website:evaluate' %}">ประเมินโครงงาน</a></li>
             </ul>
           </li>
+            <li><a class="getstarted scrollto bg-white text-black">ที่ปรึกษา</a></li>
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
           {% endif %}
 
@@ -88,6 +91,7 @@
               <li><a href="{% url 'website:stddetail' %}">ข้อมูลนักศึกษา</a></li>
             </ul>
           </li>
+            <li><a class="getstarted scrollto bg-white text-black">นักศึกษา</a></li>
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
           {% endif %}   
         </ul>
