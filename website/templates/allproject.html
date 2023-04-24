@@ -22,7 +22,7 @@
         {{ form.as_p }}
         <input type="submit" name="Submit" id="submit">
     </form> -->
-    {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+    {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
     <div class="col-sm-12 center" style=" padding-bottom: 0;margin-bottom: 0;">
         <div class="card">
           <div class="card-body">

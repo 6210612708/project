@@ -683,9 +683,8 @@ def allproject(request):
 def project(request):
     form = projectModelForm(request.POST)
     forms = projectModelForm()
-    show = ProjectModel.objects.all()
-    context = {'form': forms, 'show': show}
     prof = ProfModel.objects.all()
+    show = ProjectModel.objects.all()
     can_show = 0
     for ck in prof:
         if ck.user == request.user:
@@ -693,6 +692,12 @@ def project(request):
     if request.user.groups.filter(name='admin').exists():
         can_show = 1
     if can_show == 1:
+        # if request.user.profmodel.major == 'ไฟฟ้า':
+        #     p = ProfModel.objects.filter(major = 'ไฟฟ้า')
+        #     show = ProjectModel.objects.filter(consult = p)
+        # else:
+        #     p = ProfModel.objects.filter(major = 'คอมพิวเตอร์')
+        #     show = ProjectModel.objects.filter(consult = p)
         if request.method == "POST":
             if form.is_valid():
                 check = SubjectModel.objects.all().order_by('-id')
@@ -744,14 +749,14 @@ def project(request):
                 else:
                     messages.error(
                         request, 'กรุณารอแอดมินตั้งค่าวิชาและปีการศึกษา')
-                    return render(request, 'project.html', context)
+                    return render(request, 'project.html')
         else:
             print("Error", form.errors)
 
     else:
         messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลอาจารย์')
         return redirect('website:index')
-
+    context = {'form': forms, 'show': show}
     return render(request, 'project.html', context)
 
 
