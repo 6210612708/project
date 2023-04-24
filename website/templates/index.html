@@ -19,16 +19,14 @@
 
     {% if messages %}
     {% for messages in messages %}
-
-    <div class="card text-white bg-danger col-sm-12 center">
-      <div class="card-body">
-        <div class="text-center">
-        <h5 class="card-title">{{messages|safe}}</h5>
+    <div class="card text-white bg-danger mx-5">
+      <div class="card-body text-center">
+        {{messages|safe}}
       </div>
     </div>
-
     {% endfor %}
     {% endif %}
+
     <!-- {% if messages %}
     {% for messages in messages %}
     <br>
