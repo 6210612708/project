@@ -78,6 +78,7 @@
                   <table class="table table-borderless">
                     <thead>
                       <tr>
+                        <th scope="col">ภาคเรียน</th>
                         <th scope="col">คะแนนจากที่ปรึกษา</th>
                         <th scope="col">คะแนนจากกรรมการ</th>
                         <th scope="col">คะแนนจากกรรมการ</th>
@@ -88,6 +89,7 @@
                     <tbody>
                       {% for show in score %}
                       <tr>
+                        <td>{{show.subject}}</td>
                         <td>{{show.consc}}</td>
                         <td>{{show.com1sc}}</td>
                         <td>{{show.com2sc}}</td>

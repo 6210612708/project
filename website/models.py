@@ -207,8 +207,8 @@ class Fileproject(models.Model):
 
 class ScoreConsult(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1con') 
-    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2con')
+    std1 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1con') 
+    std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2con')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
@@ -226,8 +226,8 @@ class ScoreConsult(models.Model):
 
 class ScoreCom1(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1sc1') 
-    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc1')
+    std1 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1sc1') 
+    std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc1')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
@@ -245,8 +245,8 @@ class ScoreCom1(models.Model):
 
 class ScoreCom2(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1sc2') 
-    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc2')
+    std1 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1sc2') 
+    std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc2')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
@@ -264,8 +264,8 @@ class ScoreCom2(models.Model):
 
 class ScoreModel(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    std1 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1') 
-    std2 = models.OneToOneField(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2')
+    std1 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1') 
+    std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
     consc = models.IntegerField(null=True, blank=True ,default=0)

@@ -1166,7 +1166,7 @@ def report_grade(request, pk):
 
 
 def report_score(request):
-    show = ScoreModel.objects.filter(std1 = not None)
+    show = ScoreModel.objects.filter()
     temp = ScoreModel.objects.all()
     for i in temp:
         sc = (i.consc + i.com1sc + i.com2sc)/3
