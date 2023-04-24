@@ -63,7 +63,7 @@
                 </td>
             </tr>
             {% endfor %} -->
-            <div class="col-sm-12 center">
+           <div class="col-sm-12 center">
                 <div class="card">
                   <div class="card-body">
                     <div class="card-header">
@@ -75,29 +75,89 @@
                     <p class="card-text">
                       <form method="POST">
                         {% csrf_token %}
-                        <!-- <div class="form__group row mt-3 mx-1">
-                          <label class="form__field">
-                           คะแนนส่วนที่ 1 : {{ form.sc1 }}
-                          </label>
-                        </div>
-                        <div class="form__group row mt-3 mx-1">
-                          <label class="form__field">
-                            คะแนนส่วนที่ 2 : {{ form.sc2 }}
-                          </label>
-                        </div> -->
-                        {{ form.subject }}
-                        <label class="addcontent-blog mt-5">
-                            คะแนนส่วนที่ 1 : {{ form.sc1 }}
-                            คะแนนส่วนที่ 2 : {{ form.sc2 }}
-                            คะแนนส่วนที่ 3 : {{ form.sc3 }}
-                            คะแนนส่วนที่ 4 : {{ form.sc4 }}
-                            </label>
-                            <label class="addcontent-blog mt-3">
-                            คะแนนส่วนที่ 5 : {{ form.sc5 }}
-                            คะแนนส่วนที่ 6 : {{ form.sc6 }}
-                            คะแนนส่วนที่ 7 : {{ form.sc7 }}
-                            คะแนนส่วนที่ 8 : {{ form.sc8 }}
-                                </label>
+                        <table class="table table-borderless">
+                          <thead>
+                            <tr>
+                              <th class="col"></th>
+                              <th class="col-8">หัวข้อการประเมิน</th>
+                              <th class="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td>1. นักศึกษาจัดทำรายงานตามรูปแบบที่กำหนดได้อย่างถูกต้อง</td>
+                              <td>
+                                <label class="addcontent-blog">
+                                 {{ form.sc1 }}
+                                  </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>2. นักศึกษาเขียนรายงานด้วยตนเองโดยใช้ภาษาที่เหมาะสมและสื่อความหมายได้ชัดเจน</td>
+                              <td>
+                                <label class="addcontent-blog">
+                                 {{ form.sc2 }}
+                                  </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>3. นักศึกษาสามารถนำเสนอผลงานได้อย่างน่าสนใจและอธิบายได้อย่างมีหลักการ</td>
+                              <td>
+                                <label class="addcontent-blog">
+                                 {{ form.sc3 }}
+                                  </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>4. นักศึกษาสามารถตอบคำถามต่างๆ และแสดงให้เห็นถึงความเข้าใจในงานที่ได้ทำ</td>
+                              <td>
+                                <label class="addcontent-blog">
+                                 {{ form.sc4 }}
+                                  </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>5. นักศึกษาสามารถทำโครงงานได้บรรลุตามแผนการดำเนินงานที่เสนอ</td>
+                              <td>
+                                <label class="addcontent-blog">
+                                 {{ form.sc5 }}
+                                  </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>6. ระดับคุณภาพของผลลัพธ์โดยรวมที่ได้จากการทำโครงงานของนักศึกษา</td>
+                              <td>
+                                <label class="addcontent-blog">
+                                 {{ form.sc6 }}
+                                  </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>7. คุณธรรม จริยธรรมและความรับผิดชอบโดยรวมในการทำโครงงานของนักศึกษา</td>
+                              <td>
+                                <label class="addcontent-blog">
+                                 {{ form.sc7 }}
+                                  </label>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td>8. นักศึกษาสามารถประยุกต์ใช้ความรู้ในการแก้ปัญหาที่เกิดขึ้นจากการทำโครงงานได้</td>
+                              <td>
+                                <label class="addcontent-blog">
+                                 {{ form.sc8 }}
+                                  </label>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                     </p>
                     <div class="text-center">
                     <input class="btn btn-primary btn-sm active mt-4 mx-3 center" type="submit" name="Submit" id="submit">
