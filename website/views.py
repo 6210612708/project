@@ -702,6 +702,11 @@ def project(request):
                     test.consult = con
                     fin = test.save()
                     ScoreModel.objects.create(
+                        subject =SubjectModel.objects.latest('id'),
+                        project=test,
+                        consult=con
+                    )
+                    ScoreModel.objects.create(
                         project=test,
                         consult=con
                     )
