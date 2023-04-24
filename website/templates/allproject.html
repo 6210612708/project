@@ -54,9 +54,6 @@
         </div>
       </div>
 
-<!-- {% for show in file %}
-{{show.topic}} {{show.datedue}}
-{% endfor %} -->
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
@@ -240,7 +237,7 @@
 
         </table>
 {% endif %} -->
-{% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+{% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
@@ -317,6 +314,6 @@
     </div>
   </div>
   {% endif %}
-  {% endif %}
+
 
 {% endblock %}
