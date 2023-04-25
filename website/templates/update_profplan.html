@@ -3,6 +3,8 @@
 <html lang="en">
 
 {% block head %}
+    <link rel="stylesheet" href="{% static '/css/form_field.css' %}">
+    {{ form.media }}
     <title>แก้ไขแผนการดำเนินการ</title>
 {% endblock %}
 
@@ -19,7 +21,38 @@
         </form>
     {% endif %} -->
     {% if not form.is_valid %} 
-    <div class="row center">
+    <div class="col-sm-12 center">
+      <div class="card">
+        <div class="card-body">
+          <!-- <h5 class="card-title">จัดการข้อมูลพื้นฐาน</h5> -->
+          <div class="card-header">
+            <h5 class="card-title">แก้ไขข้อมูล</h5>
+          </div>
+          <p class="card-text">
+            <form method="POST">
+              {% csrf_token %}
+              <div class="form__group row mt-3 mx-1">
+                <label class="form__field">
+                  วันที่ : {{ form.date }}
+                </label>
+              </div>
+              <div class="form__group row mt-3 mx-1">
+                <label class="form__field">
+                  รายการ : {{ form.list }}
+                </label>
+              </div>
+              <!-- <label class="addcontent-blog">
+                วันที่ : {{ form.date }}
+                รายการ : {{ form.list }}
+              </label> -->
+          </p>
+          <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+          <a href="{% url 'website:profplan_csv' %}" class="btn btn-secondary btn-sm active mt-4 mx-3" role="button" aria-pressed="true">Upload CSV</a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row center">
     <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
@@ -40,7 +73,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     {% endif %}
 
 {% endblock %}
