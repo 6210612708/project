@@ -133,6 +133,7 @@
                     <tbody>
                       
                       <tr>
+                        <th class="col">สาขา</th>
                           <th class="col">หัวข้อ</th>
                           <th class="col">อาจารย์ที่ปรึกษา</th>
                           <th class="col">รายละเอียด</th>
@@ -145,6 +146,9 @@
                       
                       <tr>
                         {% if request.user.profmodel == show.consult %}
+                        <td>
+                          {{show.major}}
+                        </td> 
                           <td>
                             {{show.thainame}}
                           </td>
@@ -236,6 +240,7 @@
             <tbody>
               
               <tr>
+                <th class="col">สาขา</th>
                   <th class="col">หัวข้อ</th>
                   <th class="col">อาจารย์ที่ปรึกษา</th>
                   <th class="col">รายละเอียด</th>
@@ -247,7 +252,9 @@
               {% for show in show %}
               
               <tr>
-                
+                <td>
+                  {{show.major}}
+                </td> 
                   <td>
                     {{show.thainame}}
                   </td>
