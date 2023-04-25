@@ -827,7 +827,12 @@ def stdproject(request):
         if test.student1 == request.user.stdmodel or test.student2 == request.user.stdmodel:
             x = 1
     if x == 0:
-        show = ProjectModel.objects.all()
+        if request.user.groups.filter(name='admin').exists():
+            show = ProjectModel.objects.all()
+        elif request.user.stdmodel.major == 'ไฟฟ้า':
+            show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
+        elif request.user.stdmodel.major == 'คอมพิวเตอร์':
+            show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
 
     context = {'x': x, 'show': show}
     return render(request, 'stdproject.html', context)
