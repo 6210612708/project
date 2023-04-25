@@ -674,7 +674,12 @@ def allproject(request):
             form.save()
         else:
             print("Error", form.errors)
-    show = ProjectModel.objects.all()
+    if request.user.groups.filter(name='admin').exists():
+            show = ProjectModel.objects.all()
+    elif request.user.profmodel.major == 'ไฟฟ้า':
+        show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
+    elif request.user.profmodel.major == 'คอมพิวเตอร์':
+        show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
     file = Topicproject.objects.all()
     context = {'form': form, 'show': show, 'file': file}
     return render(request, 'allproject.html', context)
@@ -692,29 +697,33 @@ def project(request):
     if request.user.groups.filter(name='admin').exists():
         can_show = 1
     if can_show == 1:
-        # if request.user.profmodel.major == 'ไฟฟ้า':
-        #     p = ProfModel.objects.filter(major = 'ไฟฟ้า')
-        #     show = ProjectModel.objects.filter(consult = p)
-        # else:
-        #     p = ProfModel.objects.filter(major = 'คอมพิวเตอร์')
-        #     show = ProjectModel.objects.filter(consult = p)
+        if request.user.groups.filter(name='admin').exists():
+            show = ProjectModel.objects.all()
+        elif request.user.profmodel.major == 'ไฟฟ้า':
+            show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
+        elif request.user.profmodel.major == 'คอมพิวเตอร์':
+            show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
         if request.method == "POST":
             if form.is_valid():
                 check = SubjectModel.objects.all().order_by('-id')
                 if check:
                     con = request.user.profmodel
+                    m = request.user.profmodel.major
                     test = form.save(commit=False)
                     test.consult = con
+                    test.major = m
                     fin = test.save()
                     ScoreModel.objects.create(
                         subject =check[0],
                         project=test,
-                        consult=con
+                        consult=con,
+                        major = m
                     )
                     ScoreModel.objects.create(
                         subject =check[1],
                         project=test,
-                        consult=con
+                        consult=con,
+                        major = m
                     )
                     ScoreConsult.objects.create(
                         subject =check[0],
@@ -1178,9 +1187,19 @@ def report_score(request):
     if sc[0].startterm < date_now < sc[0].endterm :
         term = 2
     if term == 1 :
-        show = ScoreModel.objects.filter(subject = sc[1])
+        if request.user.groups.filter(name='admin').exists():
+            show = ScoreModel.objects.all()
+        elif request.user.profmodel.major == 'ไฟฟ้า':
+            show = ScoreModel.objects.filter(subject = sc[1] ,major = 'ไฟฟ้า')
+        elif request.user.profmodel.major == 'คอมพิวเตอร์':
+            show = ScoreModel.objects.filter(subject = sc[1] ,major =  'คอมพิวเตอร์')
     else:
-        show = ScoreModel.objects.filter(subject = sc[0])
+        if request.user.groups.filter(name='admin').exists():
+            show = ScoreModel.objects.all()
+        elif request.user.profmodel.major == 'ไฟฟ้า':
+            show = ScoreModel.objects.filter(subject = sc[0] ,major = 'ไฟฟ้า') 
+        elif request.user.profmodel.major == 'คอมพิวเตอร์':
+            show = ScoreModel.objects.filter(subject = sc[0] ,major =  'คอมพิวเตอร์')
     for i in temp:
         sc = (i.consc + i.com1sc + i.com2sc)/3
         ScoreModel.objects.filter(project=i.project).update(

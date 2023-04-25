@@ -173,6 +173,7 @@ class ProjectModel(models.Model):
         StdModel, null=True, blank=True, on_delete=models.CASCADE, related_name='student2')
     status = models.CharField(
         max_length=200, null=True, choices=STATUS, default='ยังไม่มีนักศึกษาลงทะเบียน')
+    major = models.CharField(max_length=100, null=True, blank=True)
     
 
     def __str__(self):
@@ -268,6 +269,7 @@ class ScoreModel(models.Model):
     std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    major = models.CharField(max_length=100, null=True, blank=True)
     consc = models.IntegerField(null=True, blank=True ,default=0)
     com1sc = models.IntegerField(null=True, blank=True ,default=0)
     com2sc = models.IntegerField(null=True, blank=True ,default=0)
