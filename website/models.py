@@ -28,14 +28,6 @@ class CoorPlanModel(models.Model):
         return self.list
 
 
-class ComPlanModel(models.Model):
-    date = models.DateField(null=True)
-    list = models.CharField(max_length=500, null=True)
-
-    def __str__(self):
-        return self.list
-
-
 class ProfPlanModel(models.Model):
     date = models.DateField(null=True)
     list = models.CharField(max_length=500, null=True)
