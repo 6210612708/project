@@ -13,25 +13,29 @@
           <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:todolist' %}">รายการที่ต้องทำ</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:news' %}">ประกาศข่าวสาร</a></li>
-          <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto" href="{% url 'website:document' %}">อัพโหลดเอกสาร</a></li>
+          <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+            <li><a href="{% url 'website:subject' %}">วิชาและภาคเรียน</a></li>
+            <li><a href="{% url 'website:grade' %}">เกณฑ์การตัดเกรด</a></li>
+          <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
               <li><a href="{% url 'website:coorplan' %}">ผู้ประสานงาน</a></li>
               <li><a href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
               <li><a href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="{% url 'website:document' %}">อัพโหลดเอกสาร</a></li>
-              <li><a href="{% url 'website:subject' %}">วิชาและภาคเรียน</a></li>
-              <li><a href="{% url 'website:grade' %}">เกณฑ์การตัดเกรด</a></li>
-              <li><a href="{% url 'website:report_score' %}">คะแนนโครงงาน</a></li>
-              <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
-              <li><a href="{% url 'website:allproject' %}">รายงานโครงงาน</a></li>
-              <li class="dropdown"><a href="#"><span>จัดการข้อมูลพื้นฐาน</span> <i class="bi bi-chevron-right"></i></a>
+            <li class="dropdown"><a href="#"><span>จัดการข้อมูลพื้นฐาน</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{% url 'website:prof' %}">อาจารย์และผู้ประสานงาน</a></li>
                   <li><a href="{% url 'website:std' %}">นักศึกษา</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>เกี่ยวกับโครงงาน</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
+                  <li><a href="{% url 'website:allproject' %}">รายงานโครงงาน</a></li>
+                  <li><a href="{% url 'website:report_score' %}">คะแนนโครงงาน</a></li>
                 </ul>
               </li>
             </ul>
@@ -46,20 +50,25 @@
           <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:coorplan' %}">รายการที่ต้องทำ</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:news' %}">ประกาศข่าวสาร</a></li>
-          <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
-              <li><a href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
-            </ul>
-          </li>
+          
           <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'website:document' %}">อัพโหลดเอกสาร</a></li>
-              <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
               <li><a href="{% url 'website:grade' %}">เกณฑ์การตัดเกรด</a></li>
-              <li><a href="{% url 'website:allproject' %}">รายงานโครงงาน</a></li>
-              <li><a href="{% url 'website:evaluate' %}">ประเมินโครงงาน</a></li>
-              <li><a href="{% url 'website:report_score' %}">คะแนนโครงงาน</a></li>
+              <li class="dropdown"><a href="#"><span>แผนการดำเนินงาน</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="{% url 'website:profplan' %}">ที่ปรึกษา</a></li>
+                  <li><a href="{% url 'website:stdplan' %}">นักศึกษา</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>เกี่ยวกับโครงงาน</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
+                  <li><a href="{% url 'website:allproject' %}">รายงานโครงงาน</a></li>
+                  <li><a href="{% url 'website:report_score' %}">คะแนนโครงงาน</a></li>
+                  <li><a href="{% url 'website:evaluate' %}">ประเมินโครงงาน</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
             <li><a class="getstarted scrollto bg-white text-black">ผู้ประสานงาน</a></li>
@@ -70,13 +79,14 @@
           {% if user.groups.all.0.name == 'consultant' and user.groups.all.1.name != 'coordinator'%}
           <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
           <li><a class="nav-link scrollto" href="{% url 'website:profplan' %}">รายการที่ต้องทำ</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
-          <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="{% url 'website:allproject' %}">รายงานโครงงาน</a></li>
-              <li><a href="{% url 'website:evaluate' %}">ประเมินโครงงาน</a></li>
-            </ul>
-          </li>
+          <li class="dropdown"><a href="#"><span>เกี่ยวกับโครงงาน</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="{% url 'website:project' %}">โครงงานนักศึกษา</a></li>
+            <li><a href="{% url 'website:allproject' %}">รายงานโครงงาน</a></li>
+            <li><a href="{% url 'website:report_score' %}">คะแนนโครงงาน</a></li>
+            <li><a href="{% url 'website:evaluate' %}">ประเมินโครงงาน</a></li>
+          </ul>
+        </li>
             <li><a class="getstarted scrollto bg-white text-black">ที่ปรึกษา</a></li>
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
           {% endif %}
@@ -86,12 +96,9 @@
           <li><a class="nav-link scrollto active" href="{% url 'website:index' %}">Home</a></li>
           <li><a class="nav-link scrollto " href="{% url 'website:stdplan' %}">รายการที่ต้องทำ</a></li>
           <li><a class="nav-link scrollto " href="{% url 'website:detailproject' %}">ข้อมูลโครงงาน</a></li>
-          <li class="dropdown"><a href="#"><span>อื่นๆ</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="{% url 'website:docproject' %}">รายงานโครงงาน</a></li>
-              <li><a href="{% url 'website:stddetail' %}">ข้อมูลนักศึกษา</a></li>
-            </ul>
-          </li>
+          <li><a class="nav-link scrollto " href="{% url 'website:docproject' %}">รายงานโครงงาน</a></li>
+          <li><a class="nav-link scrollto " href="{% url 'website:stddetail' %}">ข้อมูลนักศึกษา</a></li>
+
             <li><a class="getstarted scrollto bg-white text-black">นักศึกษา</a></li>
         <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Log Out</a></li>
           {% endif %}   
