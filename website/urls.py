@@ -91,6 +91,7 @@ urlpatterns = [
     # Coordinator
     path('coor/delete/<pk>', views.deletecoor, name='deletecoor'),
     path('addcoor/<pk>', views.addcoor, name='addcoor'),
+    path('committee/<pk>', views.committee, name='committee'),
 
     # Project
     path('project/', views.project, name='project'),
@@ -108,24 +109,26 @@ urlpatterns = [
 
     path('reportproject/<pk>', views.reportproject, name='reportproject'),
     path('stddetail', views.stddetail, name='stddetail'),
-
-
-    # grade score subject
-    path('grade', views.grade, name='grade'),
-    path('updategrade/<pk>', views.updategrade, name='updategrade'),
-    path('deletegrade/<pk>', views.deletegrade, name='deletegrade'),
-    path('score1/<pk>', views.score1, name='score1'),
-    path('score2/<pk>', views.score2, name='score2'),
-
-
+    
+    # subject
     path('subject/', views.subject, name='subject'),
     path('subject/delete/<pk>', views.deletesubject, name='deletesubject'),
 
+    # grade score
+    path('grade', views.grade, name='grade'),
+    path('updategrade/<pk>', views.updategrade, name='updategrade'),
+    path('deletegrade/<pk>', views.deletegrade, name='deletegrade'),
+    
     path('evaluate', views.evaluate, name='evaluate'),
+    path('score1/<pk>', views.score1, name='score1'),
+    path('score2/<pk>', views.score2, name='score2'),
+    path('score1_com1/<pk>', views.score1_com1, name='score1_com1'),
+    path('score2_com1/<pk>', views.score2_com1, name='score2_com1'),
+    path('score1_com2/<pk>', views.score1_com2, name='score1_com2'),
+    path('score2_com2/<pk>', views.score2_com2, name='score2_com2'),
     path('reportgrade/<pk>', views.report_grade, name='report_grade'),
     path('reportscore/', views.report_score, name='report_score'),
 
-    path('committee/<pk>', views.committee, name='committee'),
 
 
 ]

@@ -176,18 +176,18 @@ class ScoreForm(forms.ModelForm):
 class ScoreconsultForm(forms.ModelForm):
     class Meta:
         model = ScoreConsult
-        fields = ['subject','sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'sc7', 'sc8']
+        fields = ['sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'sc7', 'sc8']
         
 
 class Scorecom1Form(forms.ModelForm):
     class Meta:
         model = ScoreCom1
-        fields = ['subject','sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'sc7', 'sc8']
+        fields = ['sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'sc7', 'sc8']
 
 class Scorecom2Form(forms.ModelForm):
     class Meta:
         model = ScoreCom2
-        fields = ['subject','sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'sc7', 'sc8']
+        fields = ['sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'sc7', 'sc8']
 
 class CommitteeForm(forms.ModelForm):
     class Meta:

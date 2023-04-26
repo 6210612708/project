@@ -771,9 +771,10 @@ def project(request):
 
 def reportproject(request, pk):
     temp = ProjectModel.objects.filter(id=pk).get()
+    proj = ProjectModel.objects.filter(id=pk)
     show = Fileproject.objects.filter(project=temp).order_by("-id")
     topic = Topicproject.objects.all()
-    context = {'show': show, 'topic': topic}
+    context = {'show': show, 'topic': topic,'proj': proj}
     return render(request, 'reportproject.html', context)
 
 
@@ -954,141 +955,154 @@ def deletesubject(request, pk):
 # =========== grade score==========================================
 
 def score2(request, pk):
-    con = ProjectModel.objects.filter(
-        consult=request.user.profmodel, status='อนุมัติ')
-    com1 = ProjectModel.objects.filter(
-        committee1=request.user.profmodel, status='อนุมัติ')
     check = SubjectModel.objects.all().order_by('-id')
-    if con:
-        con = ProjectModel.objects.filter(
-            consult=request.user.profmodel, status='อนุมัติ').get()
-        list = ScoreConsult.objects.filter(project=con,subject=check[0]).get()
-        show = ScoreConsult.objects.filter(project=con,subject=check[0])
-        form = ScoreconsultForm(instance=list)
-        if request.method == 'POST':
-            form = ScoreconsultForm(request.POST, instance=list)
-            if form.is_valid():
-                test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                    test.sc5 + test.sc6 + test.sc7 + test.sc8
-                test.score = point
-                fin = test.save()
-                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-                    consc=point
-                )
-            else:
-                print("Error", form.errors)
-        context = {'form': form, 'show': show}
-    elif com1:
-        com1 = ProjectModel.objects.filter(
-            committee1=request.user.profmodel, status='อนุมัติ')
-        list = ScoreCom1.objects.filter(project=com1,subject=check[0]).get()
-        show = ScoreCom1.objects.filter(project=com1,subject=check[0])
-        form = Scorecom1Form(instance=list)
-        if request.method == 'POST':
-            form = Scorecom1Form(request.POST, instance=list)
-            if form.is_valid():
-                test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                    test.sc5 + test.sc6 + test.sc7 + test.sc8
-                test.score = point
-                fin = test.save()
-                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-                    com1sc=point
-                )
-            else:
-                print("Error", form.errors)
-        context = {'form': form, 'show': show}
-    else:
-        com2 = ProjectModel.objects.filter(
-            committee2=request.user.profmodel, status='อนุมัติ')
-        list = ScoreCom2.objects.filter(project=com2,subject=check[0]).get()
-        show = ScoreCom2.objects.filter(project=com2,subject=check[0])
-        form = Scorecom2Form(instance=list)
-        if request.method == 'POST':
-            form = Scorecom2Form(request.POST, instance=list)
-            if form.is_valid():
-                test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                    test.sc5 + test.sc6 + test.sc7 + test.sc8
-                test.score = point
-                fin = test.save()
-                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-                    com2sc=point
-                )
-            else:
-                print("Error", form.errors)
-        context = {'form': form, 'show': show}
-
+    con = ProjectModel.objects.get(id=pk)
+    list = ScoreConsult.objects.filter(project=con,subject=check[0]).get()
+    show = ScoreConsult.objects.filter(project=con,subject=check[0])
+    form = ScoreconsultForm(instance=list)
+    if request.method == 'POST':
+        form = ScoreconsultForm(request.POST, instance=list)
+        if form.is_valid():
+            test = form.save(commit=False)
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
+                return redirect('website:score2' , pk)
+            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                test.sc5 + test.sc6 + test.sc7 + test.sc8
+            test.score = point
+            fin = test.save()
+            ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
+                consc=point
+            )
+        else:
+            print("Error", form.errors)
+    context = {'form': form, 'show': show}
+    return render(request, 'score.html', context)
+    
+def score2_com1(request, pk):
+    check = SubjectModel.objects.all().order_by('-id')
+    com1 = ProjectModel.objects.get(id=pk)
+    list = ScoreCom1.objects.filter(project=com1,subject=check[0]).get()
+    show = ScoreCom1.objects.filter(project=com1,subject=check[0])
+    form = Scorecom1Form(instance=list)
+    if request.method == 'POST':
+        form = Scorecom1Form(request.POST, instance=list)
+        if form.is_valid():
+            test = form.save(commit=False)
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
+                return redirect('website:score2_com1' , pk)
+            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                test.sc5 + test.sc6 + test.sc7 + test.sc8
+            test.score = point
+            fin = test.save()
+            ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
+                com1sc=point
+            )
+        else:
+            print("Error", form.errors)
+        
+    context = {'form': form, 'show': show}
+    return render(request, 'score.html', context)
+    
+def score2_com2(request, pk):
+    check = SubjectModel.objects.all().order_by('-id')
+    com2 = ProjectModel.objects.get(id=pk)
+    list = ScoreCom2.objects.filter(project=com2,subject=check[0]).get()
+    show = ScoreCom2.objects.filter(project=com2,subject=check[0])
+    form = Scorecom2Form(instance=list)
+    if request.method == 'POST':
+        form = Scorecom2Form(request.POST, instance=list)
+        if form.is_valid():
+            test = form.save(commit=False)
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
+                return redirect('website:score2_com2' , pk)
+            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                test.sc5 + test.sc6 + test.sc7 + test.sc8
+            test.score = point
+            fin = test.save()
+            ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
+                com2sc=point
+            )
+        else:
+            print("Error", form.errors)
+    context = {'form': form, 'show': show}
     return render(request, 'score.html', context)
 
 def score1(request, pk):
-    con = ProjectModel.objects.filter(
-        consult=request.user.profmodel, status='อนุมัติ')
-    com1 = ProjectModel.objects.filter(
-        committee1=request.user.profmodel, status='อนุมัติ')
     check = SubjectModel.objects.all().order_by('-id')
-    if con:
-        con = ProjectModel.objects.filter(
-            consult=request.user.profmodel, status='อนุมัติ').get()
-        list = ScoreConsult.objects.filter(project=con,subject=check[1]).get()
-        show = ScoreConsult.objects.filter(project=con,subject=check[1])
-        form = ScoreconsultForm(instance=list)
-        if request.method == 'POST':
-            form = ScoreconsultForm(request.POST, instance=list)
-            if form.is_valid():
-                test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                    test.sc5 + test.sc6 + test.sc7 + test.sc8
-                test.score = point
-                fin = test.save()
-                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-                    consc=point
-                )
-            else:
-                print("Error", form.errors)
-        context = {'form': form, 'show': show}
-    elif com1:
-        com1 = ProjectModel.objects.filter(
-            committee1=request.user.profmodel, status='อนุมัติ')
-        list = ScoreCom1.objects.filter(project=com1,subject=check[1]).get()
-        show = ScoreCom1.objects.filter(project=com1,subject=check[1])
-        form = Scorecom1Form(instance=list)
-        if request.method == 'POST':
-            form = Scorecom1Form(request.POST, instance=list)
-            if form.is_valid():
-                test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                    test.sc5 + test.sc6 + test.sc7 + test.sc8
-                test.score = point
-                fin = test.save()
-                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-                    com1sc=point
-                )
-            else:
-                print("Error", form.errors)
-        context = {'form': form, 'show': show}
-    else:
-        com2 = ProjectModel.objects.filter(
-            committee2=request.user.profmodel, status='อนุมัติ')
-        list = ScoreCom2.objects.filter(project=com2,subject=check[1]).get()
-        show = ScoreCom2.objects.filter(project=com2,subject=check[1])
-        form = Scorecom2Form(instance=list)
-        if request.method == 'POST':
-            form = Scorecom2Form(request.POST, instance=list)
-            if form.is_valid():
-                test = form.save(commit=False)
-                point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                    test.sc5 + test.sc6 + test.sc7 + test.sc8
-                test.score = point
-                fin = test.save()
-                ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-                    com2sc=point
-                )
-            else:
-                print("Error", form.errors)
-        context = {'form': form, 'show': show}
+    con = ProjectModel.objects.get(id=pk)
+    list = ScoreConsult.objects.filter(project=con,subject=check[1]).get()
+    show = ScoreConsult.objects.filter(project=con,subject=check[1])
+    form = ScoreconsultForm(instance=list)
+    if request.method == 'POST':
+        form = ScoreconsultForm(request.POST, instance=list)
+        if form.is_valid():
+            test = form.save(commit=False)
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
+                return redirect('website:score1' , pk)
+            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                test.sc5 + test.sc6 + test.sc7 + test.sc8
+            test.score = point
+            fin = test.save()
+            ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
+                consc=point
+            )
+        else:
+            print("Error", form.errors)
+    context = {'form': form, 'show': show}
+    return render(request, 'score.html', context)
+    
+def score1_com1(request, pk):
+    check = SubjectModel.objects.all().order_by('-id')
+    com1 = ProjectModel.objects.get(id=pk)
+    list = ScoreCom1.objects.filter(project=com1,subject=check[1]).get()
+    show = ScoreCom1.objects.filter(project=com1,subject=check[1])
+    form = Scorecom1Form(instance=list)
+    if request.method == 'POST':
+        form = Scorecom1Form(request.POST, instance=list)
+        if form.is_valid():
+            test = form.save(commit=False)
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
+                return redirect('website:score1_com1' , pk)
+            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                test.sc5 + test.sc6 + test.sc7 + test.sc8
+            test.score = point
+            fin = test.save()
+            ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
+                com1sc=point
+            )
+        else:
+            print("Error", form.errors)
+    context = {'form': form, 'show': show}
+    return render(request, 'score.html', context)
 
+def score1_com2(request, pk):
+    check = SubjectModel.objects.all().order_by('-id')
+    com2 = ProjectModel.objects.get(id=pk) 
+    list = ScoreCom2.objects.filter(project=com2,subject=check[1]).get()
+    show = ScoreCom2.objects.filter(project=com2,subject=check[1])
+    form = Scorecom2Form(instance=list)
+    if request.method == 'POST':
+        form = Scorecom2Form(request.POST, instance=list)
+        if form.is_valid():
+            test = form.save(commit=False)
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
+                return redirect('website:score1_com2' , pk)
+            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
+                test.sc5 + test.sc6 + test.sc7 + test.sc8
+            test.score = point
+            fin = test.save()
+            ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
+                com2sc=point
+            )
+        else:
+            print("Error", form.errors)
+    context = {'form': form, 'show': show}
     return render(request, 'score.html', context)
 
 def evaluate(request):

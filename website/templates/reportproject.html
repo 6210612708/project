@@ -22,7 +22,13 @@
       <div class="card-body">
         
         <div class="card-header">
+<<<<<<< HEAD
           <h5 class="card-title">เอกสารโครงงานนักศึกษา</h5>
+=======
+          {% for show in proj %}
+          <h5 class="card-title">{{show.thainame}}</h5>
+          {% endfor %}
+>>>>>>> 22f674f22fe8714151a37dc6e0516706e7b37da3
         </div>
         <p class="card-text">
           <table class="table table-borderless">
@@ -39,7 +45,7 @@
                 <th>{{t.topic}}</th>
                 {% for show in show %}
                     {% if show.topic.topic == t.topic %}
-                <td>{{show.name}} {{show.date}}</td>
+                <td>{{show.topic.topic}} {{show.date}}</td>
                 <td><a href="{{show.file.url}}" download>download file</a></td>
                 {% endif %}
             {% endfor %}

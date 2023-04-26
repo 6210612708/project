@@ -150,7 +150,7 @@
               {% for show in com %}
               
               <tr>
-                {% if request.user.profmodel == show.committee1 or request.user.profmodel == show.committee1 %}
+                {% if request.user.profmodel == show.committee1 %}
                 <td>
                   {{show.major}}
                 </td>  
@@ -181,11 +181,57 @@
                 {% endif %}
                 {% if term == 1%}
                 <td>   
-                  <a href="{% url 'website:score1' show.id %}" >กดที่นี่</a>
+                  <a href="{% url 'website:score1_com1' show.id %}" >กดที่นี่</a>
                 </td> 
                 {%else%}
                 <td>   
-                  <a href="{% url 'website:score2' show.id %}" >กดที่นี่</a>
+                  <a href="{% url 'website:score2_com1' show.id %}" >กดที่นี่</a>
+                </td> 
+                {%endif%}
+                {% endif %}
+              </tr>
+              {% endfor %}
+
+
+              {% for show in com %}
+              
+              <tr>
+                {% if request.user.profmodel == show.committee2 %}
+                <td>
+                  {{show.major}}
+                </td>  
+                <td>
+                    {{show.thainame}}
+                  </td>
+                  <td>
+                    {{show.consult}}
+                  </td>
+                {% if show.status == 'ยังไม่มีนักศึกษาลงทะเบียน' %}
+                <td>
+                    {{show.status}}
+                </td>
+                <td>
+                    <p>-</p>
+                </td>
+                <td>
+                    <p>-</p>
+                </td>
+                {% else %}
+                <td>   
+                    {{show.status}}
+                </td> 
+                <td>
+                    <p>{{show.student1}}</p>
+                    <p>{{show.student2}}</p>
+                </td>
+                {% endif %}
+                {% if term == 1%}
+                <td>   
+                  <a href="{% url 'website:score1_com2' show.id %}" >กดที่นี่</a>
+                </td> 
+                {%else%}
+                <td>   
+                  <a href="{% url 'website:score2_com2' show.id %}" >กดที่นี่</a>
                 </td> 
                 {%endif%}
                 {% endif %}
