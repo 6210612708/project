@@ -17,6 +17,7 @@
 {% block content %}
 {% for show in show %}
 
+{% if show.std1 is not None %}
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
@@ -67,6 +68,6 @@
       </div>
     </div>
   </div>
-
+  {% endif %}
  {% endfor %}
 {% endblock %}

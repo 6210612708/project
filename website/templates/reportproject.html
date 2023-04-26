@@ -21,7 +21,9 @@
     <div class="card">
       <div class="card-body">
         <div class="card-header">
-          <h5 class="card-title">การส่งเอกสารโครงงาน</h5>
+          {% for show in proj %}
+          <h5 class="card-title">{{show.thainame}}</h5>
+          {% endfor %}
         </div>
         <p class="card-text">
           <table class="table table-borderless">
@@ -38,7 +40,7 @@
                 <th>{{t.topic}}</th>
                 {% for show in show %}
                     {% if show.topic.topic == t.topic %}
-                <td>{{show.name}} {{show.date}}</td>
+                <td>{{show.topic.topic}} {{show.date}}</td>
                 <td><a href="{{show.file.url}}" download>download file</a></td>
                 {% endif %}
             {% endfor %}

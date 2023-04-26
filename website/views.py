@@ -771,9 +771,10 @@ def project(request):
 
 def reportproject(request, pk):
     temp = ProjectModel.objects.filter(id=pk).get()
+    proj = ProjectModel.objects.filter(id=pk)
     show = Fileproject.objects.filter(project=temp).order_by("-id")
     topic = Topicproject.objects.all()
-    context = {'show': show, 'topic': topic}
+    context = {'show': show, 'topic': topic,'proj': proj}
     return render(request, 'reportproject.html', context)
 
 
