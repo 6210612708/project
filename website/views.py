@@ -226,7 +226,7 @@ def prof(request):
         else:
             print("Error", form.errors)
     form = ProfModelForm()
-    show = ProfModel.objects.all()
+    show = ProfModel.objects.all().order_by('major')
     coor = CoordinatorModel.objects.all()
 
     context = {'form': form, 'show': show, 'coor': coor}
@@ -234,7 +234,7 @@ def prof(request):
 
 
 def prof_csv(request):
-    show = ProfModel.objects.all()
+    show = ProfModel.objects.all().order_by('major')
     if request.method == "GET":
         context = {'show': show}
         return render(request, 'prof_csv.html', context)
@@ -674,12 +674,20 @@ def allproject(request):
             form.save()
         else:
             print("Error", form.errors)
-    if request.user.groups.filter(name='admin').exists():
+    prof = ProfModel.objects.all()
+    can_show = 0
+    for ck in prof:
+        if ck.user == request.user:
+            can_show = 1
+    if can_show == 1:
+        if request.user.groups.filter(name='admin').exists():
             show = ProjectModel.objects.all()
-    elif request.user.profmodel.major == 'ไฟฟ้า':
-        show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
-    elif request.user.profmodel.major == 'คอมพิวเตอร์':
-        show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+        elif request.user.profmodel.major == 'ไฟฟ้า' and request.user.groups.filter(name='coordinator'):
+            show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
+        elif request.user.profmodel.major == 'คอมพิวเตอร์' and request.user.groups.filter(name='coordinator'):
+            show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+        else :
+            show = ProjectModel.objects.all()
     file = Topicproject.objects.all()
     context = {'form': form, 'show': show, 'file': file}
     return render(request, 'allproject.html', context)
@@ -694,15 +702,15 @@ def project(request):
     for ck in prof:
         if ck.user == request.user:
             can_show = 1
-    if request.user.groups.filter(name='admin').exists():
-        can_show = 1
     if can_show == 1:
         if request.user.groups.filter(name='admin').exists():
             show = ProjectModel.objects.all()
-        elif request.user.profmodel.major == 'ไฟฟ้า':
+        elif request.user.profmodel.major == 'ไฟฟ้า' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
-        elif request.user.profmodel.major == 'คอมพิวเตอร์':
+        elif request.user.profmodel.major == 'คอมพิวเตอร์' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+        else :
+            show = ProjectModel.objects.all()
         if request.method == "POST":
             if form.is_valid():
                 check = SubjectModel.objects.all().order_by('-id')
