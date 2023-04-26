@@ -45,7 +45,7 @@
                   </label> -->
               </p>
               
-              <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
+              <input class="btn btn-primary mt-4 mx-3" type="submit" name="Submit" id="submit">
               </form>
             </div>
           </div>
@@ -59,7 +59,7 @@
         <p class="card-text">
           <table class="table table-borderless">
             <thead>
-              <tr>
+              <tr style="background-color:#B9C4D8;">
                 <th class="col">A</th>
                 <th class="col">B+</th>
                 <th class="col">B</th>
@@ -71,7 +71,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr style="background-color:#E4E7EC;">
                 <td>{{show.A}}</td>
                 <td>{{show.Bplus}}</td>
                 <td>{{show.B}}</td>
@@ -85,7 +85,7 @@
           </table>
         </p>
         <a class="btn btn-primary" href="{% url 'website:updategrade' show.id %}" role="button">แก้ไข</a>
-        <a class="btn btn-primary" href="{% url 'website:deletegrade' show.id %}" role="button">ลบ</a>
+        <a class="btn btn-primary mx-3" href="{% url 'website:deletegrade' show.id %}" role="button">ลบ</a>
       </div>
     </div>
   </div>
