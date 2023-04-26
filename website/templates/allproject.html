@@ -27,16 +27,15 @@
         <div class="card">
           <div class="card-body">
             <div class="card-header">
-              <h4 class="card-title">โครงงานนักศึกษา</h4>
+              <h4 class="card-title">กำหนดการส่งรายงาน</h4>
             </div>
-            <!-- <h4 class="card-title">โครงงานนักศึกษา</h4> -->
             <p class="card-text">
                 <form method="POST" >
                     {% csrf_token %}
                     <div class="form__group row mt-3 mx-1">
-                            <label class="form__field">
-                                <p>ขั้นตอนการดำเนินงาน :</p>  {{ form.topic }}
-                            </label>
+                        <label class="form__field">
+                            <p>หัวข้อรายงาน :</p>  {{ form.topic }}
+                        </label>
                       </div>
                       <div class="form__group row mt-3 mx-1">
                         <label class="form__field">

@@ -189,7 +189,7 @@ def deletedoc(request, pk):
     return redirect('website:document')
 
 
-# =========== consultant coordinator ==========================================
+# =========== consultant ==========================================
 
 def deletecoor(request, pk):
     data = CoordinatorModel.objects.get(id=pk)
