@@ -134,7 +134,8 @@ class fileprojectForm(forms.ModelForm):
 class scoretopicForm(forms.ModelForm):
     class Meta:
         model = FileProject
-        fields = ['score']
+        fields = ['score' ,'topic']
+
 
 class docprojectForm(forms.Form):
     SELECT_FOR_TERM_ONE = (

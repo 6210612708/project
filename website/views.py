@@ -795,10 +795,16 @@ def reportproject(request, pk):
     show = FileProject.objects.filter(project=temp).order_by("-id")
     topic = Topicproject.objects.all()
     form = scoretopicForm()
-    if request.method == 'POST':
-        form = scoretopicForm(request.POST, instance=list)
+    if request.method == "POST":
+        form = scoretopicForm(request.POST)
         if form.is_valid():
-            form.save()
+            test = form.save(commit=False)
+            print(temp)
+            print(test.topic)
+            FileProject.objects.filter(project=temp ,topic=test.topic).update(
+                score = test.score
+            )
+
 
     context = {'show': show, 'topic': topic,'proj': proj ,'form': form,}
     return render(request, 'reportproject.html', context)
