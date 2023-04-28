@@ -38,7 +38,7 @@
             <tbody>
                 {% for t in topic %}
               <tr>
-                <th>{{t.topic}}</th>
+                <!-- <th>{{t.topic}}</th> -->
                 {% for show in show %}
                     {% if show.topic.topic == t.topic %}
                 <td>{{show.topic.topic}} {{show.date}}</td>
@@ -53,28 +53,5 @@
       </div>
     </div>
   </div>
-<table>
-    {% for t in topic %}
-    <tr>
-        <td>
-            {{t.topic}}
-            <table>
-            {% for show in show %}
-                {% if show.topic.topic == t.topic %}
-                <tr>
-                    <td>
-                        {{show.topic.topic}} 
-                        {{show.name}} 
-                        {{show.date}}
-                        <a href="{{show.file.url}}" download>download file</a>
 
-                    </td>
-                </tr>
-                {% endif %}
-            {% endfor %}
-        </table>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
 {% endblock %}

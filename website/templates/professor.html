@@ -49,7 +49,7 @@
                       {% csrf_token %}
                       <div class="form__group row mt-3 mx-1">
                         <label class="form__field">
-                          หัวข้อ (Title) :  {{ form.title }}
+                          ตำแหน่ง :  {{ form.title }}
                         </label>
                       </div>
                       <div class="form__group row mt-3 mx-1">
@@ -77,9 +77,9 @@
                           โทรศัพท์ (Phone) :  {{ form.phone }}
                         </label>
                       </div>
+                       <input class="btn btn-primary mt-4 mx-3" type="submit" name="Submit" id="submit">
+                  <a href="{% url 'website:prof_csv' %}" class="btn btn-secondary mt-4 mx-3" role="button" aria-pressed="true">Upload CSV</a>
                   </form>
-                  <input class="btn btn-primary btn-sm active mt-4 mx-3" type="submit" name="Submit" id="submit">
-                  <a href="{% url 'website:prof_csv' %}" class="btn btn-secondary btn-sm active mt-4 mx-3" role="button" aria-pressed="true">Upload CSV</a>
               </p>
             </div>
           </div>
