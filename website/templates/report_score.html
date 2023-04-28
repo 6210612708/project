@@ -28,7 +28,7 @@
         <p class="card-text">
           <table class="table table-borderless">
             <thead>
-              <tr>
+              <tr style="background-color:#B9C4D8;">
                 <th class="col">ภาคเรียน</th>
                 <th class="col">สมาชิก</th>
                 <th class="col">ที่ปรึกษา</th>
@@ -40,7 +40,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr style="background-color:#E4E7EC;">
                 <td>{{show.subject}}</td>
                 <td>
                     <p>{{show.std1}}</p>
@@ -71,4 +71,19 @@
   </div>
   {% endif %}
  {% endfor %}
+
+ {% if show.std1 is None %}
+ <div class="col-sm-12 center">
+     <div class="card">
+         <div class="text-center text-danger mt-5 mb-5">
+          <br>
+          <br>
+           <h5 class="card-title"> ยังไม่มีนักศึกษาลงทะเบียน</h5>
+           <br>
+           <br>
+         </div>
+     </div>
+   </div>
+   {% endif %}
+
 {% endblock %}

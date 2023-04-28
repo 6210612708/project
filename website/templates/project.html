@@ -95,7 +95,7 @@
                     </thead>
                     <tbody>
                       
-                      <tr>
+                      <tr style="background-color:#B9C4D8;">
                         <th class="col">สาขา</th>
                           <th class="col">หัวข้อ</th>
                           <th class="col">อาจารย์ที่ปรึกษา</th>
@@ -106,7 +106,7 @@
                       </tr>
                       {% for show in show %}
                       
-                      <tr>
+                      <tr style="background-color:#E4E7EC;">
                         {% if request.user.profmodel == show.consult %}
                         <td>
                           {{show.major}}
