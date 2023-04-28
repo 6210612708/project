@@ -799,8 +799,6 @@ def reportproject(request, pk):
         form = scoretopicForm(request.POST)
         if form.is_valid():
             test = form.save(commit=False)
-            print(temp)
-            print(test.topic)
             FileProject.objects.filter(project=temp ,topic=test.topic).update(
                 score = test.score
             )
