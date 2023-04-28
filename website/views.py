@@ -837,12 +837,7 @@ def stdproject(request):
         if test.student1 == request.user.stdmodel or test.student2 == request.user.stdmodel:
             x = 1
     if x == 0:
-        if request.user.groups.filter(name='admin').exists():
-            show = ProjectModel.objects.all()
-        elif request.user.stdmodel.major == 'ไฟฟ้า':
-            show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
-        elif request.user.stdmodel.major == 'คอมพิวเตอร์':
-            show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+        show = ProjectModel.objects.all()
 
     context = {'x': x, 'show': show}
     return render(request, 'stdproject.html', context)
@@ -854,15 +849,19 @@ def applyproject(request, pk):
     if request.method == 'POST':
         form = applyprojectForm(request.POST, instance=list)
         if form.is_valid():
-            list.status = 'รอการอนุมัติ'
-            form.save()
+            m = request.user.stdmodel.major
+            test = form.save(commit=False)
+            test.major = m
+            test.status = 'รอการอนุมัติ'
+            fin = test.save()
             ScoreModel.objects.filter(project=list).update(
                 std1=list.student1,
-                std2=list.student2
+                std2=list.student2,
+                major = m
             )
             ScoreConsult.objects.filter(project=list).update(
                 std1=list.student1,
-                std2=list.student2
+                std2=list.student2,
             )
             ScoreCom1.objects.filter(project=list).update(
                 std1=list.student1,
