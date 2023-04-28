@@ -20,28 +20,68 @@
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
-        
         <div class="card-header">
           {% for show in proj %}
           <h5 class="card-title">{{show.thainame}}</h5>
           {% endfor %}
         </div>
+
+        {% comment %} edit {% endcomment %}
         <p class="card-text">
-          <table class="table table-borderless">
+          {% for t in topic %}
+          <br>
+            {{t.topic}}
+            <form method="POST" >
+              {% csrf_token %}
+              {{ form.media }}
+              {{ form.as_p }}
+              <input type="submit" name="Submit" id="submit">
+          </form>
+
+            {% for show in show %}
+                {% if show.topic.topic == t.topic %}
+            {{show.topic.topic}} {{show.date}}
+            <a href="{{show.file.url}}" download>download file</a>
+            
+            <br>
+            {% endif %}
+        {% endfor %}
+          </tr>
+          {% endfor %}
+
+{% comment %} end edit {% endcomment %}
+          {% comment %} <table class="table table-borderless">
             <thead>
               <tr style="background-color:#B9C4D8;">
+                
                 <th class="col">หัวข้อ</th>
                 <th class="col">วันที่ส่ง</th>
-                <th class="col">อื่นๆ</th>
+                <th class="col">อื่นๆ</th> 
               </tr>
             </thead>
-            <tbody>
-                {% for t in topic %}
-              <tr style="background-color:#E4E7EC;">
-                <!-- <th>{{t.topic}}</th> -->
-                {% for show in show %}
-                    {% if show.topic.topic == t.topic %}
-                <td>{{show.topic.topic}} {{show.date}}</td>
+            <tbody> {% endcomment %}
+
+                {% comment %} {% for t in topic %}
+                
+              <tr style="background-color:#E4E7EC;"> {% endcomment %}
+                 {% comment %}
+                 {{t.topic}} ต้องเอาขึ้นเพราะเป็นหัวข้อที่ผู้ประสานงานกำหนด จะได้รู้ว่าส่งหัวข้อไหน 
+                 {% endcomment %}
+                {% comment %} <--<th>{{t.topic}}</th>--> {% endcomment %}
+                {% comment %} <th><form method="POST" >
+                  {% csrf_token %}
+                  {{ form.media }}
+                  {{ form.as_p }}
+                  <input type="submit" name="Submit" id="submit">
+              </form></th> {% endcomment %}
+
+                {% comment %} {% for show in show %}
+                    {% if show.topic.topic == t.topic %} {% endcomment %}
+                    {% comment %} 
+                    {{show.topic.topic}}  หัวข้อที่นักศึกษาส่ง
+                    {{show.date}} เวลาที่ส่ง
+                    {% endcomment %}
+                {% comment %} <td>{{show.topic.topic}} {{show.date}}</td>
                 <td><a href="{{show.file.url}}" download>download file</a></td>
                 {% endif %}
             {% endfor %}
@@ -52,6 +92,6 @@
         </p>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
 {% endblock %}

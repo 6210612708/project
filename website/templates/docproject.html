@@ -132,13 +132,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% for show in show %}
+                  {% for show in show %} 
+                  
                   <tr>
                     <td>{{show.topic}}</td>
                     <td>{{show.date}}</td>
-                    <td>
-                        <a href="{{show.file.url}}" download>{{show.file}}</a>
-                    </td>
+                   
+                     <td>
+                          <a href="{{show.file.url}}" download>{{show.file}}</a>
+                      </td> 
+                    
                     {% endfor %}
                   </tr>
                 </tbody>
@@ -147,18 +150,6 @@
           </div>
       </div>
     </div>
-    <!-- <table>
-        {% for show in show %}
-        <tr>
-            <td>
-                {{show.topic}}
-                <a href="{{show.file.url}}" download>download file</a>
-                {{show.date}}
 
-            </td>
-        </tr>
-        {% endfor %}
-
-    </table> -->
     {% endif %}
 {% endblock %}

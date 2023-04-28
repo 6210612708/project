@@ -669,9 +669,16 @@ def updatestdplan(request, pk):
 
 def allproject(request):
     form = topicprojectForm(request.POST)
+    proj = ProjectModel.objects.all()
     if request.method == "POST":
         if form.is_valid():
-            form.save()
+            test = form.save(commit=False)
+            test.save()
+            for p in proj :
+                FileProject.objects.create(
+                    topic = test,
+                    project = p
+                )
         else:
             print("Error", form.errors)
     prof = ProfModel.objects.all()
@@ -692,6 +699,11 @@ def allproject(request):
     context = {'form': form, 'show': show, 'file': file}
     return render(request, 'allproject.html', context)
 
+
+def deletetopic(request, pk):
+    data = Topicproject.objects.get(id=pk)
+    data.delete()
+    return redirect('website:allproject')
 
 def project(request):
     form = projectModelForm(request.POST)
@@ -780,10 +792,15 @@ def project(request):
 def reportproject(request, pk):
     temp = ProjectModel.objects.filter(id=pk).get()
     proj = ProjectModel.objects.filter(id=pk)
-    show = Fileproject.objects.filter(project=temp).order_by("-id")
+    show = FileProject.objects.filter(project=temp).order_by("-id")
     topic = Topicproject.objects.all()
-    
-    context = {'show': show, 'topic': topic,'proj': proj}
+    form = scoretopicForm()
+    if request.method == 'POST':
+        form = scoretopicForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
+
+    context = {'show': show, 'topic': topic,'proj': proj ,'form': form,}
     return render(request, 'reportproject.html', context)
 
 
@@ -922,12 +939,15 @@ def docproject(request):
                     form = fileprojectForm(request.POST, request.FILES)
                     if form.is_valid():
                         test = form.save(commit=False)
-                        test.date = datetime.now()
-                        test = test.save()
+                        FileProject.objects.filter(project=proj ,topic = test.topic).update(
+                            date = datetime.now(),
+                            file = test.file
+                        )
+
                     else:
                         print("Error", form.errors)
             form = fileprojectForm(initial={'project': proj})
-            show = Fileproject.objects.filter(project=proj).order_by("-id")
+            show = FileProject.objects.exclude(file='').filter(project=proj)
             topic = Topicproject.objects.all()
             context = {'form': form, 'show': show, 'topic': topic}
             return render(request, 'docproject.html', context)

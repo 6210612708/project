@@ -167,6 +167,7 @@ class ProjectModel(models.Model):
     def __str__(self):
         return self.thainame
 
+
 class Topicproject(models.Model):
     TOPIC = (
         ("proposal", "proposal"),
@@ -182,18 +183,19 @@ class Topicproject(models.Model):
     def __str__(self):
         return f'{self.topic} {self.datedue}'
 
-class Fileproject(models.Model):
+class FileProject(models.Model):
     project = models.ForeignKey(
         ProjectModel, on_delete=models.CASCADE, null=True,blank=True)
     topic = models.ForeignKey(
         Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     file = models.FileField(upload_to=file_path, null=True ,blank=True,)
     date = models.DateTimeField(null=True,blank=True)
+    score = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return f'{self.project} {self.topic}'
+        return f'{self.topic} {self.project}'
 
-
+    
 class ScoreConsult(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
     std1 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1con') 

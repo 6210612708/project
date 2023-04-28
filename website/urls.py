@@ -106,6 +106,7 @@ urlpatterns = [
     path('detailproject', views.detailproject, name='detailproject'),
     path('docproject', views.docproject, name='docproject'),
     path('allproject', views.allproject, name='allproject'),
+    path('deletetopic/<pk>', views.deletetopic, name='deletetopic'),
 
     path('reportproject/<pk>', views.reportproject, name='reportproject'),
     path('stddetail', views.stddetail, name='stddetail'),

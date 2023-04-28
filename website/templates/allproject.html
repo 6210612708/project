@@ -71,6 +71,10 @@
                   <td>
                     {{show.datedue}}
                   </td>
+                  <td>
+                  <a href="{% url 'website:deletetopic' show.id %}" 
+                    onclick="return confirm('Confirm Delete?')">ลบ</a>
+                  </td>
               </tr>
               {% endfor %}
             </tbody>

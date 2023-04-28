@@ -7,7 +7,7 @@ from django import forms
 from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
 from .models import *
 
-
+        
 class settingForm(forms.ModelForm):
     class Meta:
         model = User
@@ -127,11 +127,14 @@ class topicprojectForm(forms.ModelForm):
         
 class fileprojectForm(forms.ModelForm):
     class Meta:
-        model = Fileproject
+        model = FileProject
         fields = "__all__"
-        exclude = ['date']
+        exclude = ['date' ,'score']
         
-
+class scoretopicForm(forms.ModelForm):
+    class Meta:
+        model = FileProject
+        fields = ['score']
 
 class docprojectForm(forms.Form):
     SELECT_FOR_TERM_ONE = (
