@@ -176,7 +176,7 @@ class Topicproject(models.Model):
         ("draftthesis", "draftthesis"),
         ("finalthesis", "finalthesis"),
     )
-    topic = models.CharField(max_length=200, null=True,choices=TOPIC)
+    topic = models.CharField(max_length=200, null=True)
     datedue = models.DateField(null=True)
 
     def __str__(self):

@@ -189,7 +189,7 @@ def deletedoc(request, pk):
     return redirect('website:document')
 
 
-# =========== consultant coordinator ==========================================
+# =========== consultant ==========================================
 
 def deletecoor(request, pk):
     data = CoordinatorModel.objects.get(id=pk)
@@ -226,7 +226,7 @@ def prof(request):
         else:
             print("Error", form.errors)
     form = ProfModelForm()
-    show = ProfModel.objects.all()
+    show = ProfModel.objects.all().order_by('major')
     coor = CoordinatorModel.objects.all()
 
     context = {'form': form, 'show': show, 'coor': coor}
@@ -234,7 +234,7 @@ def prof(request):
 
 
 def prof_csv(request):
-    show = ProfModel.objects.all()
+    show = ProfModel.objects.all().order_by('major')
     if request.method == "GET":
         context = {'show': show}
         return render(request, 'prof_csv.html', context)
@@ -674,12 +674,20 @@ def allproject(request):
             form.save()
         else:
             print("Error", form.errors)
-    if request.user.groups.filter(name='admin').exists():
+    prof = ProfModel.objects.all()
+    can_show = 0
+    for ck in prof:
+        if ck.user == request.user:
+            can_show = 1
+    if can_show == 1:
+        if request.user.groups.filter(name='admin').exists():
             show = ProjectModel.objects.all()
-    elif request.user.profmodel.major == 'ไฟฟ้า':
-        show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
-    elif request.user.profmodel.major == 'คอมพิวเตอร์':
-        show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+        elif request.user.profmodel.major == 'ไฟฟ้า' and request.user.groups.filter(name='coordinator'):
+            show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
+        elif request.user.profmodel.major == 'คอมพิวเตอร์' and request.user.groups.filter(name='coordinator'):
+            show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+        else :
+            show = ProjectModel.objects.all()
     file = Topicproject.objects.all()
     context = {'form': form, 'show': show, 'file': file}
     return render(request, 'allproject.html', context)
@@ -694,15 +702,15 @@ def project(request):
     for ck in prof:
         if ck.user == request.user:
             can_show = 1
-    if request.user.groups.filter(name='admin').exists():
-        can_show = 1
     if can_show == 1:
         if request.user.groups.filter(name='admin').exists():
             show = ProjectModel.objects.all()
-        elif request.user.profmodel.major == 'ไฟฟ้า':
+        elif request.user.profmodel.major == 'ไฟฟ้า' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
-        elif request.user.profmodel.major == 'คอมพิวเตอร์':
+        elif request.user.profmodel.major == 'คอมพิวเตอร์' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+        else :
+            show = ProjectModel.objects.all()
         if request.method == "POST":
             if form.is_valid():
                 check = SubjectModel.objects.all().order_by('-id')
@@ -774,6 +782,7 @@ def reportproject(request, pk):
     proj = ProjectModel.objects.filter(id=pk)
     show = Fileproject.objects.filter(project=temp).order_by("-id")
     topic = Topicproject.objects.all()
+    
     context = {'show': show, 'topic': topic,'proj': proj}
     return render(request, 'reportproject.html', context)
 
@@ -1159,39 +1168,38 @@ def updategrade(request, pk):
 
 
 def report_grade(request, pk):
-    show = ScoreModel.objects.filter(std1=not None)
     i = ScoreModel.objects.get(id=pk)
     g = GradeModel.objects.get(subject=i.subject)
     if i.score > g.A:
-        ScoreModel.objects.filter(project=i.project).update(
+        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='A'
         )
     elif g.A > i.score > g.Bplus:
-        ScoreModel.objects.filter(project=i.project).update(
+        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='B+'
         )
     elif g.Bplus > i.score > g.B:
-        ScoreModel.objects.filter(project=i.project).update(
+        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='B'
         )
     elif g.B > i.score > g.Cplus:
-        ScoreModel.objects.filter(project=i.project).update(
+        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='C+'
         )
     elif g.Cplus > i.score > g.C:
-        ScoreModel.objects.filter(project=i.project).update(
+        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='C'
         )
     elif g.C > i.score > g.Dplus:
-        ScoreModel.objects.filter(project=i.project).update(
+        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='D+'
         )
     elif g.Dplus > i.score > g.D:
-        ScoreModel.objects.filter(project=i.project).update(
+        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='D'
         )
     else:
-        ScoreModel.objects.filter(project=i.project).update(
+        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='F'
         )
 

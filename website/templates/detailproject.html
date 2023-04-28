@@ -67,18 +67,19 @@
               </div>
             </div>
           </div>
+          {% for show in score %}
+          {% if show.grade is not None %}
           <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
                 <!-- <h5 class="card-title">ข้อมูลโครงงาน</h5> -->
                 <div class="card-header">
-                  <h5 class="card-title">คะแนนโครงงาน</h5>
+                  <h5 class="card-title">คะแนน {{show.subject.subject}}</h5>
                 </div>
                 <p class="card-text">
                   <table class="table table-borderless">
                     <thead>
-                      <tr>
-                        <th scope="col">ภาคเรียน</th>
+                      <tr>  
                         <th scope="col">คะแนนจากที่ปรึกษา</th>
                         <th scope="col">คะแนนจากกรรมการ</th>
                         <th scope="col">คะแนนจากกรรมการ</th>
@@ -87,25 +88,26 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for show in score %}
+                      
                       <tr>
-                        <td>{{show.subject}}</td>
                         <td>{{show.consc}}</td>
                         <td>{{show.com1sc}}</td>
                         <td>{{show.com2sc}}</td>
                         <td>{{show.score}}</td>
-                        {% if show.grade is not None %}
-                          <td>{{show.grade}} </td>
-                        {% else %}
-                          <td>ยังไม่ประกาศ</td>
-                        {% endif %}
+                        
+                        <td>{{show.grade}} </td>
+
+
+                        
                       </tr>
-                      {% endfor %}
+                      
                     </tbody>
                   </table>
                 </p>
               </div>
             </div>
           </div>
+          {% endif %}
+          {% endfor %}
     </body>
 {% endblock %}
