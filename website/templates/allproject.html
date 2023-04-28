@@ -59,12 +59,12 @@
             </thead>
             <tbody>
               
-              <tr>
+              <tr style="background-color:#B9C4D8;">
                   <th class="col">ขั้นตอนการดำเนินงาน</th>
                   <th class="col">วันสิ้นสุด</th>
               </tr>
               {% for show in file %}
-              <tr>
+              <tr style="background-color:#E4E7EC;">
                   <td>
                     {{show.topic}}
                   </td>
@@ -90,8 +90,7 @@
                   <table class="table table-borderless">
                     </thead>
                     <tbody>
-                      
-                      <tr>
+                      <tr style="background-color:#B9C4D8;">
                         <th class="col">สาขา</th>
                           <th class="col">หัวข้อ</th>
                           <th class="col">อาจารย์ที่ปรึกษา</th>
@@ -103,7 +102,7 @@
                       </tr>
                       {% for show in show %}
                       
-                      <tr>
+                      <tr style="background-color:#E4E7EC;">
                         {% if request.user.profmodel == show.consult %}
                         <td>
                           {{show.major}}
@@ -167,7 +166,7 @@
                     </thead>
                     <tbody>
                       
-                      <tr>
+                      <tr style="background-color:#B9C4D8;">
                         <th class="col">สาขา</th>
                           <th class="col">หัวข้อ</th>
                           <th class="col">อาจารย์ที่ปรึกษา</th>
@@ -179,7 +178,7 @@
                       </tr>
                       {% for show in show %}
                       
-                      <tr>
+                      <tr style="background-color:#E4E7EC;">
                         {% if request.user.profmodel == show.committee1 or request.user.profmodel == show.committee2%}
                         <td>
                           {{show.major}}
@@ -243,7 +242,7 @@
                     </thead>
                     <tbody>
                       
-                      <tr>
+                      <tr style="background-color:#B9C4D8;">
                         <th class="col">สาขา</th>
                           <th class="col">หัวข้อ</th>
                           <th class="col">อาจารย์ที่ปรึกษา</th>
@@ -255,7 +254,7 @@
                       </tr>
                       {% for show in show %}
                       
-                      <tr>
+                      <tr style="background-color:#E4E7EC;">
                         
                         <td>
                           {{show.major}}

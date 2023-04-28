@@ -29,7 +29,7 @@
         <p class="card-text">
           <table class="table table-borderless">
             <thead>
-              <tr>
+              <tr style="background-color:#B9C4D8;">
                 <th class="col">หัวข้อ</th>
                 <th class="col">วันที่ส่ง</th>
                 <th class="col">อื่นๆ</th>
@@ -37,7 +37,7 @@
             </thead>
             <tbody>
                 {% for t in topic %}
-              <tr>
+              <tr style="background-color:#E4E7EC;">
                 <!-- <th>{{t.topic}}</th> -->
                 {% for show in show %}
                     {% if show.topic.topic == t.topic %}
