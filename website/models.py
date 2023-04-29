@@ -202,6 +202,8 @@ class ScoreConsult(models.Model):
     std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2con')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    topic = models.ForeignKey(
+        Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
     sc2 = models.IntegerField(null=True, blank=True ,default=0)
     sc3 = models.IntegerField(null=True, blank=True ,default=0)
@@ -221,6 +223,8 @@ class ScoreCom1(models.Model):
     std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc1')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    topic = models.ForeignKey(
+        Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
     sc2 = models.IntegerField(null=True, blank=True ,default=0)
     sc3 = models.IntegerField(null=True, blank=True ,default=0)
@@ -240,6 +244,8 @@ class ScoreCom2(models.Model):
     std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc2')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
+    topic = models.ForeignKey(
+        Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
     sc2 = models.IntegerField(null=True, blank=True ,default=0)
     sc3 = models.IntegerField(null=True, blank=True ,default=0)
