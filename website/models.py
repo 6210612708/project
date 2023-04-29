@@ -190,10 +190,10 @@ class FileProject(models.Model):
         Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     file = models.FileField(upload_to=file_path, null=True ,blank=True,)
     date = models.DateTimeField(null=True,blank=True)
-    sccon = models.IntegerField(blank=True, null=True,default=0)
-    sccom1 = models.IntegerField(blank=True, null=True,default=0)
-    sccom2 = models.IntegerField(blank=True, null=True,default=0)
-    score = models.IntegerField(blank=True, null=True,default=0)
+    sccon = models.IntegerField(blank=True, null=True)
+    sccom1 = models.IntegerField(blank=True, null=True)
+    sccom2 = models.IntegerField(blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.topic} {self.project}'

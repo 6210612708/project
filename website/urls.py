@@ -134,8 +134,8 @@ urlpatterns = [
     # path('score2_com1/<pk>', views.score2_com1, name='score2_com1'),
     # path('score1_com2/<pk>', views.score1_com2, name='score1_com2'),
     # path('score2_com2/<pk>', views.score2_com2, name='score2_com2'),
-    path('reportgrade/<pk>', views.report_grade, name='report_grade'),
-    path('reportscore/', views.report_score, name='report_score'),
+    path('reportgrade/<pk>', views.reportgrade, name='reportgrade'),
+    path('reportscore/', views.reportscore, name='reportscore'),
 
 
 

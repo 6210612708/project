@@ -17,7 +17,15 @@
 
 {% block content %}
 
-
+{% if messages %}
+{% for messages in messages %}
+<div class="card text-white bg-danger mx-5">
+  <div class="card-body text-center">
+    {{messages|safe}}
+  </div>
+</div>
+{% endfor %}
+{% endif %}
 {% comment %} {% if show.std1 is not None %} {% endcomment %}
 {% for show in show %}
 <div class="col-sm-12 center">
@@ -27,6 +35,52 @@
           <h5 class="card-title">{{show.project}}</h5>
         </div>
         <p class="card-text">
+          <table class="table table-borderless">
+            <thead>
+              <tr style="background-color:#B9C4D8;">
+                <th class="col">รายงาน</th>
+                <th class="col">คะแนนจากที่ปรึกษา</th>
+                <th class="col">คะแนนจากกรรมการ 1</th>
+                <th class="col">คะแนนจากกรรมการ 2</th>
+                <th class="col">คะแนนรวม</th>
+                <th class="col">สรุปคะแนน</th>
+              </tr>
+            </thead>
+            {% for re in re %}
+            {% if re.project == show.project %}
+            <tbody>
+              <tr style="background-color:#E4E7EC;">
+                <td>{{re.topic}}</td>
+                {% if re.sccon != None %}
+                  <td>{{re.sccon}}</td>
+                {% else %}
+                  <td>ยังไม่ได้ประเมิน</td>
+                {% endif %}
+                
+                {% if re.sccom1 != None %}
+                  <td>{{re.sccom1}}</td>
+                {% else %}
+                  <td>ยังไม่ได้ประเมิน</td>
+                {% endif %}
+
+                {% if re.sccom2 != None %}
+                  <td>{{re.sccom2}}</td>
+                {% else %}
+                  <td>ยังไม่ได้ประเมิน</td>
+                {% endif %}
+        
+                {% if re.score != None %}
+                  <td>{{re.score}}</td>
+                {% else %}
+                  <td>ยังไม่ได้สรุป</td>
+                {% endif %}
+                <td><a href="{% url 'website:avgscore' re.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปคะแนน</a></td>
+              </tr>
+            </tbody> 
+            {% endif %}
+          {% endfor%}
+          </table>
+         
           <table class="table table-borderless">
             <thead>
               <tr style="background-color:#B9C4D8;">
@@ -63,7 +117,7 @@
         <center>
           <div class="form-group row mt-3">
             <div class="col-sm-11 mx-5">
-              <a href="{% url 'website:report_grade' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปเกรด</a>
+              <a href="{% url 'website:reportgrade' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปเกรด</a>
             </div>
           </div></center>
           {% endif %}

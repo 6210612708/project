@@ -1091,29 +1091,18 @@ def score1(request, pk):
     return render(request, 'score.html', context)
     
 def avgscore(request, pk):
-    check = SubjectModel.objects.all().order_by('-id')
-    com1 = ProjectModel.objects.get(id=pk)
-    list = ScoreCom1.objects.filter(project=com1,subject=check[1]).get()
-    show = ScoreCom1.objects.filter(project=com1,subject=check[1])
-    form = Scorecom1Form(instance=list)
-    if request.method == 'POST':
-        form = Scorecom1Form(request.POST, instance=list)
-        if form.is_valid():
-            test = form.save(commit=False)
-            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
-                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
-                return redirect('website:score1_com1' , pk)
-            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                test.sc5 + test.sc6 + test.sc7 + test.sc8
-            test.score = point
-            fin = test.save()
-            ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-                com1sc=point
-            )
-        else:
-            print("Error", form.errors)
-    context = {'form': form, 'show': show}
-    return render(request, 'score.html', context)
+    re = FileProject.objects.get(id=pk)
+    print(re)
+    if re.sccon is None or re.sccom1 is None or re.sccom2 is None :
+        messages.error(request, 'กรุณารอคะแนนให้ครบทุกช่อง')
+        return redirect('website:reportscore')
+    else :
+        sc = re.sccon + (re.sccom1 + re.sccom2)/2
+        FileProject.objects.filter(id=pk).update(
+        score = sc
+        )
+
+    return redirect('website:reportscore')
 
 
 
@@ -1168,7 +1157,7 @@ def updategrade(request, pk):
     return render(request, 'updategrade.html', context)
 
 
-def report_grade(request, pk):
+def reportgrade(request, pk):
     i = ScoreModel.objects.get(id=pk)
     g = GradeModel.objects.get(subject=i.subject)
     if i.score > g.A:
@@ -1207,7 +1196,8 @@ def report_grade(request, pk):
     return redirect('website:report_score')
 
 
-def report_score(request):
+def reportscore(request):
+    report = FileProject.objects.all()
     sc = SubjectModel.objects.all().order_by('-id')
     temp = ScoreModel.objects.all()
     term = 1
@@ -1233,7 +1223,7 @@ def report_score(request):
         ScoreModel.objects.filter(project=i.project).update(
             score=sc
         )
-    context = {'show': show}
+    context = {'show': show ,'re':report}
     return render(request, 'report_score.html', context)
 
 
