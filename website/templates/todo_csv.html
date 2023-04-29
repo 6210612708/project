@@ -23,7 +23,7 @@
               <div class="card-body">
                 <!-- <h4 class="card-title">อัพโหลดเอกสาร</h4> -->
                 <div class="card-header">
-                  <h5 class="card-title">อัพโหลดเอกสาร</h5>
+                  <h5 class="card-title">อัพโหลดแผนการดำเนินงาน</h5>
                 </div>
                 <p class="card-text">
                     {% if messages %}
@@ -45,6 +45,11 @@
                         <input type="file" name="file" class="form-control mt-2" id="customFile" />
                         <button type="submit" class="btn btn-primary mt-3">upload</button>
                     </form>
+                </p>
+                <p class="text-danger">
+                  หมายเหตุ : ตัวอย่างรูปแบบไฟล์ CSV 
+                  <p class="text-danger"><em>April 21, 2023	,เพิ่มวิชาตามภาคเรียนและปีการศึกษา</em></p>
+                  <p class="text-danger"><em>April 22, 2023	,อัพเดทข้อมูลของอาจารย์และนักศึกษา</em></p>
                 </p>
               </div>
             </div>
@@ -70,7 +75,7 @@
           <div class="card-body">
             <!-- <h4 class="card-title">เอกสารที่อัพโหลด</h4> -->
             <div class="card-header">
-              <h5 class="card-title">เอกสารที่อัพโหลด</h5>
+              <h5 class="card-title">แผนการดำเนินงาน</h5>
             </div>
             <p class="card-text">
               <table class="table table-borderless">
