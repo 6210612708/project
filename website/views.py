@@ -1011,9 +1011,9 @@ def score(request, pk):
                 test.sc5 + test.sc6 + test.sc7 + test.sc8
             test.score = point
             fin = test.save()
-            # ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-            #     consc=point
-            # )
+            FileProject.objects.filter(project=test.project,topic = list.topic).update(
+                sccon = point
+            )
         else:
             print("Error", form.errors)
     context = {'form': form,'t':t}
@@ -1034,9 +1034,9 @@ def scorecom1(request, pk):
                 test.sc5 + test.sc6 + test.sc7 + test.sc8
             test.score = point
             fin = test.save()
-            # ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-            #     consc=point
-            # )
+            FileProject.objects.filter(project=test.project,topic = list.topic).update(
+                sccom1 = point
+            )
         else:
             print("Error", form.errors)
     context = {'form': form,'t':t}
@@ -1057,9 +1057,9 @@ def scorecom2(request, pk):
                 test.sc5 + test.sc6 + test.sc7 + test.sc8
             test.score = point
             fin = test.save()
-            # ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-            #     consc=point
-            # )
+            FileProject.objects.filter(project=test.project,topic = list.topic).update(
+                sccom2 = point
+            )
         else:
             print("Error", form.errors)
     context = {'form': form,'t':t}
@@ -1090,7 +1090,7 @@ def score1(request, pk):
     context = {'form': form, 'show': show}
     return render(request, 'score.html', context)
     
-def score1_com1(request, pk):
+def avgscore(request, pk):
     check = SubjectModel.objects.all().order_by('-id')
     com1 = ProjectModel.objects.get(id=pk)
     list = ScoreCom1.objects.filter(project=com1,subject=check[1]).get()
@@ -1115,30 +1115,7 @@ def score1_com1(request, pk):
     context = {'form': form, 'show': show}
     return render(request, 'score.html', context)
 
-def score1_com2(request, pk):
-    check = SubjectModel.objects.all().order_by('-id')
-    com2 = ProjectModel.objects.get(id=pk) 
-    list = ScoreCom2.objects.filter(project=com2,subject=check[1]).get()
-    show = ScoreCom2.objects.filter(project=com2,subject=check[1])
-    form = Scorecom2Form(instance=list)
-    if request.method == 'POST':
-        form = Scorecom2Form(request.POST, instance=list)
-        if form.is_valid():
-            test = form.save(commit=False)
-            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
-                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
-                return redirect('website:score1_com2' , pk)
-            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                test.sc5 + test.sc6 + test.sc7 + test.sc8
-            test.score = point
-            fin = test.save()
-            ScoreModel.objects.filter(project=test.project,subject = test.subject).update(
-                com2sc=point
-            )
-        else:
-            print("Error", form.errors)
-    context = {'form': form, 'show': show}
-    return render(request, 'score.html', context)
+
 
 def evaluate(request):
     sc = SubjectModel.objects.all().order_by('-id')

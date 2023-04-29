@@ -27,24 +27,25 @@
         </div>
 
         {% comment %} edit {% endcomment %}
-        <form method="POST" >
+        {% comment %} <form method="POST" >
               {% csrf_token %}
               {{ form.media }}
               {{ form.as_p }}
               <input type="submit" name="Submit" id="submit">
-          </form>
+          </form> {% endcomment %}
 
         <p class="card-text">
           {% for t in topic %}
           <br>
             {{t.topic}}
+            {{t.datedue}}
             
             {% for show in show %}
                 {% if show.topic.topic == t.topic %}
                 {% if show.score != None %}
                 {{show.score}}
                 {% else %}
-                ยังไม่ได้ให้คะแนน
+                ยังไม่ได้สรุปคะแนน
                 {% endif %}
             {{show.topic.topic}} {{show.date}}
             <a href="{{show.file.url}}" download>download file</a>

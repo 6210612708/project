@@ -18,7 +18,7 @@
 {% block content %}
 
 
-{% if show.std1 is not None %}
+{% comment %} {% if show.std1 is not None %} {% endcomment %}
 {% for show in show %}
 <div class="col-sm-12 center">
     <div class="card">
@@ -71,7 +71,7 @@
     </div>
   </div>
   {% endfor %}
-  {% endif %}
+  {% comment %} {% endif %} {% endcomment %}
  
 
  {% if show.std1 is None %}

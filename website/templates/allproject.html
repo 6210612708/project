@@ -73,8 +73,10 @@
                     {{show.datedue}}
                   </td>
                   <td>
+                    {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
                   <a href="{% url 'website:deletetopic' show.id %}" 
                     onclick="return confirm('Confirm Delete?')">ลบ</a>
+                    {% endif%}
                   </td>
               </tr>
               {% endfor %}

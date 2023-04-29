@@ -126,6 +126,7 @@ urlpatterns = [
     path('score/<pk>', views.score, name='score'),
     path('scorecom1/<pk>', views.scorecom1, name='scorecom1'),
     path('scorecom2/<pk>', views.scorecom2, name='scorecom2'),
+    path('avgscore/<pk>', views.avgscore, name='avgscore'),
     
     # path('score1/<pk>', views.score1, name='score1'),
     # path('score2/<pk>', views.score2, name='score2'),
