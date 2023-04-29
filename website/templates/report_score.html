@@ -105,7 +105,7 @@
           {% endfor%}
           </table>
          
-          <table class="table table-borderless">
+          <table class="table table-borderless mb-5">
             <thead>
               <tr style="background-color:#B9C4D8;">
                 <th class="col">ภาคเรียน</th>
@@ -141,8 +141,8 @@
         <center>
           <div class="form-group row mt-3">
             <div class="col-sm-11 mx-5">
-              <a href="{% url 'website:reportgrade' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปเกรด</a>
-              <a href="{% url 'website:sumscore' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">รวมคะแนน</a>
+              <a href="{% url 'website:reportgrade' show.id %}" class="btn btn-primary text-center" role="button" aria-pressed="true">สรุปเกรด</a>
+              <a href="{% url 'website:sumscore' show.id %}" class="btn btn-primary text-center" role="button" aria-pressed="true">รวมคะแนน</a>
             </div>
           </div></center>
           {% endif %}
