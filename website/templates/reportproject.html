@@ -73,23 +73,29 @@
                     <th class="col-2">ดาวน์โหลดเอกสาร</th>
                 </tr>
               </thead>
-              <tbody> {% for t in topic %}
-                 
+              <tbody> 
+                
                 <tr style="background-color:#E4E7EC;"> 
+                  {% for t in topic %}
                   {% for show in show %}
                     {% if show.topic.topic == t.topic %}
-                    <td>
-                      {{show.topic.topic}}
-                    </td>
                     <td>
                       {{t.topic}}
                     </td>
                     <td>
-                      {{show.date}}
+                      {{t.datedue}}
                     </td>
-                    <td>
-                      <a href="{{show.file.url}}" download>download file</a>
-                    </td>
+                      {% if show.date != none %}
+                      <td>
+                        {{show.date}}
+                      </td>
+                      <td>
+                        <a href="{{show.file.url}}" download>download file</a>
+                      </td>
+                      {% else %}
+                      <td>-</td>
+                      <td>-</td>
+                      {% endif %}
                     {% endif %}
                   {% endfor %}
                 </tr>
