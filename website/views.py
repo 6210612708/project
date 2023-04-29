@@ -668,6 +668,7 @@ def updatestdplan(request, pk):
 # =========== project ==========================================
 
 def allproject(request):
+    
     form = topicprojectForm(request.POST)
     proj = ProjectModel.objects.all()
     if request.method == "POST":
@@ -724,9 +725,13 @@ def allproject(request):
     for ck in prof:
         if ck.user == request.user:
             can_show = 1
+            
+    if request.user.groups.filter(name='admin').exists():
+        can_show = 1
     if can_show == 1:
         if request.user.groups.filter(name='admin').exists():
             show = ProjectModel.objects.all()
+            con= ProjectModel.objects.all()
         elif request.user.profmodel.major == 'ไฟฟ้า' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
             con = ProjectModel.objects.all()
@@ -750,14 +755,16 @@ def project(request):
     form = projectModelForm(request.POST)
     forms = projectModelForm()
     prof = ProfModel.objects.all()
-    show = ProjectModel.objects.all()
     can_show = 0
     for ck in prof:
         if ck.user == request.user:
             can_show = 1
+    if request.user.groups.filter(name='admin').exists():
+        can_show = 1
     if can_show == 1:
         if request.user.groups.filter(name='admin').exists():
             show = ProjectModel.objects.all()
+            all = ProjectModel.objects.all()
         elif request.user.profmodel.major == 'ไฟฟ้า' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
             all = ProjectModel.objects.all()
