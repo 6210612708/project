@@ -70,32 +70,26 @@
                     <th class="col-6">หัวข้อ</th>
                     <th class="col-2">วันที่สิ้นสุด</th>
                     <th class="col-2">วันที่ส่ง</th>
-                    <th class="col-2">ดาวน์โหลดเอกสาร</th>
+                    <th class="col">ดาวน์โหลดเอกสาร</th>
                 </tr>
               </thead>
-              <tbody> 
-                
+              <tbody> {% for t in topic %}
+                 
                 <tr style="background-color:#E4E7EC;"> 
-                  {% for t in topic %}
                   {% for show in show %}
                     {% if show.topic.topic == t.topic %}
                     <td>
-                      {{t.topic}}
+                      {{show.topic.topic}}
                     </td>
                     <td>
                       {{t.datedue}}
                     </td>
-                      {% if show.date != none %}
-                      <td>
-                        {{show.date}}
-                      </td>
-                      <td>
-                        <a href="{{show.file.url}}" download>download file</a>
-                      </td>
-                      {% else %}
-                      <td>-</td>
-                      <td>-</td>
-                      {% endif %}
+                    <td>
+                      {{show.date}}
+                    </td>
+                    <td>
+                      <a href="{{show.file.url}}" download>download file</a>
+                    </td>
                     {% endif %}
                   {% endfor %}
                 </tr>
