@@ -121,12 +121,18 @@ urlpatterns = [
     path('deletegrade/<pk>', views.deletegrade, name='deletegrade'),
     
     path('evaluate', views.evaluate, name='evaluate'),
-    path('score1/<pk>', views.score1, name='score1'),
-    path('score2/<pk>', views.score2, name='score2'),
-    path('score1_com1/<pk>', views.score1_com1, name='score1_com1'),
-    path('score2_com1/<pk>', views.score2_com1, name='score2_com1'),
-    path('score1_com2/<pk>', views.score1_com2, name='score1_com2'),
-    path('score2_com2/<pk>', views.score2_com2, name='score2_com2'),
+    
+    
+    path('score/<pk>', views.score, name='score'),
+    path('scorecom1/<pk>', views.scorecom1, name='scorecom1'),
+    path('scorecom2/<pk>', views.scorecom2, name='scorecom2'),
+    
+    # path('score1/<pk>', views.score1, name='score1'),
+    # path('score2/<pk>', views.score2, name='score2'),
+    # path('score1_com1/<pk>', views.score1_com1, name='score1_com1'),
+    # path('score2_com1/<pk>', views.score2_com1, name='score2_com1'),
+    # path('score1_com2/<pk>', views.score1_com2, name='score1_com2'),
+    # path('score2_com2/<pk>', views.score2_com2, name='score2_com2'),
     path('reportgrade/<pk>', views.report_grade, name='report_grade'),
     path('reportscore/', views.report_score, name='report_score'),
 

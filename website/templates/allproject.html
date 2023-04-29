@@ -96,7 +96,6 @@
                     </thead>
                     <tbody>
                       <tr style="background-color:#B9C4D8;">
-                        <th class="col">สาขา</th>
                           <th class="col">หัวข้อ</th>
                           <th class="col">อาจารย์ที่ปรึกษา</th>
                           <th class="col">รายละเอียด</th>
@@ -105,13 +104,11 @@
                           <th class="col">กรรมการ</th>
                           <th class="col">อื่นๆ</th>
                       </tr>
-                      {% for show in show %}
+                      {% for show in con %}
                       
                       <tr style="background-color:#E4E7EC;">
                         {% if request.user.profmodel == show.consult %}
-                        <td>
-                          {{show.major}}
-                        </td> 
+ 
                           <td>
                             {{show.thainame}}
                           </td>
@@ -172,7 +169,6 @@
                     <tbody>
                       
                       <tr style="background-color:#B9C4D8;">
-                        <th class="col">สาขา</th>
                           <th class="col">หัวข้อ</th>
                           <th class="col">อาจารย์ที่ปรึกษา</th>
                           <th class="col">รายละเอียด</th>
@@ -181,13 +177,10 @@
                           <th class="col">กรรมการ</th>
                           <th class="col">อื่นๆ</th>
                       </tr>
-                      {% for show in show %}
+                      {% for show in con %}
                       
                       <tr style="background-color:#E4E7EC;">
                         {% if request.user.profmodel == show.committee1 or request.user.profmodel == show.committee2%}
-                        <td>
-                          {{show.major}}
-                        </td> 
                           <td>
                             {{show.thainame}}
                           </td>
@@ -235,7 +228,7 @@
               </div>
             </div>
           </div>
-          {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator'%}
+          {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
           <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">

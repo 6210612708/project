@@ -29,7 +29,7 @@
                     {{show.student1}}
                     {{show.student2}}
                 {% endif %}
-                <a href="{% url 'website:score1' show.id %}" >ประเมิน</a>
+                <a href="{% url 'website:score' show.id %}" >ประเมิน</a>
             {% endif %}
         </td>
     </tr>
@@ -88,15 +88,15 @@
                     <p>{{show.student2}}</p>
                 </td>
                 {% endif %}
-                {% if term == 1%}
+
+                {% for t in topic %}
+                {% if t.project == show %}
                 <td>   
-                  <a href="{% url 'website:score1' show.id %}" >กดที่นี่</a>
+                  <a href="{% url 'website:score' t.id %}" >{{t.topic.topic}}</a>
                 </td> 
-                {% else%}
-                <td>   
-                  <a href="{% url 'website:score2' show.id %}" >กดที่นี่</a>
-                </td> 
-                {%endif%}
+                {% endif %}
+                {% endfor%}
+
                 {% endif %}
               </tr>
               {% endfor %}
@@ -122,7 +122,8 @@
                     {{show.student1}}
                     {{show.student2}}
                 {% endif %}
-                <a href="{% url 'website:score1' show.id %}" >ประเมิน</a>
+                <a href="{% url 'website:score
+                ' show.id %}" >ประเมิน</a>
             {% endif %}
         </td>
     </tr>
@@ -179,15 +180,15 @@
                     <p>{{show.student2}}</p>
                 </td>
                 {% endif %}
-                {% if term == 1%}
+               
+                {% for t in topic %}
+                {% if t.project == show %}
                 <td>   
-                  <a href="{% url 'website:score1_com1' show.id %}" >กดที่นี่</a>
+                  <a href="{% url 'website:scorecom1' t.id %}" >{{t.topic.topic}}</a>
                 </td> 
-                {%else%}
-                <td>   
-                  <a href="{% url 'website:score2_com1' show.id %}" >กดที่นี่</a>
-                </td> 
-                {%endif%}
+                {% endif %}
+                {% endfor%}
+
                 {% endif %}
               </tr>
               {% endfor %}
@@ -225,15 +226,15 @@
                     <p>{{show.student2}}</p>
                 </td>
                 {% endif %}
-                {% if term == 1%}
+                
+                {% for t in topic %}
+                {% if t.project == show %}
                 <td>   
-                  <a href="{% url 'website:score1_com2' show.id %}" >กดที่นี่</a>
+                  <a href="{% url 'website:scorecom2' t.id %}" >{{t.topic.topic}}</a>
                 </td> 
-                {%else%}
-                <td>   
-                  <a href="{% url 'website:score2_com2' show.id %}" >กดที่นี่</a>
-                </td> 
-                {%endif%}
+                {% endif %}
+                {% endfor%} 
+
                 {% endif %}
               </tr>
               {% endfor %}

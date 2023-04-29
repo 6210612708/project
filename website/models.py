@@ -215,7 +215,7 @@ class ScoreConsult(models.Model):
     score = models.IntegerField(null=True, blank=True ,default=0)
        
     def __str__(self):
-        return f'{self.project} {self.subject}'
+        return f'{self.topic} {self.subject} {self.project} '
 
 class ScoreCom1(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
@@ -236,7 +236,7 @@ class ScoreCom1(models.Model):
     score = models.IntegerField(null=True, blank=True ,default=0)
     
     def __str__(self):
-        return f'{self.project} {self.subject}'
+        return f'{self.topic} {self.subject} {self.project} '
 
 class ScoreCom2(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
@@ -257,7 +257,7 @@ class ScoreCom2(models.Model):
     score = models.IntegerField(null=True, blank=True ,default=0)
     
     def __str__(self):
-        return f'{self.project} {self.subject}'
+        return f'{self.topic} {self.subject} {self.project} '
 
 class ScoreModel(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
