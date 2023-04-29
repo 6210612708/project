@@ -55,6 +55,8 @@
                   <th class="col">สถานะ</th>
                   <th class="col">นักศึกษา</th>
                   <th class="col">ประเมิน</th>
+                  <!-- <th class="col">อื่นๆ</th> -->
+
               </tr>
               {% for show in show %}
               
@@ -89,13 +91,15 @@
                 </td>
                 {% endif %}
 
-                {% for t in topic %}
-                {% if t.project == show %}
-                <td>   
-                  <a href="{% url 'website:score' t.id %}" >{{t.topic.topic}}</a>
+                
+                <td>
+                  {% for t in topic %}
+                    {% if t.project == show %}
+                  <p><a href="{% url 'website:score' t.id %}" >{{t.topic.topic}}</a></p>
+                    {% endif %}
+                  {% endfor%}
                 </td> 
-                {% endif %}
-                {% endfor%}
+                    
 
                 {% endif %}
               </tr>
@@ -140,17 +144,18 @@
             </thead>
             <tbody>
               
-              <tr>
+              <tr style="background-color:#B9C4D8;">
                   <th class="col">สาขา</th>
                   <th class="col">หัวข้อ</th>
                   <th class="col">อาจารย์ที่ปรึกษา</th>
                   <th class="col">สถานะ</th>
                   <th class="col">นักศึกษา</th>
                   <th class="col">ประเมิน</th>
+                  <!-- <th class="col">อื่นๆ</th> -->
               </tr>
               {% for show in com %}
               
-              <tr>
+              <tr style="background-color:#E4E7EC;">
                 {% if request.user.profmodel == show.committee1 %}
                 <td>
                   {{show.major}}
@@ -181,13 +186,15 @@
                 </td>
                 {% endif %}
                
-                {% for t in topic %}
-                {% if t.project == show %}
-                <td>   
-                  <a href="{% url 'website:scorecom1' t.id %}" >{{t.topic.topic}}</a>
+               
+                <td>
+                  {% for t in topic %}
+                    {% if t.project == show %}
+                  <p><a href="{% url 'website:scorecom1' t.id %}" >{{t.topic.topic}}</a></p>
+                    {% endif %}
+                  {% endfor%}
                 </td> 
-                {% endif %}
-                {% endfor%}
+                
 
                 {% endif %}
               </tr>
@@ -227,13 +234,15 @@
                 </td>
                 {% endif %}
                 
-                {% for t in topic %}
-                {% if t.project == show %}
-                <td>   
-                  <a href="{% url 'website:scorecom2' t.id %}" >{{t.topic.topic}}</a>
+               
+                <td>
+                  {% for t in topic %}
+                    {% if t.project == show %}
+                  <p><a href="{% url 'website:scorecom2' t.id %}" >{{t.topic.topic}}</a></p>
+                    {% endif %}
+                  {% endfor%} 
                 </td> 
-                {% endif %}
-                {% endfor%} 
+                
 
                 {% endif %}
               </tr>

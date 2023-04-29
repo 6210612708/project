@@ -42,7 +42,7 @@
               <input type="submit" name="Submit" id="submit">
           </form> {% endcomment %}
 
-        <p class="card-text">
+        <!-- <p class="card-text">
           {% for t in topic %}
           <br>
             {{t.topic}}
@@ -60,7 +60,40 @@
         {% endfor %}
           </tr>
           {% endfor %}
-          <a href="{% url 'website:allproject' %}" class="btn btn-primary">back</a>
+          <a href="{% url 'website:allproject' %}" class="btn btn-primary">back</a> -->
+
+          <p class="card-text">
+            <table class="table table-borderless">
+              <thead>
+                
+                <tr style="background-color:#B9C4D8;">
+                    <th class="col-5">หัวข้อ</th>
+                    <th class="col-5">วันที่ส่ง</th>
+                    <th class="col-5">ดาวน์โหลดเอกสาร</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for t in topic %}
+                  {% for show in show %}
+                    {% if show.topic.topic == t.topic %}
+                <tr style="background-color:#E4E7EC;">  
+                    <td>
+                      {{show.topic.topic}}
+                    </td>
+                    <td>
+                      {{show.date}}
+                    </td>
+                    <td>
+                      <a href="{{show.file.url}}" download>download file</a>
+                    </td>
+                    {% endif %}
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </p>
+          <a href="{% url 'website:allproject' %}" class="btn btn-primary mt-5">back</a>
 {% comment %} end edit {% endcomment %}
           {% comment %} <table class="table table-borderless">
             <thead>

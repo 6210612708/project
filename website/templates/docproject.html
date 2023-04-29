@@ -39,8 +39,8 @@
             <table class="table table-borderless">
               <thead>
                 <tr style="background-color:#B9C4D8;">
-                  <th scope="col">รายงาน</th>
-                  <th scope="col">กำหนดส่ง</th>
+                  <th class="col-10">รายงาน</th>
+                  <th class="col">กำหนดส่ง</th>
                 </tr>
               </thead>
               <tbody>
@@ -125,16 +125,16 @@
             <p class="card-text">
               <table class="table table-borderless">
                 <thead>
-                  <tr>
-                    <th scope="col">หัวเรื่อง</th>
-                    <th scope="col">วันที่</th>
-                    <th scope="col">อื่นๆ</th>
+                  <tr style="background-color:#B9C4D8;">
+                    <th class="col-6">หัวเรื่อง</th>
+                    <th class="col-5">วันที่</th>
+                    <th class="col-5">อื่นๆ</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for show in show %} 
                   
-                  <tr>
+                  <tr style="background-color:#E4E7EC;">
                     <td>{{show.topic}}</td>
                     <td>{{show.date}}</td>
                    

@@ -26,8 +26,10 @@
 </div>
 {% endfor %}
 {% endif %}
-{% comment %} {% if show.std1 is not None %} {% endcomment %}
+
 {% for show in show %}
+{% if show.std1 is not None %}
+
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
@@ -35,20 +37,20 @@
           <h5 class="card-title">{{show.project}}</h5>
         </div>
         <p class="card-text">
-          <table class="table table-borderless">
+          <table class="table table-borderless mb-5">
             <thead>
               <tr style="background-color:#B9C4D8;">
-                <th class="col">รายงาน</th>
-                <th class="col">กำหนดส่ง</th>
-                <th class="col">วันที่ส่ง</th>
-                <th class="col">คะแนนจากที่ปรึกษา ({{show.consult}})</th>
-                <th class="col">คะแนนจากกรรมการ 1 ({{show.committee1}})</th>
-                <th class="col">คะแนนจากกรรมการ 2 ({{show.committee2}})</th>
-                <th class="col">คะแนนรวม</th>
-                <th class="col">สถานะคะแนน</th>
+                <th class="col align-baseline">รายงาน</th>
+                <th class="col align-baseline">กำหนดส่ง</th>
+                <th class="col align-baseline">วันที่ส่ง</th>
+                <th class="col align-baseline"><p>คะแนนจากที่ปรึกษา </p> ({{show.consult}})</th>
+                <th class="col align-baseline"><p>คะแนนจากกรรมการ 1</p> ({{show.committee1}})</th>
+                <th class="col align-baseline"><p>คะแนนจากกรรมการ 2 </p>({{show.committee2}})</th>
+                <th class="col align-baseline">คะแนนรวม</th>
+                <th class="col align-baseline">สถานะคะแนน</th>
                 {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
-                <th class="col">สรุปคะแนน</th>
-                <th class="col">หักคะแนน</th>
+                <th class="col align-baseline">สรุปคะแนน</th>
+                <th class="col align-baseline">หักคะแนน</th>
                 {% endif %}
               </tr>
             </thead>
@@ -94,8 +96,8 @@
                   <td>ไม่ได้หักคะแนน</td>
                 {% endif %}
                 {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
-                <td><a href="{% url 'website:avgscore' re.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปคะแนน</a></td>
-                <td><a href="{% url 'website:subscore' re.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">หักคะแนน</a></td>
+                <td><a href="{% url 'website:avgscore' re.id %}" class="btn btn-primary btn-xs text-center" role="button" aria-pressed="true">สรุปคะแนน</a></td>
+                <td><a href="{% url 'website:subscore' re.id %}" class="btn btn-primary btn-xs text-center" role="button" aria-pressed="true">หักคะแนน</a></td>
                 {% endif %}
               </tr>
             </tbody> 
@@ -108,7 +110,7 @@
               <tr style="background-color:#B9C4D8;">
                 <th class="col">ภาคเรียน</th>
                 <th class="col">สมาชิก</th>
-                <th class="col">คะแนนจากที่ปรึกษา ({{show.consult}})</th>
+                <th class="col">คะแนนจากที่ปรึกษา</th>
                 <th class="col">คะแนนจากกรรมการ 1 ({{show.committee1}})</th>
                 <th class="col">คะแนนจากกรรมการ 2 ({{show.committee2}})</th>
                 <th class="col">คะแนนรวม</th>
@@ -145,22 +147,25 @@
       </div>
     </div>
   </div>
-  {% endfor %}
-  {% comment %} {% endif %} {% endcomment %}
- 
-
- {% if show.std1 is None %}
- <div class="col-sm-12 center">
-     <div class="card">
-         <div class="text-center text-danger mt-5 mb-5">
-          <br>
-          <br>
-           <h5 class="card-title"> ยังไม่มีนักศึกษาลงทะเบียน</h5>
+  {% else %}
+  <div class="col-sm-12 center">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header">
+            <h5 class="card-title">{{show.project}}</h5>
+          </div>
+          <div class="text-center text-danger mt-5 mb-5">
            <br>
            <br>
-         </div>
-     </div>
-   </div>
-   {% endif %}
+            <h5 class="card-title"> ยังไม่มีนักศึกษาลงทะเบียน</h5>
+            <br>
+            <br>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  {% endif %}
+ {% endfor %}
 
 {% endblock %}
