@@ -87,6 +87,7 @@
     </div>
   </div>
   
+  {% if user.groups.all.0.name != 'admin'%}
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
@@ -230,6 +231,7 @@
               </div>
             </div>
           </div>
+{% endif %}
           {% if user.groups.all.1.name == 'coordinator' or user.groups.all.0.name == 'coordinator' or user.groups.all.0.name == 'admin'%}
           <div class="col-sm-12 center">
             <div class="card">
