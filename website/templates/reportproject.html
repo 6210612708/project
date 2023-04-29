@@ -67,18 +67,22 @@
               <thead>
                 
                 <tr style="background-color:#B9C4D8;">
-                    <th class="col-5">หัวข้อ</th>
-                    <th class="col-5">วันที่ส่ง</th>
-                    <th class="col-5">ดาวน์โหลดเอกสาร</th>
+                    <th class="col-6">หัวข้อ</th>
+                    <th class="col-2">วันที่สิ้นสุด</th>
+                    <th class="col-2">วันที่ส่ง</th>
+                    <th class="col-2">ดาวน์โหลดเอกสาร</th>
                 </tr>
               </thead>
-              <tbody>
-                  {% for t in topic %}
+              <tbody> {% for t in topic %}
+                 
+                <tr style="background-color:#E4E7EC;"> 
                   {% for show in show %}
                     {% if show.topic.topic == t.topic %}
-                <tr style="background-color:#E4E7EC;">  
                     <td>
                       {{show.topic.topic}}
+                    </td>
+                    <td>
+                      {{t.topic}}
                     </td>
                     <td>
                       {{show.date}}

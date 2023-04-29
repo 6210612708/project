@@ -255,10 +255,13 @@
                       {% for show in show %}
                       
                       <tr style="background-color:#E4E7EC;">
-                        
+                        {% if show.major != none %}
                         <td>
                           {{show.major}}
-                        </td> 
+                        </td>
+                        {% else %} 
+                        <td>-</td>
+                        {% endif %}
                           <td>
                             {{show.thainame}}
                           </td>
