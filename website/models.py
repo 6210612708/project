@@ -194,7 +194,7 @@ class FileProject(models.Model):
     sccom1 = models.IntegerField(blank=True, null=True)
     sccom2 = models.IntegerField(blank=True, null=True)
     subscore = models.BooleanField(blank=True, null=True,default=False)
-    score = models.IntegerField(blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True ,default=0)
 
     def __str__(self):
         return f'{self.topic} {self.project}'
@@ -274,10 +274,7 @@ class ScoreModel(models.Model):
         ProfModel, on_delete=models.CASCADE, null=True, blank=True, related_name='com2')
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
     major = models.CharField(max_length=100, null=True, blank=True)
-    consc = models.IntegerField(null=True, blank=True ,default=0)
-    com1sc = models.IntegerField(null=True, blank=True ,default=0)
-    com2sc = models.IntegerField(null=True, blank=True ,default=0)
-    score = models.IntegerField(null=True, blank=True ,default=0)
+    score = models.IntegerField(null=True, blank=True)
     grade = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):

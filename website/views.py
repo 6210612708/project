@@ -1169,6 +1169,18 @@ def updategrade(request, pk):
     context = {'form': form}
     return render(request, 'updategrade.html', context)
 
+def sumscore(request, pk):
+    point = 0
+    i = ScoreModel.objects.get(id=pk)
+    print(i)
+    sc = FileProject.objects.filter(project=i.project)
+    print(sc)
+    for sc in sc :
+        point += sc.score
+        ScoreModel.objects.filter(id=pk).update(
+            score = point
+        )
+    return redirect('website:reportscore')
 
 def reportgrade(request, pk):
     i = ScoreModel.objects.get(id=pk)
@@ -1206,7 +1218,7 @@ def reportgrade(request, pk):
             grade='F'
         )
 
-    return redirect('website:report_score')
+    return redirect('website:reportscore')
 
 
 def reportscore(request):
@@ -1231,11 +1243,7 @@ def reportscore(request):
             show = ScoreModel.objects.filter(subject = sc[0] ,major = 'ไฟฟ้า') 
         elif request.user.profmodel.major == 'คอมพิวเตอร์':
             show = ScoreModel.objects.filter(subject = sc[0] ,major =  'คอมพิวเตอร์')
-    for i in temp:
-        sc = (i.consc + i.com1sc + i.com2sc)/3
-        ScoreModel.objects.filter(project=i.project).update(
-            score=sc
-        )
+
     context = {'show': show ,'re':report}
     return render(request, 'report_score.html', context)
 

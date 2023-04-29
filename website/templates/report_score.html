@@ -110,9 +110,7 @@
               <tr style="background-color:#B9C4D8;">
                 <th class="col">ภาคเรียน</th>
                 <th class="col">สมาชิก</th>
-                <th class="col">คะแนนจากที่ปรึกษา</th>
-                <th class="col">คะแนนจากกรรมการ 1 ({{show.committee1}})</th>
-                <th class="col">คะแนนจากกรรมการ 2 ({{show.committee2}})</th>
+                <th class="col">ที่ปรึกษา</th>
                 <th class="col">คะแนนรวม</th>
                 <th class="col">เกรด</th>
               </tr>
@@ -125,12 +123,15 @@
                     <p>{{show.std2}}</p>
                 </td>
                 <td>{{show.consult}}</td>
-                <td>{{show.consc}}</td>
-                <td>{{show.com1sc}}</td>
-                <td>{{show.com2sc}}</td>
-                <td>{{show.score}}</td>
-                {% if show.grade is not None %}
-                    <td>{{show.grade}} </td> 
+                {% if show.score != None %}
+                <td>{{show.score}} </td>
+                {% else %}
+                <td>ไม่ได้รวมคะแนน</td>
+                {% endif %}
+                {% if show.grade != None %}
+                    <td>{{show.grade}} </td>
+                {% else %}
+                <td>ไม่ได้สรุปเกรด</td>
                 {% endif %}
               </tr>
             </tbody>
@@ -141,6 +142,7 @@
           <div class="form-group row mt-3">
             <div class="col-sm-11 mx-5">
               <a href="{% url 'website:reportgrade' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปเกรด</a>
+              <a href="{% url 'website:sumscore' show.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">รวมคะแนน</a>
             </div>
           </div></center>
           {% endif %}
