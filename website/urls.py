@@ -128,7 +128,7 @@ urlpatterns = [
     path('scorecom2/<pk>', views.scorecom2, name='scorecom2'),
     path('avgscore/<pk>', views.avgscore, name='avgscore'),
     path('subscore/<pk>', views.subscore, name='subscore'),
-    
+    path('sumscore/<pk>', views.sumscore, name='sumscore'),
     # path('score1/<pk>', views.score1, name='score1'),
     # path('score2/<pk>', views.score2, name='score2'),
     # path('score1_com1/<pk>', views.score1_com1, name='score1_com1'),
