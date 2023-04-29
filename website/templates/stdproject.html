@@ -43,10 +43,20 @@
                         {% if user.groups.all.0.name == 'student' %}
                             {% if show.status == 'รอการอนุมัติ' or show.status == 'อนุมัติ' %}
                                 <td>{{show.status}}</td>
-                                <td>
+                                <!-- <td>
                                   <p>{{show.student1}}</p>
                                   <p>{{show.student2}}</p>
-                                </td>
+                                </td> -->
+                                {% if show.student2 != None %}
+                                  <td>
+                                    <p>{{show.student1}}</p>
+                                    <p>{{show.student2}}</p>
+                                  </td> 
+                                  {% else %}
+                                    <td>
+                                      <p>{{show.student1}}</p>
+                                    </td>
+                                  {% endif %}
                             {% else %}
                                 {% if x == 0 %}
                                     <td>-</td>

@@ -240,10 +240,16 @@
                           <td>
                             {{show.status}}
                           </td>
+                          {% if show.student2 != None %}
                           <td>
                             <p>{{show.student1}}</p>
                             <p>{{show.student2}}</p>
-                        </td>
+                          </td> 
+                          {% else %}
+                            <td>
+                              <p>{{show.student1}}</p>
+                            </td>
+                          {% endif %}
                         {% endif %}
                         {% if show.committee1 != none %}
                         <td>

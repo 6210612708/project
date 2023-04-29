@@ -40,10 +40,16 @@
                           <tr style="background-color:#E4E7EC;">
                             <td>{{show.subject}}</td>
                             <td>{{show.project}}</td>
+                            {% if show.std2 != None %}
                             <td>
                                 <p>{{show.std1}}</p>
                                 <p>{{show.std2}}</p>
                             </td>
+                            {% else %}
+                            <td>
+                              <p>{{show.std1}}</p>
+                            </td>
+                            {% endif %}
                             <td>{{show.consult}}</td>
                             <td> {{show.score}} </td>
                             {% endfor %}
