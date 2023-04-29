@@ -799,12 +799,15 @@ def project(request):
     return render(request, 'project.html', context)
 
 
+
 def reportproject(request, pk):
     temp = ProjectModel.objects.filter(id=pk).get()
     proj = ProjectModel.objects.filter(id=pk)
     show = FileProject.objects.exclude(file='').filter(project=temp)
     topic = Topicproject.objects.all()
-    form = scoretopicForm()
+    
+    
+    # form = scoretopicForm()
     # if request.method == "POST":
     #     form = scoretopicForm(request.POST)
     #     if form.is_valid():
@@ -1092,7 +1095,6 @@ def score1(request, pk):
     
 def avgscore(request, pk):
     re = FileProject.objects.get(id=pk)
-    print(re)
     if re.sccon is None or re.sccom1 is None or re.sccom2 is None :
         messages.error(request, 'กรุณารอคะแนนให้ครบทุกช่อง')
         return redirect('website:reportscore')
@@ -1104,10 +1106,21 @@ def avgscore(request, pk):
 
     return redirect('website:reportscore')
 
+def subscore(request, pk):
+    re = FileProject.objects.get(id=pk)
+    if re.sccon is None or re.sccom1 is None or re.sccom2 is None :
+        messages.error(request, 'กรุณาสรุปคะแนน')
+        return redirect('website:reportscore')
+    else :
+        sc = re.score - (re.score* 5/100)
+        FileProject.objects.filter(id=pk).update(
+            score = sc,
+            subscore = True
+            )
+    return redirect('website:reportscore')
 
 
 def evaluate(request):
-    sc = SubjectModel.objects.all().order_by('-id')
     prof = ProfModel.objects.all()
     topic = ScoreConsult.objects.all()
     can_show = 0
@@ -1236,7 +1249,13 @@ def committee(request, pk):
         form = CommitteeForm(request.POST, instance=list)
         if form.is_valid():
             test = form.save(commit=False)
+            com1 = test.committee1
+            com2 = test.committee2
             test = test.save()
+            ScoreModel.objects.filter(project=list).update(
+                committee1 = com1,
+                committee2 = com2
+            )
             return redirect('website:project')
     context = {'form': form, 'list': list}
     return render(request, 'committee.html', context)

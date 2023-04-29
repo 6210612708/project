@@ -193,6 +193,7 @@ class FileProject(models.Model):
     sccon = models.IntegerField(blank=True, null=True)
     sccom1 = models.IntegerField(blank=True, null=True)
     sccom2 = models.IntegerField(blank=True, null=True)
+    subscore = models.BooleanField(blank=True, null=True,default=False)
     score = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
@@ -267,6 +268,10 @@ class ScoreModel(models.Model):
     std1 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std1') 
     std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
+    committee1 = models.ForeignKey(
+        ProfModel, on_delete=models.CASCADE, null=True, blank=True, related_name='com1')
+    committee2 = models.ForeignKey(
+        ProfModel, on_delete=models.CASCADE, null=True, blank=True, related_name='com2')
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
     major = models.CharField(max_length=100, null=True, blank=True)
     consc = models.IntegerField(null=True, blank=True ,default=0)

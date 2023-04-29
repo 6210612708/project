@@ -16,7 +16,15 @@
 {% endblock %}
 
 {% block content %}
-
+{% if messages %}
+{% for messages in messages %}
+<div class="card text-white bg-danger mx-5">
+  <div class="card-body text-center">
+    {{messages|safe}}
+  </div>
+</div>
+{% endfor %}
+{% endif %}
 <div class="col-sm-12 center">
     <div class="card">
       <div class="card-body">
@@ -39,18 +47,15 @@
           <br>
             {{t.topic}}
             {{t.datedue}}
-            
+            <br>
             {% for show in show %}
                 {% if show.topic.topic == t.topic %}
-                {% if show.score != None %}
-                {{show.score}}
-                {% else %}
-                ยังไม่ได้สรุปคะแนน
-                {% endif %}
-            {{show.topic.topic}} {{show.date}}
-            <a href="{{show.file.url}}" download>download file</a>
+                {{show.topic.topic}} {{show.date}}
             
+            <a href="{{show.file.url}}" download>download file</a>
+
             <br>
+            
             {% endif %}
         {% endfor %}
           </tr>

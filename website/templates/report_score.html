@@ -39,18 +39,31 @@
             <thead>
               <tr style="background-color:#B9C4D8;">
                 <th class="col">รายงาน</th>
-                <th class="col">คะแนนจากที่ปรึกษา</th>
-                <th class="col">คะแนนจากกรรมการ 1</th>
-                <th class="col">คะแนนจากกรรมการ 2</th>
+                <th class="col">กำหนดส่ง</th>
+                <th class="col">วันที่ส่ง</th>
+                <th class="col">คะแนนจากที่ปรึกษา ({{show.consult}})</th>
+                <th class="col">คะแนนจากกรรมการ 1 ({{show.committee1}})</th>
+                <th class="col">คะแนนจากกรรมการ 2 ({{show.committee2}})</th>
                 <th class="col">คะแนนรวม</th>
+                <th class="col">สถานะคะแนน</th>
+                {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
                 <th class="col">สรุปคะแนน</th>
+                <th class="col">หักคะแนน</th>
+                {% endif %}
               </tr>
             </thead>
             {% for re in re %}
             {% if re.project == show.project %}
             <tbody>
               <tr style="background-color:#E4E7EC;">
-                <td>{{re.topic}}</td>
+                <td>{{re.topic.topic}}</td>
+                <td>{{re.topic.datedue}}</td>
+                {% if re.sccon != None %}
+                <td>{{re.date}}</td>
+                {% else %}
+                  <td>ยังไม่ได้ส่ง</td>
+                {% endif %}
+                
                 {% if re.sccon != None %}
                   <td>{{re.sccon}}</td>
                 {% else %}
@@ -74,7 +87,16 @@
                 {% else %}
                   <td>ยังไม่ได้สรุป</td>
                 {% endif %}
+
+                {% if re.subscore == True %}
+                  <td>ถูกหักคะแนน</td>
+                {% else %}
+                  <td>ไม่ได้หักคะแนน</td>
+                {% endif %}
+                {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
                 <td><a href="{% url 'website:avgscore' re.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">สรุปคะแนน</a></td>
+                <td><a href="{% url 'website:subscore' re.id %}" class="btn btn-primary active text-center" role="button" aria-pressed="true">หักคะแนน</a></td>
+                {% endif %}
               </tr>
             </tbody> 
             {% endif %}
@@ -86,10 +108,9 @@
               <tr style="background-color:#B9C4D8;">
                 <th class="col">ภาคเรียน</th>
                 <th class="col">สมาชิก</th>
-                <th class="col">ที่ปรึกษา</th>
-                <th class="col">คะแนนจากที่ปรึกษา</th>
-                <th class="col">คะแนนจากกรรมการ 1</th>
-                <th class="col">คะแนนจากกรรมการ 2</th>
+                <th class="col">คะแนนจากที่ปรึกษา ({{show.consult}})</th>
+                <th class="col">คะแนนจากกรรมการ 1 ({{show.committee1}})</th>
+                <th class="col">คะแนนจากกรรมการ 2 ({{show.committee2}})</th>
                 <th class="col">คะแนนรวม</th>
                 <th class="col">เกรด</th>
               </tr>
