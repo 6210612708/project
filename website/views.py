@@ -672,6 +672,54 @@ def allproject(request):
     proj = ProjectModel.objects.all()
     if request.method == "POST":
         if form.is_valid():
+            check = SubjectModel.objects.all().order_by('-id')
+            if check:
+                test = form.save(commit=False)
+                test.save()
+                for p in proj :
+                    FileProject.objects.create(
+                        topic = test,
+                        project = p
+                    )
+                    ScoreConsult.objects.create(
+                        subject =check[0],
+                        project=test,
+            
+                    )
+                    ScoreConsult.objects.create(
+                        subject =check[1],
+                        project=test,
+                
+                    )
+                    ScoreCom1.objects.create(
+                        subject =check[0],
+                        project=test,
+            
+                    )
+                    ScoreCom1.objects.create(
+                        subject =check[1],
+                        project=test,
+
+                    )
+                    ScoreCom2.objects.create(
+                        subject =check[0],
+                        project=test,
+
+                    )
+                    ScoreCom2.objects.create(
+                        subject =check[1],
+                        project=test,
+                    )
+            else:
+                messages.error(
+                    request, 'กรุณารอแอดมินตั้งค่าวิชาและปีการศึกษา')
+                return render(request, 'project.html')
+        else:
+            print("Error", form.errors)
+
+    if request.method == "POST":
+        if form.is_valid():
+            
             test = form.save(commit=False)
             test.save()
             for p in proj :
@@ -691,12 +739,15 @@ def allproject(request):
             show = ProjectModel.objects.all()
         elif request.user.profmodel.major == 'ไฟฟ้า' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
+            con = ProjectModel.objects.all()
         elif request.user.profmodel.major == 'คอมพิวเตอร์' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+            con= ProjectModel.objects.all()
         else :
             show = ProjectModel.objects.all()
+            con= ProjectModel.objects.all()
     file = Topicproject.objects.all()
-    context = {'form': form, 'show': show, 'file': file}
+    context = {'form': form, 'show': show, 'file': file, 'con' :con}
     return render(request, 'allproject.html', context)
 
 
@@ -719,61 +770,30 @@ def project(request):
             show = ProjectModel.objects.all()
         elif request.user.profmodel.major == 'ไฟฟ้า' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major = 'ไฟฟ้า')
+            all = ProjectModel.objects.all()
         elif request.user.profmodel.major == 'คอมพิวเตอร์' and request.user.groups.filter(name='coordinator'):
             show = ProjectModel.objects.filter(major =  'คอมพิวเตอร์')
+            all= ProjectModel.objects.all()
         else :
             show = ProjectModel.objects.all()
+            all= ProjectModel.objects.all()
         if request.method == "POST":
             if form.is_valid():
                 check = SubjectModel.objects.all().order_by('-id')
                 if check:
                     con = request.user.profmodel
-                    m = request.user.profmodel.major
                     test = form.save(commit=False)
                     test.consult = con
-                    test.major = m
                     fin = test.save()
                     ScoreModel.objects.create(
                         subject =check[0],
                         project=test,
-                        consult=con,
-                        major = m
+                        consult=con,            
                     )
                     ScoreModel.objects.create(
                         subject =check[1],
                         project=test,
                         consult=con,
-                        major = m
-                    )
-                    ScoreConsult.objects.create(
-                        subject =check[0],
-                        project=test,
-                        consult=con
-                    )
-                    ScoreConsult.objects.create(
-                        subject =check[1],
-                        project=test,
-                        consult=con
-                    )
-                    ScoreCom1.objects.create(
-                        subject =check[0],
-                        project=test,
-                        consult=con
-                    )
-                    ScoreCom1.objects.create(
-                        subject =check[1],
-                        project=test,
-                        consult=con
-                    )
-                    ScoreCom2.objects.create(
-                        subject =check[0],
-                        project=test,
-                        consult=con
-                    )
-                    ScoreCom2.objects.create(
-                        subject =check[1],
-                        project=test,
-                        consult=con
                     )
                 else:
                     messages.error(
@@ -781,11 +801,11 @@ def project(request):
                     return render(request, 'project.html')
         else:
             print("Error", form.errors)
-
     else:
         messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลอาจารย์')
         return redirect('website:index')
-    context = {'form': forms, 'show': show}
+    
+    context = {'form': forms, 'show': show , 'all': all}
     return render(request, 'project.html', context)
 
 

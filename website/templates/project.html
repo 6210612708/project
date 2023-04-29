@@ -86,7 +86,6 @@
         <div class="col-sm-12 center">
             <div class="card">
               <div class="card-body">
-                <!-- <h5 class="card-title">โครงงานที่ปรึกษา</h5> -->
                 <div class="card-header">
                   <h5 class="card-title">ที่ปรึกษาโครงงาน</h5>
                 </div>
@@ -96,7 +95,6 @@
                     <tbody>
                       
                       <tr style="background-color:#B9C4D8;">
-                        <th class="col">สาขา</th>
                           <th class="col">หัวข้อ</th>
                           <th class="col">อาจารย์ที่ปรึกษา</th>
                           <th class="col">รายละเอียด</th>
@@ -104,13 +102,10 @@
                           <th class="col">นักศึกษา</th>
                           <th class="col">อื่นๆ</th>
                       </tr>
-                      {% for show in show %}
+                      {% for show in all %}
                       
                       <tr style="background-color:#E4E7EC;">
                         {% if request.user.profmodel == show.consult %}
-                        <td>
-                          {{show.major}}
-                        </td> 
                           <td>
                             {{show.thainame}}
                           </td>
