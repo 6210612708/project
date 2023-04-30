@@ -397,8 +397,9 @@ def std_csv(request):
             title=column[1],
             fname=column[2],
             lname=column[3],
-            email=column[4],
-            phone=column[5],
+            major=column[4],
+            email=column[5],
+            phone=column[6],
 
         )
     context = {
