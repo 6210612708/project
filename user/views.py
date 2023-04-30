@@ -66,9 +66,12 @@ def login_view(request):
                             user.save()
                         group = Group.objects.get(name='student')
                         user.groups.add(group)
+                        
                         StdModel.objects.filter(stdid = user.username).update(
                             user=user
                         )
+
+
                     else:
                         pull_api = requests.get(
                             'https://restapi.tu.ac.th/api/v2/profile/emp/info/?username='+str(username), headers=header)
@@ -91,6 +94,11 @@ def login_view(request):
                         ProfModel.objects.filter(fname = user.first_name ,lname = user.last_name).update(
                             user=user
                         )
+                        coor = CoordinatorModel.objects.all()
+                        for c in coor:
+                            if user.profmodel == c.user :
+                                group = Group.objects.get(name='coordinator')
+                                user.groups.add(group)
                 
                 
                 if user is not None:
@@ -121,7 +129,12 @@ def login_view(request):
                         user.groups.add(group)
                         ProfModel.objects.filter(fname = user.first_name ,lname = user.last_name).update(
                             user=user
-                        )                        
+                        )
+                        coor = CoordinatorModel.objects.all()
+                        for c in coor:
+                            if user.profmodel == c.user :
+                                group = Group.objects.get(name='coordinator')
+                                user.groups.add(group)                        
 
                     if user is not None:
                         login(request, user)

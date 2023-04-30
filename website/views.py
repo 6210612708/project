@@ -370,7 +370,7 @@ def std(request):
         else:
             print("Error", form.errors)
     form = StdModelForm()
-    show = StdModel.objects.all()
+    show = StdModel.objects.all().order_by('major')
 
     context = {'form': form, 'show': show}
     return render(request, 'student.html', context)
