@@ -1015,11 +1015,11 @@ def score(request, pk):
         form = ScoreconsultForm(request.POST, instance=list)
         if form.is_valid():
             test = form.save(commit=False)
-            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None :
                 messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
                 return redirect('website:score' , pk)
             point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                test.sc5 + test.sc6 + test.sc7 + test.sc8
+                test.sc5 + test.sc6 
             test.score = point
             fin = test.save()
             FileProject.objects.filter(project=test.project,topic = list.topic).update(
@@ -1038,11 +1038,11 @@ def scorecom1(request, pk):
         form = Scorecom1Form(request.POST, instance=list)
         if form.is_valid():
             test = form.save(commit=False)
-            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None :
                 messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
                 return redirect('website:score' , pk)
             point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                test.sc5 + test.sc6 + test.sc7 + test.sc8
+                test.sc5 + test.sc6 
             test.score = point
             fin = test.save()
             FileProject.objects.filter(project=test.project,topic = list.topic).update(
@@ -1061,11 +1061,11 @@ def scorecom2(request, pk):
         form = Scorecom2Form(request.POST, instance=list)
         if form.is_valid():
             test = form.save(commit=False)
-            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
+            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None:
                 messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
                 return redirect('website:score' , pk)
             point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                test.sc5 + test.sc6 + test.sc7 + test.sc8
+                test.sc5 + test.sc6 
             test.score = point
             fin = test.save()
             FileProject.objects.filter(project=test.project,topic = list.topic).update(
