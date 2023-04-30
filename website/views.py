@@ -194,7 +194,7 @@ def deletedoc(request, pk):
 def deletecoor(request, pk):
     data = CoordinatorModel.objects.get(id=pk)
     data.delete()
-    username = User.objects.get(username=data.user)
+    username = User.objects.get(username=data.user.user)
     group = Group.objects.get(name='coordinator')
     username.groups.remove(group)
     return redirect('website:prof')
