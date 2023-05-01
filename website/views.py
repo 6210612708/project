@@ -194,7 +194,7 @@ def deletedoc(request, pk):
 def deletecoor(request, pk):
     data = CoordinatorModel.objects.get(id=pk)
     data.delete()
-    username = User.objects.get(username=data.user.user)
+    username = User.objects.get(username=data.user)
     group = Group.objects.get(name='coordinator')
     username.groups.remove(group)
     return redirect('website:prof')
@@ -202,9 +202,10 @@ def deletecoor(request, pk):
 
 def addcoor(request, pk):
     name = ProfModel.objects.get(id=pk)
-    username = User.objects.get(username=name.user)
-    group = Group.objects.get(name='coordinator')
-    username.groups.add(group)
+    if name.user is not None:
+        username = User.objects.get(username=name.user)
+        group = Group.objects.get(name='coordinator')
+        username.groups.add(group)
     list = ProfModel.objects.get(id=pk)
     if request.method == 'POST':
         form = coordinatorForm(request.POST)

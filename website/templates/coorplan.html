@@ -39,7 +39,7 @@
 
             <a href="{% url 'website:coorplan_csv' %}">upload csv</a>
         </table> -->
-        
+        {% if user.groups.all.0.name == 'admin' %}
         <div class="col-sm-12 center">
             <div class="col-sm-12">
               <div class="card">
@@ -72,7 +72,7 @@
                 </div>
               </div>
             </div>
-            
+            {% endif %}
             <div class="col-sm-12 mt-5">
               <div class="card">
                 <div class="card-body">
