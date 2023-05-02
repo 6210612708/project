@@ -137,6 +137,9 @@ urlpatterns = [
     # path('score2_com2/<pk>', views.score2_com2, name='score2_com2'),
     path('reportgrade/<pk>', views.reportgrade, name='reportgrade'),
     path('reportscore/', views.reportscore, name='reportscore'),
+    
+    path('dowloadfile/', views.dowloadfile, name='dowloadfile'),
+
 
 
 

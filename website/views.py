@@ -6,12 +6,16 @@ from datetime import date, datetime
 from django.contrib import messages
 import csv
 import io
-from django.http import FileResponse
+import os
+from django.http import FileResponse, StreamingHttpResponse
 from django.contrib.auth.decorators import login_required
 from .decorator import *
 from django.db.models import Q
 from django.contrib.auth.models import Group
-
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render, get_object_or_404
+from wsgiref.util import FileWrapper
+import mimetypes
 
 @login_required(login_url='user:login')
 def index(request):
@@ -162,6 +166,14 @@ def news_detail(request, pk):
 
 # =========== document ==========================================
 
+
+def dowloadfile(request, pk):
+    base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    filename = 'test.text'
+    file_path = base + '/Document/' + filename
+    name = os.path.basename(file_path)
+    response = StreamingHttpResponse(FileWrapper(open(file_path, 'rb')))
+    
 
 def document(request):
     if request.method == "POST":

@@ -39,7 +39,6 @@ class ProfPlanModel(models.Model):
 class StdPlanModel(models.Model):
     date = models.DateField(null=True)
     list = models.CharField(max_length=500, null=True)
-    file = models.FileField(upload_to=file_path, null=True, blank=True)
 
     def __str__(self):
         return self.list
@@ -58,7 +57,7 @@ class NewsModel(models.Model):
 
 class DocModel(models.Model):
     title = models.CharField(max_length=500, null=True)
-    file = models.FileField(upload_to=file_path, null=True)
+    file = models.FileField(null=True)
     date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -188,7 +187,7 @@ class FileProject(models.Model):
         ProjectModel, on_delete=models.CASCADE, null=True,blank=True)
     topic = models.ForeignKey(
         Topicproject, on_delete=models.CASCADE, null=True,blank=True)
-    file = models.FileField(upload_to=file_path, null=True ,blank=True,)
+    file = models.FileField(null=True ,blank=True,)
     date = models.DateTimeField(null=True,blank=True)
     sccon = models.IntegerField(blank=True, null=True)
     sccom1 = models.IntegerField(blank=True, null=True)

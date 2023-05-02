@@ -43,9 +43,18 @@
                 <th class="col align-baseline">รายงาน</th>
                 <th class="col align-baseline">กำหนดส่ง</th>
                 <th class="col align-baseline">วันที่ส่ง</th>
-                <th class="col align-baseline"><p>คะแนนจากที่ปรึกษา </p> ({{show.consult}})</th>
+                <th class="col align-baseline"><p>คะแนนจากที่ปรึกษา </p> ({{show.consult}})</th> 
+                {% if show.committee1 == None%}
+                <th class="col align-baseline"><p>คะแนนจากกรรมการ 1</p> (ยังไม่ได้กำหนด)</th>
+                {% else %}
                 <th class="col align-baseline"><p>คะแนนจากกรรมการ 1</p> ({{show.committee1}})</th>
-                <th class="col align-baseline"><p>คะแนนจากกรรมการ 2 </p>({{show.committee2}})</th>
+                {% endif%}
+                {% if show.committee1 == None%}
+                <th class="col align-baseline"><p>คะแนนจากกรรมการ 2 </p> (ยังไม่ได้กำหนด)</th>
+                {% else %}
+                <th class="col align-baseline"><p>คะแนนจากกรรมการ 2 </p> ({{show.committee2}})</th>
+                {% endif%}
+                
                 <th class="col align-baseline">คะแนนรวม</th>
                 <th class="col align-baseline">สถานะคะแนน</th>
                 {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
@@ -60,7 +69,7 @@
               <tr style="background-color:#E4E7EC;">
                 <td>{{re.topic.topic}}</td>
                 <td>{{re.topic.datedue}}</td>
-                {% if re.file != None %}
+                {% if re.file != '' %}
                 <td>{{re.date}}</td>
                 {% else %}
                   <td>ยังไม่ได้ส่ง</td>

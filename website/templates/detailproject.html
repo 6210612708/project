@@ -37,6 +37,8 @@
                 <div class="card-header">
                   <h5 class="card-title">ข้อมูลโครงงาน</h5>
                 </div>
+                
+                
                 <p class="card-text">
                   <table class="table table-borderless">
                     <thead>
@@ -46,6 +48,11 @@
                         <th scope="col">รายละเอียด</th>
                         <th scope="col">สถานะ</th>
                         <th scope="col">สมาชิก</th>
+                        {% for sc in score %}
+                        {% if sc.grade is not None %}
+                        <th scope="col">เกรด{{sc.subject.subject}}</th>
+                        {% endif %}
+                        {% endfor %}
                       </tr>
                     </thead>
                     <tbody>
@@ -65,8 +72,13 @@
                             <p>{{show.student1}}</p>
                           </td>
                         {% endif %}
-                            
+                        {% for sc in score %}
+                        {% if sc.grade is not None %}
+                        <td>{{sc.grade}}</td>
+                        {% endif %}
+                        {% endfor %}   
                       </tr>
+                      
                       {% endfor %}
                     </tbody>
                   </table>
@@ -74,47 +86,6 @@
               </div>
             </div>
           </div>
-          {% for show in score %}
-          {% if show.grade is not None %}
-          <div class="col-sm-12 center">
-            <div class="card">
-              <div class="card-body">
-                <!-- <h5 class="card-title">ข้อมูลโครงงาน</h5> -->
-                <div class="card-header">
-                  <h5 class="card-title">คะแนน {{show.subject.subject}}</h5>
-                </div>
-                <p class="card-text">
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr style="background-color:#B9C4D8;">  
-                        <th scope="col">คะแนนจากที่ปรึกษา</th>
-                        <th scope="col">คะแนนจากกรรมการ</th>
-                        <th scope="col">คะแนนจากกรรมการ</th>
-                        <th scope="col">คะแนนรวม</th>
-                        <th scope="col">เกรด</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      
-                      <tr style="background-color:#E4E7EC;">
-                        <td>{{show.consc}}</td>
-                        <td>{{show.com1sc}}</td>
-                        <td>{{show.com2sc}}</td>
-                        <td>{{show.score}}</td>
-                        
-                        <td>{{show.grade}} </td>
 
-
-                        
-                      </tr>
-                      
-                    </tbody>
-                  </table>
-                </p>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          {% endfor %}
     </body>
 {% endblock %}
