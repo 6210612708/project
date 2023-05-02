@@ -1206,31 +1206,31 @@ def sumscore(request, pk):
 def reportgrade(request, pk):
     i = ScoreModel.objects.get(id=pk)
     g = GradeModel.objects.get(subject=i.subject)
-    if i.score > g.A:
+    if i.score >= g.A:
         ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='A'
         )
-    elif g.A > i.score > g.Bplus:
+    elif g.A >= i.score >= g.Bplus:
         ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='B+'
         )
-    elif g.Bplus > i.score > g.B:
+    elif g.Bplus >= i.score >= g.B:
         ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='B'
         )
-    elif g.B > i.score > g.Cplus:
+    elif g.B >= i.score >= g.Cplus:
         ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='C+'
         )
-    elif g.Cplus > i.score > g.C:
+    elif g.Cplus >= i.score >= g.C:
         ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='C'
         )
-    elif g.C > i.score > g.Dplus:
+    elif g.C >= i.score >= g.Dplus:
         ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='D+'
         )
-    elif g.Dplus > i.score > g.D:
+    elif g.Dplus >= i.score >= g.D:
         ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
             grade='D'
         )
