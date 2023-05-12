@@ -213,6 +213,8 @@ class ScoreConsult(models.Model):
     sc4 = models.IntegerField(null=True, blank=True ,default=0)
     sc5 = models.IntegerField(null=True, blank=True ,default=0)
     sc6 = models.IntegerField(null=True, blank=True ,default=0)
+    sc7 = models.IntegerField(null=True, blank=True ,default=0)
+    sc8 = models.IntegerField(null=True, blank=True ,default=0)
 
     score = models.IntegerField(null=True, blank=True ,default=0)
        
