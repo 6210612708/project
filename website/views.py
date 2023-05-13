@@ -701,31 +701,6 @@ def allproject(request):
                         topic = test,
                         project = p
                     )
-                    ScoreConsult.objects.create(
-                        topic = test,
-                        subject =check[term],
-                        project=p,
-                        consult =p.consult,
-                        std1=p.student1,
-                        std2=p.student2,
-                    ) 
-                    ScoreCom1.objects.create(
-                        topic = test,
-                        subject =check[term],
-                        project=p,
-                        consult =p.consult,
-                        std1=p.student1,
-                        std2=p.student2,
-            
-                    )
-                    ScoreCom2.objects.create(
-                        topic = test,
-                        subject =check[term],
-                        project=p,
-                        consult =p.consult,
-                        std1=p.student1,
-                        std2=p.student2,
-                    )
                    
             else:
                 messages.error(
@@ -806,10 +781,41 @@ def project(request):
                         project=test,
                         consult=con,
                     )
+                    ScoreConsult.objects.create(
+                        subject =check[0],
+                        project=test,
+                        consult=con,
+                    ) 
+                    ScoreConsult.objects.create(
+                        subject =check[1],
+                        project=test,
+                        consult=con,
+                    ) 
+                    ScoreCom1.objects.create(
+                        subject =check[0],
+                        project=test,
+                        consult=con,
+            
+                    )
+                    ScoreCom1.objects.create(
+                        subject =check[1],
+                        project=test,
+                        consult=con,
+                    )
+                    ScoreCom2.objects.create(
+                        subject =check[0],
+                        project=test,
+                        consult=con,
+                    )
+                    ScoreCom2.objects.create(
+                        subject =check[1],
+                        project=test,
+                        consult=con,
+                    )
                 else:
                     messages.error(
                         request, 'กรุณารอแอดมินตั้งค่าวิชาและปีการศึกษา')
-                    return render(request, 'project.html')
+                    return redirect('website:index')
         else:
             print("Error", form.errors)
     else:
@@ -1024,6 +1030,11 @@ def score(request, pk):
     list = ScoreConsult.objects.get(id=pk)
     t = ScoreConsult.objects.filter(id=pk)
     form = ScoreconsultForm(instance=list)
+    sc = SubjectModel.objects.all().order_by('-id')
+    term = 1
+    date_now = date.today()
+    if sc[0].startterm < date_now < sc[0].endterm :
+        term = 2
     if request.method == 'POST':
         form = ScoreconsultForm(request.POST, instance=list)
         if form.is_valid():
@@ -1035,9 +1046,14 @@ def score(request, pk):
                 test.sc5 + test.sc6 + test.sc7 + test.sc8
             test.score = point
             fin = test.save()
-            FileProject.objects.filter(project=test.project).update(
-                sccon = point
-            )
+            if term == 1 :
+                ScoreModel.objects.filter(project=test.project ,subject=sc[1]).update(
+                    sccon = point
+                )
+            else:
+                ScoreModel.objects.filter(project=test.project ,subject=sc[0]).update(
+                    sccon = point
+                )
         else:
             print("Error", form.errors)
     context = {'form': form,'t':t}
@@ -1047,6 +1063,11 @@ def scorecom1(request, pk):
     list = ScoreCom1.objects.get(id=pk)
     t = ScoreCom1.objects.filter(id=pk)
     form = Scorecom1Form(instance=list)
+    sc = SubjectModel.objects.all().order_by('-id')
+    term = 1
+    date_now = date.today()
+    if sc[0].startterm < date_now < sc[0].endterm :
+        term = 2
     if request.method == 'POST':
         form = Scorecom1Form(request.POST, instance=list)
         if form.is_valid():
@@ -1058,9 +1079,14 @@ def scorecom1(request, pk):
                 test.sc5 + test.sc6 
             test.score = point
             fin = test.save()
-            FileProject.objects.filter(project=test.project).update(
-                sccom1 = point
-            )
+            if term == 1 :
+                ScoreModel.objects.filter(project=test.project ,subject=sc[1]).update(
+                    sccom1 = point
+                )
+            else:
+                ScoreModel.objects.filter(project=test.project ,subject=sc[0]).update(
+                    sccom1 = point
+                )
         else:
             print("Error", form.errors)
     context = {'form': form,'t':t}
@@ -1070,6 +1096,11 @@ def scorecom2(request, pk):
     list = ScoreCom2.objects.get(id=pk)
     t = ScoreCom2.objects.filter(id=pk)
     form = Scorecom2Form(instance=list)
+    sc = SubjectModel.objects.all().order_by('-id')
+    term = 1
+    date_now = date.today()
+    if sc[0].startterm < date_now < sc[0].endterm :
+        term = 2
     if request.method == 'POST':
         form = Scorecom2Form(request.POST, instance=list)
         if form.is_valid():
@@ -1081,47 +1112,27 @@ def scorecom2(request, pk):
                 test.sc5 + test.sc6 
             test.score = point
             fin = test.save()
-            FileProject.objects.filter(project=test.project).update(
-                sccom2 = point
-            )
+            if term == 1 :
+                ScoreModel.objects.filter(project=test.project ,subject=sc[1]).update(
+                    sccom2 = point
+                )
+            else:
+                ScoreModel.objects.filter(project=test.project ,subject=sc[0]).update(
+                    sccom2 = point
+                )
         else:
             print("Error", form.errors)
     context = {'form': form,'t':t}
     return render(request, 'score_com.html', context)
-
-def score1(request, pk):
-    check = SubjectModel.objects.all().order_by('-id')
-    con = ProjectModel.objects.get(id=pk)
-    list = ScoreConsult.objects.filter(project=con,subject=check[1]).get()
-    show = ScoreConsult.objects.filter(project=con,subject=check[1])
-    form = ScoreconsultForm(instance=list)
-    if request.method == 'POST':
-        form = ScoreconsultForm(request.POST, instance=list)
-        if form.is_valid():
-            test = form.save(commit=False)
-            if test.sc1 is None or test.sc2 is None or test.sc3 is None or test.sc4 is None or test.sc5 is None or test.sc6 is None or test.sc7 is None or test.sc8 is None:
-                messages.error(request, 'กรุณากรอกคะแนนให้ครบทุกช่อง หากยังไม่ประสงค์ประเมินข้อใดกรุณาใส่ 0')
-                return redirect('website:score1' , pk)
-            point = test.sc1 + test.sc2 + test.sc3 + test.sc4 + \
-                test.sc5 + test.sc6 + test.sc7 + test.sc8
-            test.score = point
-            fin = test.save()
-            ScoreModel.objects.filter(project=test.project).update(
-                consc=point
-            )
-        else:
-            print("Error", form.errors)
-    context = {'form': form, 'show': show}
-    return render(request, 'score.html', context)
     
 def avgscore(request, pk):
-    re = FileProject.objects.get(id=pk)
+    re = ScoreModel.objects.get(id=pk)
     if re.sccon is None or re.sccom1 is None or re.sccom2 is None :
-        messages.error(request, 'กรุณารอคะแนนให้ครบทุกช่อง')
+        messages.error(request, 'กรุณารอกรรมการและที่ปรึกษาประเมินคะแนน')
         return redirect('website:reportscore')
     else :
         sc = re.sccon + (re.sccom1 + re.sccom2)/2
-        FileProject.objects.filter(id=pk).update(
+        ScoreModel.objects.filter(id=pk).update(
         score = sc
         )
 
@@ -1129,23 +1140,53 @@ def avgscore(request, pk):
 
 def subscore(request, pk):
     re = FileProject.objects.get(id=pk)
-    if re.sccon is None or re.sccom1 is None or re.sccom2 is None :
-        messages.error(request, 'กรุณาสรุปคะแนน')
-        return redirect('website:reportscore')
-    else :
-        sc = re.score - (re.score* 5/100)
-        FileProject.objects.filter(id=pk).update(
-            score = sc,
-            subscore = True
-            )
+    sc = SubjectModel.objects.all().order_by('-id')
+    term = 1
+    date_now = date.today()
+    if sc[0].startterm < date_now < sc[0].endterm :
+        term = 2
+    if term == 1 :
+        score = ScoreModel.objects.get(project = re.project,subject = sc[1])
+        if score.score is None :
+            messages.error(request, 'กรุณาสรุปคะแนนก่อน')
+            return redirect('website:reportscore')
+        else :
+            fin  = score.score - (score.score* 5/100)
+            FileProject.objects.filter(id=pk).update(
+                subscore = True
+                )
+            score = ScoreModel.objects.filter(project = re.project,subject = sc[1]).update(
+                score = fin
+                )
+    else:
+        score = ScoreModel.objects.get(project = re.project,subject = sc[0])
+        if score.score is None :
+            messages.error(request, 'กรุณาสรุปคะแนนก่อน')
+            return redirect('website:reportscore')
+        else :
+            fin  = score.score - (score.score* 5/100)
+            FileProject.objects.filter(id=pk).update(
+                subscore = True
+                )
+            score = ScoreModel.objects.filter(project = re.project,subject = sc[0]).update(
+                score = fin
+                )
+    # if re.sccon is None or re.sccom1 is None or re.sccom2 is None :
+    #     messages.error(request, 'กรุณาสรุปคะแนน')
+    #     return redirect('website:reportscore')
+    # else :
+    # sc = re.score - (re.score* 5/100)
+    # FileProject.objects.filter(id=pk).update(
+    #     score = sc,
+    #     subscore = True
+    #     )
     return redirect('website:reportscore')
 
 
 def evaluate(request):
     prof = ProfModel.objects.all()
-    topic = ScoreConsult.objects.all()
     can_show = 0
-
+    sc = SubjectModel.objects.all().order_by('-id')
     for ck in prof:
         if ck.user == request.user:
             can_show = 1
@@ -1154,7 +1195,20 @@ def evaluate(request):
             consult=request.user.profmodel, status='อนุมัติ')
         com = ProjectModel.objects.filter(
             Q(committee1=request.user.profmodel) | Q(committee2=request.user.profmodel), status='อนุมัติ')
-        context = {'show': show, 'com': com, 'topic': topic}
+        term = 1
+        date_now = date.today()
+        if sc[0].startterm < date_now < sc[0].endterm :
+            term = 2
+        if term == 1 :
+            score = ScoreConsult.objects.filter(subject = sc[1])
+            scorecom1 = ScoreCom1.objects.filter(subject = sc[1])
+            scorecom2 = ScoreCom2.objects.filter(subject = sc[1])
+        else:
+            score = ScoreConsult.objects.filter(subject = sc[0]) 
+            scorecom1 = ScoreCom1.objects.filter(subject = sc[0])
+            scorecom2 = ScoreCom2.objects.filter(subject = sc[0])
+            
+        context = {'show': show, 'com': com, 'score': score, 'scorecom1': scorecom1, 'scorecom2': scorecom2}
         return render(request, 'evaluate.html', context)
     else:
         messages.error(request, 'กรุณารอแอดมินอัพเดทข้อมูลอาจารย์')
@@ -1208,39 +1262,44 @@ def sumscore(request, pk):
 
 def reportgrade(request, pk):
     i = ScoreModel.objects.get(id=pk)
-    g = GradeModel.objects.get(subject=i.subject)
-    if i.score >= g.A:
-        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
-            grade='A'
-        )
-    elif g.A >= i.score >= g.Bplus:
-        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
-            grade='B+'
-        )
-    elif g.Bplus >= i.score >= g.B:
-        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
-            grade='B'
-        )
-    elif g.B >= i.score >= g.Cplus:
-        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
-            grade='C+'
-        )
-    elif g.Cplus >= i.score >= g.C:
-        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
-            grade='C'
-        )
-    elif g.C >= i.score >= g.Dplus:
-        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
-            grade='D+'
-        )
-    elif g.Dplus >= i.score >= g.D:
-        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
-            grade='D'
-        )
+    check = GradeModel.objects.filter(subject=i.subject).count()
+    if check == 0:
+        messages.error(request, 'กรุณากำหนดเกณฑ์การตัดเกรด')
     else:
-        ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
-            grade='F'
-        )
+        g = GradeModel.objects.get(subject=i.subject)
+        if i.score >= g.A:
+            ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
+                grade='A'
+            )
+        elif g.A >= i.score >= g.Bplus:
+            ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
+                grade='B+'
+            )
+        elif g.Bplus >= i.score >= g.B:
+            ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
+                grade='B'
+            )
+        elif g.B >= i.score >= g.Cplus:
+            ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
+                grade='C+'
+            )
+        elif g.Cplus >= i.score >= g.C:
+            ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
+                grade='C'
+            )
+        elif g.C >= i.score >= g.Dplus:
+            ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
+                grade='D+'
+            )
+        elif g.Dplus >= i.score >= g.D:
+            ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
+                grade='D'
+            )
+        else:
+            ScoreModel.objects.filter(project=i.project,subject=i.subject).update(
+                grade='F'
+            )
+        print(check)
 
     return redirect('website:reportscore')
 

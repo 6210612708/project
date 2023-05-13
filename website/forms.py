@@ -129,12 +129,12 @@ class fileprojectForm(forms.ModelForm):
     class Meta:
         model = FileProject
         fields = "__all__"
-        exclude = ['date' ,'score']
+        exclude = ['date' ]
         
 class scoretopicForm(forms.ModelForm):
     class Meta:
         model = FileProject
-        fields = ['score' ,'topic']
+        fields = ['topic']
 
 
 class docprojectForm(forms.Form):

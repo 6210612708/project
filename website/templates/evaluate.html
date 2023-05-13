@@ -93,7 +93,11 @@
 
                 
                 <td>
-
+                  {% for sc in score %}
+                    {% if sc.project == show %}
+                    <p><a href="{% url 'website:score' sc.id %}" >{{show}}</a></p>
+                    {% endif %}
+                  {% endfor%}
                 </td> 
                     
 
@@ -184,9 +188,9 @@
                
                
                 <td>
-                  {% for t in topic %}
-                    {% if t.project == show %}
-                  <p><a href="{% url 'website:scorecom1' t.id %}" >{{t.topic.topic}}</a></p>
+                  {% for sc in scorecom1 %}
+                    {% if sc.project == show %}
+                    <p><a href="{% url 'website:scorecom1' sc.id %}" >{{show}}</a></p>
                     {% endif %}
                   {% endfor%}
                 </td> 
@@ -232,13 +236,13 @@
                 
                
                 <td>
-                  {% for t in topic %}
-                    {% if t.project == show %}
-                  <p><a href="{% url 'website:scorecom2' t.id %}" >{{t.topic.topic}}</a></p>
+                  {% for sc in scorecom2 %}
+                    {% if sc.project == show %}
+                    <p><a href="{% url 'website:scorecom2' sc.id %}" >{{show}}</a></p>
                     {% endif %}
-                  {% endfor%} 
+                  {% endfor%}
                 </td> 
-                
+
 
                 {% endif %}
               </tr>

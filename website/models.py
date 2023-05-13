@@ -189,11 +189,7 @@ class FileProject(models.Model):
         Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     file = models.FileField(null=True ,blank=True,)
     date = models.DateTimeField(null=True,blank=True)
-    sccon = models.IntegerField(blank=True, null=True)
-    sccom1 = models.IntegerField(blank=True, null=True)
-    sccom2 = models.IntegerField(blank=True, null=True)
     subscore = models.BooleanField(blank=True, null=True,default=False)
-    score = models.IntegerField(blank=True, null=True ,default=0)
 
     def __str__(self):
         return f'{self.topic} {self.project}'
@@ -205,8 +201,6 @@ class ScoreConsult(models.Model):
     std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2con')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    topic = models.ForeignKey(
-        Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
     sc2 = models.IntegerField(null=True, blank=True ,default=0)
     sc3 = models.IntegerField(null=True, blank=True ,default=0)
@@ -215,11 +209,10 @@ class ScoreConsult(models.Model):
     sc6 = models.IntegerField(null=True, blank=True ,default=0)
     sc7 = models.IntegerField(null=True, blank=True ,default=0)
     sc8 = models.IntegerField(null=True, blank=True ,default=0)
-
     score = models.IntegerField(null=True, blank=True ,default=0)
        
     def __str__(self):
-        return f'{self.topic} {self.subject} {self.project} '
+        return f'{self.subject} {self.project} '
 
 class ScoreCom1(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
@@ -227,8 +220,6 @@ class ScoreCom1(models.Model):
     std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc1')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    topic = models.ForeignKey(
-        Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
     sc2 = models.IntegerField(null=True, blank=True ,default=0)
     sc3 = models.IntegerField(null=True, blank=True ,default=0)
@@ -239,7 +230,7 @@ class ScoreCom1(models.Model):
     score = models.IntegerField(null=True, blank=True ,default=0)
     
     def __str__(self):
-        return f'{self.topic} {self.subject} {self.project} '
+        return f'{self.subject} {self.project} '
 
 class ScoreCom2(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
@@ -247,8 +238,6 @@ class ScoreCom2(models.Model):
     std2 = models.ForeignKey(StdModel, null=True, on_delete=models.CASCADE, blank=True , related_name='std2sc2')
     consult = models.ForeignKey(ProfModel, on_delete=models.CASCADE, null=True, blank=True)
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
-    topic = models.ForeignKey(
-        Topicproject, on_delete=models.CASCADE, null=True,blank=True)
     sc1 = models.IntegerField(null=True, blank=True ,default=0)
     sc2 = models.IntegerField(null=True, blank=True ,default=0)
     sc3 = models.IntegerField(null=True, blank=True ,default=0)
@@ -259,7 +248,7 @@ class ScoreCom2(models.Model):
     score = models.IntegerField(null=True, blank=True ,default=0)
     
     def __str__(self):
-        return f'{self.topic} {self.subject} {self.project} '
+        return f'{self.subject} {self.project} '
 
 class ScoreModel(models.Model):
     subject = models.ForeignKey(SubjectModel, on_delete=models.CASCADE, null=True, blank=True)
@@ -272,6 +261,9 @@ class ScoreModel(models.Model):
         ProfModel, on_delete=models.CASCADE, null=True, blank=True, related_name='com2')
     project = models.ForeignKey(ProjectModel, on_delete=models.CASCADE, null=True, blank=True)
     major = models.CharField(max_length=100, null=True, blank=True)
+    sccon = models.IntegerField(null=True, blank=True)
+    sccom1 = models.IntegerField(blank=True, null=True)
+    sccom2 = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(null=True, blank=True)
     grade = models.CharField(max_length=10, null=True, blank=True)
 

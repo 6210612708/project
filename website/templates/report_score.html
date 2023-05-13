@@ -40,9 +40,8 @@
           <table class="table table-borderless mb-5">
             <thead>
               <tr style="background-color:#B9C4D8;">
-                <th class="col align-baseline">รายงาน</th>
-                <th class="col align-baseline">กำหนดส่ง</th>
-                <th class="col align-baseline">วันที่ส่ง</th>
+                <th class="col">ภาคเรียน</th>
+                <th class="col">สมาชิก</th>
                 <th class="col align-baseline"><p>คะแนนจากที่ปรึกษา </p> ({{show.consult}})</th> 
                 {% if show.committee1 == None%}
                 <th class="col align-baseline"><p>คะแนนจากกรรมการ 1</p> (ยังไม่ได้กำหนด)</th>
@@ -54,73 +53,7 @@
                 {% else %}
                 <th class="col align-baseline"><p>คะแนนจากกรรมการ 2 </p> ({{show.committee2}})</th>
                 {% endif%}
-                
-                <th class="col align-baseline">คะแนนรวม</th>
-                <th class="col align-baseline">สถานะคะแนน</th>
-                {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
-                <th class="col align-baseline">สรุปคะแนน</th>
-                <th class="col align-baseline">หักคะแนน</th>
-                {% endif %}
-              </tr>
-            </thead>
-            {% for re in re %}
-            {% if re.project == show.project %}
-            <tbody>
-              <tr style="background-color:#E4E7EC;">
-                <td>{{re.topic.topic}}</td>
-                <td>{{re.topic.datedue}}</td>
-                {% if re.file != '' %}
-                <td>{{re.date}}</td>
-                {% else %}
-                  <td>ยังไม่ได้ส่ง</td>
-                {% endif %}
-                
-                {% if re.sccon != None %}
-                  <td>{{re.sccon}}</td>
-                {% else %}
-                  <td>ยังไม่ได้ประเมิน</td>
-                {% endif %}
-                
-                {% if re.sccom1 != None %}
-                  <td>{{re.sccom1}}</td>
-                {% else %}
-                  <td>ยังไม่ได้ประเมิน</td>
-                {% endif %}
-
-                {% if re.sccom2 != None %}
-                  <td>{{re.sccom2}}</td>
-                {% else %}
-                  <td>ยังไม่ได้ประเมิน</td>
-                {% endif %}
-        
-                {% if re.score != None %}
-                  <td>{{re.score}}</td>
-                {% else %}
-                  <td>ยังไม่ได้สรุป</td>
-                {% endif %}
-
-                {% if re.subscore == True %}
-                  <td>ถูกหักคะแนน</td>
-                {% else %}
-                  <td>ไม่ได้หักคะแนน</td>
-                {% endif %}
-                {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
-                <td><a href="{% url 'website:avgscore' re.id %}" class="btn btn-primary btn-xs text-center" role="button" aria-pressed="true">สรุปคะแนน</a></td>
-                <td><a href="{% url 'website:subscore' re.id %}" class="btn btn-primary btn-xs text-center" role="button" aria-pressed="true">หักคะแนน</a></td>
-                {% endif %}
-              </tr>
-            </tbody> 
-            {% endif %}
-          {% endfor%}
-          </table>
-         
-          <table class="table table-borderless mb-5">
-            <thead>
-              <tr style="background-color:#B9C4D8;">
-                <th class="col">ภาคเรียน</th>
-                <th class="col">สมาชิก</th>
-                <th class="col">ที่ปรึกษา</th>
-                <th class="col">คะแนนรวม</th>
+                <th class="col ">คะแนนรวม</th>
                 <th class="col">เกรด</th>
               </tr>
             </thead>
@@ -137,7 +70,23 @@
                   <p>{{show.std1}}</p>
                 </td>
                 {% endif %}
-                <td>{{show.consult}}</td>
+                {% if show.sccon != None %}
+                  <td>{{show.sccon}}</td>
+                {% else %}
+                  <td>ยังไม่ได้ประเมิน</td>
+                {% endif %}
+                
+                {% if show.sccom1 != None %}
+                  <td>{{show.sccom1}}</td>
+                {% else %}
+                  <td>ยังไม่ได้ประเมิน</td>
+                {% endif %}
+
+                {% if show.sccom2 != None %}
+                  <td>{{show.sccom2}}</td>
+                {% else %}
+                  <td>ยังไม่ได้ประเมิน</td>
+                {% endif %}
                 {% if show.score != None %}
                 <td>{{show.score}} </td>
                 {% else %}
@@ -156,14 +105,53 @@
         <center>
           <div class="form-group row mt-3">
             <div class="col-sm-11 mx-5">
+              <a href="{% url 'website:avgscore' show.id %}" class="btn btn-primary btn-xs text-center" role="button" aria-pressed="true">รวมคะแนน</a>
               <a href="{% url 'website:reportgrade' show.id %}" class="btn btn-primary text-center" role="button" aria-pressed="true">สรุปเกรด</a>
-              <a href="{% url 'website:sumscore' show.id %}" class="btn btn-primary text-center" role="button" aria-pressed="true">รวมคะแนน</a>
             </div>
           </div></center>
           {% endif %}
+          <p>
+          <table class="table table-borderless mb-5">
+            <thead>
+              <tr style="background-color:#B9C4D8;">
+                <th class="col align-baseline">รายงาน</th>
+                <th class="col align-baseline">กำหนดส่ง</th>
+                <th class="col align-baseline">วันที่ส่ง</th>
+                <th class="col align-baseline">สถานะคะแนน</th>
+                {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
+                <th class="col align-baseline">หักคะแนน</th>
+                {% endif %}
+              </tr>
+            </thead>
+            {% for re in re %}
+            {% if re.project == show.project %}
+            <tbody>
+              <tr style="background-color:#E4E7EC;">
+                <td>{{re.topic.topic}}</td>
+                <td>{{re.topic.datedue}}</td>
+                {% if re.file != '' %}
+                <td>{{re.date}}</td>
+                {% else %}
+                  <td>ยังไม่ได้ส่ง</td>
+                {% endif %}
+                {% if re.subscore == True %}
+                  <td>ถูกหักคะแนน</td>
+                {% else %}
+                  <td>ไม่ได้หักคะแนน</td>
+                {% endif %}
+                {% if user.groups.all.0.name == 'admin' or user.groups.all.0.name == 'coordinator' or user.groups.all.1.name == 'coordinator'%}
+                <td><a href="{% url 'website:subscore' re.id %}" class="btn btn-primary btn-xs text-center" role="button" aria-pressed="true">หักคะแนน</a></td>
+                {% endif %}
+              </tr>
+            </tbody> 
+              {% endif %}
+            {% endfor%}
+          </table>
+        </p>
       </div>
     </div>
   </div>
+
   {% else %}
   <div class="col-sm-12 center">
       <div class="card">
