@@ -100,6 +100,7 @@
                           <th class="col">รายละเอียด</th>
                           <th class="col">สถานะ</th>
                           <th class="col">นักศึกษา</th>
+                          <th class="col">อนุมัติ</th>
                           <th class="col">อื่นๆ</th>
                       </tr>
                       {% for show in all %}
@@ -122,6 +123,9 @@
                         <td>
                             <p>-</p>
                         </td>
+                        <td>
+                          <p>-</p>
+                      </td>
                         {% elif show.status == 'รอการอนุมัติ' %}
                             <td>
                                 {{show.status}}
@@ -131,7 +135,7 @@
                                 <p>{{show.student2}}</p>
                             </td>
                             <td>
-                                <a href="{% url 'website:statusproject' show.id %}" >อนุมัติโครงงาน</a>
+                                <a href="{% url 'website:statusproject' show.id %}" class="btn btn-primary btn-xs" role="button" aria-pressed="true">อนุมัติ</a>
                             </td>
                         {% else %}
                         <td>   
@@ -140,6 +144,9 @@
                         <td>
                             <p>{{show.student1}}</p>
                             <p>{{show.student2}}</p>
+                        </td>
+                        <td>
+                          อนุมัติแล้ว
                         </td>
                         {% endif %}
                         <td>   
